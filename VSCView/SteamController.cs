@@ -15,7 +15,7 @@ namespace VSCView
         private const int ProductIdWireless = 0x1142; // 4418;
         private const int ProductIdWired = 0x1102; // 4354
 
-        private bool _attached = false;
+        //private bool _attached = false;
         private HidDevice _device;
 
         public enum VSCEventType
@@ -169,24 +169,26 @@ namespace VSCView
 
             //_device.OpenDevice();
 
-            _device.Inserted += DeviceAttachedHandler;
-            _device.Removed += DeviceRemovedHandler;
+            //_device.Inserted += DeviceAttachedHandler;
+            //_device.Removed += DeviceRemovedHandler;
 
-            _device.MonitorDeviceEvents = true;
-
-            _device.ReadReport(OnReport);
+            //_device.MonitorDeviceEvents = true;
 
             Initalized = true;
+
+            //_attached = _device.IsConnected;
+
+            _device.ReadReport(OnReport);
         }
 
         public void DeInitalize()
         {
             if (!Initalized) return;
 
-            _device.Inserted -= DeviceAttachedHandler;
-            _device.Removed -= DeviceRemovedHandler;
+            //_device.Inserted -= DeviceAttachedHandler;
+            //_device.Removed -= DeviceRemovedHandler;
 
-            _device.MonitorDeviceEvents = false;
+            //_device.MonitorDeviceEvents = false;
 
             Initalized = false;
         }
@@ -269,7 +271,7 @@ namespace VSCView
             {
                 //SteamControllerState OldState = GetState();
 
-                if (_attached == false) { return; }
+                //if (_attached == false) { return; }
 
                 byte Unknown1 = report.Data[0]; // always 0x01?
                 byte Unknown2 = report.Data[1]; // always 0x00?
@@ -419,7 +421,7 @@ namespace VSCView
             }
         }
 
-        private void DeviceAttachedHandler()
+        /*private void DeviceAttachedHandler()
         {
             lock (controllerStateLock)
             {
@@ -436,6 +438,6 @@ namespace VSCView
                 _attached = false;
                 Console.WriteLine("VSC Address Removed");
             }
-        }
+        }*/
     }
 }

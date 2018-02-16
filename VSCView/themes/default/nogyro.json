@@ -73,7 +73,7 @@
                             "scaleFactorX": 0.0022,
                             "scaleFactorY": 0.0022,
                             "image":"padheat.png",
-                            "length":60,
+                            "length":30,
                             "width":36,
                             "height":36,
                             "children": [
@@ -99,7 +99,7 @@
                             "scaleFactorX": 0.0022,
                             "scaleFactorY": 0.0022,
                             "image":"padheat.png",
-                            "length":60,
+                            "length":30,
                             "width":36,
                             "height":36,
                             "children": [
