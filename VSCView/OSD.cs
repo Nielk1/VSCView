@@ -921,10 +921,14 @@ namespace VSCView
             {
                 if (Math.Sign(TiltFactorX) > 0) {
                     float percent = TiltFactorX * 2;// * 0.15f;
+                    percent = (float)Math.Round(percent * 25f) / 25f;
+                    percent = (float)Math.Min(percent, 1.0f);
                     g.DrawImage(cache.GetImage($"{ImageGyroDName}:{percent}", () => { return UI_ImageCache.SetImageOpacity(ImageGyroD, percent); }), location.X, location.Y, Width, Height);
                 }
                 if (Math.Sign(TiltFactorX) < 0) {
                     float percent = -TiltFactorX * 2;// * 0.15f;
+                    percent = (float)Math.Round(percent * 25f) / 25f;
+                    percent = (float)Math.Min(percent, 1.0f);
                     g.DrawImage(cache.GetImage($"{ImageGyroUName}:{percent}", () => { return UI_ImageCache.SetImageOpacity(ImageGyroU, percent); }), location.X, location.Y, Width, Height);
                 }
             }
@@ -933,10 +937,14 @@ namespace VSCView
             {
                 if (Math.Sign(TiltFactorY) > 0) {
                     float percent = TiltFactorY * 2;// * 0.15f;
+                    percent = (float)Math.Round(percent * 25f) / 25f;
+                    percent = (float)Math.Min(percent, 1.0f);
                     g.DrawImage(cache.GetImage($"{ImageGyroLName}:{percent}", () => { return UI_ImageCache.SetImageOpacity(ImageGyroL, percent); }), location.X, location.Y, Width, Height);
                 }
                 if (Math.Sign(TiltFactorY) < 0) {
                     float percent = -TiltFactorY * 2;// * 0.15f;
+                    percent = (float)Math.Round(percent * 25f) / 25f;
+                    percent = (float)Math.Min(percent, 1.0f);
                     g.DrawImage(cache.GetImage($"{ImageGyroRName}:{percent}", () => { return UI_ImageCache.SetImageOpacity(ImageGyroR, percent); }), location.X, location.Y, Width, Height);
                 }
             }

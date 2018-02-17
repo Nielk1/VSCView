@@ -37,12 +37,12 @@
             this.tsmiReloadThemes = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiReloadControllers = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiSetBackgroundColor = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.lblHint1 = new System.Windows.Forms.Label();
             this.lblHint2 = new System.Windows.Forms.Label();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiSetBackgroundColor = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.cmsMain.SuspendLayout();
             this.SuspendLayout();
@@ -105,12 +105,24 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(186, 6);
             // 
+            // tsmiSetBackgroundColor
+            // 
+            this.tsmiSetBackgroundColor.Name = "tsmiSetBackgroundColor";
+            this.tsmiSetBackgroundColor.Size = new System.Drawing.Size(189, 22);
+            this.tsmiSetBackgroundColor.Text = "Set Background Color";
+            this.tsmiSetBackgroundColor.Click += new System.EventHandler(this.tsmiSetBackgroundColor_Click);
+            // 
             // tsmiAbout
             // 
             this.tsmiAbout.Name = "tsmiAbout";
             this.tsmiAbout.Size = new System.Drawing.Size(189, 22);
             this.tsmiAbout.Text = "&About";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(186, 6);
             // 
             // tsmiExit
             // 
@@ -136,18 +148,6 @@
             this.lblHint2.Size = new System.Drawing.Size(119, 13);
             this.lblHint2.TabIndex = 2;
             this.lblHint2.Text = "Click and Drag to Move";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(186, 6);
-            // 
-            // tsmiSetBackgroundColor
-            // 
-            this.tsmiSetBackgroundColor.Name = "tsmiSetBackgroundColor";
-            this.tsmiSetBackgroundColor.Size = new System.Drawing.Size(189, 22);
-            this.tsmiSetBackgroundColor.Text = "Set Background Color";
-            this.tsmiSetBackgroundColor.Click += new System.EventHandler(this.tsmiSetBackgroundColor_Click);
             // 
             // colorDialog1
             // 
