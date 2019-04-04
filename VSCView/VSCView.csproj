@@ -129,7 +129,9 @@
     <Content Include="licenses\Newtonsoft.Json.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="licenses\MahonyFilter.txt" />
+    <Content Include="licenses\MahonyFilter.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="licenses\VCSView.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
