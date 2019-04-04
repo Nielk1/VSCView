@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -272,26 +273,26 @@ namespace VSCView
         {
             try
             {
-                //create a Bitmap the size of the image provided  
+                //create a Bitmap the size of the image provided
                 Bitmap bmp = new Bitmap(image.Width, image.Height);
 
-                //create a graphics object from the image  
+                //create a graphics object from the image
                 using (Graphics gfx = Graphics.FromImage(bmp))
                 {
 
-                    //create a color matrix object  
+                    //create a color matrix object
                     ColorMatrix matrix = new ColorMatrix();
 
-                    //set the opacity  
+                    //set the opacity
                     matrix.Matrix33 = opacity;
 
-                    //create image attributes  
+                    //create image attributes
                     ImageAttributes attributes = new ImageAttributes();
 
-                    //set the color(opacity) of the image  
+                    //set the color(opacity) of the image
                     attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-                    //now draw the image  
+                    //now draw the image
                     gfx.DrawImage(image, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
 
                     bmp.SetResolution(image.HorizontalResolution, image.VerticalResolution);
@@ -781,86 +782,87 @@ namespace VSCView
             graphics.TranslateTransform(X, Y);
             //graphics.TranslateTransform(-Width / 2, -Height / 2);
 
-            switch (DisplayType)
+            SteamController.SteamControllerState State = data.GetState();
+            if (State != null)
             {
-                case "accel":
-                    {
-                        SteamController.SteamControllerState State = data.GetState();
+                int AccelMagX = State.AngularVelocityX, AccelMagY = State.AngularVelocityY, AccelMagZ = State.AngularVelocityZ;
+                int GyroW = State.OrientationW, GyroX = State.OrientationX, GyroY = State.OrientationY, GyroZ = State.OrientationZ;
 
-                        if (State != null)
+                float AccelTiltFactorX = AccelMagX * 0.0001f;
+                float AccelTiltFactorY = AccelMagY * 0.0001f;
+                float AccelRotationAngle = AccelMagZ * 0.0001f * -90;
+                double GyroNormX = GyroX * 1.0f / 32768;
+                double GyroNormY = GyroY * 1.0f / 32768;
+                double GyroNormZ = GyroZ * 1.0f / 32768;
+                double GyroNormW = GyroW * 1.0f / 32768;
+
+                // use MahonyFilter integration with some sane coefficients (8ms. sampling @ 125hz)
+                MahonyFilter gyroFilter = new MahonyFilter((1000 / 125.0f / 100), 1f, 0f);
+                float[] _fIMU = gyroFilter.UpdateIMU((float)GyroNormX, (float)GyroNormY, (float)GyroNormZ, AccelMagX, AccelMagY, AccelMagZ);
+
+                switch (DisplayType)
+                {
+                    case "accel":
                         {
-                            float TiltFactorX = State.AngularVelocityX * 0.0001f;
-                            float TiltFactorY = State.AngularVelocityY * 0.0001f;
-                            float rotationAngle = (State.AngularVelocityZ * 0.0001f) * -90;
-                            float transformX = 1.0f - Math.Abs(TiltFactorY * 0.5f);
-                            float transformY = 1.0f - Math.Abs(TiltFactorX * 0.5f);
+                            float AccelTransformX = 1.0f - Math.Abs(AccelTiltFactorY * 0.5f);
+                            float AccelTransformY = 1.0f - Math.Abs(AccelTiltFactorX * 0.5f);
 
-                            Draw3dAs3d(cache, graphics, DisplayImage, ShadowLName, ShadowL, ShadowRName, ShadowR, ShadowUName, ShadowU, ShadowDName, ShadowD, transformX, transformY, rotationAngle, TiltFactorX, TiltFactorY, Width, Height, TiltTranslateX, TiltTranslateY);
+                            Draw3dAs3d(
+                                cache, graphics, DisplayImage, ShadowLName, ShadowL, ShadowRName, ShadowR, ShadowUName, ShadowU, ShadowDName, ShadowD,
+                                AccelTransformX, AccelTransformY, AccelRotationAngle, AccelTiltFactorX, AccelTiltFactorY,
+                                Width, Height, TiltTranslateX, TiltTranslateY
+                            );
 
                             graphics.ResetTransform();
                         }
-                    }
-                    break;
-                case "gyro":
-                    {
-                        SteamController.SteamControllerState State = data.GetState();
-
-                        if (State != null)
+                        break;
+                    case "gyro":
                         {
-                            double qw = (State.OrientationW * 1.0f / 32736);
-                            double qx = (State.OrientationX * 1.0f / 32736);
-                            double qy = (State.OrientationY * 1.0f / 32736);
-                            double qz = (State.OrientationZ * 1.0f / 32736);
+                            // flip input axis around to correct 2d->3d rendered orientation
+                            double[] eulerAngles = ToEulerAngles(GyroNormW, GyroNormY, GyroNormZ, GyroNormX);
 
-                            double pitch;
-                            double roll;
-                            double yaw;
+                            double Yaw = eulerAngles[0] * 2.0f / Math.PI;
+                            double Pitch = eulerAngles[1] * 2.0f / Math.PI;
+                            double Roll = -(eulerAngles[2] * 2.0f / Math.PI);
+                            if (double.IsNaN(Yaw)) Yaw = 0;
+                            if (double.IsNaN(Pitch)) Pitch = 0;
+                            if (double.IsNaN(Roll)) Roll = 0;
 
-                            ToEulerAngles(qw, qy, qz, qx, out pitch, out roll, out yaw);
+                            int SignY = -Math.Sign((2 * mod(Math.Floor((Roll - 1) * 0.5f) + 1, 2)) - 1);
+                            float GyroTiltFactorX = (float)((2 * Math.Abs(mod((Pitch - 1) * 0.5f, 2) - 1)) - 1);
+                            float GyroTiltFactorY = (float)((2 * Math.Abs(mod((Roll - 1) * 0.5f, 2) - 1)) - 1);
+                            float GyroRotationAngle = (float)(Yaw * -90.0f);
+                            float GyroTransformX = SignY * Math.Max(1.0f - Math.Abs(GyroTiltFactorY), 0.15f);
+                            float GyroTransformY = Math.Max(1.0f - Math.Abs(GyroTiltFactorX), 0.15f);
 
-                            {
-                                double Yaw = (yaw * 2.0f / Math.PI);
-                                double Roll = -(roll * 2.0f / Math.PI);
-                                double Pitch = (pitch * 2.0f / Math.PI);
+                            //Console.WriteLine($"{TiltFactorY}\t{Roll}\t{(2 * mod(Math.Floor((Roll - 1) * 0.5f) + 1, 2)) - 1}");
 
-                                if (double.IsNaN(Yaw)) Yaw = 0;
-                                if (double.IsNaN(Roll)) Roll = 0;
-                                if (double.IsNaN(Pitch)) Pitch = 0;
+                            Draw3dAs3d(
+                                cache, graphics, DisplayImage, ShadowLName, ShadowL, ShadowRName, ShadowR, ShadowUName, ShadowU, ShadowDName, ShadowD,
+                                GyroTransformX, GyroTransformY, GyroRotationAngle, GyroTiltFactorX, GyroTiltFactorY,
+                                Width, Height, TiltTranslateX, TiltTranslateY
+                            );
 
-                                int SignY = -Math.Sign((2 * mod(Math.Floor((Roll - 1) * 0.5f) + 1, 2)) - 1);
-                                float TiltFactorX = (float)((2 * Math.Abs(mod((Pitch - 1) * 0.5f, 2) - 1)) - 1);
-                                float TiltFactorY = (float)((2 * Math.Abs(mod((Roll - 1) * 0.5f, 2) - 1)) - 1);
-                                float rotationAngle = (float)(Yaw * -90.0f);
-                                float transformX = SignY * Math.Max(1.0f - Math.Abs(TiltFactorY), 0.15f);
-                                float transformY = Math.Max(1.0f - Math.Abs(TiltFactorX), 0.15f);
-
-                                //Console.WriteLine($"{TiltFactorY}\t{Roll}\t{(2 * mod(Math.Floor((Roll - 1) * 0.5f) + 1, 2)) - 1}");
-
-                                Draw3dAs3d(cache, graphics, DisplayImage, ShadowLName, ShadowL, ShadowRName, ShadowR, ShadowUName, ShadowU, ShadowDName, ShadowD, transformX, transformY, rotationAngle, TiltFactorX, TiltFactorY, Width, Height, TiltTranslateX, TiltTranslateY);
-
-                                graphics.ResetTransform();
-                            }
+                            graphics.ResetTransform();
                         }
-                    }
-                    break;
-                default:
-                    break;
+                        break;
+                    default:
+                        break;
+                }
             }
 
             graphics.Transform = preserve;
-            
+
             base.Paint(graphics);
         }
 
-        public static void ToEulerAngles(double QuaternionW, double QuaternionX, double QuaternionY, double QuaternionZ, out double Pitch, out double Roll, out double Yaw)
+        public static double[] ToEulerAngles(double QuaternionW, double QuaternionX, double QuaternionY, double QuaternionZ)
         {
-            // Store the Euler angles in radians
-            //Vector3 pitchYawRoll = new Vector3();
-
             double sqw = QuaternionW * QuaternionW;
             double sqx = QuaternionX * QuaternionX;
             double sqy = QuaternionY * QuaternionY;
             double sqz = QuaternionZ * QuaternionZ;
+            double Yaw, Pitch, Roll;
 
             // If quaternion is normalised the unit is one, otherwise it is the correction factor
             double unit = sqx + sqy + sqz + sqw;
@@ -872,7 +874,6 @@ namespace VSCView
                 Yaw = 2f * Math.Atan2(QuaternionX, QuaternionW);  // Yaw
                 Pitch = Math.PI * 0.5f;                         // Pitch
                 Roll = 0f;                                // Roll
-                return;
             }
             else if (test < -0.4999f * unit)                        // -0.4999f OR -0.5f + EPSILON
             {
@@ -880,7 +881,6 @@ namespace VSCView
                 Yaw = -2f * Math.Atan2(QuaternionX, QuaternionW); // Yaw
                 Pitch = -Math.PI * 0.5f;                        // Pitch
                 Roll = 0f;                                // Roll
-                return;
             }
             else
             {
@@ -888,6 +888,7 @@ namespace VSCView
                 Pitch = Math.Asin(2f * test / unit);                                             // Pitch
                 Roll = Math.Atan2(2f * QuaternionX * QuaternionW - 2f * QuaternionY * QuaternionZ, -sqx + sqy - sqz + sqw);      // Roll
             }
+            return new double[] { Yaw, Pitch, Roll };
         }
 
         double mod(double x, double m)
