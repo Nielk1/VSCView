@@ -76,25 +76,32 @@ namespace VSCView
         private void LoadControllers()
         {
             tsmiController.DropDownItems.Clear();
-
             SteamController[] Controllers = SteamController.GetControllers();
 
-            foreach (SteamController controller in Controllers)
+            for (int i = 0; i < Controllers.Count(); i++)
             {
-                ToolStripItem itm = tsmiController.DropDownItems.Add(controller.GetDevicePath(), null, LoadController);
-                itm.Tag = controller;
+                ToolStripItem itm = tsmiController.DropDownItems.Add(Controllers[i].GetDevicePath(), null, LoadController);
+                itm.Tag = Controllers[i];
+
+                // load the first controller in the list if it exists
+                if (i == 0 && Controllers[i] != null)
+                    LoadController(Controllers[i], null);
             }
         }
 
         private void LoadController(object sender, EventArgs e)
         {
             if (ActiveController != null)
-            {
                 ActiveController.DeInitalize();
-            }
 
-            ToolStripItem item = (ToolStripItem)sender;
-            ActiveController = (SteamController)item.Tag;
+            // differentiate between context selection and startup
+            if (sender is ToolStripItem)
+            {
+                ToolStripItem item = (ToolStripItem)sender;
+                ActiveController = (SteamController)item.Tag;
+            }
+            else
+                ActiveController = (SteamController)sender;
 
             ControllerData.SetController(ActiveController);
             ActiveController.Initalize();

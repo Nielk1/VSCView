@@ -1,6 +1,7 @@
 ﻿using HidLibrary;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -179,6 +180,10 @@ namespace VSCView
             //_attached = _device.IsConnected;
 
             _device.ReadReport(OnReport);
+
+            // enable gyro and accel data when wired
+            //_device.WriteFeatureData(new byte[] { 0x30 | 0x04 | 0x08 | 0x10 });
+            //Thread.Sleep(20); // prevent EPIPE hang
         }
 
         public void DeInitalize()
@@ -230,36 +235,21 @@ namespace VSCView
         public static SteamController[] GetControllers()
         {
             List<HidDevice> _devices = HidDevices.Enumerate(VendorId, ProductIdWireless, ProductIdWired).ToList();
-            //Dictionary<int, HidDevice> HidDeviceList = new Dictionary<int, HidDevice>();
-
             List<HidDevice> HidDeviceList = new List<HidDevice>();
+            string wired_m = "&pid_1102&mi_02";
+            string dongle_m = "&pid_1142&mi_01";
 
             // we should never have holes, this entire dictionary is just because I don't know if I can trust the order I get the HID devices
-            foreach (HidDevice _device in _devices)
+            for (int i = 0; i < _devices.Count; i++)
             {
-                if (_device != null)
+                if (_devices[i] != null)
                 {
-                    int index = -1;
-                    Match m = Regex.Match(_device.DevicePath, "&mi_([0-9]{2})");
-                    if (!m.Success) continue;
-                    index = int.Parse(m.Groups[1].Value) - 1;
-                    if (index < 0) continue;
-
-                    //HidDeviceList.Add(index, _device);
-                    HidDeviceList.Add(_device);
+                    HidDevice _device = _devices[i];
+                    string devicePath = _device.DevicePath.ToString();
+                    if (devicePath.Contains(wired_m) || devicePath.Contains(dongle_m))
+                        HidDeviceList.Add(_device);
                 }
             }
-
-            //SteamController[] Controllers = new SteamController[HidDeviceList.Count];
-            //for (int idx = 0; idx < HidDeviceList.Count; idx++)
-            //{
-            //    if (!HidDeviceList.ContainsKey(idx)) continue;
-            //
-            //    Controllers[idx] = new SteamController(HidDeviceList[idx]);
-            //}
-            //
-            //return Controllers;
-
             return HidDeviceList.Select(dr => new SteamController(dr)).ToArray();
         }
 
