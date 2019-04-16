@@ -42,9 +42,11 @@ namespace VSCView
 
             public bool LeftBumper { get; set; }
             public bool LeftTrigger { get; set; }
+            public bool LeftTriggerAnalog { get; set; }
 
             public bool RightBumper { get; set; }
             public bool RightTrigger { get; set; }
+            public bool RightTriggerAnalog { get; set; }
 
             public bool LeftGrip { get; set; }
             public bool RightGrip { get; set; }
@@ -75,9 +77,11 @@ namespace VSCView
 
                 buttons.LeftBumper = LeftBumper;
                 buttons.LeftTrigger = LeftTrigger;
+                buttons.LeftTriggerAnalog = LeftTriggerAnalog;
 
                 buttons.RightBumper = RightBumper;
                 buttons.RightTrigger = RightTrigger;
+                buttons.RightTriggerAnalog = RightTriggerAnalog;
 
                 buttons.LeftGrip = LeftGrip;
                 buttons.RightGrip = RightGrip;
@@ -108,6 +112,9 @@ namespace VSCView
             public byte LeftTrigger { get; set; }
             public byte RightTrigger { get; set; }
 
+            public bool LeftTriggerAnalog { get; set; }
+            public bool RightTriggerAnalog { get; set; }
+
             public Int32 LeftStickX { get; set; }
             public Int32 LeftStickY { get; set; }
             public Int32 LeftPadX { get; set; }
@@ -128,6 +135,9 @@ namespace VSCView
 
         byte LeftTrigger { get; set; }
         byte RightTrigger { get; set; }
+
+        bool LeftTriggerAnalog { get; set; }
+        bool RightTriggerAnalog { get; set; }
 
         Int32 LeftStickX { get; set; }
         Int32 LeftStickY { get; set; }
@@ -212,6 +222,8 @@ namespace VSCView
 
                 state.LeftTrigger = LeftTrigger;
                 state.RightTrigger = RightTrigger;
+                state.LeftTriggerAnalog = LeftTriggerAnalog;
+                state.RightTriggerAnalog = RightTriggerAnalog;
 
                 state.LeftStickX = LeftStickX;
                 state.LeftStickY = LeftStickY;
@@ -307,6 +319,10 @@ namespace VSCView
 
                             LeftTrigger = report.Data[11];
                             RightTrigger = report.Data[12];
+
+                            // use 20% of analog range (0-255) for minimum threshold
+                            LeftTriggerAnalog = LeftTrigger > (255 * 0.20);
+                            RightTriggerAnalog = RightTrigger > (255 * 0.20);
 
                             if (LeftAnalogMultiplexMode)
                             {
