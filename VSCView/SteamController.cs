@@ -16,6 +16,8 @@ namespace VSCView
         private const int ProductIdWireless = 0x1142; // 4418;
         private const int ProductIdWired = 0x1102; // 4354
 
+        public SteamControllerState OldState;
+
         //private bool _attached = false;
         private HidDevice _device;
 
@@ -277,6 +279,7 @@ namespace VSCView
             lock (controllerStateLock)
             {
                 //SteamControllerState OldState = GetState();
+                OldState = GetState();
 
                 //if (_attached == false) { return; }
 
@@ -378,7 +381,14 @@ namespace VSCView
                             OrientationY = BitConverter.ToInt16(report.Data, 44);
                             OrientationZ = BitConverter.ToInt16(report.Data, 46);
 
-                            if (AccelerometerZ > 0)
+                            if (OldState.AccelerometerX == AccelerometerX &&
+                                OldState.AccelerometerY == AccelerometerY &&
+                                OldState.AccelerometerZ == AccelerometerZ)
+                            {
+                                Debug.WriteLine($"Accelerometer is not enabled or sensor data is stuck!");
+                                // DO STUFF HERE
+                            }
+                            else if (AccelerometerZ > 0)
                                 Debug.WriteLine($"aX={AccelerometerX},{AccelerometerY},{AccelerometerZ}");
                         }
                         break;
