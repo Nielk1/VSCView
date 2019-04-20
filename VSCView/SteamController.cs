@@ -122,6 +122,9 @@ namespace VSCView
             public Int32 RightPadX { get; set; }
             public Int32 RightPadY { get; set; }
 
+            public Int16 AccelerometerX { get; set; }
+            public Int16 AccelerometerY { get; set; }
+            public Int16 AccelerometerZ { get; set; }
             public Int16 AngularVelocityX { get; set; }
             public Int16 AngularVelocityY { get; set; }
             public Int16 AngularVelocityZ { get; set; }
@@ -146,6 +149,9 @@ namespace VSCView
         Int32 RightPadX { get; set; }
         Int32 RightPadY { get; set; }
 
+        Int16 AccelerometerX { get; set; }
+        Int16 AccelerometerY { get; set; }
+        Int16 AccelerometerZ { get; set; }
         Int16 AngularVelocityX { get; set; }
         Int16 AngularVelocityY { get; set; }
         Int16 AngularVelocityZ { get; set; }
@@ -190,10 +196,6 @@ namespace VSCView
             //_attached = _device.IsConnected;
 
             _device.ReadReport(OnReport);
-
-            // enable gyro and accel data when wired
-            //_device.WriteFeatureData(new byte[] { 0x30 | 0x04 | 0x08 | 0x10 });
-            //Thread.Sleep(20); // prevent EPIPE hang
         }
 
         public void DeInitalize()
@@ -232,6 +234,9 @@ namespace VSCView
                 state.RightPadX = RightPadX;
                 state.RightPadY = RightPadY;
 
+                state.AccelerometerX = AccelerometerX;
+                state.AccelerometerY = AccelerometerY;
+                state.AccelerometerZ = AccelerometerZ;
                 state.AngularVelocityX = AngularVelocityX;
                 state.AngularVelocityY = AngularVelocityY;
                 state.AngularVelocityZ = AngularVelocityZ;
@@ -362,14 +367,9 @@ namespace VSCView
                             RightPadX = BitConverter.ToInt16(report.Data, 20);
                             RightPadY = BitConverter.ToInt16(report.Data, 22);
 
-                            /*
-                            //NiceOutputText[28] += " -------- Acceleration X: " + BitConverter.ToInt16(report.Data, 28);
-                            //NiceOutputText[29] += " ^^^^^^^^";
-                            //NiceOutputText[30] += " -------- Acceleration Y: " + BitConverter.ToInt16(report.Data, 30);
-                            //NiceOutputText[31] += " ^^^^^^^^";
-                            //NiceOutputText[32] += " -------- Acceleration Z: " + BitConverter.ToInt16(report.Data, 32);
-                            //NiceOutputText[33] += " ^^^^^^^^";
-                            */
+                            AccelerometerX = BitConverter.ToInt16(report.Data, 28);
+                            AccelerometerY = BitConverter.ToInt16(report.Data, 30);
+                            AccelerometerZ = BitConverter.ToInt16(report.Data, 32);
                             AngularVelocityX = BitConverter.ToInt16(report.Data, 34);
                             AngularVelocityY = BitConverter.ToInt16(report.Data, 36);
                             AngularVelocityZ = BitConverter.ToInt16(report.Data, 38);
@@ -377,6 +377,9 @@ namespace VSCView
                             OrientationX = BitConverter.ToInt16(report.Data, 42);
                             OrientationY = BitConverter.ToInt16(report.Data, 44);
                             OrientationZ = BitConverter.ToInt16(report.Data, 46);
+
+                            if (AccelerometerZ > 0)
+                                Debug.WriteLine($"aX={AccelerometerX},{AccelerometerY},{AccelerometerZ}");
                         }
                         break;
 
