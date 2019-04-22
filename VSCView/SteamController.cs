@@ -18,7 +18,7 @@ namespace VSCView
 
         public SteamControllerState OldState;
 
-        //private bool _attached = false;
+        private bool _sensorsEnabled;
         private HidDevice _device;
 
         public enum VSCEventType
@@ -210,6 +210,45 @@ namespace VSCView
             //_device.MonitorDeviceEvents = false;
 
             Initalized = false;
+            _device.CloseDevice();
+        }
+
+        public bool EnableGyroSensors()
+        {
+            if (_device.IsOpen && _device.IsConnected && !_sensorsEnabled)
+            {
+                byte[] reportData = new byte[64];
+                reportData[1] = 0x87; // 0x87 = register write command
+                reportData[2] = 0x03; // 0x03 = length of data to be written (data + 1 empty bit)
+                reportData[3] = 0x30; // 0x30 = register of Gyro data
+                reportData[4] = 0x10 | 0x08 | 0x04; // enable raw Gyro, raw Accel, and Quaternion data
+                //var report = _device.CreateReport();
+                //report.Data = reportData;
+
+                //var result = _device.WriteReport(report, 100);
+                var result = _device.WriteFeatureData(reportData);
+                _sensorsEnabled = true;
+                return result;
+            }
+            return false;
+        }
+
+        public bool ResetGyroSensors()
+        {
+            if (_device.IsOpen && _device.IsConnected && _sensorsEnabled)
+            {
+                byte[] reportData = new byte[_device.Capabilities.FeatureReportByteLength];
+                reportData[1] = 0x87; // 0x87 = register write command
+                reportData[2] = 0x03; // 0x03 = length of data to be written (data + 1 empty bit)
+                reportData[3] = 0x30; // 0x30 = register of Gyro data
+                reportData[4] = 0x10 | 0x04; // enable raw Gyro and Quaternion data only
+
+                var result = _device.WriteFeatureData(reportData);
+                Thread.Sleep(20);
+                _sensorsEnabled = false;
+                return result;
+            }
+            return false;
         }
 
         public string GetDevicePath()
@@ -381,12 +420,14 @@ namespace VSCView
                             OrientationY = BitConverter.ToInt16(report.Data, 44);
                             OrientationZ = BitConverter.ToInt16(report.Data, 46);
 
-                            if (OldState.AccelerometerX == AccelerometerX &&
+                            // use a semaphor so we don't spam the device
+                            if (!_sensorsEnabled &&
+                                OldState.AccelerometerX == AccelerometerX &&
                                 OldState.AccelerometerY == AccelerometerY &&
                                 OldState.AccelerometerZ == AccelerometerZ)
                             {
                                 Debug.WriteLine($"Accelerometer is not enabled or sensor data is stuck!");
-                                // DO STUFF HERE
+                                EnableGyroSensors();
                             }
                             else if (AccelerometerZ > 0)
                                 Debug.WriteLine($"aX={AccelerometerX},{AccelerometerY},{AccelerometerZ}");
