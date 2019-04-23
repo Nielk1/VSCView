@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -84,7 +85,7 @@ namespace VSCView
 
     public class ControllerData
     {
-        SteamController ActiveController;
+        public SteamController ActiveController;
 
         public bool GetBasicControl(string inputName)
         {
@@ -794,6 +795,13 @@ namespace VSCView
                 double qy = State.OrientationY * 1.0f / 32768;
                 double qz = State.OrientationZ * 1.0f / 32768;
 
+                double gx = State.AngularVelocityX * 1.0f / 131;
+                double gy = State.AngularVelocityX * 1.0f / 131;
+                double gz = State.AngularVelocityX * 1.0f / 131;
+                double ax = State.AccelerometerX * 1.0f / 32768;
+                double ay = State.AccelerometerY * 1.0f / 32768;
+                double az = State.AccelerometerZ * 1.0f / 32768;
+
                 switch (DisplayType)
                 {
                     case "accel":
@@ -808,6 +816,12 @@ namespace VSCView
                         break;
                     case "gyro":
                         {
+                            if (data.ActiveController.OldState != null &&
+                                data.ActiveController.CheckSensorDataStuck())
+                            {
+                                data.ActiveController.EnableGyroSensors();
+                            }
+
                             double[] eulAnglesYPR = ToEulerAngles(qw, qy, qz, qx);
                             double Yaw = (eulAnglesYPR[0] * 2.0f / Math.PI);
                             double Pitch = (eulAnglesYPR[1] * 2.0f / Math.PI);
@@ -826,6 +840,7 @@ namespace VSCView
                             float transformY = Math.Max(1.0f - Math.Abs(QuatTiltFactorX), 0.15f);
 
                             //Console.WriteLine($"{TiltFactorY}\t{Roll}\t{(2 * mod(Math.Floor((Roll - 1) * 0.5f) + 1, 2)) - 1}");
+                            Debug.WriteLine($"aX={ax},{ay},{az} & gX={gx},{gy},{gz}");
 
                             Draw3dAs3d(cache, graphics, DisplayImage, ShadowLName, ShadowL, ShadowRName, ShadowR, ShadowUName, ShadowU, ShadowDName, ShadowD, transformX, transformY, QuatTiltFactorZ, QuatTiltFactorX, QuatTiltFactorY, Width, Height, TiltTranslateX, TiltTranslateY);
 

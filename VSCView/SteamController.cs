@@ -18,7 +18,7 @@ namespace VSCView
 
         public SteamControllerState OldState;
 
-        private bool _sensorsEnabled;
+        public bool SensorsEnabled;
         private HidDevice _device;
 
         public enum VSCEventType
@@ -210,24 +210,22 @@ namespace VSCView
             //_device.MonitorDeviceEvents = false;
 
             Initalized = false;
+            ResetGyroSensors();
             _device.CloseDevice();
         }
 
         public bool EnableGyroSensors()
         {
-            if (_device.IsOpen && _device.IsConnected && !_sensorsEnabled)
+            if (_device.IsOpen && _device.IsConnected && !SensorsEnabled)
             {
                 byte[] reportData = new byte[64];
                 reportData[1] = 0x87; // 0x87 = register write command
                 reportData[2] = 0x03; // 0x03 = length of data to be written (data + 1 empty bit)
                 reportData[3] = 0x30; // 0x30 = register of Gyro data
                 reportData[4] = 0x10 | 0x08 | 0x04; // enable raw Gyro, raw Accel, and Quaternion data
-                //var report = _device.CreateReport();
-                //report.Data = reportData;
-
-                //var result = _device.WriteReport(report, 100);
+                Debug.WriteLine("Attempting to reenable MPU accelerometer sensor");
                 var result = _device.WriteFeatureData(reportData);
-                _sensorsEnabled = true;
+                SensorsEnabled = true;
                 return result;
             }
             return false;
@@ -235,20 +233,33 @@ namespace VSCView
 
         public bool ResetGyroSensors()
         {
-            if (_device.IsOpen && _device.IsConnected && _sensorsEnabled)
+            if (_device.IsOpen && _device.IsConnected && SensorsEnabled)
             {
-                byte[] reportData = new byte[_device.Capabilities.FeatureReportByteLength];
+                byte[] reportData = new byte[64];
                 reportData[1] = 0x87; // 0x87 = register write command
                 reportData[2] = 0x03; // 0x03 = length of data to be written (data + 1 empty bit)
                 reportData[3] = 0x30; // 0x30 = register of Gyro data
-                reportData[4] = 0x10 | 0x04; // enable raw Gyro and Quaternion data only
-
+                reportData[4] = 0x10 | 0x04; // enable raw Gyro, raw Accel, and Quaternion data
+                Debug.WriteLine("Attempting to restore default sensor state");
                 var result = _device.WriteFeatureData(reportData);
-                Thread.Sleep(20);
-                _sensorsEnabled = false;
+                SensorsEnabled = false;
                 return result;
             }
             return false;
+        }
+
+        public bool CheckSensorDataStuck()
+        {
+            return (AccelerometerX == 0 &&
+                AccelerometerY == 0 &&
+                AccelerometerZ == 0 ||
+                AccelerometerX == OldState.AccelerometerX &&
+                AccelerometerY == OldState.AccelerometerY &&
+                AccelerometerZ == OldState.AccelerometerZ ||
+                AngularVelocityX == OldState.AngularVelocityX &&
+                AngularVelocityY == OldState.AngularVelocityY &&
+                AngularVelocityZ == OldState.AngularVelocityZ
+            );
         }
 
         public string GetDevicePath()
@@ -317,9 +328,7 @@ namespace VSCView
 
             lock (controllerStateLock)
             {
-                //SteamControllerState OldState = GetState();
                 OldState = GetState();
-
                 //if (_attached == false) { return; }
 
                 byte Unknown1 = report.Data[0]; // always 0x01?
@@ -419,18 +428,6 @@ namespace VSCView
                             OrientationX = BitConverter.ToInt16(report.Data, 42);
                             OrientationY = BitConverter.ToInt16(report.Data, 44);
                             OrientationZ = BitConverter.ToInt16(report.Data, 46);
-
-                            // use a semaphor so we don't spam the device
-                            if (!_sensorsEnabled &&
-                                OldState.AccelerometerX == AccelerometerX &&
-                                OldState.AccelerometerY == AccelerometerY &&
-                                OldState.AccelerometerZ == AccelerometerZ)
-                            {
-                                Debug.WriteLine($"Accelerometer is not enabled or sensor data is stuck!");
-                                EnableGyroSensors();
-                            }
-                            else if (AccelerometerZ > 0)
-                                Debug.WriteLine($"aX={AccelerometerX},{AccelerometerY},{AccelerometerZ}");
                         }
                         break;
 
