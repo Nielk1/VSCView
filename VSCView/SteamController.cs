@@ -134,6 +134,8 @@ namespace VSCView
             public Int16 OrientationX { get; set; }
             public Int16 OrientationY { get; set; }
             public Int16 OrientationZ { get; set; }
+
+            public Int32 Timestamp { get; set; }
         }
 
         SteamControllerButtons Buttons { get; set; }
@@ -161,6 +163,8 @@ namespace VSCView
         Int16 OrientationX { get; set; }
         Int16 OrientationY { get; set; }
         Int16 OrientationZ { get; set; }
+
+        public Int32 Timestamp { get; set; }
 
         bool Initalized;
 
@@ -297,6 +301,8 @@ namespace VSCView
                 state.OrientationY = OrientationY;
                 state.OrientationZ = OrientationZ;
 
+                state.Timestamp = Timestamp;
+
                 return state;
             }
         }
@@ -428,6 +434,8 @@ namespace VSCView
                             OrientationX = BitConverter.ToInt16(report.Data, 42);
                             OrientationY = BitConverter.ToInt16(report.Data, 44);
                             OrientationZ = BitConverter.ToInt16(report.Data, 46);
+
+                            Timestamp = DateTime.Now.Millisecond;
                         }
                         break;
 

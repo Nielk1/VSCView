@@ -69,6 +69,7 @@
     <Compile Include="ProcForm.Designer.cs">
       <DependentUpon>ProcForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SensorFusion.cs" />
     <Compile Include="SteamController.cs" />
     <Compile Include="RawForm.cs">
       <SubType>Form</SubType>
