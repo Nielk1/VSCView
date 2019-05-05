@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace VSCView
@@ -6,23 +7,22 @@ namespace VSCView
     public class SensorFusion
     {
         public sealed class EMACalc
-        {// adapted from: https://stackoverflow.com/a/44073605
+        {
             readonly double _alpha;
-            double _lastAverage = double.NaN;
-            double _lastVariance = double.NaN;
-            double _lastDataPoint = double.NaN;
+            double _lastDataPoint = double.NaN, _lastEMA = double.NaN, _lastEMD = double.NaN;
+
+            public double EMA { get { return _lastEMA; } private set { _lastEMA = value; } }
+            public double EMD { get { return _lastEMD; } private set { _lastEMD = value; } }
 
             public EMACalc(int lookBack) => _alpha = 2f / (lookBack + 1);
 
             public double NextValue(double value)
             {
                 _lastDataPoint = value;
-                return _lastAverage = double.IsNaN(_lastAverage) ?
-                    _lastDataPoint : (_lastDataPoint - _lastAverage) * _alpha + _lastAverage;
+                _lastEMA = double.IsNaN(_lastEMA) ? _lastDataPoint : (_lastDataPoint - _lastEMA) * _alpha + _lastEMA;
+                _lastEMD = double.IsNaN(_lastEMD) ? _lastEMA : Math.Sqrt(_alpha * Math.Pow(_lastDataPoint - _lastEMA, 2) + (1 - _alpha) * Math.Pow(_lastEMD, 2));
+                return _lastEMA;
             }
-
-            public double Deviation() => _lastVariance = double.IsNaN(_lastVariance) ?
-                0f : Math.Sqrt(_alpha * Math.Pow(_lastDataPoint - _lastAverage, 2) + (1 - _alpha) * Math.Pow(_lastVariance, 2));
         }
 
         public sealed class OTFCalibrator
@@ -30,10 +30,10 @@ namespace VSCView
             public double OffsetY { get; private set; }
             public double OffsetP { get; private set; }
             public double OffsetR { get; private set; }
+            const double framerate = 66.6666666667f;
 
-            EMACalc velocity, velEMA;
-            int SampleSize, OffsetThreshold;
-            double _lastEMD;
+            EMACalc velocity;
+            int SampleSize, ThresholdCounter;
 
             /// <summary>
             /// Calculates an offset for IMU data streams (YPR/AHR) using a timer and zero-point diffing
@@ -44,10 +44,9 @@ namespace VSCView
                 OffsetY = 0f;
                 OffsetP = 0f;
                 OffsetR = 0f;
-                SampleSize = (int)(66.667f * bufferTime); // timer paints at ~66fps x buffer window (s)
-                OffsetThreshold = SampleSize;
+                SampleSize = (int)(framerate * bufferTime); // timer paints at ~66fps x buffer window (s)
                 velocity = new EMACalc(SampleSize);
-                velEMA = new EMACalc(bufferTime);
+                
             }
 
             /// <summary>
@@ -65,32 +64,32 @@ namespace VSCView
             public void Calibrate(double yaw, double pitch, double roll,
                 double gx, double gy, double gz, double ax, double ay, double az)
             {
-                // use the normalized sum of gyro and accel readings to derive idle
+                // using the EMD along with normalized sensor magnitude helps track zero-motion state
                 double normGyro = Math.Sqrt(gx * gx + gy * gy + gz * gz);
                 double normAccel = Math.Sqrt(ax * ax + ay * ay + az * az);
-                velocity.NextValue(normGyro + normAccel);
-                double velEMD = velEMA.NextValue(velocity.Deviation());
-                float floor = 0.01f, ceiling = 0.5f;
+                double magNorm = normGyro + normAccel, mfloor = 0.001f, mceiling = 0.15f, vceiling = 0.3f;
+                velocity.NextValue(magNorm);
 
 #if DEBUG
-                Debug.WriteLine($"[ {ax},{ay},{az} ] => {velEMD} = [ {OffsetY},{OffsetP},{OffsetR} ]");
+                Debug.WriteLine($"[ {magNorm} & {velocity.EMD} ] => [ {OffsetY},{OffsetP},{OffsetR} ]");
 #endif
 
-                if (OffsetThreshold == SampleSize)
-                {// if full offset then reset the counter
+                // offset here once our 'bucket' of matching samples is full
+                if (ThresholdCounter == SampleSize)
+                {
                     OffsetY = 1.0f - 1.0f - yaw;
                     OffsetP = 1.0f - 1.0f - pitch;
                     OffsetR = 1.0f - 1.0f - roll;
-                    OffsetThreshold = 0;
+                    ThresholdCounter = 0;
+                    return; // bail
                 }
 
-                // only collect when emd acceleration velocities are very near idle
-                if ((_lastEMD > floor && _lastEMD <= ceiling) && (velEMD > floor && velEMD <= ceiling))
-                    OffsetThreshold++;
+                // accumulate only when nmag < mceiling > mfloor or EMD <= vceiling > mfloor:
+                // should be responsive to both sudden changes and steady-state idle
+                if (magNorm > mfloor && magNorm < mceiling || velocity.EMD > mfloor && velocity.EMD <= vceiling)
+                    ThresholdCounter++; // just count up to the amount of lookBack samples
                 else
-                    OffsetThreshold = 0;
-
-                _lastEMD = velEMD;
+                    ThresholdCounter = 0; // reset on spikes
             }
         }
     }

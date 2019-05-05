@@ -741,17 +741,17 @@ namespace VSCView
         string ShadowDName;
 
         // provide EMA smoothing for all common IMU outputs
-        SensorFusion.EMACalc qwEMA = new SensorFusion.EMACalc(10);
-        SensorFusion.EMACalc qxEMA = new SensorFusion.EMACalc(10);
-        SensorFusion.EMACalc qyEMA = new SensorFusion.EMACalc(10);
-        SensorFusion.EMACalc qzEMA = new SensorFusion.EMACalc(10);
-        SensorFusion.EMACalc axEMA = new SensorFusion.EMACalc(10);
-        SensorFusion.EMACalc ayEMA = new SensorFusion.EMACalc(10);
-        SensorFusion.EMACalc azEMA = new SensorFusion.EMACalc(10);
-        SensorFusion.EMACalc gxEMA = new SensorFusion.EMACalc(10);
-        SensorFusion.EMACalc gyEMA = new SensorFusion.EMACalc(10);
-        SensorFusion.EMACalc gzEMA = new SensorFusion.EMACalc(10);
-        SensorFusion.OTFCalibrator calib = new SensorFusion.OTFCalibrator(8);
+        SensorFusion.EMACalc qwEMA = new SensorFusion.EMACalc(5);
+        SensorFusion.EMACalc qxEMA = new SensorFusion.EMACalc(5);
+        SensorFusion.EMACalc qyEMA = new SensorFusion.EMACalc(5);
+        SensorFusion.EMACalc qzEMA = new SensorFusion.EMACalc(5);
+        SensorFusion.EMACalc axEMA = new SensorFusion.EMACalc(5);
+        SensorFusion.EMACalc ayEMA = new SensorFusion.EMACalc(5);
+        SensorFusion.EMACalc azEMA = new SensorFusion.EMACalc(5);
+        SensorFusion.EMACalc gxEMA = new SensorFusion.EMACalc(5);
+        SensorFusion.EMACalc gyEMA = new SensorFusion.EMACalc(5);
+        SensorFusion.EMACalc gzEMA = new SensorFusion.EMACalc(5);
+        SensorFusion.OTFCalibrator calib = new SensorFusion.OTFCalibrator(5); // lookback = ~6-8s
 
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
@@ -817,8 +817,8 @@ namespace VSCView
                 double ax = axEMA.NextValue(State.AccelerometerX);
                 double ay = ayEMA.NextValue(State.AccelerometerY);
                 double az = azEMA.NextValue(State.AccelerometerZ);
-                // sensitivity scale factor 4 -> units/g
-                double _ax = ax / 2048 / 16, _ay = ay / 2048 / 16, _az = az / 2048 / 16;
+                // sensitivity scale factor 0 -> units/g
+                double _ax = ax * 1.0f / 16384, _ay = ay * 1.0f / 16384, _az = (az * 1.0f / 16384) - 1;
 
                 float GyroTiltFactorX = (float)gx * 0.0001f;
                 float GyroTiltFactorY = (float)gy * 0.0001f;
@@ -870,7 +870,8 @@ namespace VSCView
 #if DEBUG
                             //Debug.WriteLine($"{TiltFactorY}\t{Roll}\t{(2 * mod(Math.Floor((Roll - 1) * 0.5f) + 1, 2)) - 1}");
                             //Debug.WriteLine($"qW={qw},{qx},{qy},{qz}");
-                            Debug.WriteLine($"{Yaw},{Pitch},{Roll} -> {QuatTiltFactorX},{QuatTiltFactorY},{QuatTiltFactorZ}\r\n");
+                            Debug.WriteLine($"gX={_gx},{_gy},{_gz}\taX={_ax},{_ay},{_az}");
+                            Debug.WriteLine($"{Yaw},{Pitch},{Roll}\r\n");
 #endif
 
                             Draw3dAs3d(cache, graphics, DisplayImage, ShadowLName, ShadowL, ShadowRName, ShadowR, ShadowUName, ShadowU, ShadowDName, ShadowD, transformX, transformY, QuatTiltFactorZ, QuatTiltFactorX, QuatTiltFactorY, Width, Height, TiltTranslateX, TiltTranslateY);
