@@ -751,7 +751,7 @@ namespace VSCView
         SensorFusion.EMACalc gxEMA = new SensorFusion.EMACalc(5);
         SensorFusion.EMACalc gyEMA = new SensorFusion.EMACalc(5);
         SensorFusion.EMACalc gzEMA = new SensorFusion.EMACalc(5);
-        SensorFusion.OTFCalibrator calib = new SensorFusion.OTFCalibrator(5); // lookback = ~6-8s
+        SensorFusion.OTFCalibrator calib = new SensorFusion.OTFCalibrator(8); // lookback = ~8-12s
 
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {

@@ -10,9 +10,11 @@ namespace VSCView
         {
             readonly double _alpha;
             double _lastDataPoint = double.NaN, _lastEMA = double.NaN, _lastEMD = double.NaN;
+            double _lastVariance = 0f, _lastZScore = 0f;
 
             public double EMA { get { return _lastEMA; } private set { _lastEMA = value; } }
             public double EMD { get { return _lastEMD; } private set { _lastEMD = value; } }
+            public double ZScore { get { return _lastZScore; } private set { _lastZScore = value; } }
 
             public EMACalc(int lookBack) => _alpha = 2f / (lookBack + 1);
 
@@ -20,7 +22,9 @@ namespace VSCView
             {
                 _lastDataPoint = value;
                 _lastEMA = double.IsNaN(_lastEMA) ? _lastDataPoint : (_lastDataPoint - _lastEMA) * _alpha + _lastEMA;
-                _lastEMD = double.IsNaN(_lastEMD) ? _lastEMA : Math.Sqrt(_alpha * Math.Pow(_lastDataPoint - _lastEMA, 2) + (1 - _alpha) * Math.Pow(_lastEMD, 2));
+                _lastVariance = (1 - _alpha) * (_lastVariance + _alpha * Math.Pow(_lastDataPoint - _lastEMA,2));
+                _lastEMD = double.IsNaN(_lastEMD) ? 0f : Math.Sqrt(_lastVariance);
+                _lastZScore = (_lastDataPoint - _lastEMA) / _lastEMD;
                 return _lastEMA;
             }
         }
@@ -34,6 +38,7 @@ namespace VSCView
 
             EMACalc velocity;
             int SampleSize, ThresholdCounter;
+            double _lastEMD = 0f;
 
             /// <summary>
             /// Calculates an offset for IMU data streams (YPR/AHR) using a timer and zero-point diffing
@@ -65,13 +70,19 @@ namespace VSCView
                 double gx, double gy, double gz, double ax, double ay, double az)
             {
                 // using the EMD along with normalized sensor magnitude helps track zero-motion state
-                double normGyro = Math.Sqrt(gx * gx + gy * gy + gz * gz);
-                double normAccel = Math.Sqrt(ax * ax + ay * ay + az * az);
-                double magNorm = normGyro + normAccel, mfloor = 0.001f, mceiling = 0.15f, vceiling = 0.3f;
+                double mgx = Math.Abs(gx), mgy = Math.Abs(gy), mgz = Math.Abs(gz);
+                double max = Math.Abs(ax), may = Math.Abs(ay), maz = Math.Abs(az);
+                double normGyro = Math.Sqrt(mgx * mgx + mgy * mgy + mgz * mgz);
+                double normAccel = Math.Sqrt(max * max + may * may + maz * maz);
+                double magNorm = normGyro + normAccel, ceiling = 0.22f;
                 velocity.NextValue(magNorm);
+                // search for motion based on sensor input magnitude:
+                // movement > z-score:EMD > previous reading (local maxima search)
+                bool signal = magNorm <= ceiling || velocity.ZScore < velocity.EMD || velocity.EMD < _lastEMD ? false : true;
+                _lastEMD = velocity.EMD;
 
 #if DEBUG
-                Debug.WriteLine($"[ {magNorm} & {velocity.EMD} ] => [ {OffsetY},{OffsetP},{OffsetR} ]");
+                Debug.WriteLine($"[{magNorm} & {velocity.EMD} & {velocity.ZScore}] : [{signal}] => [ {OffsetY},{OffsetP},{OffsetR} ]");
 #endif
 
                 // offset here once our 'bucket' of matching samples is full
@@ -81,13 +92,11 @@ namespace VSCView
                     OffsetP = 1.0f - 1.0f - pitch;
                     OffsetR = 1.0f - 1.0f - roll;
                     ThresholdCounter = 0;
-                    return; // bail
+                    return;
                 }
 
-                // accumulate only when nmag < mceiling > mfloor or EMD <= vceiling > mfloor:
-                // should be responsive to both sudden changes and steady-state idle
-                if (magNorm > mfloor && magNorm < mceiling || velocity.EMD > mfloor && velocity.EMD <= vceiling)
-                    ThresholdCounter++; // just count up to the amount of lookBack samples
+                if (!signal)
+                    ThresholdCounter++; // just count up to the size of our buffer
                 else
                     ThresholdCounter = 0; // reset on spikes
             }
