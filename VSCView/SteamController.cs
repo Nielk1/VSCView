@@ -1,6 +1,7 @@
 ﻿using HidLibrary;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -15,7 +16,9 @@ namespace VSCView
         private const int ProductIdWireless = 0x1142; // 4418;
         private const int ProductIdWired = 0x1102; // 4354
 
-        //private bool _attached = false;
+        public SteamControllerState OldState;
+
+        public bool SensorsEnabled;
         private HidDevice _device;
 
         public enum VSCEventType
@@ -41,9 +44,11 @@ namespace VSCView
 
             public bool LeftBumper { get; set; }
             public bool LeftTrigger { get; set; }
+            public bool LeftTriggerAnalog { get; set; }
 
             public bool RightBumper { get; set; }
             public bool RightTrigger { get; set; }
+            public bool RightTriggerAnalog { get; set; }
 
             public bool LeftGrip { get; set; }
             public bool RightGrip { get; set; }
@@ -74,9 +79,11 @@ namespace VSCView
 
                 buttons.LeftBumper = LeftBumper;
                 buttons.LeftTrigger = LeftTrigger;
+                buttons.LeftTriggerAnalog = LeftTriggerAnalog;
 
                 buttons.RightBumper = RightBumper;
                 buttons.RightTrigger = RightTrigger;
+                buttons.RightTriggerAnalog = RightTriggerAnalog;
 
                 buttons.LeftGrip = LeftGrip;
                 buttons.RightGrip = RightGrip;
@@ -107,6 +114,9 @@ namespace VSCView
             public byte LeftTrigger { get; set; }
             public byte RightTrigger { get; set; }
 
+            public bool LeftTriggerAnalog { get; set; }
+            public bool RightTriggerAnalog { get; set; }
+
             public Int32 LeftStickX { get; set; }
             public Int32 LeftStickY { get; set; }
             public Int32 LeftPadX { get; set; }
@@ -114,6 +124,9 @@ namespace VSCView
             public Int32 RightPadX { get; set; }
             public Int32 RightPadY { get; set; }
 
+            public Int16 AccelerometerX { get; set; }
+            public Int16 AccelerometerY { get; set; }
+            public Int16 AccelerometerZ { get; set; }
             public Int16 AngularVelocityX { get; set; }
             public Int16 AngularVelocityY { get; set; }
             public Int16 AngularVelocityZ { get; set; }
@@ -121,12 +134,17 @@ namespace VSCView
             public Int16 OrientationX { get; set; }
             public Int16 OrientationY { get; set; }
             public Int16 OrientationZ { get; set; }
+
+            public Int32 Timestamp { get; set; }
         }
 
         SteamControllerButtons Buttons { get; set; }
 
         byte LeftTrigger { get; set; }
         byte RightTrigger { get; set; }
+
+        bool LeftTriggerAnalog { get; set; }
+        bool RightTriggerAnalog { get; set; }
 
         Int32 LeftStickX { get; set; }
         Int32 LeftStickY { get; set; }
@@ -135,6 +153,9 @@ namespace VSCView
         Int32 RightPadX { get; set; }
         Int32 RightPadY { get; set; }
 
+        Int16 AccelerometerX { get; set; }
+        Int16 AccelerometerY { get; set; }
+        Int16 AccelerometerZ { get; set; }
         Int16 AngularVelocityX { get; set; }
         Int16 AngularVelocityY { get; set; }
         Int16 AngularVelocityZ { get; set; }
@@ -142,6 +163,8 @@ namespace VSCView
         Int16 OrientationX { get; set; }
         Int16 OrientationY { get; set; }
         Int16 OrientationZ { get; set; }
+
+        public Int32 Timestamp { get; set; }
 
         bool Initalized;
 
@@ -191,6 +214,56 @@ namespace VSCView
             //_device.MonitorDeviceEvents = false;
 
             Initalized = false;
+            ResetGyroSensors();
+            _device.CloseDevice();
+        }
+
+        public bool EnableGyroSensors()
+        {
+            if (_device.IsOpen && _device.IsConnected && !SensorsEnabled)
+            {
+                byte[] reportData = new byte[64];
+                reportData[1] = 0x87; // 0x87 = register write command
+                reportData[2] = 0x03; // 0x03 = length of data to be written (data + 1 empty bit)
+                reportData[3] = 0x30; // 0x30 = register of Gyro data
+                reportData[4] = 0x10 | 0x08 | 0x04; // enable raw Gyro, raw Accel, and Quaternion data
+                Debug.WriteLine("Attempting to reenable MPU accelerometer sensor");
+                var result = _device.WriteFeatureData(reportData);
+                SensorsEnabled = true;
+                return result;
+            }
+            return false;
+        }
+
+        public bool ResetGyroSensors()
+        {
+            if (_device.IsOpen && _device.IsConnected && SensorsEnabled)
+            {
+                byte[] reportData = new byte[64];
+                reportData[1] = 0x87; // 0x87 = register write command
+                reportData[2] = 0x03; // 0x03 = length of data to be written (data + 1 empty bit)
+                reportData[3] = 0x30; // 0x30 = register of Gyro data
+                reportData[4] = 0x10 | 0x04; // enable raw Gyro, raw Accel, and Quaternion data
+                Debug.WriteLine("Attempting to restore default sensor state");
+                var result = _device.WriteFeatureData(reportData);
+                SensorsEnabled = false;
+                return result;
+            }
+            return false;
+        }
+
+        public bool CheckSensorDataStuck()
+        {
+            return (AccelerometerX == 0 &&
+                AccelerometerY == 0 &&
+                AccelerometerZ == 0 ||
+                AccelerometerX == OldState.AccelerometerX &&
+                AccelerometerY == OldState.AccelerometerY &&
+                AccelerometerZ == OldState.AccelerometerZ ||
+                AngularVelocityX == OldState.AngularVelocityX &&
+                AngularVelocityY == OldState.AngularVelocityY &&
+                AngularVelocityZ == OldState.AngularVelocityZ
+            );
         }
 
         public string GetDevicePath()
@@ -207,6 +280,8 @@ namespace VSCView
 
                 state.LeftTrigger = LeftTrigger;
                 state.RightTrigger = RightTrigger;
+                state.LeftTriggerAnalog = LeftTriggerAnalog;
+                state.RightTriggerAnalog = RightTriggerAnalog;
 
                 state.LeftStickX = LeftStickX;
                 state.LeftStickY = LeftStickY;
@@ -215,6 +290,9 @@ namespace VSCView
                 state.RightPadX = RightPadX;
                 state.RightPadY = RightPadY;
 
+                state.AccelerometerX = AccelerometerX;
+                state.AccelerometerY = AccelerometerY;
+                state.AccelerometerZ = AccelerometerZ;
                 state.AngularVelocityX = AngularVelocityX;
                 state.AngularVelocityY = AngularVelocityY;
                 state.AngularVelocityZ = AngularVelocityZ;
@@ -223,6 +301,8 @@ namespace VSCView
                 state.OrientationY = OrientationY;
                 state.OrientationZ = OrientationZ;
 
+                state.Timestamp = Timestamp;
+
                 return state;
             }
         }
@@ -230,36 +310,21 @@ namespace VSCView
         public static SteamController[] GetControllers()
         {
             List<HidDevice> _devices = HidDevices.Enumerate(VendorId, ProductIdWireless, ProductIdWired).ToList();
-            //Dictionary<int, HidDevice> HidDeviceList = new Dictionary<int, HidDevice>();
-
             List<HidDevice> HidDeviceList = new List<HidDevice>();
+            string wired_m = "&pid_1102&mi_02";
+            string dongle_m = "&pid_1142&mi_01";
 
             // we should never have holes, this entire dictionary is just because I don't know if I can trust the order I get the HID devices
-            foreach (HidDevice _device in _devices)
+            for (int i = 0; i < _devices.Count; i++)
             {
-                if (_device != null)
+                if (_devices[i] != null)
                 {
-                    int index = -1;
-                    Match m = Regex.Match(_device.DevicePath, "&mi_([0-9]{2})");
-                    if (!m.Success) continue;
-                    index = int.Parse(m.Groups[1].Value) - 1;
-                    if (index < 0) continue;
-
-                    //HidDeviceList.Add(index, _device);
-                    HidDeviceList.Add(_device);
+                    HidDevice _device = _devices[i];
+                    string devicePath = _device.DevicePath.ToString();
+                    if (devicePath.Contains(wired_m) || devicePath.Contains(dongle_m))
+                        HidDeviceList.Add(_device);
                 }
             }
-
-            //SteamController[] Controllers = new SteamController[HidDeviceList.Count];
-            //for (int idx = 0; idx < HidDeviceList.Count; idx++)
-            //{
-            //    if (!HidDeviceList.ContainsKey(idx)) continue;
-            //
-            //    Controllers[idx] = new SteamController(HidDeviceList[idx]);
-            //}
-            //
-            //return Controllers;
-
             return HidDeviceList.Select(dr => new SteamController(dr)).ToArray();
         }
 
@@ -269,8 +334,7 @@ namespace VSCView
 
             lock (controllerStateLock)
             {
-                //SteamControllerState OldState = GetState();
-
+                OldState = GetState();
                 //if (_attached == false) { return; }
 
                 byte Unknown1 = report.Data[0]; // always 0x01?
@@ -318,6 +382,10 @@ namespace VSCView
                             LeftTrigger = report.Data[11];
                             RightTrigger = report.Data[12];
 
+                            // use 20% of analog range (0-255) for minimum threshold
+                            LeftTriggerAnalog = LeftTrigger > (255 * 0.20);
+                            RightTriggerAnalog = RightTrigger > (255 * 0.20);
+
                             if (LeftAnalogMultiplexMode)
                             {
                                 if (LeftPadTouch)
@@ -356,14 +424,9 @@ namespace VSCView
                             RightPadX = BitConverter.ToInt16(report.Data, 20);
                             RightPadY = BitConverter.ToInt16(report.Data, 22);
 
-                            /*
-                            //NiceOutputText[28] += " -------- Acceleration X: " + BitConverter.ToInt16(report.Data, 28);
-                            //NiceOutputText[29] += " ^^^^^^^^";
-                            //NiceOutputText[30] += " -------- Acceleration Y: " + BitConverter.ToInt16(report.Data, 30);
-                            //NiceOutputText[31] += " ^^^^^^^^";
-                            //NiceOutputText[32] += " -------- Acceleration Z: " + BitConverter.ToInt16(report.Data, 32);
-                            //NiceOutputText[33] += " ^^^^^^^^";
-                            */
+                            AccelerometerX = BitConverter.ToInt16(report.Data, 28);
+                            AccelerometerY = BitConverter.ToInt16(report.Data, 30);
+                            AccelerometerZ = BitConverter.ToInt16(report.Data, 32);
                             AngularVelocityX = BitConverter.ToInt16(report.Data, 34);
                             AngularVelocityY = BitConverter.ToInt16(report.Data, 36);
                             AngularVelocityZ = BitConverter.ToInt16(report.Data, 38);
@@ -371,6 +434,8 @@ namespace VSCView
                             OrientationX = BitConverter.ToInt16(report.Data, 42);
                             OrientationY = BitConverter.ToInt16(report.Data, 44);
                             OrientationZ = BitConverter.ToInt16(report.Data, 46);
+
+                            Timestamp = DateTime.Now.Millisecond;
                         }
                         break;
 
