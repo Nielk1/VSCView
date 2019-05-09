@@ -44,7 +44,7 @@ namespace VSCView
         #region Render Loop
         private void RenderLoop()
         {
-            int fpsLimit = 60, fpsTracker = 0;
+            int fpsLimit = 30, fpsTracker = 0;
             double frameCap = 1.0f * 1000 / fpsLimit;
             double prevTime = msTime();
             double lag = 0.0f, timer = 0.0f;
@@ -86,7 +86,7 @@ namespace VSCView
         }
 
         private void Tick(int delay)
-        {// high res timer (CAUTION: PInvoke dragons!)
+        {
             try
             {
                 Thread.Sleep(delay);

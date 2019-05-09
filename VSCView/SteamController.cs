@@ -16,9 +16,14 @@ namespace VSCView
         private const int ProductIdWireless = 0x1142; // 4418;
         private const int ProductIdWired = 0x1102; // 4354
 
+        SteamControllerState State = new SteamControllerState();
+        SteamControllerState OldState = new SteamControllerState();
         public bool SensorsEnabled;
         private HidDevice _device;
 
+        int stateUsageLock = 0, internalStateLock = 0;
+
+        #region DATA STRUCTS
         public enum VSCEventType
         {
             CONTROL_UPDATE = 0x01,
@@ -42,11 +47,9 @@ namespace VSCView
 
             public bool LeftBumper { get; set; }
             public bool LeftTrigger { get; set; }
-            public bool LeftTriggerAnalog { get; set; }
 
             public bool RightBumper { get; set; }
             public bool RightTrigger { get; set; }
-            public bool RightTriggerAnalog { get; set; }
 
             public bool LeftGrip { get; set; }
             public bool RightGrip { get; set; }
@@ -77,11 +80,9 @@ namespace VSCView
 
                 buttons.LeftBumper = LeftBumper;
                 buttons.LeftTrigger = LeftTrigger;
-                buttons.LeftTriggerAnalog = LeftTriggerAnalog;
 
                 buttons.RightBumper = RightBumper;
                 buttons.RightTrigger = RightTrigger;
-                buttons.RightTriggerAnalog = RightTriggerAnalog;
 
                 buttons.LeftGrip = LeftGrip;
                 buttons.RightGrip = RightGrip;
@@ -112,9 +113,6 @@ namespace VSCView
             public byte LeftTrigger { get; set; }
             public byte RightTrigger { get; set; }
 
-            public bool LeftTriggerAnalog { get; set; }
-            public bool RightTriggerAnalog { get; set; }
-
             public Int32 LeftStickX { get; set; }
             public Int32 LeftStickY { get; set; }
             public Int32 LeftPadX { get; set; }
@@ -138,49 +136,45 @@ namespace VSCView
 
         public SteamControllerState GetState()
         {
-            lock (controllerStateLock)
+            if (0 == Interlocked.Exchange(ref stateUsageLock, 1))
             {
-                SteamControllerState state = new SteamControllerState();
-                state.Buttons = (SteamControllerButtons)Buttons.Clone();
+                SteamControllerState newState = new SteamControllerState();
+                newState.Buttons = (SteamControllerButtons)Buttons.Clone();
 
-                state.LeftTrigger = LeftTrigger;
-                state.RightTrigger = RightTrigger;
-                state.LeftTriggerAnalog = LeftTriggerAnalog;
-                state.RightTriggerAnalog = RightTriggerAnalog;
+                newState.LeftTrigger = LeftTrigger;
+                newState.RightTrigger = RightTrigger;
 
-                state.LeftStickX = LeftStickX;
-                state.LeftStickY = LeftStickY;
-                state.LeftPadX = LeftPadX;
-                state.LeftPadY = LeftPadY;
-                state.RightPadX = RightPadX;
-                state.RightPadY = RightPadY;
+                newState.LeftStickX = LeftStickX;
+                newState.LeftStickY = LeftStickY;
+                newState.LeftPadX = LeftPadX;
+                newState.LeftPadY = LeftPadY;
+                newState.RightPadX = RightPadX;
+                newState.RightPadY = RightPadY;
 
-                state.AccelerometerX = AccelerometerX;
-                state.AccelerometerY = AccelerometerY;
-                state.AccelerometerZ = AccelerometerZ;
-                state.AngularVelocityX = AngularVelocityX;
-                state.AngularVelocityY = AngularVelocityY;
-                state.AngularVelocityZ = AngularVelocityZ;
-                state.OrientationW = OrientationW;
-                state.OrientationX = OrientationX;
-                state.OrientationY = OrientationY;
-                state.OrientationZ = OrientationZ;
+                newState.AccelerometerX = AccelerometerX;
+                newState.AccelerometerY = AccelerometerY;
+                newState.AccelerometerZ = AccelerometerZ;
+                newState.AngularVelocityX = AngularVelocityX;
+                newState.AngularVelocityY = AngularVelocityY;
+                newState.AngularVelocityZ = AngularVelocityZ;
+                newState.OrientationW = OrientationW;
+                newState.OrientationX = OrientationX;
+                newState.OrientationY = OrientationY;
+                newState.OrientationZ = OrientationZ;
 
-                state.DataStuck = DataStuck;
+                newState.DataStuck = DataStuck;
 
-                return state;
+                State = newState;
+                Interlocked.Exchange(ref stateUsageLock, 0);
             }
+            return State;
         }
-
-        SteamControllerState OldState = new SteamControllerState();
+        #endregion
 
         SteamControllerButtons Buttons { get; set; }
 
         byte LeftTrigger { get; set; }
         byte RightTrigger { get; set; }
-
-        bool LeftTriggerAnalog { get; set; }
-        bool RightTriggerAnalog { get; set; }
 
         Int32 LeftStickX { get; set; }
         Int32 LeftStickY { get; set; }
@@ -210,8 +204,6 @@ namespace VSCView
         {
             StateUpdated?.Invoke(this, e);
         }
-
-        object controllerStateLock = new object();
 
         public SteamController(HidDevice device)
         {
@@ -291,15 +283,15 @@ namespace VSCView
         public bool CheckSensorDataStuck()
         {
             return (OldState != null &&
-                AccelerometerX == 0 &&
-                AccelerometerY == 0 &&
-                AccelerometerZ == 0 ||
-                AccelerometerX == OldState.AccelerometerX &&
-                AccelerometerY == OldState.AccelerometerY &&
-                AccelerometerZ == OldState.AccelerometerZ ||
-                AngularVelocityX == OldState.AngularVelocityX &&
-                AngularVelocityY == OldState.AngularVelocityY &&
-                AngularVelocityZ == OldState.AngularVelocityZ
+                State.AccelerometerX == 0 &&
+                State.AccelerometerY == 0 &&
+                State.AccelerometerZ == 0 ||
+                State.AccelerometerX == OldState.AccelerometerX &&
+                State.AccelerometerY == OldState.AccelerometerY &&
+                State.AccelerometerZ == OldState.AccelerometerZ ||
+                State.AngularVelocityX == OldState.AngularVelocityX &&
+                State.AngularVelocityY == OldState.AngularVelocityY &&
+                State.AngularVelocityZ == OldState.AngularVelocityZ
             );
         }
 
@@ -333,10 +325,10 @@ namespace VSCView
         {
             if (!Initalized) return;
 
-            lock (controllerStateLock)
+            if (0 == Interlocked.Exchange(ref internalStateLock, 1))
             {
-                OldState = GetState();
                 //if (_attached == false) { return; }
+                OldState = GetState();
 
                 byte Unknown1 = report.Data[0]; // always 0x01?
                 byte Unknown2 = report.Data[1]; // always 0x00?
@@ -382,10 +374,6 @@ namespace VSCView
 
                             LeftTrigger = report.Data[11];
                             RightTrigger = report.Data[12];
-
-                            // use 20% of analog range (0-255) for minimum threshold
-                            LeftTriggerAnalog = LeftTrigger > (255 * 0.20);
-                            RightTriggerAnalog = RightTrigger > (255 * 0.20);
 
                             if (LeftAnalogMultiplexMode)
                             {
@@ -485,6 +473,8 @@ namespace VSCView
                 OnStateUpdated(NewState);
 
                 _device.ReadReport(OnReport);
+
+                Interlocked.Exchange(ref internalStateLock, 0);
             }
         }
 

@@ -61,7 +61,7 @@ namespace VSCView
         SensorFusion.EMACalc ayEMA;
         SensorFusion.EMACalc azEMA;
 
-        SensorFusion.OTFCalibrator calib = new SensorFusion.OTFCalibrator(8); // buffer ~8-10s
+        SensorFusion.OTFCalibrator calib = new SensorFusion.OTFCalibrator(10); // buffer ~10s
 
         public SensorCollector(int lookback, bool smoothing)
         {

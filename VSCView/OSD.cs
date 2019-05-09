@@ -267,11 +267,16 @@ namespace VSCView
             try
             {
                 //create a Bitmap the size of the image provided  
-                Bitmap bmp = new Bitmap(image.Width, image.Height);
+                Bitmap bmp = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppPArgb);
 
                 //create a graphics object from the image  
                 using (Graphics gfx = Graphics.FromImage(bmp))
                 {
+                    gfx.InterpolationMode = InterpolationMode.NearestNeighbor;
+                    gfx.SmoothingMode = SmoothingMode.None;
+                    gfx.PixelOffsetMode = PixelOffsetMode.None;
+                    gfx.CompositingQuality = CompositingQuality.HighSpeed;
+                    gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
 
                     //create a color matrix object  
                     ColorMatrix matrix = new ColorMatrix();
@@ -285,7 +290,7 @@ namespace VSCView
                     //set the color(opacity) of the image  
                     attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-                    //now draw the image  
+                    //now draw the image
                     gfx.DrawImage(image, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
 
                     bmp.SetResolution(image.HorizontalResolution, image.VerticalResolution);
@@ -413,18 +418,12 @@ namespace VSCView
 
             if (DisplayImage != null)
             {
-                if(DisplayImage != null)
-                    graphics.DrawImage(DisplayImage, X, Y, Width, Height);
+                graphics.DrawImage(DisplayImage, X, Y, Width, Height);
             }
 
             graphics.Transform = preserve;
 
-            //if (DrawFromCenter)
-            //    graphics.TranslateTransform(X, Y);
-
             base.Paint(graphics);
-
-            //graphics.Transform = preserve;
         }
     }
 
