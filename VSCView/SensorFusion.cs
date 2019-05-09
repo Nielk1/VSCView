@@ -34,7 +34,7 @@ namespace VSCView
             public double OffsetY { get; private set; }
             public double OffsetP { get; private set; }
             public double OffsetR { get; private set; }
-            const double framerate = 66.6666666667f;
+            const double framerate = 60.0f;
 
             EMACalc velocity;
             int SampleSize, ThresholdCounter;
