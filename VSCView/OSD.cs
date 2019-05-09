@@ -785,7 +785,7 @@ namespace VSCView
                             float transformX = 1.0f - Math.Abs(sensorData.GyroTiltFactorY * 0.5f);
                             float transformY = 1.0f - Math.Abs(sensorData.GyroTiltFactorX * 0.5f);
 
-                            Draw3dAs3d(
+                            Draw2dAs3d(
                                 cache, graphics, DisplayImage, ShadowLName, ShadowL, ShadowRName, ShadowR, ShadowUName, ShadowU, ShadowDName, ShadowD,
                                 transformX, transformY, sensorData.GyroTiltFactorZ, sensorData.GyroTiltFactorX, sensorData.GyroTiltFactorY,
                                 Width, Height, TiltTranslateX, TiltTranslateY
@@ -807,7 +807,7 @@ namespace VSCView
                             //Debug.WriteLine($"{sensorData.Yaw},{sensorData.Pitch},{sensorData.Roll}\r\n");
 #endif
 
-                            Draw3dAs3d(
+                            Draw2dAs3d(
                                 cache, graphics, DisplayImage, ShadowLName, ShadowL, ShadowRName, ShadowR, ShadowUName, ShadowU, ShadowDName, ShadowD,
                                 transformX, transformY, sensorData.QuatTiltFactorZ, sensorData.QuatTiltFactorX, sensorData.QuatTiltFactorY,
                                 Width, Height, TiltTranslateX, TiltTranslateY
@@ -824,7 +824,7 @@ namespace VSCView
             graphics.Transform = preserve;
         }
 
-        private void Draw3dAs3d(
+        private void Draw2dAs3d(
             UI_ImageCache cache, Graphics g,
             Image image, string ImageGyroLName, Image ImageGyroL, string ImageGyroRName, Image ImageGyroR, string ImageGyroUName, Image ImageGyroU, string ImageGyroDName, Image ImageGyroD,
             float transformX, float transformY,
