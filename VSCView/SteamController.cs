@@ -16,8 +16,6 @@ namespace VSCView
         private const int ProductIdWireless = 0x1142; // 4418;
         private const int ProductIdWired = 0x1102; // 4354
 
-        public SteamControllerState OldState;
-
         public bool SensorsEnabled;
         private HidDevice _device;
 
@@ -135,8 +133,46 @@ namespace VSCView
             public Int16 OrientationY { get; set; }
             public Int16 OrientationZ { get; set; }
 
-            public Int32 Timestamp { get; set; }
+            public bool DataStuck { get; set; }
         }
+
+        public SteamControllerState GetState()
+        {
+            lock (controllerStateLock)
+            {
+                SteamControllerState state = new SteamControllerState();
+                state.Buttons = (SteamControllerButtons)Buttons.Clone();
+
+                state.LeftTrigger = LeftTrigger;
+                state.RightTrigger = RightTrigger;
+                state.LeftTriggerAnalog = LeftTriggerAnalog;
+                state.RightTriggerAnalog = RightTriggerAnalog;
+
+                state.LeftStickX = LeftStickX;
+                state.LeftStickY = LeftStickY;
+                state.LeftPadX = LeftPadX;
+                state.LeftPadY = LeftPadY;
+                state.RightPadX = RightPadX;
+                state.RightPadY = RightPadY;
+
+                state.AccelerometerX = AccelerometerX;
+                state.AccelerometerY = AccelerometerY;
+                state.AccelerometerZ = AccelerometerZ;
+                state.AngularVelocityX = AngularVelocityX;
+                state.AngularVelocityY = AngularVelocityY;
+                state.AngularVelocityZ = AngularVelocityZ;
+                state.OrientationW = OrientationW;
+                state.OrientationX = OrientationX;
+                state.OrientationY = OrientationY;
+                state.OrientationZ = OrientationZ;
+
+                state.DataStuck = DataStuck;
+
+                return state;
+            }
+        }
+
+        SteamControllerState OldState = new SteamControllerState();
 
         SteamControllerButtons Buttons { get; set; }
 
@@ -164,7 +200,7 @@ namespace VSCView
         Int16 OrientationY { get; set; }
         Int16 OrientationZ { get; set; }
 
-        public Int32 Timestamp { get; set; }
+        bool DataStuck { get; set; }
 
         bool Initalized;
 
@@ -220,7 +256,7 @@ namespace VSCView
 
         public bool EnableGyroSensors()
         {
-            if (_device.IsOpen && _device.IsConnected && !SensorsEnabled)
+            if (!SensorsEnabled)
             {
                 byte[] reportData = new byte[64];
                 reportData[1] = 0x87; // 0x87 = register write command
@@ -237,7 +273,7 @@ namespace VSCView
 
         public bool ResetGyroSensors()
         {
-            if (_device.IsOpen && _device.IsConnected && SensorsEnabled)
+            if (SensorsEnabled)
             {
                 byte[] reportData = new byte[64];
                 reportData[1] = 0x87; // 0x87 = register write command
@@ -254,7 +290,8 @@ namespace VSCView
 
         public bool CheckSensorDataStuck()
         {
-            return (AccelerometerX == 0 &&
+            return (OldState != null &&
+                AccelerometerX == 0 &&
                 AccelerometerY == 0 &&
                 AccelerometerZ == 0 ||
                 AccelerometerX == OldState.AccelerometerX &&
@@ -269,42 +306,6 @@ namespace VSCView
         public string GetDevicePath()
         {
             return _device.DevicePath;
-        }
-
-        public SteamControllerState GetState()
-        {
-            lock (controllerStateLock)
-            {
-                SteamControllerState state = new SteamControllerState();
-                state.Buttons = (SteamControllerButtons)Buttons.Clone();
-
-                state.LeftTrigger = LeftTrigger;
-                state.RightTrigger = RightTrigger;
-                state.LeftTriggerAnalog = LeftTriggerAnalog;
-                state.RightTriggerAnalog = RightTriggerAnalog;
-
-                state.LeftStickX = LeftStickX;
-                state.LeftStickY = LeftStickY;
-                state.LeftPadX = LeftPadX;
-                state.LeftPadY = LeftPadY;
-                state.RightPadX = RightPadX;
-                state.RightPadY = RightPadY;
-
-                state.AccelerometerX = AccelerometerX;
-                state.AccelerometerY = AccelerometerY;
-                state.AccelerometerZ = AccelerometerZ;
-                state.AngularVelocityX = AngularVelocityX;
-                state.AngularVelocityY = AngularVelocityY;
-                state.AngularVelocityZ = AngularVelocityZ;
-                state.OrientationW = OrientationW;
-                state.OrientationX = OrientationX;
-                state.OrientationY = OrientationY;
-                state.OrientationZ = OrientationZ;
-
-                state.Timestamp = Timestamp;
-
-                return state;
-            }
         }
 
         public static SteamController[] GetControllers()
@@ -424,6 +425,9 @@ namespace VSCView
                             RightPadX = BitConverter.ToInt16(report.Data, 20);
                             RightPadY = BitConverter.ToInt16(report.Data, 22);
 
+                            DataStuck = CheckSensorDataStuck();
+                            if (!SensorsEnabled || DataStuck) { EnableGyroSensors(); }
+
                             AccelerometerX = BitConverter.ToInt16(report.Data, 28);
                             AccelerometerY = BitConverter.ToInt16(report.Data, 30);
                             AccelerometerZ = BitConverter.ToInt16(report.Data, 32);
@@ -434,8 +438,6 @@ namespace VSCView
                             OrientationX = BitConverter.ToInt16(report.Data, 42);
                             OrientationY = BitConverter.ToInt16(report.Data, 44);
                             OrientationZ = BitConverter.ToInt16(report.Data, 46);
-
-                            Timestamp = DateTime.Now.Millisecond;
                         }
                         break;
 

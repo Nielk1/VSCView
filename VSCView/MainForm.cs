@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,15 +11,19 @@ namespace VSCView
 {
     public partial class MainForm : Form
     {
-        //SteamController[] Controllers;
-        //SteamController.SteamControllerState State;
+        [DllImport("winmm.dll", EntryPoint = "timeBeginPeriod", SetLastError = true)]
+        private static extern uint TimeBeginPeriod(uint delay);
+
+        [DllImport("winmm.dll", EntryPoint = "timeEndPeriod", SetLastError = true)]
+        private static extern uint TimeEndPeriod(uint delay);
+
+        public static SteamController.SteamControllerState state;
+        public static SensorCollector sensorData;
 
         ControllerData ControllerData;
         SteamController ActiveController;
-
-        //short AngularVelocityXMax = 5000;
-        //short AngularVelocityYMax = 5000;
-        //short AngularVelocityZMax = 5000;
+        bool exited = false;
+        int renderUsageEx = 0;
 
         UI ui;
 
@@ -32,23 +33,94 @@ namespace VSCView
             InitializeComponent();
 
             ControllerData = new ControllerData();
-            //ActiveController.SetController(Controllers[0]);
-
-            //ui = new UI(ActiveController, "default",);
-
-            //this.Width = ui.Width;
-            //this.Height = ui.Height;
-
-            //Controllers = SteamController.GetControllers();
-            //ActiveController.SetController(Controllers[0]);
-            //if (Controllers.Length > 0) Controllers[0].StateUpdated += (object sender, SteamController.SteamControllerState e) => MainForm_StateUpdated(sender, e, 0);
-            //if (Controllers.Length > 1) Controllers[1].StateUpdated += (object sender, SteamController.SteamControllerState e) => MainForm_StateUpdated(sender, e, 1);
-            //if (Controllers.Length > 2) Controllers[2].StateUpdated += (object sender, SteamController.SteamControllerState e) => MainForm_StateUpdated(sender, e, 2);
-            //if (Controllers.Length > 3) Controllers[3].StateUpdated += (object sender, SteamController.SteamControllerState e) => MainForm_StateUpdated(sender, e, 3);
+            state = new SteamController.SteamControllerState();
+            // 5s lookback smoothing on sensors
+            sensorData = new SensorCollector(5, true);
 
             LoadThemes();
             LoadControllers();
         }
+
+        #region Render Loop
+        private void RenderLoop()
+        {
+            int fpsLimit = 60, fpsTracker = 0;
+            double frameCap = 1.0f * 1000 / fpsLimit;
+            double prevTime = msTime();
+            double lag = 0.0f, timer = 0.0f;
+            // loop must run faster than rendering rate!
+            int tickDelay = (int)(frameCap * 0.75f);
+            TimeBeginPeriod((uint)tickDelay);
+
+            while (!exited)
+            {
+                double curTime = msTime();
+                double elapsed = (curTime - prevTime);
+                prevTime = curTime;
+                lag += elapsed;
+#if DEBUG
+                timer += elapsed;
+#endif
+
+                if (lag >= frameCap)
+                {// variable render rate on fixed timestep
+                    Render();
+                    lag -= frameCap;
+#if DEBUG
+                    fpsTracker++;
+                    Debug.WriteLine($"Render delta: {lag}ms");
+#endif
+                }
+#if DEBUG
+                if (timer >= 1000.0f)
+                {
+                    Debug.WriteLine($"FPS: {fpsTracker}");
+                    fpsTracker = 0;
+                    timer = 0;
+                }
+#endif
+
+                Tick(tickDelay);
+            }
+            TimeEndPeriod((uint)tickDelay);
+        }
+
+        private void Tick(int delay)
+        {// high res timer (CAUTION: PInvoke dragons!)
+            try
+            {
+                Thread.Sleep(delay);
+            }
+            catch (Exception e) { Debug.WriteLine(e.Message); }
+        }
+
+        private double msTime()
+        {
+            return Stopwatch.GetTimestamp() * 1.0f / 10000.0f;
+        }
+
+        private void Render()
+        {
+            var state = new SteamController.SteamControllerState();
+            if (ActiveController != null)
+            {
+                state = ActiveController.GetState();
+                sensorData.Update(state);
+            }
+
+            if (!this.IsDisposed && this.InvokeRequired && sensorData != null)
+            {
+                try
+                {
+                    this.Invoke(new Action(() =>
+                    {// force a full repaint
+                        this.Invalidate();
+                    }));
+                }
+                catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting*/ }
+            }
+        }
+        #endregion
 
         private void LoadThemes()
         {
@@ -107,7 +179,7 @@ namespace VSCView
             ActiveController.Initalize();
         }
 
-        private void LoadTheme(object sender, EventArgs e)
+        private async void LoadTheme(object sender, EventArgs e)
         {
             lblHint1.Hide();
             lblHint2.Hide();
@@ -122,6 +194,12 @@ namespace VSCView
             ui = new UI(ControllerData, displayTextParts[0], skinJson);
             this.Width = ui.Width;
             this.Height = ui.Height;
+
+            if (0 == Interlocked.Exchange(ref renderUsageEx, 1))
+            {
+                await Task.Run(() => RenderLoop());
+                Interlocked.Exchange(ref renderUsageEx, 0);
+            }
         }
 
         #region Drag Anywhere
@@ -155,14 +233,9 @@ namespace VSCView
             //Console.WriteLine((DateTime.UtcNow - now).TotalMilliseconds);
         }
 
-        private void tmrPaint_Tick(object sender, EventArgs e)
-        {
-            this.Invalidate(); // we can invalidate specific zones
-            this.Update();
-        }
-
         private void tsmiExit_Click(object sender, EventArgs e)
         {
+            exited = true;
             this.Close();
         }
 
@@ -187,6 +260,11 @@ namespace VSCView
             {
                 this.BackColor = colorDialog1.Color;
             }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            exited = true;
         }
     }
 }
