@@ -124,6 +124,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Nielk1_eyes_128.png" />
+    <None Include="Resources\icon_usb.png" />
+    <None Include="Resources\icon_wireless.png" />
+    <None Include="Resources\icon_bt.png" />
     <Content Include="licenses\HidLibrary.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

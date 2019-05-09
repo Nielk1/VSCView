@@ -32,7 +32,14 @@ namespace VSCView
             CONNECT = 0x02,
             PAIRING = 0x03,
         }
-
+        public enum EConnectionType
+        {
+            Unknown,
+            Wireless,
+            USB,
+            BT,
+        }
+        
         public class SteamControllerButtons : ICloneable
         {
             public bool A { get; set; }
@@ -204,6 +211,8 @@ namespace VSCView
 
         bool Initalized;
 
+        public EConnectionType ConnectionType { get; private set; }
+
         public delegate void StateUpdatedEventHandler(object sender, SteamControllerState e);
         public event StateUpdatedEventHandler StateUpdated;
         protected virtual void OnStateUpdated(SteamControllerState e)
@@ -213,11 +222,12 @@ namespace VSCView
 
         object controllerStateLock = new object();
 
-        public SteamController(HidDevice device)
+        public SteamController(HidDevice device, EConnectionType connection = SteamController.EConnectionType.Unknown)
         {
             Buttons = new SteamControllerButtons();
 
             _device = device;
+            ConnectionType = connection;
 
             Initalized = false;
         }
@@ -311,7 +321,8 @@ namespace VSCView
         public static SteamController[] GetControllers()
         {
             List<HidDevice> _devices = HidDevices.Enumerate(VendorId, ProductIdWireless, ProductIdWired).ToList();
-            List<HidDevice> HidDeviceList = new List<HidDevice>();
+            //List<HidDevice> HidDeviceList = new List<HidDevice>();
+            List<SteamController> ControllerList = new List<SteamController>();
             string wired_m = "&pid_1102&mi_02";
             string dongle_m = "&pid_1142&mi_01";
 
@@ -322,11 +333,21 @@ namespace VSCView
                 {
                     HidDevice _device = _devices[i];
                     string devicePath = _device.DevicePath.ToString();
-                    if (devicePath.Contains(wired_m) || devicePath.Contains(dongle_m))
-                        HidDeviceList.Add(_device);
+                    //if (devicePath.Contains(wired_m) || devicePath.Contains(dongle_m))
+                    //    HidDeviceList.Add(_device);
+                    if (devicePath.Contains(wired_m))
+                    {
+                        ControllerList.Add(new SteamController(_device, EConnectionType.USB));
+                    }
+                    else if (devicePath.Contains(dongle_m))
+                    {
+                        ControllerList.Add(new SteamController(_device, EConnectionType.Wireless));
+                    }
                 }
             }
-            return HidDeviceList.Select(dr => new SteamController(dr)).ToArray();
+
+            //return HidDeviceList.Select(dr => new SteamController(dr)).ToArray();
+            return ControllerList.ToArray();
         }
 
         private void OnReport(HidReport report)

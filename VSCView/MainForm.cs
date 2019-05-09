@@ -154,6 +154,18 @@ namespace VSCView
             {
                 ToolStripItem itm = tsmiController.DropDownItems.Add(Controllers[i].GetDevicePath(), null, LoadController);
                 itm.Tag = Controllers[i];
+                switch (Controllers[i].ConnectionType)
+                {
+                    case SteamController.EConnectionType.Wireless:
+                        itm.Image = Properties.Resources.icon_wireless;
+                        break;
+                    case SteamController.EConnectionType.USB:
+                        itm.Image = Properties.Resources.icon_usb;
+                        break;
+                    case SteamController.EConnectionType.BT:
+                        itm.Image = Properties.Resources.icon_bt;
+                        break;
+                }
 
                 // load the first controller in the list if it exists
                 if (i == 0 && Controllers[i] != null)
