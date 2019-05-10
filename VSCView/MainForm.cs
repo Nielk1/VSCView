@@ -11,19 +11,14 @@ namespace VSCView
 {
     public partial class MainForm : Form
     {
-        [DllImport("winmm.dll", EntryPoint = "timeBeginPeriod", SetLastError = true)]
-        private static extern uint TimeBeginPeriod(uint delay);
-
-        [DllImport("winmm.dll", EntryPoint = "timeEndPeriod", SetLastError = true)]
-        private static extern uint TimeEndPeriod(uint delay);
-
         public static SteamController.SteamControllerState state;
         public static SensorCollector sensorData;
+        public static int fpsLimit = 45;
 
         ControllerData ControllerData;
         SteamController ActiveController;
         bool exited = false;
-        int renderUsageEx = 0;
+        int renderUsageLock = 0;
 
         UI ui;
 
@@ -34,8 +29,8 @@ namespace VSCView
 
             ControllerData = new ControllerData();
             state = new SteamController.SteamControllerState();
-            // 5s lookback smoothing on sensors
-            sensorData = new SensorCollector(5, true);
+            // 5s lookback for smoothing
+            sensorData = new SensorCollector(5, fpsLimit, true);
 
             LoadThemes();
             LoadControllers();
@@ -44,62 +39,45 @@ namespace VSCView
         #region Render Loop
         private void RenderLoop()
         {
-            int fpsLimit = 30, fpsTracker = 0;
-            double frameCap = 1.0f * 1000 / fpsLimit;
-            double prevTime = msTime();
-            double lag = 0.0f, timer = 0.0f;
-            // loop must run faster than rendering rate!
-            int tickDelay = (int)(frameCap * 0.75f);
-            TimeBeginPeriod((uint)tickDelay);
+            int frameCap = 1000 / fpsLimit;
+            double lastTime = msTime();
+            double accumulator = 0;
 
             while (!exited)
             {
                 double curTime = msTime();
-                double elapsed = (curTime - prevTime);
-                prevTime = curTime;
-                lag += elapsed;
-#if DEBUG
-                timer += elapsed;
-#endif
+                double frameTime = curTime - lastTime;
+                accumulator += frameTime;
+                lastTime = curTime;
 
-                if (lag >= frameCap)
-                {// variable render rate on fixed timestep
-                    Render();
-                    lag -= frameCap;
-#if DEBUG
-                    fpsTracker++;
-                    Debug.WriteLine($"Render delta: {lag}ms");
-#endif
-                }
-#if DEBUG
-                if (timer >= 1000.0f)
+                while (accumulator >= frameCap)
                 {
-                    Debug.WriteLine($"FPS: {fpsTracker}");
-                    fpsTracker = 0;
-                    timer = 0;
+                    SensorUpdate();
+                    Render();
+                    accumulator -= frameCap;
                 }
-#endif
-
-                Tick(tickDelay);
+                TickWait(frameCap - 1);
             }
-            TimeEndPeriod((uint)tickDelay);
         }
 
-        private void Tick(int delay)
+        private void TickWait(int msTimeout)
         {
-            try
+            SpinWait spinner = new SpinWait();
+            Stopwatch watch = Stopwatch.StartNew();
+            while (watch.ElapsedMilliseconds < msTimeout)
             {
-                Thread.Sleep(delay);
+                spinner.SpinOnce();
             }
-            catch (Exception e) { Debug.WriteLine(e.Message); }
+            watch.Stop();
+            //Debug.WriteLine($"TickWait took: {watch.ElapsedMilliseconds}ms");
         }
 
         private double msTime()
         {
-            return Stopwatch.GetTimestamp() * 1.0f / 10000.0f;
+            return Stopwatch.GetTimestamp() * 0.0001f;
         }
 
-        private void Render()
+        private void SensorUpdate()
         {
             var state = new SteamController.SteamControllerState();
             if (ActiveController != null)
@@ -107,7 +85,10 @@ namespace VSCView
                 state = ActiveController.GetState();
                 sensorData.Update(state);
             }
+        }
 
+        private void Render()
+        {
             if (!this.IsDisposed && this.InvokeRequired && sensorData != null)
             {
                 try
@@ -115,9 +96,10 @@ namespace VSCView
                     this.Invoke(new Action(() =>
                     {// force a full repaint
                         this.Invalidate();
+                        this.Update();
                     }));
                 }
-                catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting*/ }
+                catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
             }
         }
         #endregion
@@ -195,42 +177,33 @@ namespace VSCView
             this.Width = ui.Width;
             this.Height = ui.Height;
 
-            if (0 == Interlocked.Exchange(ref renderUsageEx, 1))
+            if (0 == Interlocked.Exchange(ref renderUsageLock, 1))
             {
                 await Task.Run(() => RenderLoop());
-                Interlocked.Exchange(ref renderUsageEx, 0);
+                Interlocked.Exchange(ref renderUsageLock, 0);
             }
         }
 
         #region Drag Anywhere
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
+        private const int WM_NCLBUTTONDOWN = 0xA1;
+        private const int HT_CAPTION = 0x2;
 
-        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-        private void MainForm_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void MainForm_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+                NativeMethods.NativeReleaseCapture();
+                NativeMethods.NativeSendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, (IntPtr)0);
             }
         }
         #endregion Drag Anywhere
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            //DateTime now = DateTime.UtcNow;
-
             // Call the OnPaint method of the base class.  
             base.OnPaint(e);
 
             ui?.Paint(e.Graphics);
-
-            //Console.WriteLine((DateTime.UtcNow - now).TotalMilliseconds);
         }
 
         private void tsmiExit_Click(object sender, EventArgs e)
@@ -265,6 +238,39 @@ namespace VSCView
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             exited = true;
+        }
+    }
+
+    public class NativeMethods
+    {
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, IntPtr lParam);
+        [DllImport("user32.dll")]
+        private static extern bool ReleaseCapture();
+
+        [DllImport("winmm.dll", EntryPoint = "timeBeginPeriod", SetLastError = true)]
+        private static extern uint TimeBeginPeriod(uint delay);
+        [DllImport("winmm.dll", EntryPoint = "timeEndPeriod", SetLastError = true)]
+        private static extern uint TimeEndPeriod(uint delay);
+
+        public static IntPtr NativeSendMessage(IntPtr hWnd, int Msg, int wParam, IntPtr lParam)
+        {
+            return SendMessage(hWnd, Msg, wParam, lParam);
+        }
+
+        public static bool NativeReleaseCapture()
+        {
+            return ReleaseCapture();
+        }
+
+        public static uint NativeTimeBeginPeriod(int delay)
+        {
+            return TimeBeginPeriod((uint)delay);
+        }
+
+        public static uint NativeTimeEndPeriod(int delay)
+        {
+            return TimeEndPeriod((uint)delay);
         }
     }
 }

@@ -242,7 +242,7 @@ namespace VSCView
             //_device.MonitorDeviceEvents = false;
 
             Initalized = false;
-            ResetGyroSensors();
+            //ResetGyroSensors();
             _device.CloseDevice();
         }
 
@@ -413,8 +413,10 @@ namespace VSCView
                             RightPadX = BitConverter.ToInt16(report.Data, 20);
                             RightPadY = BitConverter.ToInt16(report.Data, 22);
 
+                            /*
                             DataStuck = CheckSensorDataStuck();
                             if (!SensorsEnabled || DataStuck) { EnableGyroSensors(); }
+                            */
 
                             AccelerometerX = BitConverter.ToInt16(report.Data, 28);
                             AccelerometerY = BitConverter.ToInt16(report.Data, 30);

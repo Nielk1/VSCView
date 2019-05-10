@@ -7,10 +7,11 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace VSCView
 {
-    public class UI
+    public class UI : IDisposable
     {
         public int Height { get; private set; }
         public int Width { get; private set; }
@@ -18,6 +19,8 @@ namespace VSCView
         private UI_ImageCache cache;
         private ControllerData data;
         private List<UI_Item> Items;
+
+        bool disposed = false;
 
         public UI(ControllerData data, string themePath, string json)
         {
@@ -78,6 +81,29 @@ namespace VSCView
             {
                 item.Paint(graphics);
             }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                cache.Dispose();
+                disposed = true;
+            }
+        }
+
+        ~UI()
+        {
+            Dispose(false);
         }
     }
 
@@ -228,8 +254,6 @@ namespace VSCView
 
             if (disposing)
             {
-                // Free any other managed objects here.
-                //
                 foreach(var key in cache.Keys)
                 {
                     cache[key].Dispose();
@@ -237,15 +261,13 @@ namespace VSCView
                 }
             }
 
-            // Free any unmanaged objects here.
-            //
             cache = null;
             disposed = true;
         }
 
         public Image GetImage(string Key, Func<Image> ImageLoader)
         {
-            lock(cache)
+            lock (cache)
             {
                 if (cache.ContainsKey(Key)) return cache[Key];
                 cache[Key] = ImageLoader();
@@ -266,15 +288,15 @@ namespace VSCView
         {
             try
             {
-                //create a Bitmap the size of the image provided  
+                //create a Bitmap the size of the image provided
                 Bitmap bmp = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppPArgb);
 
                 //create a graphics object from the image  
                 using (Graphics gfx = Graphics.FromImage(bmp))
                 {
-                    gfx.InterpolationMode = InterpolationMode.NearestNeighbor;
-                    gfx.SmoothingMode = SmoothingMode.None;
-                    gfx.PixelOffsetMode = PixelOffsetMode.None;
+                    gfx.InterpolationMode = InterpolationMode.Bilinear;
+                    gfx.SmoothingMode = SmoothingMode.HighSpeed;
+                    gfx.PixelOffsetMode = PixelOffsetMode.HighSpeed;
                     gfx.CompositingQuality = CompositingQuality.HighSpeed;
                     gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
 
@@ -313,12 +335,6 @@ namespace VSCView
 
         private UI_ImageCache cache;
         private List<UI_Item> Items;
-
-        //public UI_Item(UI_ImageCache cache, string themePath, string json)
-        //{
-        //    JObject themeData = JObject.Parse(json);
-        //    Initalize(cache, themePath, themeData);
-        //}
 
         public UI_Item(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
@@ -574,7 +590,7 @@ namespace VSCView
                         double xVector = cord.Value.X - prevCord.Value.X;
                         double yVector = cord.Value.Y - prevCord.Value.Y;
 
-                        double distance = Math.Sqrt(xVector * xVector + yVector * yVector);
+                        double distance = SensorFusion.EMACalc.ApproxSqrt((float)(xVector * xVector + yVector * yVector));
                         double subdist = distance * 0.5f;
 
                         if ((int)subdist > 0)

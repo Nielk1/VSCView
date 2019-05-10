@@ -27,9 +27,11 @@ namespace VSCView
             public double calGyroY = 0f;
             public double calGyroZ = 0f;
 
+            /*
             public double calAccelX = 0f;
             public double calAccelY = 0f;
             public double calAccelZ = 0f;
+            */
 
             public double Yaw = 0f;
             public double Pitch = 0f;
@@ -41,6 +43,8 @@ namespace VSCView
             public float QuatTiltFactorX = 0f;
             public float QuatTiltFactorY = 0f;
             public float QuatTiltFactorZ = 0f;
+
+            public float NormGyroMag = 0f;
         }
 
         public SensorData Data { get; private set; }
@@ -48,6 +52,7 @@ namespace VSCView
         const double deg2rad = 0.01745329251994329577f;
         int Lookback = 0, usingResource = 0;
         bool Smoothing;
+        
         SensorFusion.EMACalc qwEMA;
         SensorFusion.EMACalc qxEMA;
         SensorFusion.EMACalc qyEMA;
@@ -57,16 +62,22 @@ namespace VSCView
         SensorFusion.EMACalc gyEMA;
         SensorFusion.EMACalc gzEMA;
 
+        /*
         SensorFusion.EMACalc axEMA;
         SensorFusion.EMACalc ayEMA;
         SensorFusion.EMACalc azEMA;
+        */
 
-        SensorFusion.OTFCalibrator calib = new SensorFusion.OTFCalibrator(10); // buffer ~10s
+        SensorFusion.EMACalc normData;
 
-        public SensorCollector(int lookback, bool smoothing)
+        SensorFusion.OTFCalibrator calib;
+
+        public SensorCollector(int lookback, int framerate, bool smoothing)
         {
             Lookback = lookback;
             Smoothing = smoothing;
+            calib = new SensorFusion.OTFCalibrator(8, framerate); // buffer ~8s
+
             qwEMA = new SensorFusion.EMACalc(Lookback);
             qxEMA = new SensorFusion.EMACalc(Lookback);
             qyEMA = new SensorFusion.EMACalc(Lookback);
@@ -76,9 +87,12 @@ namespace VSCView
             gyEMA = new SensorFusion.EMACalc(Lookback);
             gzEMA = new SensorFusion.EMACalc(Lookback);
 
+            /*
             axEMA = new SensorFusion.EMACalc(Lookback);
             ayEMA = new SensorFusion.EMACalc(Lookback);
             azEMA = new SensorFusion.EMACalc(Lookback);
+            */
+            normData = new SensorFusion.EMACalc(Lookback);
             Data = new SensorData();
         }
 
@@ -98,9 +112,11 @@ namespace VSCView
                     Data.gY = (int)gyEMA.NextValue(stateData.AngularVelocityY);
                     Data.gZ = (int)gzEMA.NextValue(stateData.AngularVelocityZ);
 
+                    /*
                     Data.aX = (int)axEMA.NextValue(stateData.AccelerometerX);
                     Data.aY = (int)ayEMA.NextValue(stateData.AccelerometerY);
                     Data.aZ = (int)azEMA.NextValue(stateData.AccelerometerZ);
+                    */
                 }
                 else if (stateData != null)
                 {
@@ -126,9 +142,19 @@ namespace VSCView
                 Data.calGyroY = Data.gY / 16.4f * deg2rad;
                 Data.calGyroZ = Data.gZ / 16.4f * deg2rad;
                 // sensitivity scale factor 0 -> units/g
+                /*
                 Data.calAccelX = Data.aX * 1.0f / 16384;
                 Data.calAccelY = Data.aY * 1.0f / 16384;
                 Data.calAccelZ = Data.aZ * 1.0f / 16384;
+                */
+
+                // accumulate smoothed statistical data on normalized gyro sensor magnitude
+                Data.NormGyroMag = SensorFusion.EMACalc.ApproxSqrt((float)(
+                    Math.Abs(Data.calGyroX * Data.calGyroX) +
+                    Math.Abs(Data.calGyroY * Data.calGyroY) +
+                    Math.Abs(Data.calGyroZ * Data.calGyroZ)
+                ));
+                normData.NextValue(Data.NormGyroMag);
 
                 double[] eulAnglesYPR = ToEulerAngles(Data.qW, Data.qY, Data.qZ, Data.qX);
                 Data.Yaw = eulAnglesYPR[0] * 2.0f / Math.PI;
@@ -139,11 +165,7 @@ namespace VSCView
                 if (double.IsNaN(Data.Roll)) Data.Roll = 0f;
 
                 // auto-calibrate on the fly over several seconds when near idle
-                calib.Calibrate(
-                    Data.Yaw, Data.Pitch, Data.Roll,
-                    Data.calGyroX, Data.calGyroY, Data.calGyroZ,
-                    Data.calAccelX, Data.calAccelY, Data.calAccelZ
-                );
+                calib.Calibrate(Data.Yaw, Data.Pitch, Data.Roll, Data.NormGyroMag);
                 Data.Yaw += calib.OffsetY;
                 Data.Pitch += calib.OffsetP;
                 Data.Roll += calib.OffsetR;
