@@ -3,10 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace VSCView
 {
@@ -16,12 +13,9 @@ namespace VSCView
         private const int ProductIdWireless = 0x1142; // 4418;
         private const int ProductIdWired = 0x1102; // 4354
 
-        SteamControllerState State = new SteamControllerState();
-        SteamControllerState OldState = new SteamControllerState();
         public bool SensorsEnabled;
         private HidDevice _device;
-
-        int stateUsageLock = 0, internalStateLock = 0;
+        int stateUsageLock = 0, reportUsageLock = 0;
 
         #region DATA STRUCTS
         public enum VSCEventType
@@ -36,6 +30,13 @@ namespace VSCView
             DISCONNECT = 0x01,
             CONNECT = 0x02,
             PAIRING = 0x03,
+        }
+        public enum EConnectionType
+        {
+            Unknown,
+            Wireless,
+            USB,
+            BT,
         }
 
         public class SteamControllerButtons : ICloneable
@@ -139,30 +140,30 @@ namespace VSCView
             if (0 == Interlocked.Exchange(ref stateUsageLock, 1))
             {
                 SteamControllerState newState = new SteamControllerState();
-                newState.Buttons = (SteamControllerButtons)Buttons.Clone();
+                newState.Buttons = (SteamControllerButtons)State.Buttons.Clone();
 
-                newState.LeftTrigger = LeftTrigger;
-                newState.RightTrigger = RightTrigger;
+                newState.LeftTrigger = State.LeftTrigger;
+                newState.RightTrigger = State.RightTrigger;
 
-                newState.LeftStickX = LeftStickX;
-                newState.LeftStickY = LeftStickY;
-                newState.LeftPadX = LeftPadX;
-                newState.LeftPadY = LeftPadY;
-                newState.RightPadX = RightPadX;
-                newState.RightPadY = RightPadY;
+                newState.LeftStickX = State.LeftStickX;
+                newState.LeftStickY = State.LeftStickY;
+                newState.LeftPadX = State.LeftPadX;
+                newState.LeftPadY = State.LeftPadY;
+                newState.RightPadX = State.RightPadX;
+                newState.RightPadY = State.RightPadY;
 
-                newState.AccelerometerX = AccelerometerX;
-                newState.AccelerometerY = AccelerometerY;
-                newState.AccelerometerZ = AccelerometerZ;
-                newState.AngularVelocityX = AngularVelocityX;
-                newState.AngularVelocityY = AngularVelocityY;
-                newState.AngularVelocityZ = AngularVelocityZ;
-                newState.OrientationW = OrientationW;
-                newState.OrientationX = OrientationX;
-                newState.OrientationY = OrientationY;
-                newState.OrientationZ = OrientationZ;
+                newState.AccelerometerX = State.AccelerometerX;
+                newState.AccelerometerY = State.AccelerometerY;
+                newState.AccelerometerZ = State.AccelerometerZ;
+                newState.AngularVelocityX = State.AngularVelocityX;
+                newState.AngularVelocityY = State.AngularVelocityY;
+                newState.AngularVelocityZ = State.AngularVelocityZ;
+                newState.OrientationW = State.OrientationW;
+                newState.OrientationX = State.OrientationX;
+                newState.OrientationY = State.OrientationY;
+                newState.OrientationZ = State.OrientationZ;
 
-                newState.DataStuck = DataStuck;
+                //newState.DataStuck = State.DataStuck;
 
                 State = newState;
                 Interlocked.Exchange(ref stateUsageLock, 0);
@@ -171,32 +172,12 @@ namespace VSCView
         }
         #endregion
 
-        SteamControllerButtons Buttons = new SteamControllerButtons();
-
-        byte LeftTrigger { get; set; }
-        byte RightTrigger { get; set; }
-
-        Int32 LeftStickX { get; set; }
-        Int32 LeftStickY { get; set; }
-        Int32 LeftPadX { get; set; }
-        Int32 LeftPadY { get; set; }
-        Int32 RightPadX { get; set; }
-        Int32 RightPadY { get; set; }
-
-        Int16 AccelerometerX { get; set; }
-        Int16 AccelerometerY { get; set; }
-        Int16 AccelerometerZ { get; set; }
-        Int16 AngularVelocityX { get; set; }
-        Int16 AngularVelocityY { get; set; }
-        Int16 AngularVelocityZ { get; set; }
-        Int16 OrientationW { get; set; }
-        Int16 OrientationX { get; set; }
-        Int16 OrientationY { get; set; }
-        Int16 OrientationZ { get; set; }
-
-        bool DataStuck { get; set; }
+        SteamControllerState State = new SteamControllerState();
+        SteamControllerState OldState = new SteamControllerState();
 
         bool Initalized;
+
+        public EConnectionType ConnectionType { get; private set; }
 
         public delegate void StateUpdatedEventHandler(object sender, SteamControllerState e);
         public event StateUpdatedEventHandler StateUpdated;
@@ -205,9 +186,12 @@ namespace VSCView
             StateUpdated?.Invoke(this, e);
         }
 
-        public SteamController(HidDevice device)
+        public SteamController(HidDevice device, EConnectionType connection = SteamController.EConnectionType.Unknown)
         {
+            State.Buttons = new SteamControllerButtons();
+
             _device = device;
+            ConnectionType = connection;
 
             Initalized = false;
         }
@@ -240,7 +224,6 @@ namespace VSCView
             //_device.MonitorDeviceEvents = false;
 
             Initalized = false;
-            //ResetGyroSensors();
             _device.CloseDevice();
         }
 
@@ -301,7 +284,7 @@ namespace VSCView
         public static SteamController[] GetControllers()
         {
             List<HidDevice> _devices = HidDevices.Enumerate(VendorId, ProductIdWireless, ProductIdWired).ToList();
-            List<HidDevice> HidDeviceList = new List<HidDevice>();
+            List<SteamController> ControllerList = new List<SteamController>();
             string wired_m = "&pid_1102&mi_02";
             string dongle_m = "&pid_1142&mi_01";
 
@@ -312,21 +295,28 @@ namespace VSCView
                 {
                     HidDevice _device = _devices[i];
                     string devicePath = _device.DevicePath.ToString();
-                    if (devicePath.Contains(wired_m) || devicePath.Contains(dongle_m))
-                        HidDeviceList.Add(_device);
+                    if (devicePath.Contains(wired_m))
+                    {
+                        ControllerList.Add(new SteamController(_device, EConnectionType.USB));
+                    }
+                    else if (devicePath.Contains(dongle_m))
+                    {
+                        ControllerList.Add(new SteamController(_device, EConnectionType.Wireless));
+                    }
                 }
             }
-            return HidDeviceList.Select(dr => new SteamController(dr)).ToArray();
+
+            return ControllerList.ToArray();
         }
 
         private void OnReport(HidReport report)
         {
             if (!Initalized) return;
 
-            if (0 == Interlocked.Exchange(ref internalStateLock, 1))
+            if (0 == Interlocked.Exchange(ref reportUsageLock, 1))
             {
+                OldState = State;
                 //if (_attached == false) { return; }
-                OldState = GetState();
 
                 byte Unknown1 = report.Data[0]; // always 0x01?
                 byte Unknown2 = report.Data[1]; // always 0x00?
@@ -342,90 +332,90 @@ namespace VSCView
 
                             UInt32 PacketIndex = BitConverter.ToUInt32(report.Data, 4);
 
-                            Buttons.A = (report.Data[8] & 128) == 128;
-                            Buttons.X = (report.Data[8] & 64) == 64;
-                            Buttons.B = (report.Data[8] & 32) == 32;
-                            Buttons.Y = (report.Data[8] & 16) == 16;
-                            Buttons.LeftBumper = (report.Data[8] & 8) == 8;
-                            Buttons.RightBumper = (report.Data[8] & 4) == 4;
-                            Buttons.LeftTrigger = (report.Data[8] & 2) == 2;
-                            Buttons.RightTrigger = (report.Data[8] & 1) == 1;
+                            State.Buttons.A = (report.Data[8] & 128) == 128;
+                            State.Buttons.X = (report.Data[8] & 64) == 64;
+                            State.Buttons.B = (report.Data[8] & 32) == 32;
+                            State.Buttons.Y = (report.Data[8] & 16) == 16;
+                            State.Buttons.LeftBumper = (report.Data[8] & 8) == 8;
+                            State.Buttons.RightBumper = (report.Data[8] & 4) == 4;
+                            State.Buttons.LeftTrigger = (report.Data[8] & 2) == 2;
+                            State.Buttons.RightTrigger = (report.Data[8] & 1) == 1;
 
-                            Buttons.LeftGrip = (report.Data[9] & 128) == 128;
-                            Buttons.Start = (report.Data[9] & 64) == 64;
-                            Buttons.Steam = (report.Data[9] & 32) == 32;
-                            Buttons.Select = (report.Data[9] & 16) == 16;
+                            State.Buttons.LeftGrip = (report.Data[9] & 128) == 128;
+                            State.Buttons.Start = (report.Data[9] & 64) == 64;
+                            State.Buttons.Steam = (report.Data[9] & 32) == 32;
+                            State.Buttons.Select = (report.Data[9] & 16) == 16;
 
-                            Buttons.Down = (report.Data[9] & 8) == 8;
-                            Buttons.Left = (report.Data[9] & 4) == 4;
-                            Buttons.Right = (report.Data[9] & 2) == 2;
-                            Buttons.Up = (report.Data[9] & 1) == 1;
+                            State.Buttons.Down = (report.Data[9] & 8) == 8;
+                            State.Buttons.Left = (report.Data[9] & 4) == 4;
+                            State.Buttons.Right = (report.Data[9] & 2) == 2;
+                            State.Buttons.Up = (report.Data[9] & 1) == 1;
 
                             bool LeftAnalogMultiplexMode = (report.Data[10] & 128) == 128;
-                            Buttons.StickClick = (report.Data[10] & 64) == 64;
+                            State.Buttons.StickClick = (report.Data[10] & 64) == 64;
                             bool Unknown = (report.Data[10] & 32) == 32; // what is this?
-                            Buttons.RightPadTouch = (report.Data[10] & 16) == 16;
+                            State.Buttons.RightPadTouch = (report.Data[10] & 16) == 16;
                             bool LeftPadTouch = (report.Data[10] & 8) == 8;
-                            Buttons.RightPadClick = (report.Data[10] & 4) == 4;
+                            State.Buttons.RightPadClick = (report.Data[10] & 4) == 4;
                             bool ThumbOrLeftPadPress = (report.Data[10] & 2) == 2; // what is this even for?
-                            Buttons.RightGrip = (report.Data[10] & 1) == 1;
+                            State.Buttons.RightGrip = (report.Data[10] & 1) == 1;
 
-                            LeftTrigger = report.Data[11];
-                            RightTrigger = report.Data[12];
+                            State.LeftTrigger = report.Data[11];
+                            State.RightTrigger = report.Data[12];
 
                             if (LeftAnalogMultiplexMode)
                             {
                                 if (LeftPadTouch)
                                 {
-                                    Buttons.LeftPadTouch = true;
-                                    Buttons.LeftPadClick = ThumbOrLeftPadPress;
-                                    LeftPadX = BitConverter.ToInt16(report.Data, 16);
-                                    LeftPadY = BitConverter.ToInt16(report.Data, 18);
+                                    State.Buttons.LeftPadTouch = true;
+                                    State.Buttons.LeftPadClick = ThumbOrLeftPadPress;
+                                    State.LeftPadX = BitConverter.ToInt16(report.Data, 16);
+                                    State.LeftPadY = BitConverter.ToInt16(report.Data, 18);
                                 }
                                 else
                                 {
-                                    LeftStickX = BitConverter.ToInt16(report.Data, 16);
-                                    LeftStickY = BitConverter.ToInt16(report.Data, 18);
+                                    State.LeftStickX = BitConverter.ToInt16(report.Data, 16);
+                                    State.LeftStickY = BitConverter.ToInt16(report.Data, 18);
                                 }
                             }
                             else
                             {
                                 if (LeftPadTouch)
                                 {
-                                    Buttons.LeftPadTouch = true;
-                                    LeftPadX = BitConverter.ToInt16(report.Data, 16);
-                                    LeftPadY = BitConverter.ToInt16(report.Data, 18);
+                                    State.Buttons.LeftPadTouch = true;
+                                    State.LeftPadX = BitConverter.ToInt16(report.Data, 16);
+                                    State.LeftPadY = BitConverter.ToInt16(report.Data, 18);
                                 }
                                 else
                                 {
-                                    Buttons.LeftPadTouch = false;
-                                    LeftStickX = BitConverter.ToInt16(report.Data, 16);
-                                    LeftStickY = BitConverter.ToInt16(report.Data, 18);
-                                    LeftPadX = 0;
-                                    LeftPadY = 0;
+                                    State.Buttons.LeftPadTouch = false;
+                                    State.LeftStickX = BitConverter.ToInt16(report.Data, 16);
+                                    State.LeftStickY = BitConverter.ToInt16(report.Data, 18);
+                                    State.LeftPadX = 0;
+                                    State.LeftPadY = 0;
                                 }
 
-                                Buttons.LeftPadClick = ThumbOrLeftPadPress && !Buttons.StickClick;
+                                State.Buttons.LeftPadClick = ThumbOrLeftPadPress && !State.Buttons.StickClick;
                             }
 
-                            RightPadX = BitConverter.ToInt16(report.Data, 20);
-                            RightPadY = BitConverter.ToInt16(report.Data, 22);
+                            State.RightPadX = BitConverter.ToInt16(report.Data, 20);
+                            State.RightPadY = BitConverter.ToInt16(report.Data, 22);
 
                             /*
-                            DataStuck = CheckSensorDataStuck();
+                            State.DataStuck = CheckSensorDataStuck();
                             if (!SensorsEnabled || DataStuck) { EnableGyroSensors(); }
                             */
 
-                            AccelerometerX = BitConverter.ToInt16(report.Data, 28);
-                            AccelerometerY = BitConverter.ToInt16(report.Data, 30);
-                            AccelerometerZ = BitConverter.ToInt16(report.Data, 32);
-                            AngularVelocityX = BitConverter.ToInt16(report.Data, 34);
-                            AngularVelocityY = BitConverter.ToInt16(report.Data, 36);
-                            AngularVelocityZ = BitConverter.ToInt16(report.Data, 38);
-                            OrientationW = BitConverter.ToInt16(report.Data, 40);
-                            OrientationX = BitConverter.ToInt16(report.Data, 42);
-                            OrientationY = BitConverter.ToInt16(report.Data, 44);
-                            OrientationZ = BitConverter.ToInt16(report.Data, 46);
+                            State.AccelerometerX = BitConverter.ToInt16(report.Data, 28);
+                            State.AccelerometerY = BitConverter.ToInt16(report.Data, 30);
+                            State.AccelerometerZ = BitConverter.ToInt16(report.Data, 32);
+                            State.AngularVelocityX = BitConverter.ToInt16(report.Data, 34);
+                            State.AngularVelocityY = BitConverter.ToInt16(report.Data, 36);
+                            State.AngularVelocityZ = BitConverter.ToInt16(report.Data, 38);
+                            State.OrientationW = BitConverter.ToInt16(report.Data, 40);
+                            State.OrientationX = BitConverter.ToInt16(report.Data, 42);
+                            State.OrientationY = BitConverter.ToInt16(report.Data, 44);
+                            State.OrientationZ = BitConverter.ToInt16(report.Data, 46);
                         }
                         break;
 
@@ -471,10 +461,9 @@ namespace VSCView
 
                 SteamControllerState NewState = GetState();
                 OnStateUpdated(NewState);
+                Interlocked.Exchange(ref reportUsageLock, 0);
 
                 _device.ReadReport(OnReport);
-
-                Interlocked.Exchange(ref internalStateLock, 0);
             }
         }
 

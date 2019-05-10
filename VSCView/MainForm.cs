@@ -48,29 +48,31 @@ namespace VSCView
             while (!exited)
             {
                 watch.Restart();
-
-                SensorUpdate();
                 Render();
-                fps++;
 
+#if DEBUG
+                fps++;
                 while (timer >= 1000)
                 {
                     Debug.WriteLine($"FPS: {fps}");
                     fps = 0;
                     timer = 0;
                 }
+#endif
 
                 while (watch.ElapsedMilliseconds < frameCap)
                 {
                     spinner.SpinOnce();
                 }
 
+#if DEBUG
                 timer += watch.ElapsedMilliseconds;
+#endif
             }
             watch.Stop();
         }
 
-        private void SensorUpdate()
+        private void Render()
         {
             var state = new SteamController.SteamControllerState();
             if (ActiveController != null)
@@ -78,10 +80,7 @@ namespace VSCView
                 state = ActiveController.GetState();
                 sensorData.Update(state);
             }
-        }
 
-        private void Render()
-        {
             if (!this.IsDisposed && this.InvokeRequired && sensorData != null)
             {
                 try
@@ -128,6 +127,18 @@ namespace VSCView
             {
                 ToolStripItem itm = tsmiController.DropDownItems.Add(Controllers[i].GetDevicePath(), null, LoadController);
                 itm.Tag = Controllers[i];
+                switch (Controllers[i].ConnectionType)
+                {
+                    case SteamController.EConnectionType.Wireless:
+                        itm.Image = Properties.Resources.icon_wireless;
+                        break;
+                    case SteamController.EConnectionType.USB:
+                        itm.Image = Properties.Resources.icon_usb;
+                        break;
+                    case SteamController.EConnectionType.BT:
+                        itm.Image = Properties.Resources.icon_bt;
+                        break;
+                }
 
                 // load the first controller in the list if it exists
                 if (i == 0 && Controllers[i] != null)
