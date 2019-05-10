@@ -69,9 +69,9 @@ namespace VSCView
             public bool RightPadTouch { get; set; }
             public bool RightPadClick { get; set; }
 
-            public object Clone()
+            public virtual object Clone()
             {
-                SteamControllerButtons buttons = new SteamControllerButtons();
+                SteamControllerButtons buttons = (SteamControllerButtons)base.MemberwiseClone();
 
                 buttons.A = A;
                 buttons.B = B;
@@ -108,7 +108,7 @@ namespace VSCView
 
         public class SteamControllerState
         {
-            public SteamControllerButtons Buttons;
+            public SteamControllerButtons Buttons { get; set; }
 
             public byte LeftTrigger { get; set; }
             public byte RightTrigger { get; set; }
@@ -171,7 +171,7 @@ namespace VSCView
         }
         #endregion
 
-        SteamControllerButtons Buttons { get; set; }
+        SteamControllerButtons Buttons = new SteamControllerButtons();
 
         byte LeftTrigger { get; set; }
         byte RightTrigger { get; set; }
@@ -207,8 +207,6 @@ namespace VSCView
 
         public SteamController(HidDevice device)
         {
-            Buttons = new SteamControllerButtons();
-
             _device = device;
 
             Initalized = false;

@@ -118,6 +118,7 @@ namespace VSCView
             inputName = inputName.ToLowerInvariant();
 
             SteamController.SteamControllerState state = ActiveController.GetState();
+            if (state.Buttons == null) return false;
 
             switch (inputName)
             {
@@ -198,11 +199,11 @@ namespace VSCView
 
             switch (inputName)
             {
-                case "leftpadx": return state.LeftPadX;
-                case "leftpady": return state.LeftPadY;
+                case "leftpadx": return sensorData.lpX;
+                case "leftpady": return sensorData.lpY;
 
-                case "rightpadx": return state.RightPadX;
-                case "rightpady": return state.RightPadY;
+                case "rightpadx": return sensorData.rpX;
+                case "rightpady": return sensorData.rpY;
 
                 case "leftstickx": return state.LeftStickX;
                 case "leftsticky": return state.LeftStickY;
@@ -294,9 +295,11 @@ namespace VSCView
                 //create a graphics object from the image  
                 using (Graphics gfx = Graphics.FromImage(bmp))
                 {
-                    gfx.InterpolationMode = InterpolationMode.Bilinear;
-                    gfx.SmoothingMode = SmoothingMode.HighSpeed;
-                    gfx.PixelOffsetMode = PixelOffsetMode.HighSpeed;
+                    // tweaked rendering settings for better performance rendering sprites
+                    gfx.InterpolationMode = InterpolationMode.NearestNeighbor;
+                    gfx.SmoothingMode = SmoothingMode.None;
+                    gfx.PixelOffsetMode = PixelOffsetMode.Half;
+                    gfx.CompositingMode = CompositingMode.SourceOver;
                     gfx.CompositingQuality = CompositingQuality.HighSpeed;
                     gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
 
@@ -548,7 +551,8 @@ namespace VSCView
             if (!string.IsNullOrWhiteSpace(imageName) && TrailLength > 0)
             {
                 Image ImagePadDecayBase = cache.LoadImage(imageName);
-                ImagePadDecay = new Image[TrailLength];
+                int scaledTrailLength = MainForm.fpsLimit == 60 ? TrailLength : TrailLength / 2;
+                ImagePadDecay = new Image[scaledTrailLength];
                 for (int x = 0; x < ImagePadDecay.Length; x++)
                 {
                     float percent = ((x + 1) * 1.0f / ImagePadDecay.Length);

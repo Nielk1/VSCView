@@ -23,6 +23,11 @@ namespace VSCView
             public double qY = 0f;
             public double qZ = 0f;
 
+            public int lpX = 0;
+            public int lpY = 0;
+            public int rpX = 0;
+            public int rpY = 0;
+
             public double calGyroX = 0f;
             public double calGyroY = 0f;
             public double calGyroZ = 0f;
@@ -62,6 +67,11 @@ namespace VSCView
         SensorFusion.EMACalc gyEMA;
         SensorFusion.EMACalc gzEMA;
 
+        SensorFusion.EMACalc lpxEMA;
+        SensorFusion.EMACalc lpyEMA;
+        SensorFusion.EMACalc rpxEMA;
+        SensorFusion.EMACalc rpyEMA;
+
         /*
         SensorFusion.EMACalc axEMA;
         SensorFusion.EMACalc ayEMA;
@@ -86,6 +96,11 @@ namespace VSCView
             gxEMA = new SensorFusion.EMACalc(Lookback);
             gyEMA = new SensorFusion.EMACalc(Lookback);
             gzEMA = new SensorFusion.EMACalc(Lookback);
+
+            lpxEMA = new SensorFusion.EMACalc(Lookback);
+            lpyEMA = new SensorFusion.EMACalc(Lookback);
+            rpxEMA = new SensorFusion.EMACalc(Lookback);
+            rpyEMA = new SensorFusion.EMACalc(Lookback);
 
             /*
             axEMA = new SensorFusion.EMACalc(Lookback);
@@ -112,6 +127,11 @@ namespace VSCView
                     Data.gY = (int)gyEMA.NextValue(stateData.AngularVelocityY);
                     Data.gZ = (int)gzEMA.NextValue(stateData.AngularVelocityZ);
 
+                    Data.lpX = (int)lpxEMA.NextValue(stateData.LeftPadX);
+                    Data.lpY = (int)lpyEMA.NextValue(stateData.LeftPadY);
+                    Data.rpX = (int)rpxEMA.NextValue(stateData.RightPadX);
+                    Data.rpY = (int)rpyEMA.NextValue(stateData.RightPadY);
+
                     /*
                     Data.aX = (int)axEMA.NextValue(stateData.AccelerometerX);
                     Data.aY = (int)ayEMA.NextValue(stateData.AccelerometerY);
@@ -129,9 +149,16 @@ namespace VSCView
                     Data.gY = stateData.AngularVelocityY;
                     Data.gZ = stateData.AngularVelocityZ;
 
+                    Data.lpX = stateData.LeftPadX;
+                    Data.lpY = stateData.LeftPadY;
+                    Data.rpX = stateData.RightPadX;
+                    Data.rpY = stateData.RightPadY;
+
+                    /*
                     Data.aX = stateData.AccelerometerX;
                     Data.aY = stateData.AccelerometerY;
                     Data.aZ = stateData.AccelerometerZ;
+                    */
                 }
 
                 Data.GyroTiltFactorX = (float)Data.gX * 0.0001f;

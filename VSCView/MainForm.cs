@@ -13,7 +13,7 @@ namespace VSCView
     {
         public static SteamController.SteamControllerState state;
         public static SensorCollector sensorData;
-        public static int fpsLimit = 45;
+        public static int fpsLimit = 30;
 
         ControllerData ControllerData;
         SteamController ActiveController;
@@ -39,42 +39,35 @@ namespace VSCView
         #region Render Loop
         private void RenderLoop()
         {
-            int frameCap = 1000 / fpsLimit;
-            double lastTime = msTime();
-            double accumulator = 0;
+            Stopwatch watch = new Stopwatch();
+            SpinWait spinner = new SpinWait();
+            double frameCap = 1000.0f / fpsLimit;
+            double timer = 0;
+            int fps = 0;
 
             while (!exited)
             {
-                double curTime = msTime();
-                double frameTime = curTime - lastTime;
-                accumulator += frameTime;
-                lastTime = curTime;
+                watch.Restart();
 
-                while (accumulator >= frameCap)
+                SensorUpdate();
+                Render();
+                fps++;
+
+                while (timer >= 1000)
                 {
-                    SensorUpdate();
-                    Render();
-                    accumulator -= frameCap;
+                    Debug.WriteLine($"FPS: {fps}");
+                    fps = 0;
+                    timer = 0;
                 }
-                TickWait(frameCap - 1);
-            }
-        }
 
-        private void TickWait(int msTimeout)
-        {
-            SpinWait spinner = new SpinWait();
-            Stopwatch watch = Stopwatch.StartNew();
-            while (watch.ElapsedMilliseconds < msTimeout)
-            {
-                spinner.SpinOnce();
+                while (watch.ElapsedMilliseconds < frameCap)
+                {
+                    spinner.SpinOnce();
+                }
+
+                timer += watch.ElapsedMilliseconds;
             }
             watch.Stop();
-            //Debug.WriteLine($"TickWait took: {watch.ElapsedMilliseconds}ms");
-        }
-
-        private double msTime()
-        {
-            return Stopwatch.GetTimestamp() * 0.0001f;
         }
 
         private void SensorUpdate()
@@ -96,7 +89,6 @@ namespace VSCView
                     this.Invoke(new Action(() =>
                     {// force a full repaint
                         this.Invalidate();
-                        this.Update();
                     }));
                 }
                 catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
