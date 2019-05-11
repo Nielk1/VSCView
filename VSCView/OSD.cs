@@ -195,15 +195,14 @@ namespace VSCView
             inputName = inputName.ToLowerInvariant();
 
             SteamController.SteamControllerState state = ActiveController.GetState();
-            var sensorData = MainForm.sensorData.Data;
 
             switch (inputName)
             {
-                case "leftpadx": return sensorData.lpX;
-                case "leftpady": return sensorData.lpY;
+                case "leftpadx": return state.LeftPadX;
+                case "leftpady": return state.LeftPadY;
 
-                case "rightpadx": return sensorData.rpX;
-                case "rightpady": return sensorData.rpY;
+                case "rightpadx": return state.RightPadX;
+                case "rightpady": return state.RightPadY;
 
                 case "leftstickx": return state.LeftStickX;
                 case "leftsticky": return state.LeftStickY;
