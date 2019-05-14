@@ -7,10 +7,11 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace VSCView
 {
-    public class UI
+    public class UI : IDisposable
     {
         public int Height { get; private set; }
         public int Width { get; private set; }
@@ -18,6 +19,8 @@ namespace VSCView
         private UI_ImageCache cache;
         private ControllerData data;
         private List<UI_Item> Items;
+
+        bool disposed = false;
 
         public UI(ControllerData data, string themePath, string json)
         {
@@ -79,6 +82,29 @@ namespace VSCView
                 item.Paint(graphics);
             }
         }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                cache.Dispose();
+                disposed = true;
+            }
+        }
+
+        ~UI()
+        {
+            Dispose(false);
+        }
     }
 
     public class ControllerData
@@ -92,6 +118,7 @@ namespace VSCView
             inputName = inputName.ToLowerInvariant();
 
             SteamController.SteamControllerState state = ActiveController.GetState();
+            if (state.Buttons == null) return false;
 
             switch (inputName)
             {
@@ -168,7 +195,6 @@ namespace VSCView
             inputName = inputName.ToLowerInvariant();
 
             SteamController.SteamControllerState state = ActiveController.GetState();
-            var sensorData = MainForm.sensorData.Data;
 
             switch (inputName)
             {
@@ -228,8 +254,6 @@ namespace VSCView
 
             if (disposing)
             {
-                // Free any other managed objects here.
-                //
                 foreach(var key in cache.Keys)
                 {
                     cache[key].Dispose();
@@ -237,15 +261,13 @@ namespace VSCView
                 }
             }
 
-            // Free any unmanaged objects here.
-            //
             cache = null;
             disposed = true;
         }
 
         public Image GetImage(string Key, Func<Image> ImageLoader)
         {
-            lock(cache)
+            lock (cache)
             {
                 if (cache.ContainsKey(Key)) return cache[Key];
                 cache[Key] = ImageLoader();
@@ -266,12 +288,19 @@ namespace VSCView
         {
             try
             {
-                //create a Bitmap the size of the image provided  
-                Bitmap bmp = new Bitmap(image.Width, image.Height);
+                //create a Bitmap the size of the image provided
+                Bitmap bmp = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppPArgb);
 
                 //create a graphics object from the image  
                 using (Graphics gfx = Graphics.FromImage(bmp))
                 {
+                    // tweaked rendering settings for better performance rendering sprites
+                    gfx.InterpolationMode = InterpolationMode.NearestNeighbor;
+                    gfx.SmoothingMode = SmoothingMode.None;
+                    gfx.PixelOffsetMode = PixelOffsetMode.Half;
+                    gfx.CompositingMode = CompositingMode.SourceOver;
+                    gfx.CompositingQuality = CompositingQuality.HighSpeed;
+                    gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
 
                     //create a color matrix object  
                     ColorMatrix matrix = new ColorMatrix();
@@ -285,7 +314,7 @@ namespace VSCView
                     //set the color(opacity) of the image  
                     attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-                    //now draw the image  
+                    //now draw the image
                     gfx.DrawImage(image, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
 
                     bmp.SetResolution(image.HorizontalResolution, image.VerticalResolution);
@@ -308,12 +337,6 @@ namespace VSCView
 
         private UI_ImageCache cache;
         private List<UI_Item> Items;
-
-        //public UI_Item(UI_ImageCache cache, string themePath, string json)
-        //{
-        //    JObject themeData = JObject.Parse(json);
-        //    Initalize(cache, themePath, themeData);
-        //}
 
         public UI_Item(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
@@ -413,18 +436,12 @@ namespace VSCView
 
             if (DisplayImage != null)
             {
-                if(DisplayImage != null)
-                    graphics.DrawImage(DisplayImage, X, Y, Width, Height);
+                graphics.DrawImage(DisplayImage, X, Y, Width, Height);
             }
 
             graphics.Transform = preserve;
 
-            //if (DrawFromCenter)
-            //    graphics.TranslateTransform(X, Y);
-
             base.Paint(graphics);
-
-            //graphics.Transform = preserve;
         }
     }
 
@@ -533,7 +550,8 @@ namespace VSCView
             if (!string.IsNullOrWhiteSpace(imageName) && TrailLength > 0)
             {
                 Image ImagePadDecayBase = cache.LoadImage(imageName);
-                ImagePadDecay = new Image[TrailLength];
+                int scaledTrailLength = MainForm.fpsLimit == 60 ? TrailLength : TrailLength / 2;
+                ImagePadDecay = new Image[scaledTrailLength];
                 for (int x = 0; x < ImagePadDecay.Length; x++)
                 {
                     float percent = ((x + 1) * 1.0f / ImagePadDecay.Length);
@@ -575,7 +593,7 @@ namespace VSCView
                         double xVector = cord.Value.X - prevCord.Value.X;
                         double yVector = cord.Value.Y - prevCord.Value.Y;
 
-                        double distance = Math.Sqrt(xVector * xVector + yVector * yVector);
+                        double distance = SensorFusion.EMACalc.ApproxSqrt((float)(xVector * xVector + yVector * yVector));
                         double subdist = distance * 0.5f;
 
                         if ((int)subdist > 0)
