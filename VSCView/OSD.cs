@@ -278,7 +278,7 @@ namespace VSCView
         public Image LoadImage(string name)
         {
             // load the image for the active theme
-            string ImagePath = Path.Combine("themes", themePath, name);
+            string ImagePath = Path.Combine(themePath, name);
 
             // this will throw an exception if the file or path doesn't exist
             return Image.FromFile(ImagePath);

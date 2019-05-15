@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Nielk1")]
 [assembly: AssemblyProduct("VSCView")]
-[assembly: AssemblyCopyright("John Klein © 2018")]
+[assembly: AssemblyCopyright("John Klein © 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

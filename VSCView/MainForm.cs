@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -105,15 +106,42 @@ namespace VSCView
             foreach (string themeParent in themeParents)
             {
                 string ThemeName = Path.GetFileName(themeParent);
+                try
+                {
+                    string themeMetaFile = Path.Combine(themeParent, "theme.json");
+                    if (File.Exists(themeMetaFile))
+                    {
+                        ThemeDesc desc = JsonConvert.DeserializeObject<ThemeDesc>(File.ReadAllText(themeMetaFile));
+                        if (!string.IsNullOrWhiteSpace(desc.name))
+                            ThemeName = desc.name;
+                    }
+                }
+                catch { }
+
+                ToolStripMenuItem itmTop = new ToolStripMenuItem(ThemeName);
+                tsmiTheme.DropDownItems.Add(itmTop);
 
                 string[] themeFiles = Directory.GetFiles(themeParent, "*.json", SearchOption.TopDirectoryOnly);
                 foreach (string themeFile in themeFiles)
                 {
                     string ThemeFileName = Path.GetFileNameWithoutExtension(themeFile);
 
-                    string DisplayName = ThemeName + "/" + ThemeFileName;
+                    if (ThemeFileName.ToLowerInvariant() == "theme")
+                        continue;
 
-                    ToolStripItem itm = tsmiTheme.DropDownItems.Add(DisplayName, null, LoadTheme);
+                    string DisplayName = ThemeFileName;
+
+                    try
+                    {
+                        ThemeSubDesc desc = JsonConvert.DeserializeObject<ThemeSubDesc>(File.ReadAllText(themeFile));
+                        if (!string.IsNullOrWhiteSpace(desc.name))
+                            DisplayName = desc.name;
+                    }
+                    catch { }
+
+                    ToolStripItem itm = new ToolStripMenuItem(DisplayName, null, LoadTheme);
+                    itm.Tag = themeFile;
+                    itmTop.DropDownItems.Add(itm);
                 }
             }
         }
@@ -172,13 +200,10 @@ namespace VSCView
             lblHint2.Hide();
 
             ToolStripItem item = (ToolStripItem)sender;
-            string displayText = item.Text;
 
-            string[] displayTextParts = displayText.Split(new string[] { "/" }, 2, StringSplitOptions.None);
+            string skinJson = File.ReadAllText((string)item.Tag);
 
-            string skinJson = File.ReadAllText(Path.Combine("themes", displayTextParts[0], displayTextParts[1] + @".json"));
-
-            ui = new UI(ControllerData, displayTextParts[0], skinJson);
+            ui = new UI(ControllerData, Path.GetDirectoryName((string)item.Tag), skinJson);
             this.Width = ui.Width;
             this.Height = ui.Height;
 

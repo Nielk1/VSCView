@@ -38,6 +38,8 @@
             this.labelCopyright = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.pnlThemes = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -48,6 +50,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -173,6 +176,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
@@ -195,6 +199,32 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "VSCView";
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.pnlThemes);
+            this.tabPage5.Location = new System.Drawing.Point(4, 25);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(572, 136);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Themes";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // pnlThemes
+            // 
+            this.pnlThemes.AutoScroll = true;
+            this.pnlThemes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.pnlThemes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlThemes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlThemes.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.pnlThemes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.pnlThemes.Location = new System.Drawing.Point(3, 3);
+            this.pnlThemes.Name = "pnlThemes";
+            this.pnlThemes.Padding = new System.Windows.Forms.Padding(5);
+            this.pnlThemes.Size = new System.Drawing.Size(566, 130);
+            this.pnlThemes.TabIndex = 0;
+            this.pnlThemes.WrapContents = false;
+            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
@@ -202,7 +232,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(422, 136);
+            this.tabPage2.Size = new System.Drawing.Size(572, 136);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "VSCView License";
             // 
@@ -218,7 +248,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(422, 136);
+            this.textBox1.Size = new System.Drawing.Size(572, 136);
             this.textBox1.TabIndex = 35;
             this.textBox1.TabStop = false;
             this.textBox1.Text = resources.GetString("textBox1.Text");
@@ -230,7 +260,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(422, 136);
+            this.tabPage3.Size = new System.Drawing.Size(572, 136);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "HidLibrary License";
             // 
@@ -246,7 +276,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox2.Size = new System.Drawing.Size(422, 136);
+            this.textBox2.Size = new System.Drawing.Size(572, 136);
             this.textBox2.TabIndex = 36;
             this.textBox2.TabStop = false;
             this.textBox2.Text = resources.GetString("textBox2.Text");
@@ -258,7 +288,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(422, 136);
+            this.tabPage4.Size = new System.Drawing.Size(572, 136);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Newtonsoft.Json License";
             // 
@@ -274,7 +304,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox3.Size = new System.Drawing.Size(422, 136);
+            this.textBox3.Size = new System.Drawing.Size(572, 136);
             this.textBox3.TabIndex = 37;
             this.textBox3.TabStop = false;
             this.textBox3.Text = resources.GetString("textBox3.Text");
@@ -302,6 +332,7 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -330,5 +361,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.FlowLayoutPanel pnlThemes;
     }
 }
