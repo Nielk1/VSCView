@@ -33,7 +33,7 @@ namespace VSCView
             sensorData = new SensorCollector(5, fpsLimit, true);
 
             LoadThemes();
-            LoadControllers();
+            LoadControllers(true);
         }
 
         #region Render Loop
@@ -118,7 +118,7 @@ namespace VSCView
             }
         }
 
-        private void LoadControllers()
+        private void LoadControllers(bool firstload)
         {
             tsmiController.DropDownItems.Clear();
             SteamController[] Controllers = SteamController.GetControllers();
@@ -141,7 +141,7 @@ namespace VSCView
                 }
 
                 // load the first controller in the list if it exists
-                if (i == 0 && Controllers[i] != null)
+                if (firstload && i == 0 && Controllers[i] != null)
                     LoadController(Controllers[i], null);
             }
         }
@@ -162,6 +162,8 @@ namespace VSCView
 
             ControllerData.SetController(ActiveController);
             ActiveController.Initalize();
+
+            ActiveController.PlayMelody(SteamController.Melody.Rise_and_Shine);
         }
 
         private async void LoadTheme(object sender, EventArgs e)
@@ -222,7 +224,7 @@ namespace VSCView
 
         private void tsmiReloadControllers_Click(object sender, EventArgs e)
         {
-            LoadControllers();
+            LoadControllers(false);
         }
 
         private void tsmiAbout_Click(object sender, EventArgs e)
