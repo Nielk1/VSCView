@@ -1,5 +1,5 @@
 {
-    "name": "All",
+    "name": "Accel Symbol",
     "width": 629,
     "height": 774,
     "children": [
@@ -47,14 +47,14 @@
                 },
                 {
                     "x":0,
-                    "y":-235,
+                    "y":0,
                     "children": [
-                        { "type":"showhide", "inputName":"lg", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":  -75, "y":   0, "width":50, "height":50, "center":true } ] },
-                        { "type":"showhide", "inputName":"lt", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x": -163, "y":  48, "width":50, "height":50, "center":true } ] },
-                        { "type":"showhide", "inputName":"lb", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x": -163, "y": -28, "width":50, "height":50, "center":true } ] },
-                        { "type":"showhide", "inputName":"rg", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":   75, "y":   0, "width":50, "height":50, "center":true } ] },
-                        { "type":"showhide", "inputName":"rt", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":  163, "y":  48, "width":50, "height":50, "center":true } ] },
-                        { "type":"showhide", "inputName":"rb", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":  163, "y": -28, "width":50, "height":50, "center":true } ] }
+                        { "type":"showhide", "inputName":"lg", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x": -130, "y": 190, "width":50, "height":50, "center":true } ] },
+                        { "type":"showhide", "inputName":"lt", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x": -185, "y":-185, "width":50, "height":50, "center":true } ] },
+                        { "type":"showhide", "inputName":"lb", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x": -185, "y":-135, "width":50, "height":50, "center":true } ] },
+                        { "type":"showhide", "inputName":"rg", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":  130, "y": 190, "width":50, "height":50, "center":true } ] },
+                        { "type":"showhide", "inputName":"rt", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":  185, "y":-185, "width":50, "height":50, "center":true } ] },
+                        { "type":"showhide", "inputName":"rb", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":  185, "y":-135, "width":50, "height":50, "center":true } ] }
                     ]
                 },
 
@@ -112,10 +112,10 @@
 
                 {
                     "x":0,
-                    "y":-170,
+                    "y":-185,
                     "children": [
-                        { "type":"pbar", "axisName":"lefttrigger" , "background":"ff007894", "foreground":"ff00d2f8", "x": -65, "y": 0, "width":120, "height":15, "min":0, "max":255, "direction": "right" },
-                        { "type":"pbar", "axisName":"righttrigger", "background":"ff007894", "foreground":"ff00d2f8", "x":  65, "y": 0, "width":120, "height":15, "min":0, "max":255, "direction": "left" }
+                        { "type":"pbar", "axisName":"lefttrigger" , "background":"ff007894", "foreground":"ff00d2f8", "x":-110, "y": 0, "width":120, "height":15, "min":0, "max":255, "direction": "right" },
+                        { "type":"pbar", "axisName":"righttrigger", "background":"ff007894", "foreground":"ff00d2f8", "x": 110, "y": 0, "width":120, "height":15, "min":0, "max":255, "direction": "left" }
                     ]
                 },
 
@@ -123,33 +123,19 @@
                     "x":0,
                     "y":370,
                     "children": [
+
                         {
                             "type":"basic3d1",
-                            "x": 165,
-                            "y": 0,
-                            "width":103,
-                            "height":77,
+                            "x": 0,
+                            "y": -130,
+                            "width":125,
+                            "height":125,
                             "mode": "accel",
-                            "image":"gyro.png",
-                            "shadowl":"gyro_l.png",
-                            "shadowr":"gyro_r.png",
-                            "shadowu":"gyro_u.png",
-                            "shadowd":"gyro_d.png",
-                            "tilttranslatex":55,
-                            "tilttranslatey":40
-                        },
-                        {
-                            "type":"basic3d1",
-                            "x": -165,
-                            "y": 0,
-                            "width":103,
-                            "height":77,
-                            "mode": "gyro",
-                            "image":"gyro.png",
-                            "shadowl":"gyro_l.png",
-                            "shadowr":"gyro_r.png",
-                            "shadowu":"gyro_u.png",
-                            "shadowd":"gyro_d.png",
+                            "image":"gyro-smbl.png",
+                            "shadowl":"gyro-smbl_l.png",
+                            "shadowr":"gyro-smbl_r.png",
+                            "shadowu":"gyro-smbl_u.png",
+                            "shadowd":"gyro-smbl_d.png",
                             "tilttranslatex":55,
                             "tilttranslatey":40
                         }

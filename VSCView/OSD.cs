@@ -527,6 +527,9 @@ namespace VSCView
 
     public class UL_TrailPad : UL_Slider
     {
+        //protected float Width;
+        //protected float Height;
+
         public UL_TrailPad(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData) : base(data, cache, themePath, themeData)
         {
         }
@@ -547,16 +550,22 @@ namespace VSCView
             string imageName = themeData["image"]?.Value<string>();
             int TrailLength = themeData["length"]?.Value<int>()??0;
 
+            float Width = themeData["width"]?.Value<float>() ?? 0;
+            float Height = themeData["height"]?.Value<float>() ?? 0;
+
             if (!string.IsNullOrWhiteSpace(imageName) && TrailLength > 0)
             {
                 Image ImagePadDecayBase = cache.LoadImage(imageName);
+                string SizeSuffix = string.Empty;
+                if (Width > 0 && Height > 0)
+                    ImagePadDecayBase = new Bitmap(ImagePadDecayBase, (int)Width, (int)Height);
                 int scaledTrailLength = MainForm.fpsLimit == 60 ? TrailLength : TrailLength / 2;
                 ImagePadDecay = new Image[scaledTrailLength];
                 for (int x = 0; x < ImagePadDecay.Length; x++)
                 {
                     float percent = ((x + 1) * 1.0f / ImagePadDecay.Length);
 
-                    ImagePadDecay[x] = cache.GetImage($"{imageName}:{percent}", () => { return UI_ImageCache.SetImageOpacity(ImagePadDecayBase, percent * 0.15f); });
+                    ImagePadDecay[x] = cache.GetImage($"{imageName}:{Width}:{Height}:{percent}", () => { return UI_ImageCache.SetImageOpacity(ImagePadDecayBase, percent * 0.15f); });
                 }
             }
             else

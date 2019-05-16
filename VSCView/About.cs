@@ -30,8 +30,7 @@ namespace VSCView
                 foreach (string themeParent in themeParents)
                 {
                     string ThemeName = Path.GetFileName(themeParent);
-                    string Author = string.Empty;
-                    string Link = null;
+                    List<ThemeDescAuthors> authors = null;
                     try
                     {
                         string themeMetaFile = Path.Combine(themeParent, "theme.json");
@@ -40,45 +39,54 @@ namespace VSCView
                             ThemeDesc desc = JsonConvert.DeserializeObject<ThemeDesc>(File.ReadAllText(themeMetaFile));
                             if (!string.IsNullOrWhiteSpace(desc.name))
                                 ThemeName = desc.name;
-                            if (!string.IsNullOrWhiteSpace(desc.author))
-                                Author = desc.author;
-                            if (!string.IsNullOrWhiteSpace(desc.url))
-                                Link = desc.url;
+                            authors = desc.authors;
                         }
-                        if (Link != null)
+                        authors?.ForEach(dr =>
                         {
-                            if (Author != null)
+                            if (string.IsNullOrWhiteSpace(dr.name))
                             {
-                                LinkLabel label = new LinkLabel();
-                                label.Text = ThemeName + " - " + Author;
-                                label.LinkColor = Color.Yellow;
-                                label.ActiveLinkColor = Color.GreenYellow;
-                                label.VisitedLinkColor = Color.DarkGreen;
-                                label.Links.Add(ThemeName.Length + 3, Author.Length, Link);
-                                label.LinkClicked += Label_LinkClicked;
-                                label.Padding = new Padding(0, 0, 0, 5);
-                                label.AutoSize = true;
-                                pnlThemes.Controls.Add(label);
+                                if (string.IsNullOrWhiteSpace(dr.url))
+                                {
+                                    dr.name = null;
+                                    dr.url = null;
+                                }
+                                else
+                                {
+                                    dr.name = dr.url;
+                                }
                             }
-                            else if (Author != null)
+                            else if (string.IsNullOrWhiteSpace(dr.url))
                             {
-                                LinkLabel label = new LinkLabel();
-                                label.Text = ThemeName + " - " + Link;
-                                label.LinkColor = Color.Yellow;
-                                label.ActiveLinkColor = Color.GreenYellow;
-                                label.VisitedLinkColor = Color.DarkGreen;
-                                label.Links.Add(ThemeName.Length + 3, Link.Length, Link);
-                                label.LinkClicked += Label_LinkClicked;
-                                label.Padding = new Padding(0, 0, 0, 5);
-                                label.AutoSize = true;
-                                pnlThemes.Controls.Add(label);
+                                dr.url = null;
                             }
+                        });
+                        authors = authors?.Where(dr => dr.name != null).ToList();
+                        if (authors?.Any(dr => dr.url != null) ?? false) // at least one url
+                        {
+                            LinkLabel label = new LinkLabel();
+                            label.Text = ThemeName;
+                            label.LinkColor = Color.Yellow;
+                            label.ActiveLinkColor = Color.GreenYellow;
+                            label.VisitedLinkColor = Color.DarkGreen;
+                            foreach (var author in authors)
+                            {
+                                label.Text += " - ";
+                                if (author.url != null)
+                                {
+                                    label.Links.Add(label.Text.Length, author.name.Length, author.url);
+                                }
+                                label.Text += author.name;
+                            }
+                            label.LinkClicked += Label_LinkClicked;
+                            label.Padding = new Padding(0, 0, 0, 5);
+                            label.AutoSize = true;
+                            pnlThemes.Controls.Add(label);
                         }
-                        else if (Author != null)
+                        else if ((authors?.Count ?? 0) > 0)
                         {
                             Label label = new Label();
                             label.Font = LinkLabel.DefaultFont;
-                            label.Text = ThemeName + " - " + Author;
+                            label.Text = ThemeName + " - " + string.Join(" - ", authors.Select(dr => dr.name));
                             label.Padding = new Padding(0, 0, 0, 5);
                             label.AutoSize = true;
                             pnlThemes.Controls.Add(label);
