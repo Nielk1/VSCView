@@ -1,0 +1,146 @@
+{
+	"name": "Accel",
+    "width": 629,
+    "height": 605,
+    "children": [
+        {
+            "type":"image",
+            "image":"base.png",
+            "x":314.5,
+            "y":302.5,
+            "width":629,
+            "height":605,
+            "center":true,
+            "children": [
+                {
+                    "x":74,
+                    "y":67,
+                    "children": [
+                        { "type":"showhide", "inputName":"a", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x":  -7, "y": 39, "width":36, "height":36, "center":true } ] },
+                        { "type":"showhide", "inputName":"b", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x": 29, "y":  4, "width":36, "height":36, "center":true } ] },
+                        { "type":"showhide", "inputName":"x", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x":-42, "y":  3, "width":36, "height":36, "center":true } ] },
+                        { "type":"showhide", "inputName":"y", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x":  -7, "y":-32, "width":36, "height":36, "center":true } ] }
+                    ]
+                },
+
+                { "type":"showhide", "inputName":"stickclick", "invert":false, "children": [ { "type":"image", "image":"btn-stick.png", "x": -71, "y": 81, "width":105, "height":105, "center":true } ] },
+                {
+                    "type":"slider",
+                    "x": -70,
+                    "y": 82,
+                    "axisNameX":"leftstickx",
+                    "axisNameY":"leftsticky",
+                    "scaleFactorX": 0.0005,
+                    "scaleFactorY": 0.0005,
+                    "children": [
+                        { "type":"image", "image":"stick.png", "x": 0, "y": 0, "width":72, "height":73, "center":true }
+                    ]
+                },
+                {
+                    "x":-4,
+                    "y":-26,
+                    "children": [
+                        { "type":"showhide", "inputName":"steam" , "invert":false, "children": [ { "type":"image", "image":"btn-home.png", "x":   1, "y": -8, "width":51, "height":51, "center":true } ] },
+                        { "type":"showhide", "inputName":"start" , "invert":false, "children": [ { "type":"image", "image":"btn-sub.png" , "x":  53, "y":  2, "width":38, "height":22, "center":true } ] },
+                        { "type":"showhide", "inputName":"select", "invert":false, "children": [ { "type":"image", "image":"btn-sub.png" , "x": -51, "y":  1, "width":38, "height":22, "center":true } ] }
+                    ]
+                }, 
+                {
+                    "x":-1,
+                    "y":0,
+                    "children": [
+                        { "type":"showhide", "inputName":"lg", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x": -130, "y": 190, "width":50, "height":50, "center":true } ] },
+                        { "type":"showhide", "inputName":"lt", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x": -185, "y":-185, "width":50, "height":50, "center":true } ] },
+                        { "type":"showhide", "inputName":"lb", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x": -185, "y":-135, "width":50, "height":50, "center":true } ] },
+                        { "type":"showhide", "inputName":"rg", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":  130, "y": 190, "width":50, "height":50, "center":true } ] },
+                        { "type":"showhide", "inputName":"rt", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":  185, "y":-185, "width":50, "height":50, "center":true } ] },
+                        { "type":"showhide", "inputName":"rb", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":  185, "y":-135, "width":50, "height":50, "center":true } ] }
+                    ]
+                },
+
+                { "type":"showhide", "inputName":"rightpadclick", "invert":false, "children": [ { "type":"image", "image":"btn-haptic.png", "x":  157, "y": -23, "width":156, "height":160, "center":true } ] },
+                {
+                    "x": 150,
+                    "y": -24,
+                    "rot":0,
+                    "children": [
+                        {
+                            "type":"trailpad",
+                            "inputName":"rightpadtouch",
+                            "x":  0,
+                            "y": 0,
+                            "axisNameX":"rightpadx",
+                            "axisNameY":"rightpady",
+                            "scaleFactorX": 0.0022,
+                            "scaleFactorY": 0.0022,
+                            "image":"padheat.png",
+                            "length":30,
+                            "width":36,
+                            "height":36,
+                            "children": [
+                                { "type":"showhide", "inputName":"rightpadtouch", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x": 0, "y": 0, "width":36, "height":36, "center":true } ] }
+                            ]
+                        }
+                    ]
+                },
+
+                { "type":"showhide", "inputName":"leftpadclick" , "invert":false, "children": [ { "type":"image", "image":"btn-haptic.png", "x": -160, "y": -23, "width":156, "height":160, "center":true } ] },
+                {
+					"x": -162,
+                    "y": -26,
+                    "rot": 0,
+                    "children": [
+                        {
+                            "type":"trailpad",
+                            "inputName":"leftpadtouch",
+                            "x": 0,
+                            "y": 0,
+                            "axisNameX":"leftpadx",
+                            "axisNameY":"leftpady",
+                            "scaleFactorX": 0.0022,
+                            "scaleFactorY": 0.0022,
+                            "image":"padheat.png",
+                            "length":30,
+                            "width":36,
+                            "height":36,
+                            "children": [
+                                { "type":"showhide", "inputName":"leftpadtouch", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x": 0, "y": 0, "width":36, "height":36, "center":true } ] }
+                            ]
+                        }
+                    ]
+                },
+
+                {
+                    "x":-2,
+                    "y":-185,
+                    "children": [
+                        { "type":"pbar", "axisName":"lefttrigger" , "background":"ff007894", "foreground":"ff00d2f8", "x":-110, "y": 0, "width":120, "height":15, "min":0, "max":255, "direction": "right" },
+                        { "type":"pbar", "axisName":"righttrigger", "background":"ff007894", "foreground":"ff00d2f8", "x": 110, "y": 0, "width":120, "height":15, "min":0, "max":255, "direction": "left" }
+                    ]
+                },
+
+                {
+                    "x":0,
+                    "y":370,
+                    "children": [
+                                               {
+                            "type":"basic3d1",
+                            "x": 0,
+                            "y": -600,
+                            "width":103,
+                            "height":77,
+                            "mode": "accel",
+                            "image":"gyro.png",
+                            "shadowl":"gyro_l.png",
+                            "shadowr":"gyro_r.png",
+                            "shadowu":"gyro_u.png",
+                            "shadowd":"gyro_d.png",
+                            "tilttranslatex":55,
+                            "tilttranslatey":40
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
