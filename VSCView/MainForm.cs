@@ -34,6 +34,14 @@ namespace VSCView
             sensorData = new SensorCollector(5, fpsLimit, true);
 
             LoadThemes();
+            if (File.Exists("ctrl.last"))
+            {
+                string themeFile = File.ReadAllText("ctrl.last");
+                if (File.Exists(themeFile))
+                {
+                    LoadTheme(themeFile, false);
+                }
+            }
             LoadControllers(true);
         }
 
@@ -196,16 +204,24 @@ namespace VSCView
 
         private async void LoadTheme(object sender, EventArgs e)
         {
-            lblHint1.Hide();
-            lblHint2.Hide();
-
             ToolStripItem item = (ToolStripItem)sender;
 
-            string skinJson = File.ReadAllText((string)item.Tag);
+            await LoadTheme((string)item.Tag);
+        }
 
-            ui = new UI(ControllerData, Path.GetDirectoryName((string)item.Tag), skinJson);
+        private async Task LoadTheme(string path, bool recordLast = true)
+        {
+            string skinJson = File.ReadAllText(path);
+
+            ui = new UI(ControllerData, Path.GetDirectoryName(path), skinJson);
             this.Width = ui.Width;
             this.Height = ui.Height;
+
+            if (recordLast)
+                File.WriteAllText("ctrl.last", path);
+
+            lblHint1.Hide();
+            lblHint2.Hide();
 
             if (0 == Interlocked.Exchange(ref renderUsageLock, 1))
             {
