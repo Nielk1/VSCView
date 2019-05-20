@@ -96,6 +96,15 @@ namespace VSCView
 
         private void Render()
         {
+            state = new SteamController.SteamControllerState();
+            if (ActiveController != null)
+            {
+                state = ActiveController.GetState();
+                sensorData.Update(state);
+            }
+
+            ui?.Update();
+
             if (!this.IsDisposed && this.InvokeRequired && sensorData != null)
             {
                 try
@@ -203,10 +212,7 @@ namespace VSCView
         private void LoadController(object sender, EventArgs e)
         {
             if (ActiveController != null)
-            {
-                ActiveController.StateUpdated -= ActiveController_StateUpdated;
                 ActiveController.DeInitalize();
-            }
 
             // differentiate between context selection and startup
             if (sender is ToolStripItem)
@@ -219,19 +225,9 @@ namespace VSCView
 
             ControllerData.SetController(ActiveController);
 
-            ActiveController.StateUpdated += ActiveController_StateUpdated;
-
             ActiveController.Initalize();
 
             ActiveController.PlayMelody(SteamController.Melody.Rise_and_Shine);
-        }
-
-        private void ActiveController_StateUpdated(object sender, SteamController.SteamControllerState e)
-        {
-            state = ActiveController.GetState();
-            sensorData.Update(state);
-
-            ui?.Update();
         }
 
         private async void LoadTheme(object sender, EventArgs e)
