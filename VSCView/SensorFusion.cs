@@ -88,9 +88,10 @@ namespace VSCView
                 // EMA smoothed and normalized magnitude of movement (<= ceiling)
                 bool signal = gyroMag <= 0.16f ? false : true;
 
-#if DEBUG
-                Debug.WriteLine($"[ {gyroMag} ] : [ {signal} ] => [ {OffsetY},{OffsetP},{OffsetR} ]");
-#endif
+// DEBUG_GYRO
+//#if DEBUG
+//                Debug.WriteLine($"[ {gyroMag} ] : [ {signal} ] => [ {OffsetY},{OffsetP},{OffsetR} ]");
+//#endif
 
                 // offset here once our 'bucket' of matching samples is full
                 if (ThresholdCounter == SampleSize)

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Useful find targets
+// "DEBUG_GYRO"
+
+using System;
 using System.Windows.Forms;
 
 namespace VSCView
