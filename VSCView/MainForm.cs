@@ -96,21 +96,17 @@ namespace VSCView
 
         private void Render()
         {
-            var state = new SteamController.SteamControllerState();
-            if (ActiveController != null)
-            {
-                state = ActiveController.GetState();
-                sensorData.Update(state);
-            }
-
             if (!this.IsDisposed && this.InvokeRequired && sensorData != null)
             {
                 try
                 {
-                    this.Invoke(new Action(() =>
-                    {// force a full repaint
-                        this.Invalidate();
-                    }));
+                    if (ui?.IsDirty() ?? false)
+                    {
+                        this.Invoke(new Action(() =>
+                        {// force a full repaint
+                            this.Invalidate();
+                        }));
+                    }
                 }
                 catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
             }
@@ -207,7 +203,10 @@ namespace VSCView
         private void LoadController(object sender, EventArgs e)
         {
             if (ActiveController != null)
+            {
+                ActiveController.StateUpdated -= ActiveController_StateUpdated;
                 ActiveController.DeInitalize();
+            }
 
             // differentiate between context selection and startup
             if (sender is ToolStripItem)
@@ -219,9 +218,20 @@ namespace VSCView
                 ActiveController = (SteamController)sender;
 
             ControllerData.SetController(ActiveController);
+
+            ActiveController.StateUpdated += ActiveController_StateUpdated;
+
             ActiveController.Initalize();
 
             ActiveController.PlayMelody(SteamController.Melody.Rise_and_Shine);
+        }
+
+        private void ActiveController_StateUpdated(object sender, SteamController.SteamControllerState e)
+        {
+            state = ActiveController.GetState();
+            sensorData.Update(state);
+
+            ui?.Update();
         }
 
         private async void LoadTheme(object sender, EventArgs e)
@@ -274,6 +284,7 @@ namespace VSCView
             // Call the OnPaint method of the base class.  
             base.OnPaint(e);
 
+            ui?.Update();
             ui?.Paint(e.Graphics);
         }
 

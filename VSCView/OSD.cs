@@ -75,6 +75,23 @@ namespace VSCView
             });
         }
 
+        public void Update()
+        {
+            foreach (UI_Item item in Items)
+            {
+                item.Update();
+            }
+        }
+
+        public bool IsDirty()
+        {
+            foreach (UI_Item item in Items)
+            {
+                if (item.IsDirty()) return true;
+            }
+            return false;
+        }
+
         public void Paint(Graphics graphics)
         {
             foreach(UI_Item item in Items)
@@ -385,6 +402,25 @@ namespace VSCView
             });
         }
 
+        public virtual void Update()
+        {
+            foreach (UI_Item item in Items)
+            {
+                item.Update();
+            }
+        }
+
+        public virtual bool IsDirty()
+        {
+            foreach (UI_Item item in Items)
+            {
+                if (item.IsDirty())
+                    return true;
+            }
+
+            return false;
+        }
+
         public virtual void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
@@ -428,6 +464,16 @@ namespace VSCView
             }
         }
 
+        public override void Update()
+        {
+            base.Update();
+        }
+
+        public override bool IsDirty()
+        {
+            return base.IsDirty();
+        }
+
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
@@ -455,6 +501,9 @@ namespace VSCView
         private string InputName;
 
         private bool output;
+
+        private bool val = false;
+        private bool? lastVal = null;
 
         private List<Tuple<bool, string>> calcFunc;
 
@@ -485,10 +534,8 @@ namespace VSCView
             }
         }
 
-        public override void Paint(Graphics graphics)
+        private bool Evaluate()
         {
-            Matrix preserve = graphics.Transform;
-
             if (calcFunc != null)
             {
                 bool chk = true;
@@ -503,20 +550,41 @@ namespace VSCView
                         chk &= data.GetBasicControl(itm.Item2);
                     }
                 }
-                if (chk && output) base.Paint(graphics);
+                if (chk) return output;
             }
             else if (string.IsNullOrWhiteSpace(InputName))
             {
-                if (output) base.Paint(graphics);
+                return output;
             }
             else if (data.GetBasicControl(InputName))
             {
-                if (output) base.Paint(graphics);
+                return output;
             }
-            else
-            {
-                if (!output) base.Paint(graphics);
-            }
+            return !output;
+        }
+
+        public override void Update()
+        {
+            val = Evaluate();
+
+            base.Update();
+        }
+
+        public override bool IsDirty()
+        {
+            if (lastVal != val)
+                return true;
+            return base.IsDirty();
+        }
+
+        public override void Paint(Graphics graphics)
+        {
+            Matrix preserve = graphics.Transform;
+
+            if (val)
+                base.Paint(graphics);
+
+            lastVal = val;
         }
     }
 
@@ -532,6 +600,11 @@ namespace VSCView
         protected float ScaleFactorX;
         protected float ScaleFactorY;
 
+        float? LastAnalogX = null;
+        float? LastAnalogY = null;
+        float AnalogX = 0;
+        float AnalogY = 0;
+
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
             base.Initalize(data, cache, themePath, themeData);
@@ -544,16 +617,32 @@ namespace VSCView
             ScaleFactorY = themeData["scaleFactorY"]?.Value<float>() ?? 0;
         }
 
+        public override void Update()
+        {
+            AnalogX = string.IsNullOrWhiteSpace(AxisNameX) ? 0 : (data.GetAnalogControl(AxisNameX) * ScaleFactorX);
+            AnalogY = string.IsNullOrWhiteSpace(AxisNameY) ? 0 : (data.GetAnalogControl(AxisNameY) * ScaleFactorY);
+
+            base.Update();
+        }
+
+        public override bool IsDirty()
+        {
+            if (LastAnalogX != AnalogX) return true;
+            if (LastAnalogY != AnalogY) return true;
+
+            return base.IsDirty();
+        }
+
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
 
-            float AnalogX = string.IsNullOrWhiteSpace(AxisNameX) ? 0 : (data.GetAnalogControl(AxisNameX) * ScaleFactorX);
-            float AnalogY = string.IsNullOrWhiteSpace(AxisNameY) ? 0 : (data.GetAnalogControl(AxisNameY) * ScaleFactorY);
-
             graphics.TranslateTransform(AnalogX, -AnalogY);
 
             base.Paint(graphics);
+
+            LastAnalogX = AnalogX;
+            LastAnalogY = AnalogY;
 
             graphics.Transform = preserve;
         }
@@ -572,6 +661,8 @@ namespace VSCView
         private Image[] ImagePadDecay;
         private List<PointF?> PadPosHistory;
         private string InputName;
+
+        private bool lastFrameHadItems = false;
 
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
@@ -608,78 +699,100 @@ namespace VSCView
             }
         }
 
+        public override void Update()
+        {
+            base.Update();
+        }
+
+        public override bool IsDirty()
+        {
+            if (lastFrameHadItems) return true;
+            lock (PadPosHistory)
+            {
+                foreach (var itm in PadPosHistory)
+                {
+                    if (itm != null) return true;
+                }
+            }
+            return base.IsDirty();
+        }
+
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
             graphics.TranslateTransform(X, Y);
 
-            bool ControlHot = data.GetBasicControl(InputName);
-
-            PointF? prevCord = null;
-            for (int pointfade = 0; pointfade < PadPosHistory.Count && pointfade < ImagePadDecay.Length; pointfade++)
+            lock (PadPosHistory)
             {
-                PointF? cord = PadPosHistory[pointfade];
-                if (cord.HasValue)
+                //bool ControlHot = data.GetBasicControl(InputName);
+
+                PointF? prevCord = null;
+                for (int pointfade = 0; pointfade < PadPosHistory.Count && pointfade < ImagePadDecay.Length; pointfade++)
                 {
-                    float SubPointWidth = ImagePadDecay[pointfade].Width;
-                    float SubPointHeight = ImagePadDecay[pointfade].Height;
-
-                    float ratio = (pointfade * 1.0f / ImagePadDecay.Length);
-                    ratio = ratio * 0.5f + 0.5f;
-                    SubPointWidth *= ratio;
-                    SubPointHeight *= ratio;
-
-                    graphics.DrawImage(ImagePadDecay[pointfade], cord.Value.X - (SubPointWidth / 2.0f), cord.Value.Y - (SubPointHeight / 2.0f), SubPointWidth, SubPointHeight);
-                    if (prevCord.HasValue)
+                    PointF? cord = PadPosHistory[pointfade];
+                    if (cord.HasValue)
                     {
-                        // draw extra dots between points we've seen
-                        double xVector = cord.Value.X - prevCord.Value.X;
-                        double yVector = cord.Value.Y - prevCord.Value.Y;
+                        float SubPointWidth = ImagePadDecay[pointfade].Width;
+                        float SubPointHeight = ImagePadDecay[pointfade].Height;
 
-                        double distance = SensorFusion.EMACalc.ApproxSqrt((float)(xVector * xVector + yVector * yVector));
-                        double subdist = distance * 0.5f;
+                        float ratio = (pointfade * 1.0f / ImagePadDecay.Length);
+                        ratio = ratio * 0.5f + 0.5f;
+                        SubPointWidth *= ratio;
+                        SubPointHeight *= ratio;
 
-                        if ((int)subdist > 0)
+                        graphics.DrawImage(ImagePadDecay[pointfade], cord.Value.X - (SubPointWidth / 2.0f), cord.Value.Y - (SubPointHeight / 2.0f), SubPointWidth, SubPointHeight);
+                        if (prevCord.HasValue)
                         {
-                            double distBetweenDots = distance / subdist;
-                            float SubPoint2Width = ImagePadDecay[pointfade - 1].Width;
-                            float SubPoint2Height = ImagePadDecay[pointfade - 1].Height;
+                            // draw extra dots between points we've seen
+                            double xVector = cord.Value.X - prevCord.Value.X;
+                            double yVector = cord.Value.Y - prevCord.Value.Y;
 
-                            //float ratio = (pointfade * 1.0f / ImagePadDecay.Length);
-                            SubPoint2Width *= ratio;
-                            SubPoint2Height *= ratio;
+                            double distance = SensorFusion.EMACalc.ApproxSqrt((float)(xVector * xVector + yVector * yVector));
+                            double subdist = distance * 0.5f;
 
-                            for (int subDistPlot = 0; subDistPlot < subdist; subDistPlot++)
+                            if ((int)subdist > 0)
                             {
-                                PointF betweenPoint = new PointF(
-                                    (float)(prevCord.Value.X + xVector * subDistPlot / subdist),
-                                    (float)(prevCord.Value.Y + yVector * subDistPlot / subdist));
+                                double distBetweenDots = distance / subdist;
+                                float SubPoint2Width = ImagePadDecay[pointfade - 1].Width;
+                                float SubPoint2Height = ImagePadDecay[pointfade - 1].Height;
 
-                                //Matrix preserve2 = graphics.Transform;
-                                //graphics.TranslateTransform(X, Y);
-                                graphics.DrawImage(ImagePadDecay[pointfade - 1], betweenPoint.X - (SubPoint2Width / 2.0f), betweenPoint.Y - (SubPoint2Height / 2.0f), SubPoint2Width, SubPoint2Height);
-                                //graphics.Transform = preserve2;
+                                //float ratio = (pointfade * 1.0f / ImagePadDecay.Length);
+                                SubPoint2Width *= ratio;
+                                SubPoint2Height *= ratio;
+
+                                for (int subDistPlot = 0; subDistPlot < subdist; subDistPlot++)
+                                {
+                                    PointF betweenPoint = new PointF(
+                                        (float)(prevCord.Value.X + xVector * subDistPlot / subdist),
+                                        (float)(prevCord.Value.Y + yVector * subDistPlot / subdist));
+
+                                    //Matrix preserve2 = graphics.Transform;
+                                    //graphics.TranslateTransform(X, Y);
+                                    graphics.DrawImage(ImagePadDecay[pointfade - 1], betweenPoint.X - (SubPoint2Width / 2.0f), betweenPoint.Y - (SubPoint2Height / 2.0f), SubPoint2Width, SubPoint2Height);
+                                    //graphics.Transform = preserve2;
+                                }
                             }
                         }
                     }
+                    prevCord = cord;
                 }
-                prevCord = cord;
-            }
 
 
-            if (PadPosHistory.Count >= ImagePadDecay.Length && PadPosHistory.Count > 0) PadPosHistory.RemoveAt(0);
+                if (PadPosHistory.Count >= ImagePadDecay.Length && PadPosHistory.Count > 0) PadPosHistory.RemoveAt(0);
 
-            float AnalogX = string.IsNullOrWhiteSpace(AxisNameX) ? 0 : (data.GetAnalogControl(AxisNameX) * ScaleFactorX);
-            float AnalogY = string.IsNullOrWhiteSpace(AxisNameY) ? 0 : (data.GetAnalogControl(AxisNameY) * ScaleFactorY);
+                float AnalogX = string.IsNullOrWhiteSpace(AxisNameX) ? 0 : (data.GetAnalogControl(AxisNameX) * ScaleFactorX);
+                float AnalogY = string.IsNullOrWhiteSpace(AxisNameY) ? 0 : (data.GetAnalogControl(AxisNameY) * ScaleFactorY);
 
-            if (string.IsNullOrWhiteSpace(InputName) || data.GetBasicControl(InputName))
-            {
-                PointF cord = new PointF(AnalogX,-AnalogY);
-                PadPosHistory.Add(cord);
-            }
-            else
-            {
-                PadPosHistory.Add(null);
+                if (string.IsNullOrWhiteSpace(InputName) || data.GetBasicControl(InputName))
+                {
+                    PointF cord = new PointF(AnalogX, -AnalogY);
+                    PadPosHistory.Add(cord);
+                }
+                else
+                {
+                    PadPosHistory.Add(null);
+                }
+                lastFrameHadItems = PadPosHistory.Any(dr => dr != null);
             }
 
             graphics.Transform = preserve;
@@ -703,6 +816,9 @@ namespace VSCView
         protected float Height;
         protected Color Foreground;
         protected Color Background;
+
+        private float Value = 0;
+        private float? LastVal = null;
 
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
@@ -735,12 +851,24 @@ namespace VSCView
             catch { }
         }
 
+        public override void Update()
+        {
+            float Analog = string.IsNullOrWhiteSpace(AxisName) ? 0 : (data.GetAnalogControl(AxisName));
+            Value = Math.Max(Math.Min((Analog - Min) / (Max - Min), 1.0f), 0.0f);
+
+            base.Update();
+        }
+
+        public override bool IsDirty()
+        {
+            if (LastVal != Value)
+                return true;
+            return base.IsDirty();
+        }
+
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
-
-            float Analog = string.IsNullOrWhiteSpace(AxisName) ? 0 : (data.GetAnalogControl(AxisName));
-            Analog = Math.Max(Math.Min((Analog - Min) / (Max - Min), 1.0f), 0.0f);
 
             graphics.TranslateTransform(X, Y);
             graphics.TranslateTransform(-Width / 2, -Height / 2);
@@ -748,20 +876,22 @@ namespace VSCView
             switch (Direction)
             {
                 case "up":
-                    graphics.FillRectangle(new SolidBrush(Background), 0, Height - (Height * Analog), Width, Height * Analog);
+                    graphics.FillRectangle(new SolidBrush(Background), 0, Height - (Height * Value), Width, Height * Value);
                     break;
                 case "down":
-                    graphics.FillRectangle(new SolidBrush(Background), 0, 0, Width, Height * Analog);
+                    graphics.FillRectangle(new SolidBrush(Background), 0, 0, Width, Height * Value);
                     break;
                 case "left":
-                    graphics.FillRectangle(new SolidBrush(Background), Width - (Width * Analog), 0, Width * Analog, Height);
+                    graphics.FillRectangle(new SolidBrush(Background), Width - (Width * Value), 0, Width * Value, Height);
                     break;
                 default:
-                    graphics.FillRectangle(new SolidBrush(Background), 0, 0, Width * Analog, Height);
+                    graphics.FillRectangle(new SolidBrush(Background), 0, 0, Width * Value, Height);
                     break;
             }
 
             graphics.DrawRectangle(new Pen(Foreground, 2), 0, 0, Width, Height);
+
+            LastVal = Value;
 
             graphics.Transform = preserve;
 
@@ -793,6 +923,18 @@ namespace VSCView
         string ShadowRName;
         string ShadowUName;
         string ShadowDName;
+
+        float TransformX = 0;
+        float TransformY = 0;
+        float RotationAngle = 0;
+        float TiltFactorX = 0;
+        float TiltFactorY = 0;
+
+        float? LastTransformX = null;
+        float? LastTransformY = null;
+        float? LastRotationAngle = null;
+        float? LastTiltFactorX = null;
+        float? LastTiltFactorY = null;
 
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
@@ -829,6 +971,60 @@ namespace VSCView
             TiltTranslateY = themeData["tilttranslatey"]?.Value<float>() ?? 0;
         }
 
+        public override void Update()
+        {
+            var sensorData = MainForm.sensorData.Data; // use the cache!
+
+            if (sensorData != null)
+            {
+                switch (DisplayType)
+                {
+                    case "accel":
+                        {
+                            TransformX = 1.0f - Math.Abs(sensorData.GyroTiltFactorY * 0.5f);
+                            TransformY = 1.0f - Math.Abs(sensorData.GyroTiltFactorX * 0.5f);
+                            RotationAngle = sensorData.GyroTiltFactorZ;
+                            TiltFactorX = sensorData.GyroTiltFactorX;
+                            TiltFactorY = sensorData.GyroTiltFactorY;
+                        }
+                        break;
+                    case "gyro":
+                        {
+                            int SignY = -Math.Sign((2 * SensorCollector.Mod(Math.Floor((sensorData.Roll - 1) * 0.5f) + 1, 2)) - 1);
+                            TransformX = SignY * Math.Max(1.0f - Math.Abs(sensorData.QuatTiltFactorY), 0.15f);
+                            TransformY = Math.Max(1.0f - Math.Abs(sensorData.QuatTiltFactorX), 0.15f);
+
+#if DEBUG
+                            //Debug.WriteLine($"{TiltFactorY}\t{Roll}\t{(2 * mod(Math.Floor((Roll - 1) * 0.5f) + 1, 2)) - 1}");
+                            //Debug.WriteLine($"qW={qw},{qx},{qy},{qz}");
+                            //Debug.WriteLine($"gX={_gx},{_gy},{_gz}\taX={_ax},{_ay},{_az}");
+                            //Debug.WriteLine($"{sensorData.Yaw},{sensorData.Pitch},{sensorData.Roll}\r\n");
+#endif
+
+                            RotationAngle = sensorData.QuatTiltFactorZ;
+                            TiltFactorX = sensorData.QuatTiltFactorX;
+                            TiltFactorY = sensorData.QuatTiltFactorY;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            base.Update();
+        }
+
+        public override bool IsDirty()
+        {
+            if ((LastTransformX != TransformX)
+             || (LastTransformY != TransformY)
+             || (LastRotationAngle != RotationAngle)
+             || (LastTiltFactorX != TiltFactorX)
+             || (LastTiltFactorY != TiltFactorY))
+                return true;
+            return base.IsDirty();
+        }
+
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
@@ -842,35 +1038,11 @@ namespace VSCView
                 switch (DisplayType)
                 {
                     case "accel":
-                        {
-                            float transformX = 1.0f - Math.Abs(sensorData.GyroTiltFactorY * 0.5f);
-                            float transformY = 1.0f - Math.Abs(sensorData.GyroTiltFactorX * 0.5f);
-
-                            Draw2dAs3d(
-                                cache, graphics, DisplayImage, ShadowLName, ShadowL, ShadowRName, ShadowR, ShadowUName, ShadowU, ShadowDName, ShadowD,
-                                transformX, transformY, sensorData.GyroTiltFactorZ, sensorData.GyroTiltFactorX, sensorData.GyroTiltFactorY,
-                                Width, Height, TiltTranslateX, TiltTranslateY
-                            );
-
-                            graphics.ResetTransform();
-                        }
-                        break;
                     case "gyro":
                         {
-                            int SignY = -Math.Sign((2 * SensorCollector.Mod(Math.Floor((sensorData.Roll - 1) * 0.5f) + 1, 2)) - 1);
-                            float transformX = SignY * Math.Max(1.0f - Math.Abs(sensorData.QuatTiltFactorY), 0.15f);
-                            float transformY = Math.Max(1.0f - Math.Abs(sensorData.QuatTiltFactorX), 0.15f);
-
-#if DEBUG
-                            //Debug.WriteLine($"{TiltFactorY}\t{Roll}\t{(2 * mod(Math.Floor((Roll - 1) * 0.5f) + 1, 2)) - 1}");
-                            //Debug.WriteLine($"qW={qw},{qx},{qy},{qz}");
-                            //Debug.WriteLine($"gX={_gx},{_gy},{_gz}\taX={_ax},{_ay},{_az}");
-                            //Debug.WriteLine($"{sensorData.Yaw},{sensorData.Pitch},{sensorData.Roll}\r\n");
-#endif
-
                             Draw2dAs3d(
                                 cache, graphics, DisplayImage, ShadowLName, ShadowL, ShadowRName, ShadowR, ShadowUName, ShadowU, ShadowDName, ShadowD,
-                                transformX, transformY, sensorData.QuatTiltFactorZ, sensorData.QuatTiltFactorX, sensorData.QuatTiltFactorY,
+                                TransformX, TransformY, RotationAngle, TiltFactorX, TiltFactorY,
                                 Width, Height, TiltTranslateX, TiltTranslateY
                             );
 
@@ -881,6 +1053,12 @@ namespace VSCView
                         break;
                 }
             }
+
+            LastTransformX = TransformX;
+            LastTransformY = TransformY;
+            LastRotationAngle = RotationAngle;
+            LastTiltFactorX = TiltFactorX;
+            LastTiltFactorY = TiltFactorY;
 
             graphics.Transform = preserve;
         }
