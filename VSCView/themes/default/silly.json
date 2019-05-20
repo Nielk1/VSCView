@@ -20,161 +20,25 @@
                         { "type":"showhide", "inputName":"b", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x": 35, "y":  0, "width":36, "height":36, "center":true } ] },
                         { "type":"showhide", "inputName":"x", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x":-35, "y":  0, "width":36, "height":36, "center":true } ] },
                         { "type":"showhide", "inputName":"y", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x":  0, "y":-35, "width":36, "height":36, "center":true } ] },
-						{ "type":"showhide", "inputName":"rightpadtouch", "invert":true, "children": [
-							{ "type": "showhide", "inputName": "a", "invert": true, "children": [
-							{ "type": "showhide", "inputName": "b", "invert": true, "children": [
-							{ "type": "showhide", "inputName": "x", "invert": true, "children": [
-							{ "type": "showhide", "inputName": "y", "invert": true, "children": [
-								{ "type": "image", "image": "paw.png", "x": -30, "y": -30, "width": 381, "height": 457, "center": false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":true, "children": [
-								{ "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":false, "children": [
-								{ "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":false, "children": [
-								{ "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":false, "children": [
-								{ "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":false, "children": [
-								{ "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":true, "children": [
-								{ "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":false, "children": [
-								{ "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":true, "children": [
-								{ "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"y", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"a", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":true, "children": [
-								{ "type":"image", "image":"paw.png", "x": -30, "y": -65, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":true, "children": [
-								{ "type":"image", "image":"paw.png", "x": -30, "y": 5, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"b", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"a", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":true, "children": [
-								{ "type":"image", "image":"paw.png", "x": 5, "y": -30, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"x", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"a", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":true, "children": [
-								{ "type":"image", "image":"paw.png", "x": -65, "y": -30, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":true, "children": [
-								{ "type":"image", "image":"paw.png", "x": -5, "y": -5, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":true, "children": [
-								{ "type":"image", "image":"paw.png", "x": -55, "y": -5, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":false, "children": [
-								{ "type":"image", "image":"paw.png", "x": -55, "y": -55, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] },
-							{ "type":"showhide", "inputName":"a", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"b", "invert":false, "children": [
-							{ "type":"showhide", "inputName":"x", "invert":true, "children": [
-							{ "type":"showhide", "inputName":"y", "invert":false, "children": [
-								{ "type":"image", "image":"paw.png", "x": -5, "y": -55, "width":381, "height":457, "center":false }
-							] }
-							] }
-							] }
-							] }
-						] }
+                        { "type":"showhide", "inputName":"rightpadtouch", "invert":true, "children": [
+                            { "type":"showhide", "calc":"!a && !b && !x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":"!a && !b && !x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":" a &&  b &&  x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":"!a &&  b &&  x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":" a && !b &&  x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":" a &&  b && !x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":" a &&  b &&  x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":" a && !b && !x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":"!a &&  b &&  x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":"!a && !b && !x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -65, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":" a && !b && !x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y":   5, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":"!a &&  b && !x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x":   5, "y": -30, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":"!a && !b &&  x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -65, "y": -30, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":" a &&  b && !x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x":  -5, "y":  -5, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":" a && !b &&  x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -55, "y":  -5, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":"!a && !b &&  x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -55, "y": -55, "width":381, "height":457, "center":false } ] },
+                            { "type":"showhide", "calc":"!a &&  b && !x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x":  -5, "y": -55, "width":381, "height":457, "center":false } ] }
+                        ] }
                     ]
                 },
 
@@ -189,7 +53,7 @@
                     "scaleFactorY": 0.0005,
                     "children": [
                         { "type":"image", "image":"stick.png", "x": 0, "y": 0, "width":69, "height":70, "center":true },
-						{ "type":"showhide", "inputName":"leftpadtouch", "invert":true, "children": [ { "type":"image", "image":"paw.png", "x": 30, "y": -30, "width":-381, "height":457, "center":false } ] }
+                        { "type":"showhide", "inputName":"leftpadtouch", "invert":true, "children": [ { "type":"image", "image":"paw.png", "x": 30, "y": -30, "width":-381, "height":457, "center":false } ] }
                     ]
                 },
                 {
@@ -234,7 +98,7 @@
                             "width":72,
                             "height":72,
                             "children": [
-							    { "type":"showhide", "inputName":"rightpadtouch", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -40, "y": -40, "width":381, "height":457, "center":false } ] }
+                                { "type":"showhide", "inputName":"rightpadtouch", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -40, "y": -40, "width":381, "height":457, "center":false } ] }
                             ]
                         }
                     ]
@@ -260,7 +124,7 @@
                             "width":72,
                             "height":72,
                             "children": [
-								{ "type":"showhide", "inputName":"leftpadtouch", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": 40, "y": -40, "width":-381, "height":457, "center":false } ] }
+                                { "type":"showhide", "inputName":"leftpadtouch", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": 40, "y": -40, "width":-381, "height":457, "center":false } ] }
                             ]
                         }
                     ]

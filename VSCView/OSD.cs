@@ -456,6 +456,8 @@ namespace VSCView
 
         private bool output;
 
+        private List<Tuple<bool, string>> calcFunc;
+
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
             base.Initalize(data, cache, themePath, themeData);
@@ -465,13 +467,45 @@ namespace VSCView
 
             InputName = themeData["inputName"]?.Value<string>();
             output = !(themeData["invert"]?.Value<bool>() ?? false);
+
+            // super simplistic parsing for now, only supports single prefix ! and &&
+            string Calc = themeData["calc"]?.Value<string>();
+            if (!string.IsNullOrWhiteSpace(Calc))
+            {
+                calcFunc = Calc
+                    .Split(new string[] { "&&" }, StringSplitOptions.None)
+                    .Select(raw =>
+                    {
+                        string trimed = raw.Trim();
+                        bool invert = trimed.StartsWith("!");
+                        trimed = trimed.TrimStart('!');
+                        return new Tuple<bool, string>(invert, trimed);
+                    })
+                    .ToList();
+            }
         }
 
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
 
-            if (string.IsNullOrWhiteSpace(InputName))
+            if (calcFunc != null)
+            {
+                bool chk = true;
+                foreach (Tuple<bool, string> itm in calcFunc)
+                {
+                    if (itm.Item1)
+                    {
+                        chk &= !data.GetBasicControl(itm.Item2);
+                    }
+                    else
+                    {
+                        chk &= data.GetBasicControl(itm.Item2);
+                    }
+                }
+                if (chk && output) base.Paint(graphics);
+            }
+            else if (string.IsNullOrWhiteSpace(InputName))
             {
                 if (output) base.Paint(graphics);
             }
