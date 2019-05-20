@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -23,6 +24,8 @@ namespace VSCView
 
         UI ui;
 
+        Settings settings;
+
         public MainForm()
         {
             this.FormBorderStyle = FormBorderStyle.None;
@@ -34,13 +37,23 @@ namespace VSCView
             sensorData = new SensorCollector(5, fpsLimit, true);
 
             LoadThemes();
-            if (File.Exists("ctrl.last"))
+            LoadSettings();
+            if(File.Exists("ctrl.last"))
             {
-                string themeFile = File.ReadAllText("ctrl.last");
-                if (File.Exists(themeFile))
+                settings.Theme = File.ReadAllText("ctrl.last");
+                File.Delete("ctrl.last");
+            }
+            if (!string.IsNullOrWhiteSpace(settings.Theme) && File.Exists(settings.Theme))
+            {
+                LoadTheme(settings.Theme, false); // we'll just let this task spool off on its own and pray
+            }
+            if (!string.IsNullOrWhiteSpace(settings.Background))
+            {
+                try
                 {
-                    LoadTheme(themeFile, false);
+                    this.BackColor = ColorTranslator.FromHtml(settings.Background);
                 }
+                catch { }
             }
             LoadControllers(true);
         }
@@ -104,6 +117,15 @@ namespace VSCView
         }
         #endregion
 
+        private void LoadSettings()
+        {
+            if (!File.Exists("settings.json")) File.Create("settings.json").Close();
+            settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json")) ?? new Settings();
+        }
+        private void SaveSettings()
+        {
+            File.WriteAllText("settings.json", JsonConvert.SerializeObject(settings));
+        }
         private void LoadThemes()
         {
             tsmiTheme.DropDownItems.Clear();
@@ -218,7 +240,10 @@ namespace VSCView
             this.Height = ui.Height;
 
             if (recordLast)
-                File.WriteAllText("ctrl.last", path);
+            {
+                settings.Theme = path;
+                SaveSettings();
+            }
 
             lblHint1.Hide();
             lblHint2.Hide();
@@ -278,6 +303,8 @@ namespace VSCView
             if(colorDialog1.ShowDialog() == DialogResult.OK)
             {
                 this.BackColor = colorDialog1.Color;
+                settings.Background = ColorTranslator.ToHtml(this.BackColor);
+                SaveSettings();
             }
         }
 
