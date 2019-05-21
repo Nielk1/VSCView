@@ -10,12 +10,9 @@ namespace VSCView
         public sealed class EMACalc
         {
             readonly double _alpha;
-            double _lastDataPoint = double.NaN, _lastEMA = double.NaN, _lastEMD = double.NaN;
-            double _lastVariance = 0f, _lastZScore = 0f, _emaBeta = 0f;
+            double _lastDataPoint = double.NaN, _lastEMA = double.NaN, _emaBeta = double.NaN;
 
             public double EMA { get { return _lastEMA; } private set { _lastEMA = value; } }
-            //public double EMD { get { return _lastEMD; } private set { _lastEMD = value; } }
-            //public double ZScore { get { return _lastZScore; } private set { _lastZScore = value; } }
 
             public EMACalc(int lookBack) => _alpha = 2f / (lookBack + 1);
 
@@ -24,32 +21,7 @@ namespace VSCView
                 _lastDataPoint = value;
                 _lastEMA = double.IsNaN(_lastEMA) ? _lastDataPoint : (_lastDataPoint - _lastEMA) * _alpha + _lastEMA;
                 _emaBeta = _lastDataPoint - _lastEMA;
-                //_lastVariance = (1 - _alpha) * (_lastVariance + _alpha * _emaBeta * _emaBeta);
-                //_lastEMD = double.IsNaN(_lastEMD) ? 0f : ApproxSqrt((float)_lastVariance);
-                //_lastZScore = (_lastDataPoint - _lastEMA) / _lastEMD;
                 return _lastEMA;
-            }
-
-            public static float ApproxSqrt(float z)
-            {// see: https://www.compuphase.com/cmetric.htm
-                if (z == 0) return 0;
-                FloatIntUnion u;
-                u.tmp = 0;
-                u.f = z;
-                u.tmp -= 1 << 23; /* Subtract 2^m. */
-                u.tmp >>= 1; /* Divide by 2. */
-                u.tmp += 1 << 29; /* Add ((b + 1) / 2) * 2^m. */
-                return u.f;
-            }
-
-            [StructLayout(LayoutKind.Explicit)]
-            private struct FloatIntUnion
-            {
-                [FieldOffset(0)]
-                public float f;
-
-                [FieldOffset(0)]
-                public int tmp;
             }
         }
 
@@ -59,19 +31,21 @@ namespace VSCView
             public double OffsetP { get; private set; }
             public double OffsetR { get; private set; }
 
-            int SampleSize, ThresholdCounter;
+            int SamplingTime;
+            double Elapsed;
+            Stopwatch watch = new Stopwatch();
 
             /// <summary>
             /// Calculates an offset for IMU data streams (YPR/AHR) using a timer and zero-point diffing
             /// </summary>
             /// <param name="bufferTime">Seconds to buffer before calculating offset</param>
-            public OTFCalibrator(int bufferTime, int framerate)
+            public OTFCalibrator(int bufferTime)
             {
                 OffsetY = 0f;
                 OffsetP = 0f;
                 OffsetR = 0f;
-                SampleSize = (int)(framerate * bufferTime);
-                
+                SamplingTime = bufferTime * 1000;
+                watch.Start();
             }
 
             /// <summary>
@@ -83,30 +57,28 @@ namespace VSCView
             /// <param name="gyroMag">Smoothed and normalized Gyro sensor magnitude in absolute radian/sec</param>
             public void Calibrate(double yaw, double pitch, double roll, float gyroMag)
             {
-                // search for motion based on sensor input magnitude...
-                // this is a tradeoff between capturing fine movement and triggering false positives:
-                // EMA smoothed and normalized magnitude of movement (<= ceiling)
+                if (!watch.IsRunning)
+                    watch.Restart();
+
+                Elapsed = watch.ElapsedMilliseconds;
+                // we expect smoothed, normalized, and otherwise raw Gyro data here
+                // 0.16 is the rough noise ceiling - arrived at by trial and error
                 bool signal = gyroMag <= 0.16f ? false : true;
 
-// DEBUG_GYRO
-//#if DEBUG
-//                Debug.WriteLine($"[ {gyroMag} ] : [ {signal} ] => [ {OffsetY},{OffsetP},{OffsetR} ]");
-//#endif
+                //Debug.WriteLine($"{gyroMag} => [{signal}] <= 0.16 ==> [{Elapsed} ~= {SamplingTime}]");
 
                 // offset here once our 'bucket' of matching samples is full
-                if (ThresholdCounter == SampleSize)
+                if (Elapsed >= SamplingTime)
                 {
                     OffsetY = 1.0f - 1.0f - yaw;
                     OffsetP = 1.0f - 1.0f - pitch;
                     OffsetR = 1.0f - 1.0f - roll;
-                    ThresholdCounter = 0;
+                    watch.Stop();
                     return;
                 }
 
-                if (!signal)
-                    ThresholdCounter++; // just count up to the size of our buffer
-                else
-                    ThresholdCounter = 0; // reset on spikes
+                if (signal)
+                    watch.Restart();
             }
         }
     }

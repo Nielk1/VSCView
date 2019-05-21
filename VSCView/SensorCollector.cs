@@ -72,11 +72,11 @@ namespace VSCView
 
         SensorFusion.OTFCalibrator calib;
 
-        public SensorCollector(int lookback, int framerate, bool smoothing)
+        public SensorCollector(int lookback, bool smoothing)
         {
             Lookback = lookback;
             Smoothing = smoothing;
-            calib = new SensorFusion.OTFCalibrator(8, framerate); // buffer ~8s
+            calib = new SensorFusion.OTFCalibrator(8); // buffer ~8s of samples
 
             qwEMA = new SensorFusion.EMACalc(Lookback);
             qxEMA = new SensorFusion.EMACalc(Lookback);
@@ -151,11 +151,11 @@ namespace VSCView
                 */
 
                 // accumulate smoothed statistical data on normalized gyro sensor magnitude
-                Data.NormGyroMag = SensorFusion.EMACalc.ApproxSqrt((float)(
+                Data.NormGyroMag = (float)Math.Sqrt(
                     Math.Abs(Data.calGyroX * Data.calGyroX) +
                     Math.Abs(Data.calGyroY * Data.calGyroY) +
                     Math.Abs(Data.calGyroZ * Data.calGyroZ)
-                ));
+                );
                 normData.NextValue(Data.NormGyroMag);
 
                 double[] eulAnglesYPR = ToEulerAngles(Data.qW, Data.qY, Data.qZ, Data.qX);
