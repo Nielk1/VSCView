@@ -236,7 +236,7 @@ namespace VSCView
 
         private void tsmiExit_Click(object sender, EventArgs e)
         {
-            ttimer.Change(Timeout.Infinite, Timeout.Infinite);
+            ttimer?.Change(Timeout.Infinite, Timeout.Infinite);
             this.Close();
         }
 
@@ -267,7 +267,7 @@ namespace VSCView
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ttimer.Change(Timeout.Infinite, Timeout.Infinite);
+            ttimer?.Change(Timeout.Infinite, Timeout.Infinite);
         }
     }
 
