@@ -77,9 +77,9 @@ namespace VSCView
 
         public void Paint(Graphics graphics)
         {
-            foreach(UI_Item item in Items)
+            for (int i = 0; i < Items.Count; i++)
             {
-                item.Paint(graphics);
+                Items[i].Paint(graphics);
             }
         }
 
@@ -95,10 +95,8 @@ namespace VSCView
                 return;
 
             if (disposing)
-            {
                 cache.Dispose();
-                disposed = true;
-            }
+            disposed = true;
         }
 
         ~UI()
@@ -253,15 +251,7 @@ namespace VSCView
                 return;
 
             if (disposing)
-            {
-                foreach(var key in cache.Keys)
-                {
-                    cache[key].Dispose();
-                    cache[key] = null;
-                }
-            }
-
-            cache = null;
+                cache.Clear();
             disposed = true;
         }
 
@@ -269,7 +259,8 @@ namespace VSCView
         {
             lock (cache)
             {
-                if (cache.ContainsKey(Key)) return cache[Key];
+                Image result;
+                if (cache.TryGetValue(Key, out result)) return result;
                 cache[Key] = ImageLoader();
                 return cache[Key];
             }
@@ -294,14 +285,6 @@ namespace VSCView
                 //create a graphics object from the image  
                 using (Graphics gfx = Graphics.FromImage(bmp))
                 {
-                    // tweaked rendering settings for better performance rendering sprites
-                    gfx.InterpolationMode = InterpolationMode.NearestNeighbor;
-                    gfx.SmoothingMode = SmoothingMode.None;
-                    gfx.PixelOffsetMode = PixelOffsetMode.Half;
-                    gfx.CompositingMode = CompositingMode.SourceOver;
-                    gfx.CompositingQuality = CompositingQuality.HighSpeed;
-                    gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
-
                     //create a color matrix object  
                     ColorMatrix matrix = new ColorMatrix();
 
@@ -391,9 +374,9 @@ namespace VSCView
             graphics.TranslateTransform(X, Y);
             graphics.RotateTransform(Rot);
 
-            foreach (UI_Item item in Items)
+            for (int i = 0; i < Items.Count; i++)
             {
-                item.Paint(graphics);
+                Items[i].Paint(graphics);
             }
 
             graphics.Transform = preserve;
@@ -492,8 +475,9 @@ namespace VSCView
             if (calcFunc != null)
             {
                 bool chk = true;
-                foreach (Tuple<bool, string> itm in calcFunc)
+                for (int i = 0; i < calcFunc.Count; i++)
                 {
+                    Tuple<bool, string> itm = calcFunc[i];
                     if (itm.Item1)
                     {
                         chk &= !data.GetBasicControl(itm.Item2);
@@ -503,6 +487,7 @@ namespace VSCView
                         chk &= data.GetBasicControl(itm.Item2);
                     }
                 }
+
                 if (chk && output) base.Paint(graphics);
             }
             else if (string.IsNullOrWhiteSpace(InputName))
@@ -593,8 +578,8 @@ namespace VSCView
                 string SizeSuffix = string.Empty;
                 if (Width > 0 && Height > 0)
                     ImagePadDecayBase = new Bitmap(ImagePadDecayBase, (int)Width, (int)Height);
-                int scaledTrailLength = MainForm.fpsLimit == 60 ? TrailLength : TrailLength / 2;
-                ImagePadDecay = new Image[scaledTrailLength];
+                //int scaledTrailLength = (int)(TrailLength * (MainForm.fpsLimit / 60.0f));
+                ImagePadDecay = new Image[TrailLength];
                 for (int x = 0; x < ImagePadDecay.Length; x++)
                 {
                     float percent = ((x + 1) * 1.0f / ImagePadDecay.Length);
@@ -636,7 +621,7 @@ namespace VSCView
                         double xVector = cord.Value.X - prevCord.Value.X;
                         double yVector = cord.Value.Y - prevCord.Value.Y;
 
-                        double distance = SensorFusion.EMACalc.ApproxSqrt((float)(xVector * xVector + yVector * yVector));
+                        double distance = Math.Sqrt(xVector * xVector + yVector * yVector);
                         double subdist = distance * 0.5f;
 
                         if ((int)subdist > 0)

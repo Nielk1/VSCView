@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -15,12 +14,11 @@ namespace VSCView
     {
         public static SteamController.SteamControllerState state;
         public static SensorCollector sensorData;
-        public static int fpsLimit = 30;
+        public static int frameTime = (int)(1000 / 60); // 16ms interval => ~62fps
 
         ControllerData ControllerData;
         SteamController ActiveController;
-        bool exited = false;
-        int renderUsageLock = 0;
+        System.Threading.Timer ttimer;
 
         UI ui;
 
@@ -34,7 +32,7 @@ namespace VSCView
             ControllerData = new ControllerData();
             state = new SteamController.SteamControllerState();
             // 5s lookback for smoothing
-            sensorData = new SensorCollector(5, fpsLimit, true);
+            sensorData = new SensorCollector(5, true);
 
             LoadThemes();
             LoadSettings();
@@ -58,43 +56,7 @@ namespace VSCView
             LoadControllers(true);
         }
 
-        #region Render Loop
-        private void RenderLoop()
-        {
-            Stopwatch watch = new Stopwatch();
-            SpinWait spinner = new SpinWait();
-            double frameCap = 1000.0f / fpsLimit;
-            double timer = 0;
-            int fps = 0;
-
-            while (!exited)
-            {
-                watch.Restart();
-                Render();
-
-#if DEBUG
-                fps++;
-                while (timer >= 1000)
-                {
-                    Debug.WriteLine($"FPS: {fps}");
-                    fps = 0;
-                    timer = 0;
-                }
-#endif
-
-                while (watch.ElapsedMilliseconds < frameCap)
-                {
-                    spinner.SpinOnce();
-                }
-
-#if DEBUG
-                timer += watch.ElapsedMilliseconds;
-#endif
-            }
-            watch.Stop();
-        }
-
-        private void Render()
+        private void Render(object stateInfo)
         {
             var state = new SteamController.SteamControllerState();
             if (ActiveController != null)
@@ -115,7 +77,6 @@ namespace VSCView
                 catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
             }
         }
-        #endregion
 
         private void LoadSettings()
         {
@@ -248,11 +209,7 @@ namespace VSCView
             lblHint1.Hide();
             lblHint2.Hide();
 
-            if (0 == Interlocked.Exchange(ref renderUsageLock, 1))
-            {
-                await Task.Run(() => RenderLoop());
-                Interlocked.Exchange(ref renderUsageLock, 0);
-            }
+            ttimer = new System.Threading.Timer(new TimerCallback(Render), null, 0, frameTime);
         }
 
         #region Drag Anywhere
@@ -279,7 +236,7 @@ namespace VSCView
 
         private void tsmiExit_Click(object sender, EventArgs e)
         {
-            exited = true;
+            ttimer.Change(Timeout.Infinite, Timeout.Infinite);
             this.Close();
         }
 
@@ -310,7 +267,7 @@ namespace VSCView
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            exited = true;
+            ttimer.Change(Timeout.Infinite, Timeout.Infinite);
         }
     }
 
