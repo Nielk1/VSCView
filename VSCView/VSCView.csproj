@@ -88,6 +88,9 @@
     <None Include="themes\default\chell-all.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="themes\default\chell-nogyro.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="themes\minimal\accel.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
