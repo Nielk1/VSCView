@@ -73,6 +73,16 @@ namespace VSCView.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_chell {
+            get {
+                object obj = ResourceManager.GetObject("icon_chell", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_usb {
             get {
                 object obj = ResourceManager.GetObject("icon_usb", resourceCulture);

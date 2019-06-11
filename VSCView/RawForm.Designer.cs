@@ -45,7 +45,7 @@
             this.txtUpdate.Multiline = true;
             this.txtUpdate.Name = "txtUpdate";
             this.txtUpdate.ReadOnly = true;
-            this.txtUpdate.Size = new System.Drawing.Size(738, 840);
+            this.txtUpdate.Size = new System.Drawing.Size(721, 840);
             this.txtUpdate.TabIndex = 0;
             this.txtUpdate.Text = resources.GetString("txtUpdate.Text");
             // 
@@ -57,7 +57,7 @@
             this.txtDevicePath.Location = new System.Drawing.Point(12, 8);
             this.txtDevicePath.Name = "txtDevicePath";
             this.txtDevicePath.ReadOnly = true;
-            this.txtDevicePath.Size = new System.Drawing.Size(738, 20);
+            this.txtDevicePath.Size = new System.Drawing.Size(721, 20);
             this.txtDevicePath.TabIndex = 1;
             // 
             // txtDescription
@@ -68,7 +68,7 @@
             this.txtDescription.Location = new System.Drawing.Point(12, 34);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.ReadOnly = true;
-            this.txtDescription.Size = new System.Drawing.Size(738, 20);
+            this.txtDescription.Size = new System.Drawing.Size(721, 20);
             this.txtDescription.TabIndex = 2;
             // 
             // txtBattery
@@ -80,7 +80,7 @@
             this.txtBattery.Multiline = true;
             this.txtBattery.Name = "txtBattery";
             this.txtBattery.ReadOnly = true;
-            this.txtBattery.Size = new System.Drawing.Size(738, 166);
+            this.txtBattery.Size = new System.Drawing.Size(721, 166);
             this.txtBattery.TabIndex = 3;
             this.txtBattery.Text = "00\r\n00\r\n00\r\n00\r\n00\r\n00\r\n00\r\n00\r\n00\r\n00\r\n00\r\n00";
             // 
@@ -93,7 +93,7 @@
             this.txtConnection.Multiline = true;
             this.txtConnection.Name = "txtConnection";
             this.txtConnection.ReadOnly = true;
-            this.txtConnection.Size = new System.Drawing.Size(738, 112);
+            this.txtConnection.Size = new System.Drawing.Size(721, 112);
             this.txtConnection.TabIndex = 4;
             this.txtConnection.Text = "00\r\n00\r\n00\r\n00\r\n00\r\n00\r\n00\r\n00";
             // 

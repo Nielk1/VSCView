@@ -157,6 +157,9 @@ namespace VSCView
                     case SteamController.EConnectionType.BT:
                         itm.Image = Properties.Resources.icon_bt;
                         break;
+                    case SteamController.EConnectionType.Chell:
+                        itm.Image = Properties.Resources.icon_chell;
+                        break;
                 }
 
                 // load the first controller in the list if it exists

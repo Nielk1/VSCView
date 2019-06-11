@@ -181,6 +181,20 @@ namespace VSCView
                 case "rightpadclick":
                 case "rpc":
                     return state.Buttons.RightPadClick;
+
+                case "touch0":
+                case "touchnw":
+                    return state.Buttons.Touch0;
+                case "touch1":
+                case "touchne":
+                    return state.Buttons.Touch1;
+                case "touch2":
+                case "touchsw":
+                    return state.Buttons.Touch2;
+                case "touch3":
+                case "touchse":
+                    return state.Buttons.Touch3;
+
                 default:
                     return false;
             }

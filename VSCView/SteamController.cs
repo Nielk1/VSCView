@@ -12,6 +12,7 @@ namespace VSCView
         private const int VendorId = 0x28DE; // 10462
         private const int ProductIdWireless = 0x1142; // 4418;
         private const int ProductIdWired = 0x1102; // 4354
+        private const int ProductIdChell = 0x1101; // 4353
         //private const int ProductIdBT = 0x1106; // 4358
 
         public bool SensorsEnabled;
@@ -82,6 +83,11 @@ namespace VSCView
             public bool RightPadTouch { get; set; }
             public bool RightPadClick { get; set; }
 
+            public bool Touch0 { get; set; }
+            public bool Touch1 { get; set; }
+            public bool Touch2 { get; set; }
+            public bool Touch3 { get; set; }
+
             public virtual object Clone()
             {
                 SteamControllerButtons buttons = (SteamControllerButtons)base.MemberwiseClone();
@@ -114,6 +120,11 @@ namespace VSCView
                 buttons.LeftPadClick = LeftPadClick;
                 buttons.RightPadTouch = RightPadTouch;
                 buttons.RightPadClick = RightPadClick;
+
+                buttons.Touch0 = Touch0;
+                buttons.Touch1 = Touch1;
+                buttons.Touch2 = Touch2;
+                buttons.Touch3 = Touch3;
 
                 return buttons;
             }
@@ -190,6 +201,7 @@ namespace VSCView
             Wireless,
             USB,
             BT,
+            Chell,
         }
 
         SteamControllerState State = new SteamControllerState();
@@ -320,7 +332,7 @@ namespace VSCView
 
         public static SteamController[] GetControllers()
         {
-            List<HidDevice> _devices = HidDevices.Enumerate(VendorId, ProductIdWireless, ProductIdWired/*, ProductIdBT*/).ToList();
+            List<HidDevice> _devices = HidDevices.Enumerate(VendorId, ProductIdWireless, ProductIdWired/*, ProductIdBT*/, ProductIdChell).ToList();
             List<SteamController> ControllerList = new List<SteamController>();
             string wired_m = "&pid_1102&mi_02";
             //string dongle_m = "&pid_1142&mi_01";
@@ -329,6 +341,7 @@ namespace VSCView
             string dongle_m3 = "&pid_1142&mi_03";
             string dongle_m4 = "&pid_1142&mi_04";
             //string bt_m = "_PID&1106_";
+            string chell_m = "&pid_1101";
             // we should never have holes, this entire dictionary is just because I don't know if I can trust the order I get the HID devices
             for (int i = 0; i < _devices.Count; i++)
             {
@@ -348,10 +361,14 @@ namespace VSCView
                     {
                         ControllerList.Add(new SteamController(_device, EConnectionType.Wireless));
                     }
-                    //else// if (bt_m.Contains(bt_m))
+                    //else// if (devicePath.Contains(bt_m))
                     //{
                     //    ControllerList.Add(new SteamController(_device, EConnectionType.BT));
                     //}
+                    else if (devicePath.Contains(chell_m))
+                    {
+                        ControllerList.Add(new SteamController(_device, EConnectionType.Chell));
+                    }
                 }
             }
 
@@ -423,6 +440,11 @@ namespace VSCView
 
                                         State.LeftTrigger = report.Data[11];
                                         State.RightTrigger = report.Data[12];
+
+                                        State.Buttons.Touch0 = (report.Data[14] & 0x01) == 0x01;
+                                        State.Buttons.Touch1 = (report.Data[14] & 0x02) == 0x02;
+                                        State.Buttons.Touch2 = (report.Data[14] & 0x04) == 0x04;
+                                        State.Buttons.Touch3 = (report.Data[14] & 0x08) == 0x08;
 
                                         if (LeftAnalogMultiplexMode)
                                         {

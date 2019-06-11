@@ -90,6 +90,7 @@ namespace VSCView
 
                     _device.MonitorDeviceEvents = true;
 
+                    _attached = true;
                     _device.ReadReport((_data) => OnReport(_device, _data));
                     //_device.Read((_data) => OnRead(_device, _data));
                 }
