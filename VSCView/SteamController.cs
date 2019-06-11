@@ -52,6 +52,13 @@ namespace VSCView
             The_Mann = 0x0d,
         }
 
+        public enum EControllerType
+        {
+            Chell,
+            ReleaseV1,
+            ReleaseV2,
+        }
+
         public class SteamControllerButtons : ICloneable
         {
             public bool A { get; set; }
@@ -210,6 +217,7 @@ namespace VSCView
         bool Initalized;
 
         public EConnectionType ConnectionType { get; private set; }
+        public EControllerType ControllerType { get; private set; }
 
         public delegate void StateUpdatedEventHandler(object sender, SteamControllerState e);
         public event StateUpdatedEventHandler StateUpdated;
@@ -218,12 +226,13 @@ namespace VSCView
             StateUpdated?.Invoke(this, e);
         }
 
-        public SteamController(HidDevice device, EConnectionType connection = SteamController.EConnectionType.Unknown)
+        public SteamController(HidDevice device, EConnectionType connection = SteamController.EConnectionType.Unknown, EControllerType type = EControllerType.ReleaseV1)
         {
             State.Buttons = new SteamControllerButtons();
 
             _device = device;
             ConnectionType = connection;
+            ControllerType = type;
 
             Initalized = false;
         }
@@ -352,14 +361,14 @@ namespace VSCView
 
                     if (devicePath.Contains(wired_m))
                     {
-                        ControllerList.Add(new SteamController(_device, EConnectionType.USB));
+                        ControllerList.Add(new SteamController(_device, EConnectionType.USB, EControllerType.ReleaseV1));
                     }
                     else if (devicePath.Contains(dongle_m1)
                           || devicePath.Contains(dongle_m2)
                           || devicePath.Contains(dongle_m3)
                           || devicePath.Contains(dongle_m4))
                     {
-                        ControllerList.Add(new SteamController(_device, EConnectionType.Wireless));
+                        ControllerList.Add(new SteamController(_device, EConnectionType.Wireless, EControllerType.ReleaseV1));
                     }
                     //else// if (devicePath.Contains(bt_m))
                     //{
@@ -367,7 +376,7 @@ namespace VSCView
                     //}
                     else if (devicePath.Contains(chell_m))
                     {
-                        ControllerList.Add(new SteamController(_device, EConnectionType.Chell));
+                        ControllerList.Add(new SteamController(_device, EConnectionType.Chell, EControllerType.Chell));
                     }
                 }
             }
@@ -424,11 +433,20 @@ namespace VSCView
                                         State.Buttons.Steam = (report.Data[9] & 32) == 32;
                                         State.Buttons.Select = (report.Data[9] & 16) == 16;
 
-                                        State.Buttons.Down = (report.Data[9] & 8) == 8;
-                                        State.Buttons.Left = (report.Data[9] & 4) == 4;
-                                        State.Buttons.Right = (report.Data[9] & 2) == 2;
-                                        State.Buttons.Up = (report.Data[9] & 1) == 1;
-
+                                        if (ControllerType == EControllerType.Chell)
+                                        {
+                                            State.Buttons.Touch0 = (report.Data[9] & 0x01) == 0x01;
+                                            State.Buttons.Touch1 = (report.Data[9] & 0x02) == 0x02;
+                                            State.Buttons.Touch2 = (report.Data[9] & 0x04) == 0x04;
+                                            State.Buttons.Touch3 = (report.Data[9] & 0x08) == 0x08;
+                                        }
+                                        else
+                                        {
+                                            State.Buttons.Down = (report.Data[9] & 8) == 8;
+                                            State.Buttons.Left = (report.Data[9] & 4) == 4;
+                                            State.Buttons.Right = (report.Data[9] & 2) == 2;
+                                            State.Buttons.Up = (report.Data[9] & 1) == 1;
+                                        }
                                         bool LeftAnalogMultiplexMode = (report.Data[10] & 128) == 128;
                                         State.Buttons.StickClick = (report.Data[10] & 64) == 64;
                                         bool Unknown = (report.Data[10] & 32) == 32; // what is this?
@@ -440,11 +458,6 @@ namespace VSCView
 
                                         State.LeftTrigger = report.Data[11];
                                         State.RightTrigger = report.Data[12];
-
-                                        State.Buttons.Touch0 = (report.Data[14] & 0x01) == 0x01;
-                                        State.Buttons.Touch1 = (report.Data[14] & 0x02) == 0x02;
-                                        State.Buttons.Touch2 = (report.Data[14] & 0x04) == 0x04;
-                                        State.Buttons.Touch3 = (report.Data[14] & 0x08) == 0x08;
 
                                         if (LeftAnalogMultiplexMode)
                                         {
