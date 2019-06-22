@@ -96,7 +96,7 @@ namespace VSCView
             Data = new SensorData();
         }
 
-        public SensorData Update(SteamController.SteamControllerState stateData)
+        public SensorData Update(ControllerState stateData)
         {// atomic updates
             if (0 == Interlocked.Exchange(ref usingResource, 1))
             {

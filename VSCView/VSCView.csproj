@@ -59,6 +59,8 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControllerState.cs" />
+    <Compile Include="IController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,22 +68,10 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OSD.cs" />
-    <Compile Include="ProcForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ProcForm.Designer.cs">
-      <DependentUpon>ProcForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="SensorCollector.cs" />
     <Compile Include="SensorFusion.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SteamController.cs" />
-    <Compile Include="RawForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RawForm.Designer.cs">
-      <DependentUpon>RawForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThemeDesc.cs" />
@@ -153,12 +143,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RawForm.resx">
-      <DependentUpon>RawForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProcForm.resx">
-      <DependentUpon>ProcForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

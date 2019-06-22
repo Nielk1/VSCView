@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -12,12 +13,13 @@ namespace VSCView
 {
     public partial class MainForm : Form
     {
-        public static SteamController.SteamControllerState state;
+        public static ControllerState state;
         public static SensorCollector sensorData;
         public static int frameTime = (int)(1000 / 60); // 16ms interval => ~62fps
 
         ControllerData ControllerData;
-        SteamController ActiveController;
+        IController ActiveController;
+        List<IController> Controllers = new List<IController>();
         System.Threading.Timer ttimer;
 
         UI ui;
@@ -30,7 +32,7 @@ namespace VSCView
             InitializeComponent();
 
             ControllerData = new ControllerData();
-            state = new SteamController.SteamControllerState();
+            state = new ControllerState();
             // 5s lookback for smoothing
             sensorData = new SensorCollector(5, true);
 
@@ -58,7 +60,7 @@ namespace VSCView
 
         private void Render(object stateInfo)
         {
-            var state = new SteamController.SteamControllerState();
+            var state = new ControllerState();
             if (ActiveController != null)
             {
                 state = ActiveController.GetState();
@@ -185,7 +187,7 @@ namespace VSCView
             ControllerData.SetController(ActiveController);
             ActiveController.Initalize();
 
-            ActiveController.PlayMelody(SteamController.Melody.Rise_and_Shine);
+            ActiveController.Identify();
         }
 
         private async void LoadTheme(object sender, EventArgs e)

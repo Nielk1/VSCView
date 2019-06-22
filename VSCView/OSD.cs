@@ -107,7 +107,7 @@ namespace VSCView
 
     public class ControllerData
     {
-        public SteamController ActiveController;
+        public IController ActiveController;
 
         public bool GetBasicControl(string inputName)
         {
@@ -115,7 +115,7 @@ namespace VSCView
 
             inputName = inputName.ToLowerInvariant();
 
-            SteamController.SteamControllerState state = ActiveController.GetState();
+            ControllerState state = ActiveController.GetState();
             if (state.Buttons == null) return false;
 
             switch (inputName)
@@ -206,7 +206,7 @@ namespace VSCView
 
             inputName = inputName.ToLowerInvariant();
 
-            SteamController.SteamControllerState state = ActiveController.GetState();
+            ControllerState state = ActiveController.GetState();
 
             switch (inputName)
             {
@@ -226,13 +226,13 @@ namespace VSCView
             }
         }
 
-        public SteamController.SteamControllerState GetState()
+        public ControllerState GetState()
         {
             if (ActiveController == null) return null;
             return ActiveController.GetState();
         }
 
-        public void SetController(SteamController ActiveController)
+        public void SetController(IController ActiveController)
         {
             this.ActiveController = ActiveController;
         }
