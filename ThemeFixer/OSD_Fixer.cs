@@ -112,7 +112,53 @@ namespace ThemeFixer
                 }
             }
 
+            if (!string.IsNullOrWhiteSpace(inputName))
+            {
+                inputName = FixInputName(inputName);
+            }
+
+            if (!string.IsNullOrWhiteSpace(calc))
+            {
+                calc = string.Join("&&", calc
+                    .Split(new string[] { "&&" }, StringSplitOptions.None)
+                    .Select(raw =>
+                    {
+                        string trimed = raw.Trim();
+                        bool invert = trimed.StartsWith("!");
+                        trimed = trimed.TrimStart('!');
+                        return (invert ? "!" : string.Empty) + FixInputName(trimed);
+                    }));
+            }
+
             children?.ForEach(dr => dr.Update());
+        }
+
+        private string FixInputName(string inputName)
+        {
+            switch (inputName.ToLowerInvariant())
+            {
+                case "y": return "quad:right-0";
+                case "b": return "quad:right-1";
+                case "a": return "quad:right-2";
+                case "x": return "quad:right-3";
+                case "leftbumper":
+                case "lb":
+                    return "bumpers-0";
+                case "rightbumper":
+                case "rb":
+                    return "bumpers-1";
+                case "leftgrip":
+                case "lg":
+                    return "grip-0";
+                case "rightgrip":
+                case "rg":
+                    return "grip-1";
+                case "start":
+                    return "menu-1";
+                case "select":
+                    return "menu-0";
+            }
+            return inputName;
         }
     }
 }

@@ -116,84 +116,90 @@ namespace VSCView
             inputName = inputName.ToLowerInvariant();
 
             ControllerState state = ActiveController.GetState();
-            if (state.Buttons == null) return false;
+            if (state.ButtonsOld == null) return false;
+
+            string[] parts = inputName.Split(new char[] { '-' }, 2);
+            if (parts.Length == 2)
+            {
+                return state.Controls[parts[0]]?.Value<bool>(parts[1]) ?? false;
+            }
 
             switch (inputName)
             {
-                case "a":
-                    return state.Buttons.A;
-                case "b":
-                    return state.Buttons.B;
-                case "x":
-                    return state.Buttons.X;
-                case "y":
-                    return state.Buttons.Y;
+                //case "a":
+                //    return state.ButtonsOld.A;
+                //case "b":
+                //    return state.ButtonsOld.B;
+                //case "x":
+                //    return state.ButtonsOld.X;
+                //case "y":
+                //    return state.ButtonsOld.Y;
 
-                case "leftbumper":
-                case "lb":
-                    return state.Buttons.LeftBumper;
+                //case "leftbumper":
+                //case "lb":
+                //    return state.ButtonsOld.LeftBumper;
                 case "lefttrigger":
                 case "lt":
-                    return state.Buttons.LeftTrigger;
+                    return state.ButtonsOld.LeftTrigger;
 
-                case "rightbumper":
-                case "rb":
-                    return state.Buttons.RightBumper;
+                //case "rightbumper":
+                //case "rb":
+                //    return state.ButtonsOld.RightBumper;
                 case "righttrigger":
                 case "rt":
-                    return state.Buttons.RightTrigger;
+                    return state.ButtonsOld.RightTrigger;
 
-                case "leftgrip":
-                case "lg":
-                    return state.Buttons.LeftGrip;
-                case "rightgrip":
-                case "rg":
-                    return state.Buttons.RightGrip;
+                //case "leftgrip":
+                //case "lg":
+                //    return state.ButtonsOld.LeftGrip;
+                //case "rightgrip":
+                //case "rg":
+                //    return state.ButtonsOld.RightGrip;
 
-                case "start":
-                    return state.Buttons.Start;
+                //case "start":
+                //    return state.ButtonsOld.Start;
                 case "steam":
-                    return state.Buttons.Home;
-                case "select":
-                    return state.Buttons.Select;
+                    return state.ButtonsOld.Home;
+                //case "select":
+                //    return state.ButtonsOld.Select;
 
                 case "down":
-                    return state.Buttons.Down;
+                    return state.ButtonsOld.Down;
                 case "left":
-                    return state.Buttons.Left;
+                    return state.ButtonsOld.Left;
                 case "right":
-                    return state.Buttons.Right;
+                    return state.ButtonsOld.Right;
                 case "up":
-                    return state.Buttons.Up;
+                    return state.ButtonsOld.Up;
 
                 case "stickclick":
                 case "sc":
-                    return state.Buttons.LeftStickClick;
+                    return state.ButtonsOld.LeftStickClick;
                 case "leftpadtouch":
                 case "lpt":
-                    return state.Buttons.LeftPadTouch;
+                    return state.ButtonsOld.LeftPadTouch;
                 case "leftpadclick":
                 case "lpc":
-                    return state.Buttons.LeftPadClick;
+                    return state.ButtonsOld.LeftPadClick;
                 case "rightpadtouch":
                 case "rpt":
-                    return state.Buttons.RightPadTouch;
+                    return state.ButtonsOld.RightPadTouch;
                 case "rightpadclick":
                 case "rpc":
-                    return state.Buttons.RightPadClick;
+                    return state.ButtonsOld.RightPadClick;
 
                 case "touch0":
                 case "touchnw":
-                    return state.Buttons.Touch0;
+                    return state.ButtonsOld.Touch0;
                 case "touch1":
                 case "touchne":
-                    return state.Buttons.Touch1;
+                    return state.ButtonsOld.Touch1;
                 case "touch2":
                 case "touchsw":
-                    return state.Buttons.Touch2;
+                    return state.ButtonsOld.Touch2;
                 case "touch3":
                 case "touchse":
-                    return state.Buttons.Touch3;
+                    return state.ButtonsOld.Touch3;
 
                 default:
                     return false;

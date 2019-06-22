@@ -62,7 +62,7 @@ namespace VSCView
             if (0 == Interlocked.Exchange(ref stateUsageLock, 1))
             {
                 ControllerState newState = new ControllerState();
-                newState.Buttons = (SteamControllerButtons)State.Buttons.Clone();
+                newState.ButtonsOld = (SteamControllerButtons)State.ButtonsOld.Clone();
 
                 newState.LeftTrigger = State.LeftTrigger;
                 newState.RightTrigger = State.RightTrigger;
@@ -110,7 +110,7 @@ namespace VSCView
 
         public DS4Controller(HidDevice device)
         {
-            State.Buttons = new SteamControllerButtons();
+            State.ButtonsOld = new SteamControllerButtons();
 
             _device = device;
 
@@ -190,41 +190,41 @@ namespace VSCView
                 State.RightStickX = (report.Data[baseOffset + 2] - 128) / 128f;
                 State.RightStickY = -(report.Data[baseOffset + 3] - 128) / 128f;
 
-                State.Buttons.Y = (report.Data[baseOffset + 4] & 128) == 128;
-                State.Buttons.B = (report.Data[baseOffset + 4] & 64) == 64;
-                State.Buttons.A = (report.Data[baseOffset + 4] & 32) == 32;
-                State.Buttons.X = (report.Data[baseOffset + 4] & 16) == 16;
+                State.ButtonsOld.Y = (report.Data[baseOffset + 4] & 128) == 128;
+                State.ButtonsOld.B = (report.Data[baseOffset + 4] & 64) == 64;
+                State.ButtonsOld.A = (report.Data[baseOffset + 4] & 32) == 32;
+                State.ButtonsOld.X = (report.Data[baseOffset + 4] & 16) == 16;
 
-                State.Buttons.Up = State.Buttons.Right = State.Buttons.Down = State.Buttons.Left = false;
+                State.ButtonsOld.Up = State.ButtonsOld.Right = State.ButtonsOld.Down = State.ButtonsOld.Left = false;
                 switch ((report.Data[baseOffset + 4] & 0x0f))
                 {
                     case 0:
-                        State.Buttons.Up = true;
+                        State.ButtonsOld.Up = true;
                         break;
                     case 1:
-                        State.Buttons.Up = true;
-                        State.Buttons.Right = true;
+                        State.ButtonsOld.Up = true;
+                        State.ButtonsOld.Right = true;
                         break;
                     case 2:
-                        State.Buttons.Right = true;
+                        State.ButtonsOld.Right = true;
                         break;
                     case 3:
-                        State.Buttons.Right = true;
-                        State.Buttons.Down = true;
+                        State.ButtonsOld.Right = true;
+                        State.ButtonsOld.Down = true;
                         break;
                     case 4:
-                        State.Buttons.Down = true;
+                        State.ButtonsOld.Down = true;
                         break;
                     case 5:
-                        State.Buttons.Down = true;
-                        State.Buttons.Left = true;
+                        State.ButtonsOld.Down = true;
+                        State.ButtonsOld.Left = true;
                         break;
                     case 6:
-                        State.Buttons.Left = true;
+                        State.ButtonsOld.Left = true;
                         break;
                     case 7:
-                        State.Buttons.Left = true;
-                        State.Buttons.Up = true;
+                        State.ButtonsOld.Left = true;
+                        State.ButtonsOld.Up = true;
                         break;
                     case 8:
                         break;
@@ -232,20 +232,20 @@ namespace VSCView
                         break;
                 }
 
-                State.Buttons.RightStickClick = (report.Data[baseOffset + 5] & 128) == 128;
-                State.Buttons.LeftStickClick = (report.Data[baseOffset + 5] & 64) == 64;
-                State.Buttons.Select = (report.Data[baseOffset + 5] & 32) == 32;
-                State.Buttons.Start = (report.Data[baseOffset + 5] & 16) == 16;
-                State.Buttons.RightTrigger = (report.Data[baseOffset + 5] & 8) == 8;
-                State.Buttons.LeftTrigger = (report.Data[baseOffset + 5] & 4) == 4;
-                State.Buttons.RightBumper = (report.Data[baseOffset + 5] & 2) == 2;
-                State.Buttons.LeftBumper = (report.Data[baseOffset + 5] & 1) == 1;
+                State.ButtonsOld.RightStickClick = (report.Data[baseOffset + 5] & 128) == 128;
+                State.ButtonsOld.LeftStickClick = (report.Data[baseOffset + 5] & 64) == 64;
+                State.ButtonsOld.Select = (report.Data[baseOffset + 5] & 32) == 32;
+                State.ButtonsOld.Start = (report.Data[baseOffset + 5] & 16) == 16;
+                State.ButtonsOld.RightTrigger = (report.Data[baseOffset + 5] & 8) == 8;
+                State.ButtonsOld.LeftTrigger = (report.Data[baseOffset + 5] & 4) == 4;
+                State.ButtonsOld.RightBumper = (report.Data[baseOffset + 5] & 2) == 2;
+                State.ButtonsOld.LeftBumper = (report.Data[baseOffset + 5] & 1) == 1;
 
                 // counter
                 // bld.Append((report.Data[baseOffset + 6] & 0xfc).ToString().PadLeft(3, '0'));
 
-                State.Buttons.Home = (report.Data[baseOffset + 6] & 0x1) == 0x1;
-                State.Buttons.DS4PadClick = (report.Data[baseOffset + 6] & 0x2) == 0x2;
+                State.ButtonsOld.Home = (report.Data[baseOffset + 6] & 0x1) == 0x1;
+                State.ButtonsOld.DS4PadClick = (report.Data[baseOffset + 6] & 0x2) == 0x2;
 
                 State.LeftTrigger = (float)report.Data[baseOffset + 7] / byte.MaxValue;
                 State.RightTrigger = (float)report.Data[baseOffset + 8] / byte.MaxValue;

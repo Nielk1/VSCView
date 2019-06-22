@@ -63,8 +63,10 @@ namespace VSCView
         {
             if (0 == Interlocked.Exchange(ref stateUsageLock, 1))
             {
-                ControllerState newState = new ControllerState();
-                newState.Buttons = (SteamControllerButtons)State.Buttons.Clone();
+                ControllerState newState = (ControllerState)State.Clone();
+
+                /*ControllerState newState = new ControllerState();
+                newState.ButtonsOld = (SteamControllerButtons)State.ButtonsOld.Clone();
 
                 newState.LeftTrigger = State.LeftTrigger;
                 newState.RightTrigger = State.RightTrigger;
@@ -87,7 +89,7 @@ namespace VSCView
                 newState.OrientationY = State.OrientationY;
                 newState.OrientationZ = State.OrientationZ;
 
-                //newState.DataStuck = State.DataStuck;
+                //newState.DataStuck = State.DataStuck;*/
 
                 State = newState;
                 Interlocked.Exchange(ref stateUsageLock, 0);
@@ -115,7 +117,30 @@ namespace VSCView
 
         public SteamController(HidDevice device, EConnectionType connection = EConnectionType.Unknown, EControllerType type = EControllerType.ReleaseV1)
         {
-            State.Buttons = new SteamControllerButtons();
+            /*
+            State.ButtonQuads["primary"] = new ControlButtonQuad();
+            State.ButtonPairs["bumper"] = new ControlButtonPair();
+            State.TriggerPairs["primary"] = new ControlTriggerPair();
+            State.ButtonPairs["menu"] = new ControlButtonPair();
+            State.ButtonPairs["grip"] = new ControlButtonPair();
+            State.Buttons["home"] = new ControlButton();
+            State.Sticks["left"] = new ControlStick(HasClick: true);
+            State.Touch["left"] = new ControlTouch(TouchCount: 1, HasClick: true);
+            State.Touch["right"] = new ControlTouch(TouchCount: 1, HasClick: true);
+            */
+
+            State.Controls["quad:right"] = new ControlButtonQuad(EOrientation.Diamond);
+            State.Controls["quad:left"] = new ControlButtonQuad(EOrientation.Diamond);
+            State.Controls["bumpers"] = new ControlButtonPair();
+            State.Controls["triggers"] = new ControlTriggerPair();
+            State.Controls["menu"] = new ControlButtonPair();
+            State.Controls["grip"] = new ControlButtonPair();
+            State.Controls["home"] = new ControlButton();
+            State.Controls["stick:left"] = new ControlStick(HasClick: true);
+            State.Controls["touch:left"] = new ControlTouch(TouchCount: 1, HasClick: true);
+            State.Controls["touch:right"] = new ControlTouch(TouchCount: 1, HasClick: true);
+
+            State.ButtonsOld = new SteamControllerButtons();
 
             _device = device;
             ConnectionType = connection;
@@ -266,42 +291,42 @@ namespace VSCView
 
                                         UInt32 PacketIndex = BitConverter.ToUInt32(report.Data, 4);
 
-                                        State.Buttons.A = (report.Data[8] & 128) == 128;
-                                        State.Buttons.X = (report.Data[8] & 64) == 64;
-                                        State.Buttons.B = (report.Data[8] & 32) == 32;
-                                        State.Buttons.Y = (report.Data[8] & 16) == 16;
-                                        State.Buttons.LeftBumper = (report.Data[8] & 8) == 8;
-                                        State.Buttons.RightBumper = (report.Data[8] & 4) == 4;
-                                        State.Buttons.LeftTrigger = (report.Data[8] & 2) == 2;
-                                        State.Buttons.RightTrigger = (report.Data[8] & 1) == 1;
+                                        (State.Controls["quad:right"] as ControlButtonQuad).Button2 = (report.Data[8] & 128) == 128;
+                                        (State.Controls["quad:right"] as ControlButtonQuad).Button3 = (report.Data[8] & 64) == 64;
+                                        (State.Controls["quad:right"] as ControlButtonQuad).Button1 = (report.Data[8] & 32) == 32;
+                                        (State.Controls["quad:right"] as ControlButtonQuad).Button0 = (report.Data[8] & 16) == 16;
+                                        (State.Controls["bumpers"] as ControlButtonPair).Button0 = (report.Data[8] & 8) == 8;
+                                        (State.Controls["bumpers"] as ControlButtonPair).Button1 = (report.Data[8] & 4) == 4;
+                                        State.ButtonsOld.LeftTrigger = (report.Data[8] & 2) == 2;
+                                        State.ButtonsOld.RightTrigger = (report.Data[8] & 1) == 1;
 
-                                        State.Buttons.LeftGrip = (report.Data[9] & 128) == 128;
-                                        State.Buttons.Start = (report.Data[9] & 64) == 64;
-                                        State.Buttons.Home = (report.Data[9] & 32) == 32;
-                                        State.Buttons.Select = (report.Data[9] & 16) == 16;
+                                        (State.Controls["grip"] as ControlButtonPair).Button0 = (report.Data[9] & 128) == 128;
+                                        (State.Controls["menu"] as ControlButtonPair).Button1 = (report.Data[9] & 64) == 64;
+                                        State.ButtonsOld.Home = (report.Data[9] & 32) == 32;
+                                        (State.Controls["menu"] as ControlButtonPair).Button0 = (report.Data[9] & 16) == 16;
 
                                         if (ControllerType == EControllerType.Chell)
                                         {
-                                            State.Buttons.Touch0 = (report.Data[9] & 0x01) == 0x01;
-                                            State.Buttons.Touch1 = (report.Data[9] & 0x02) == 0x02;
-                                            State.Buttons.Touch2 = (report.Data[9] & 0x04) == 0x04;
-                                            State.Buttons.Touch3 = (report.Data[9] & 0x08) == 0x08;
+                                            State.ButtonsOld.Touch0 = (report.Data[9] & 0x01) == 0x01;
+                                            State.ButtonsOld.Touch1 = (report.Data[9] & 0x02) == 0x02;
+                                            State.ButtonsOld.Touch2 = (report.Data[9] & 0x04) == 0x04;
+                                            State.ButtonsOld.Touch3 = (report.Data[9] & 0x08) == 0x08;
                                         }
                                         else
                                         {
-                                            State.Buttons.Down = (report.Data[9] & 8) == 8;
-                                            State.Buttons.Left = (report.Data[9] & 4) == 4;
-                                            State.Buttons.Right = (report.Data[9] & 2) == 2;
-                                            State.Buttons.Up = (report.Data[9] & 1) == 1;
+                                            State.ButtonsOld.Down = (report.Data[9] & 8) == 8;
+                                            State.ButtonsOld.Left = (report.Data[9] & 4) == 4;
+                                            State.ButtonsOld.Right = (report.Data[9] & 2) == 2;
+                                            State.ButtonsOld.Up = (report.Data[9] & 1) == 1;
                                         }
                                         bool LeftAnalogMultiplexMode = (report.Data[10] & 128) == 128;
-                                        State.Buttons.LeftStickClick = (report.Data[10] & 64) == 64;
+                                        State.ButtonsOld.LeftStickClick = (report.Data[10] & 64) == 64;
                                         bool Unknown = (report.Data[10] & 32) == 32; // what is this?
-                                        State.Buttons.RightPadTouch = (report.Data[10] & 16) == 16;
+                                        State.ButtonsOld.RightPadTouch = (report.Data[10] & 16) == 16;
                                         bool LeftPadTouch = (report.Data[10] & 8) == 8;
-                                        State.Buttons.RightPadClick = (report.Data[10] & 4) == 4;
+                                        State.ButtonsOld.RightPadClick = (report.Data[10] & 4) == 4;
                                         bool ThumbOrLeftPadPress = (report.Data[10] & 2) == 2; // what is this even for?
-                                        State.Buttons.RightGrip = (report.Data[10] & 1) == 1;
+                                        (State.Controls["grip"] as ControlButtonPair).Button1 = (report.Data[10] & 1) == 1;
 
                                         State.LeftTrigger = (float)report.Data[11] / byte.MaxValue;
                                         State.RightTrigger = (float)report.Data[12] / byte.MaxValue;
@@ -310,8 +335,8 @@ namespace VSCView
                                         {
                                             if (LeftPadTouch)
                                             {
-                                                State.Buttons.LeftPadTouch = true;
-                                                State.Buttons.LeftPadClick = ThumbOrLeftPadPress;
+                                                State.ButtonsOld.LeftPadTouch = true;
+                                                State.ButtonsOld.LeftPadClick = ThumbOrLeftPadPress;
                                                 State.LeftPadX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
                                                 State.LeftPadY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
                                             }
@@ -325,20 +350,20 @@ namespace VSCView
                                         {
                                             if (LeftPadTouch)
                                             {
-                                                State.Buttons.LeftPadTouch = true;
+                                                State.ButtonsOld.LeftPadTouch = true;
                                                 State.LeftPadX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
                                                 State.LeftPadY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
                                             }
                                             else
                                             {
-                                                State.Buttons.LeftPadTouch = false;
+                                                State.ButtonsOld.LeftPadTouch = false;
                                                 State.LeftStickX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
                                                 State.LeftStickY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
                                                 State.LeftPadX = 0;
                                                 State.LeftPadY = 0;
                                             }
 
-                                            State.Buttons.LeftPadClick = ThumbOrLeftPadPress && !State.Buttons.LeftStickClick;
+                                            State.ButtonsOld.LeftPadClick = ThumbOrLeftPadPress && !State.ButtonsOld.LeftStickClick;
                                         }
 
                                         State.RightPadX = (float)BitConverter.ToInt16(report.Data, 20) / Int16.MaxValue;
