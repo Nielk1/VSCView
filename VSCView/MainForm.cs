@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -22,6 +23,8 @@ namespace VSCView
         List<IController> Controllers = new List<IController>();
         System.Threading.Timer ttimer;
 
+        List<IControllerFactory> Factory;
+
         UI ui;
 
         Settings settings;
@@ -30,6 +33,11 @@ namespace VSCView
         {
             this.FormBorderStyle = FormBorderStyle.None;
             InitializeComponent();
+
+            Factory = new List<IControllerFactory>() {
+                new SteamControllerFactory(),
+                new DS4ControllerFactory()
+            };
 
             ControllerData = new ControllerData();
             state = new ControllerState();
@@ -142,7 +150,8 @@ namespace VSCView
         private void LoadControllers(bool firstload)
         {
             tsmiController.DropDownItems.Clear();
-            SteamController[] Controllers = SteamController.GetControllers();
+            Controllers.Clear();
+            Controllers.AddRange(Factory.SelectMany(dr => dr.GetControllers()));
 
             for (int i = 0; i < Controllers.Count(); i++)
             {
@@ -150,16 +159,16 @@ namespace VSCView
                 itm.Tag = Controllers[i];
                 switch (Controllers[i].ConnectionType)
                 {
-                    case SteamController.EConnectionType.Wireless:
+                    case EConnectionType.Wireless:
                         itm.Image = Properties.Resources.icon_wireless;
                         break;
-                    case SteamController.EConnectionType.USB:
+                    case EConnectionType.USB:
                         itm.Image = Properties.Resources.icon_usb;
                         break;
-                    case SteamController.EConnectionType.BT:
+                    case EConnectionType.BT:
                         itm.Image = Properties.Resources.icon_bt;
                         break;
-                    case SteamController.EConnectionType.Chell:
+                    case EConnectionType.Chell:
                         itm.Image = Properties.Resources.icon_chell;
                         break;
                 }
@@ -179,10 +188,10 @@ namespace VSCView
             if (sender is ToolStripItem)
             {
                 ToolStripItem item = (ToolStripItem)sender;
-                ActiveController = (SteamController)item.Tag;
+                ActiveController = (IController)item.Tag;
             }
             else
-                ActiveController = (SteamController)sender;
+                ActiveController = (IController)sender;
 
             ControllerData.SetController(ActiveController);
             ActiveController.Initalize();
@@ -200,6 +209,12 @@ namespace VSCView
         private async Task LoadTheme(string path, bool recordLast = true)
         {
             string skinJson = File.ReadAllText(path);
+
+            {
+                ThemeFixer.UI ui = JsonConvert.DeserializeObject<ThemeFixer.UI>(skinJson);
+                ui.Update();
+                skinJson = JsonConvert.SerializeObject(ui, Formatting.Indented);
+            }
 
             ui = new UI(ControllerData, Path.GetDirectoryName(path), skinJson);
             this.Width = ui.Width;

@@ -153,7 +153,7 @@ namespace VSCView
                 case "start":
                     return state.Buttons.Start;
                 case "steam":
-                    return state.Buttons.Steam;
+                    return state.Buttons.Home;
                 case "select":
                     return state.Buttons.Select;
 
@@ -168,7 +168,7 @@ namespace VSCView
 
                 case "stickclick":
                 case "sc":
-                    return state.Buttons.StickClick;
+                    return state.Buttons.LeftStickClick;
                 case "leftpadtouch":
                 case "lpt":
                     return state.Buttons.LeftPadTouch;
@@ -200,7 +200,7 @@ namespace VSCView
             }
         }
 
-        public Int32 GetAnalogControl(string inputName)
+        public float GetAnalogControl(string inputName)
         {
             if (ActiveController == null) return 0;
 
@@ -696,8 +696,8 @@ namespace VSCView
         private ControllerData data;
         protected string AxisName;
         protected string Direction;
-        protected int Min;
-        protected int Max;
+        protected float Min;
+        protected float Max;
         protected float Width;
         protected float Height;
         protected Color Foreground;
@@ -714,8 +714,8 @@ namespace VSCView
             AxisName = themeData["axisName"]?.Value<string>();
             Direction = themeData["direction"]?.Value<string>();
 
-            Min = themeData["min"]?.Value<int>() ?? 0;
-            Max = themeData["max"]?.Value<int>() ?? 0;
+            Min = themeData["min"]?.Value<float>() ?? 0;
+            Max = themeData["max"]?.Value<float>() ?? 0;
             Width = themeData["width"]?.Value<float>() ?? 0;
             Height = themeData["height"]?.Value<float>() ?? 0;
 

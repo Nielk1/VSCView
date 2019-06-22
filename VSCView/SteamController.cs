@@ -9,10 +9,10 @@ namespace VSCView
 {
     public class SteamController : IController
     {
-        private const int VendorId = 0x28DE; // 10462
-        private const int ProductIdWireless = 0x1142; // 4418;
-        private const int ProductIdWired = 0x1102; // 4354
-        private const int ProductIdChell = 0x1101; // 4353
+        public const int VendorId = 0x28DE; // 10462
+        public const int ProductIdWireless = 0x1142; // 4418;
+        public const int ProductIdWired = 0x1102; // 4354
+        public const int ProductIdChell = 0x1101; // 4353
         //private const int ProductIdBT = 0x1106; // 4358
 
         public bool SensorsEnabled;
@@ -96,14 +96,7 @@ namespace VSCView
         }
         #endregion
 
-        public enum EConnectionType
-        {
-            Unknown,
-            Wireless,
-            USB,
-            BT,
-            Chell,
-        }
+        
 
         ControllerState State = new ControllerState();
         ControllerState OldState = new ControllerState();
@@ -120,7 +113,7 @@ namespace VSCView
             StateUpdated?.Invoke(this, e);
         }
 
-        public SteamController(HidDevice device, EConnectionType connection = SteamController.EConnectionType.Unknown, EControllerType type = EControllerType.ReleaseV1)
+        public SteamController(HidDevice device, EConnectionType connection = EConnectionType.Unknown, EControllerType type = EControllerType.ReleaseV1)
         {
             State.Buttons = new SteamControllerButtons();
 
@@ -238,58 +231,13 @@ namespace VSCView
             return _device.DevicePath;
         }
 
-        public static SteamController[] GetControllers()
-        {
-            List<HidDevice> _devices = HidDevices.Enumerate(VendorId, ProductIdWireless, ProductIdWired/*, ProductIdBT*/, ProductIdChell).ToList();
-            List<SteamController> ControllerList = new List<SteamController>();
-            string wired_m = "&pid_1102&mi_02";
-            //string dongle_m = "&pid_1142&mi_01";
-            string dongle_m1 = "&pid_1142&mi_01";
-            string dongle_m2 = "&pid_1142&mi_02";
-            string dongle_m3 = "&pid_1142&mi_03";
-            string dongle_m4 = "&pid_1142&mi_04";
-            //string bt_m = "_PID&1106_";
-            string chell_m = "&pid_1101";
-            // we should never have holes, this entire dictionary is just because I don't know if I can trust the order I get the HID devices
-            for (int i = 0; i < _devices.Count; i++)
-            {
-                if (_devices[i] != null)
-                {
-                    HidDevice _device = _devices[i];
-                    string devicePath = _device.DevicePath.ToString();
-
-                    if (devicePath.Contains(wired_m))
-                    {
-                        ControllerList.Add(new SteamController(_device, EConnectionType.USB, EControllerType.ReleaseV1));
-                    }
-                    else if (devicePath.Contains(dongle_m1)
-                          || devicePath.Contains(dongle_m2)
-                          || devicePath.Contains(dongle_m3)
-                          || devicePath.Contains(dongle_m4))
-                    {
-                        ControllerList.Add(new SteamController(_device, EConnectionType.Wireless, EControllerType.ReleaseV1));
-                    }
-                    //else// if (devicePath.Contains(bt_m))
-                    //{
-                    //    ControllerList.Add(new SteamController(_device, EConnectionType.BT));
-                    //}
-                    else if (devicePath.Contains(chell_m))
-                    {
-                        ControllerList.Add(new SteamController(_device, EConnectionType.Chell, EControllerType.Chell));
-                    }
-                }
-            }
-
-            return ControllerList.OrderByDescending(dr => dr.ConnectionType).ThenBy(dr => dr.GetDevicePath()).ToArray();
-        }
-
         private void OnReport(HidReport report)
         {
             if (!Initalized) return;
 
             if (0 == Interlocked.Exchange(ref reportUsageLock, 1))
             {
-                OldState = State;
+                OldState = State; // shouldn't this be a clone?
                 //if (_attached == false) { return; }
 
                 switch (ConnectionType)
@@ -329,7 +277,7 @@ namespace VSCView
 
                                         State.Buttons.LeftGrip = (report.Data[9] & 128) == 128;
                                         State.Buttons.Start = (report.Data[9] & 64) == 64;
-                                        State.Buttons.Steam = (report.Data[9] & 32) == 32;
+                                        State.Buttons.Home = (report.Data[9] & 32) == 32;
                                         State.Buttons.Select = (report.Data[9] & 16) == 16;
 
                                         if (ControllerType == EControllerType.Chell)
@@ -347,7 +295,7 @@ namespace VSCView
                                             State.Buttons.Up = (report.Data[9] & 1) == 1;
                                         }
                                         bool LeftAnalogMultiplexMode = (report.Data[10] & 128) == 128;
-                                        State.Buttons.StickClick = (report.Data[10] & 64) == 64;
+                                        State.Buttons.LeftStickClick = (report.Data[10] & 64) == 64;
                                         bool Unknown = (report.Data[10] & 32) == 32; // what is this?
                                         State.Buttons.RightPadTouch = (report.Data[10] & 16) == 16;
                                         bool LeftPadTouch = (report.Data[10] & 8) == 8;
@@ -355,8 +303,8 @@ namespace VSCView
                                         bool ThumbOrLeftPadPress = (report.Data[10] & 2) == 2; // what is this even for?
                                         State.Buttons.RightGrip = (report.Data[10] & 1) == 1;
 
-                                        State.LeftTrigger = report.Data[11];
-                                        State.RightTrigger = report.Data[12];
+                                        State.LeftTrigger = (float)report.Data[11] / byte.MaxValue;
+                                        State.RightTrigger = (float)report.Data[12] / byte.MaxValue;
 
                                         if (LeftAnalogMultiplexMode)
                                         {
@@ -364,13 +312,13 @@ namespace VSCView
                                             {
                                                 State.Buttons.LeftPadTouch = true;
                                                 State.Buttons.LeftPadClick = ThumbOrLeftPadPress;
-                                                State.LeftPadX = BitConverter.ToInt16(report.Data, 16);
-                                                State.LeftPadY = BitConverter.ToInt16(report.Data, 18);
+                                                State.LeftPadX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
+                                                State.LeftPadY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
                                             }
                                             else
                                             {
-                                                State.LeftStickX = BitConverter.ToInt16(report.Data, 16);
-                                                State.LeftStickY = BitConverter.ToInt16(report.Data, 18);
+                                                State.LeftStickX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
+                                                State.LeftStickY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
                                             }
                                         }
                                         else
@@ -378,23 +326,23 @@ namespace VSCView
                                             if (LeftPadTouch)
                                             {
                                                 State.Buttons.LeftPadTouch = true;
-                                                State.LeftPadX = BitConverter.ToInt16(report.Data, 16);
-                                                State.LeftPadY = BitConverter.ToInt16(report.Data, 18);
+                                                State.LeftPadX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
+                                                State.LeftPadY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
                                             }
                                             else
                                             {
                                                 State.Buttons.LeftPadTouch = false;
-                                                State.LeftStickX = BitConverter.ToInt16(report.Data, 16);
-                                                State.LeftStickY = BitConverter.ToInt16(report.Data, 18);
+                                                State.LeftStickX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
+                                                State.LeftStickY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
                                                 State.LeftPadX = 0;
                                                 State.LeftPadY = 0;
                                             }
 
-                                            State.Buttons.LeftPadClick = ThumbOrLeftPadPress && !State.Buttons.StickClick;
+                                            State.Buttons.LeftPadClick = ThumbOrLeftPadPress && !State.Buttons.LeftStickClick;
                                         }
 
-                                        State.RightPadX = BitConverter.ToInt16(report.Data, 20);
-                                        State.RightPadY = BitConverter.ToInt16(report.Data, 22);
+                                        State.RightPadX = (float)BitConverter.ToInt16(report.Data, 20) / Int16.MaxValue;
+                                        State.RightPadY = (float)BitConverter.ToInt16(report.Data, 22) / Int16.MaxValue;
 
                                         /*
                                         State.DataStuck = CheckSensorDataStuck();
@@ -483,5 +431,53 @@ namespace VSCView
                 Console.WriteLine("VSC Address Removed");
             }
         }*/
+    }
+
+    public class SteamControllerFactory : IControllerFactory
+    {
+        public IController[] GetControllers()
+        {
+            List<HidDevice> _devices = HidDevices.Enumerate(SteamController.VendorId, SteamController.ProductIdWireless, SteamController.ProductIdWired/*, ProductIdBT*/, SteamController.ProductIdChell).ToList();
+            List<SteamController> ControllerList = new List<SteamController>();
+            string wired_m = "&pid_1102&mi_02";
+            //string dongle_m = "&pid_1142&mi_01";
+            string dongle_m1 = "&pid_1142&mi_01";
+            string dongle_m2 = "&pid_1142&mi_02";
+            string dongle_m3 = "&pid_1142&mi_03";
+            string dongle_m4 = "&pid_1142&mi_04";
+            //string bt_m = "_PID&1106_";
+            string chell_m = "&pid_1101";
+            // we should never have holes, this entire dictionary is just because I don't know if I can trust the order I get the HID devices
+            for (int i = 0; i < _devices.Count; i++)
+            {
+                if (_devices[i] != null)
+                {
+                    HidDevice _device = _devices[i];
+                    string devicePath = _device.DevicePath.ToString();
+
+                    if (devicePath.Contains(wired_m))
+                    {
+                        ControllerList.Add(new SteamController(_device, EConnectionType.USB, SteamController.EControllerType.ReleaseV1));
+                    }
+                    else if (devicePath.Contains(dongle_m1)
+                          || devicePath.Contains(dongle_m2)
+                          || devicePath.Contains(dongle_m3)
+                          || devicePath.Contains(dongle_m4))
+                    {
+                        ControllerList.Add(new SteamController(_device, EConnectionType.Wireless, SteamController.EControllerType.ReleaseV1));
+                    }
+                    //else// if (devicePath.Contains(bt_m))
+                    //{
+                    //    ControllerList.Add(new SteamController(_device, EConnectionType.BT));
+                    //}
+                    else if (devicePath.Contains(chell_m))
+                    {
+                        ControllerList.Add(new SteamController(_device, EConnectionType.Chell, SteamController.EControllerType.Chell));
+                    }
+                }
+            }
+
+            return ControllerList.OrderByDescending(dr => dr.ConnectionType).ThenBy(dr => dr.GetDevicePath()).ToArray();
+        }
     }
 }

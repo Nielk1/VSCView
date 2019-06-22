@@ -23,17 +23,19 @@ namespace VSCView
         public bool RightGrip { get; set; }
 
         public bool Start { get; set; }
-        public bool Steam { get; set; }
+        public bool Home { get; set; }
         public bool Select { get; set; }
+        public bool DS4PadClick { get; set; }
 
         public bool Down { get; set; }
         public bool Left { get; set; }
         public bool Right { get; set; }
         public bool Up { get; set; }
 
-        public bool StickClick { get; set; }
+        public bool LeftStickClick { get; set; }
         public bool LeftPadTouch { get; set; }
         public bool LeftPadClick { get; set; }
+        public bool RightStickClick { get; set; }
         public bool RightPadTouch { get; set; }
         public bool RightPadClick { get; set; }
 
@@ -61,7 +63,7 @@ namespace VSCView
             buttons.RightGrip = RightGrip;
 
             buttons.Start = Start;
-            buttons.Steam = Steam;
+            buttons.Home = Home;
             buttons.Select = Select;
 
             buttons.Down = Down;
@@ -69,9 +71,10 @@ namespace VSCView
             buttons.Right = Right;
             buttons.Up = Up;
 
-            buttons.StickClick = StickClick;
+            buttons.LeftStickClick = LeftStickClick;
             buttons.LeftPadTouch = LeftPadTouch;
             buttons.LeftPadClick = LeftPadClick;
+            buttons.RightStickClick = RightStickClick;
             buttons.RightPadTouch = RightPadTouch;
             buttons.RightPadClick = RightPadClick;
 
@@ -79,6 +82,8 @@ namespace VSCView
             buttons.Touch1 = Touch1;
             buttons.Touch2 = Touch2;
             buttons.Touch3 = Touch3;
+
+            buttons.DS4PadClick = DS4PadClick;
 
             return buttons;
         }
@@ -88,15 +93,17 @@ namespace VSCView
     {
         public SteamControllerButtons Buttons { get; set; }
 
-        public byte LeftTrigger { get; set; }
-        public byte RightTrigger { get; set; }
+        public float LeftTrigger { get; set; }
+        public float RightTrigger { get; set; }
 
-        public Int32 LeftStickX { get; set; }
-        public Int32 LeftStickY { get; set; }
-        public Int32 LeftPadX { get; set; }
-        public Int32 LeftPadY { get; set; }
-        public Int32 RightPadX { get; set; }
-        public Int32 RightPadY { get; set; }
+        public float LeftStickX { get; set; }
+        public float LeftStickY { get; set; }
+        public float LeftPadX { get; set; }
+        public float LeftPadY { get; set; }
+        public float RightStickX { get; set; }
+        public float RightStickY { get; set; }
+        public float RightPadX { get; set; }
+        public float RightPadY { get; set; }
 
         public Int16 AccelerometerX { get; set; }
         public Int16 AccelerometerY { get; set; }

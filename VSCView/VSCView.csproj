@@ -71,6 +71,7 @@
     <Compile Include="SensorCollector.cs" />
     <Compile Include="SensorFusion.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="DS4Controller.cs" />
     <Compile Include="SteamController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -398,6 +399,10 @@
     <ProjectReference Include="..\..\HidLibrary\src\HidLibrary\HidLibrary.csproj">
       <Project>{9e8f1d50-74ea-4c60-bd5c-ab2c5b53bc66}</Project>
       <Name>HidLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ThemeFixer\ThemeFixer.csproj">
+      <Project>{fb709b19-87c4-4a37-bcf2-975d24b76af0}</Project>
+      <Name>ThemeFixer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
