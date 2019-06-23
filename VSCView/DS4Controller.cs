@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 
@@ -16,6 +17,8 @@ namespace VSCView
         public bool SensorsEnabled;
         private HidDevice _device;
         int stateUsageLock = 0, reportUsageLock = 0;
+
+        public event ControllerNameUpdateEvent ControllerNameUpdated;
 
         #region DATA STRUCTS
         public enum VSCEventType
@@ -96,7 +99,7 @@ namespace VSCView
         }
         #endregion
 
-        public EConnectionType ConnectionType => EConnectionType.Unknown;
+        public EConnectionType ConnectionType { get; private set; }
 
         ControllerState State = new ControllerState();
         ControllerState OldState = new ControllerState();
@@ -112,9 +115,12 @@ namespace VSCView
 
         public DS4Controller(HidDevice device, EConnectionType ConnectionType = EConnectionType.Unknown)
         {
+            this.ConnectionType = ConnectionType;
+
             State.Controls["quad_left"] = new ControlDPad();
             State.Controls["quad_right"] = new ControlButtonQuad(EOrientation.Diamond);
             State.Controls["bumpers"] = new ControlButtonPair();
+            State.Controls["bumpers2"] = new ControlButtonPair();
             State.Controls["triggers"] = new ControlTriggerPair(HasStage2: false);
             State.Controls["menu"] = new ControlButtonPair();
             State.Controls["home"] = new ControlButton();
@@ -184,6 +190,7 @@ namespace VSCView
 
         public string GetName()
         {
+            /*
             List<string> NameParts = new List<string>();
 
             byte[] ManufacturerBytes;
@@ -201,7 +208,7 @@ namespace VSCView
             string SerialNumber = System.Text.Encoding.Unicode.GetString(SerialNumberBytes)?.Trim('\0');
             if (string.IsNullOrWhiteSpace(SerialNumber))
             {
-                NameParts.Add(_device.HardwareId);
+                NameParts.Add(_device.DevicePath);
             }
             else
             {
@@ -209,6 +216,19 @@ namespace VSCView
             }
 
             return string.Join(@" | ", NameParts.Where(dr => !string.IsNullOrWhiteSpace(dr)).Select(dr => dr.Replace("&", "&&")));
+            */
+
+            string retVal = "Sony DUALSHOCK®4 Controller";
+
+            byte[] SerialNumberBytes;
+            _device.ReadSerialNumber(out SerialNumberBytes); // DUALSHOCK®4 USB Wireless Adaptor
+            string SerialNumber = System.Text.Encoding.Unicode.GetString(SerialNumberBytes)?.Trim('\0');
+            if (!string.IsNullOrWhiteSpace(SerialNumber))
+            {
+                retVal += $" [{SerialNumber ?? "No ID"}]";
+            }
+
+            return retVal;
         }
 
         private void OnReport(HidReport report)
@@ -250,8 +270,8 @@ namespace VSCView
                 (State.Controls["stick_left"] as ControlStick).Click = (report.Data[baseOffset + 5] & 64) == 64;
                 (State.Controls["menu"] as ControlButtonPair).Button1 = (report.Data[baseOffset + 5] & 32) == 32;
                 (State.Controls["menu"] as ControlButtonPair).Button0 = (report.Data[baseOffset + 5] & 16) == 16;
-                //State.ButtonsOld.RightTrigger = (report.Data[baseOffset + 5] & 8) == 8;
-                //State.ButtonsOld.LeftTrigger = (report.Data[baseOffset + 5] & 4) == 4;
+                (State.Controls["bumpers2"] as ControlButtonPair).Button1 = (report.Data[baseOffset + 5] & 8) == 8;
+                (State.Controls["bumpers2"] as ControlButtonPair).Button0 = (report.Data[baseOffset + 5] & 4) == 4;
                 (State.Controls["bumpers"] as ControlButtonPair).Button1 = (report.Data[baseOffset + 5] & 2) == 2;
                 (State.Controls["bumpers"] as ControlButtonPair).Button0 = (report.Data[baseOffset + 5] & 1) == 1;
 
@@ -320,6 +340,23 @@ namespace VSCView
             }
         }
 
+        public Image GetIcon()
+        {
+            Image Icon = new Bitmap(32 + 4, 16);
+            Graphics g = Graphics.FromImage(Icon);
+
+            switch (ConnectionType)
+            {
+                case EConnectionType.Dongle: g.DrawImage(Properties.Resources.icon_ds4_dongle, 0, 0, 16, 16); break;
+                case EConnectionType.USB: g.DrawImage(Properties.Resources.icon_usb, 0, 0, 16, 16); break;
+                case EConnectionType.Bluetooth: g.DrawImage(Properties.Resources.icon_bt, 0, 0, 16, 16); break;
+            }
+
+            g.DrawImage(Properties.Resources.icon_ds4, 16 + 4, 0, 16, 16);
+
+            return Icon;
+        }
+
         /*private void DeviceAttachedHandler()
         {
             lock (controllerStateLock)
@@ -347,9 +384,6 @@ namespace VSCView
             List<HidDevice> _devices = HidDevices.Enumerate(DS4Controller.VendorId, DS4Controller.ProductIdDongle, DS4Controller.ProductIdWired).ToList();
             List<DS4Controller> ControllerList = new List<DS4Controller>();
             string bt_hid_id = @"00001124-0000-1000-8000-00805f9b34fb";
-            string wired_m = "&pid_09cc";
-            string bt_m = "_pid&09cc";
-            string dongle_m = "&pid_0ba0";
 
             for (int i = 0; i < _devices.Count; i++)
             {

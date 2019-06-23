@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 
@@ -10,10 +11,10 @@ namespace VSCView
     public class SteamController : IController
     {
         public const int VendorId = 0x28DE; // 10462
-        public const int ProductIdWireless = 0x1142; // 4418;
+        public const int ProductIdDongle = 0x1142; // 4418;
         public const int ProductIdWired = 0x1102; // 4354
         public const int ProductIdChell = 0x1101; // 4353
-        //private const int ProductIdBT = 0x1106; // 4358
+        public const int ProductIdBT = 0x1106; // 4358
 
         public bool SensorsEnabled;
         private HidDevice _device;
@@ -54,6 +55,7 @@ namespace VSCView
 
         public enum EControllerType
         {
+            Unknown,
             Chell,
             ReleaseV1,
             ReleaseV2,
@@ -99,11 +101,12 @@ namespace VSCView
         #endregion
 
         
+        public string Serial { get; private set; }
 
         ControllerState State = new ControllerState();
         ControllerState OldState = new ControllerState();
 
-        bool Initalized;
+        int Initalized;
 
         public EConnectionType ConnectionType { get; private set; }
         public EControllerType ControllerType { get; private set; }
@@ -115,7 +118,8 @@ namespace VSCView
             StateUpdated?.Invoke(this, e);
         }
 
-        public SteamController(HidDevice device, EConnectionType connection = EConnectionType.Unknown, EControllerType type = EControllerType.ReleaseV1)
+        // TODO for now it is safe to assume the startup connection type is correct, however, in the future we will need to have connection events trigger a recheck of the type or something once the V2 controller is out (if ever)
+        public SteamController(HidDevice device, EConnectionType connection = EConnectionType.Unknown, EControllerType type = EControllerType.Unknown)
         {
             /*
             State.ButtonQuads["primary"] = new ControlButtonQuad();
@@ -129,7 +133,7 @@ namespace VSCView
             State.Touch["right"] = new ControlTouch(TouchCount: 1, HasClick: true);
             */
 
-            State.Controls["quad_left"] = new ControlButtonQuad(EOrientation.Diamond);
+            State.Controls["quad_left"] = new ControlDPad(/*4*/);
             State.Controls["quad_right"] = new ControlButtonQuad(EOrientation.Diamond);
             State.Controls["bumpers"] = new ControlButtonPair();
             State.Controls["triggers"] = new ControlTriggerPair(HasStage2: true);
@@ -146,12 +150,24 @@ namespace VSCView
             ConnectionType = connection;
             ControllerType = type;
 
-            Initalized = false;
+            Initalized = 0;
         }
 
         public void Initalize()
         {
-            if (Initalized) return;
+            if (Initalized > 1) return;
+
+            HalfInitalize();
+
+            //_attached = _device.IsConnected;
+
+            Initalized = 2;
+            _device.ReadReport(OnReport);
+        }
+
+        public void HalfInitalize()
+        {
+            if (Initalized > 0) return;
 
             // open the device overlapped read so we don't get stuck waiting for a report when we write to it
             _device.OpenDevice(DeviceMode.Overlapped, DeviceMode.NonOverlapped, ShareMode.ShareRead | ShareMode.ShareWrite);
@@ -161,24 +177,43 @@ namespace VSCView
 
             //_device.MonitorDeviceEvents = true;
 
-            Initalized = true;
-
-            //_attached = _device.IsConnected;
-
-            _device.ReadReport(OnReport);
+            Initalized = 1;
         }
+
+        public event ControllerNameUpdateEvent ControllerNameUpdated;
 
         public void DeInitalize()
         {
-            if (!Initalized) return;
+            if (Initalized == 0) return;
 
             //_device.Inserted -= DeviceAttachedHandler;
             //_device.Removed -= DeviceRemovedHandler;
 
             //_device.MonitorDeviceEvents = false;
 
-            Initalized = false;
+            Initalized = 0;
             _device.CloseDevice();
+        }
+
+        private object FeatureReportLocalLock = new object();
+        public byte[] GetFeatureReport(byte[] reportData)
+        {
+            if (reportData.Length < 2) return null;
+
+            lock (FeatureReportLocalLock)
+            {
+                var result = _device.WriteFeatureData(reportData);
+
+                if (!result) return null;
+
+                byte[] reply;
+                bool success;
+                do
+                {
+                    success = _device.ReadFeatureData(out reply, 0);
+                } while (success && reply[1] != reportData[1]);
+                return reply;
+            }
         }
 
         public bool EnableGyroSensors()
@@ -192,6 +227,7 @@ namespace VSCView
                 reportData[4] = 0x10 | 0x08 | 0x04; // enable raw Gyro, raw Accel, and Quaternion data
                 Debug.WriteLine("Attempting to reenable MPU accelerometer sensor");
                 var result = _device.WriteFeatureData(reportData);
+                //var result = GetFeatureReport(reportData) != null;
                 SensorsEnabled = true;
                 return result;
             }
@@ -209,6 +245,7 @@ namespace VSCView
                 reportData[4] = 0x10 | 0x04; // enable raw Gyro, raw Accel, and Quaternion data
                 Debug.WriteLine("Attempting to restore default sensor state");
                 var result = _device.WriteFeatureData(reportData);
+                //var result = GetFeatureReport(reportData) != null;
                 SensorsEnabled = false;
                 return result;
             }
@@ -231,9 +268,36 @@ namespace VSCView
             reportData[5] = data[2];
             reportData[6] = data[3];
             Debug.WriteLine("Triggering Melody");
-            
+
+            //return GetFeatureReport(reportData) != null;
             var result = _device.WriteFeatureData(reportData);
             return result;
+        }
+        
+        public bool UpdateSerial()
+        {
+            byte[] reportData = new byte[64];
+            reportData[1] = 0xAE; // 0xAE = get serial
+            reportData[2] = 0x15; // 0x15 = length of data to be written
+            reportData[3] = 0x01;
+
+            Thread.Sleep(1000); // why do we need this? race condition?
+            var result = _device.WriteFeatureData(reportData);
+            Thread.Sleep(1000); // why do we need this? race condition?
+            var reply = GetFeatureReport(reportData);
+
+            //byte[] reply;
+            //bool success = _device.ReadFeatureData(out reply, 0);
+
+            if (reply == null || reply[1] != 0xae || reply[2] != 0x15 || reply[3] != 0x01)
+            {
+                Serial = null;
+                ControllerNameUpdated?.Invoke();
+                return false;
+            }
+            Serial = System.Text.Encoding.UTF8.GetString(reply.Skip(4).Take(10).ToArray());
+            ControllerNameUpdated?.Invoke();
+            return true;
         }
 
         public bool CheckSensorDataStuck()
@@ -253,6 +317,7 @@ namespace VSCView
 
         public string GetName()
         {
+            /*
             List<string> NameParts = new List<string>();
 
             byte[] ManufacturerBytes;
@@ -265,19 +330,37 @@ namespace VSCView
             string Product = System.Text.Encoding.Unicode.GetString(ProductBytes)?.Trim('\0');
             NameParts.Add(Product);
 
-            NameParts.Add(_device.DevicePath);
+            if(string.IsNullOrWhiteSpace(Serial))
+            {
+                NameParts.Add(_device.DevicePath);
+            }
+            else
+            {
+                NameParts.Add(Serial);
+            }
 
             return string.Join(@" | ", NameParts.Where(dr => !string.IsNullOrWhiteSpace(dr)).Select(dr => dr.Replace("&", "&&")));
+            */
+
+            string retVal = "Valve Steam Controller";
+            switch(ControllerType)
+            {
+                case EControllerType.ReleaseV1: retVal += " 1001"; break;
+                case EControllerType.ReleaseV2: retVal += " V2"; break;
+                case EControllerType.Chell: retVal += " Chell"; break;
+            }
+            retVal += $" [{Serial ?? "No ID"}]";
+            return retVal;
         }
 
         private void OnReport(HidReport report)
         {
-            if (!Initalized) return;
+            if (Initalized < 2) return;
 
             if (0 == Interlocked.Exchange(ref reportUsageLock, 1))
             {
                 OldState = State; // shouldn't this be a clone?
-                //if (_attached == false) { return; }
+                                    //if (_attached == false) { return; }
 
                 switch (ConnectionType)
                 {
@@ -328,10 +411,34 @@ namespace VSCView
                                         }
                                         else
                                         {
-                                            State.ButtonsOld.Down = (report.Data[9] & 8) == 8;
-                                            State.ButtonsOld.Left = (report.Data[9] & 4) == 4;
-                                            State.ButtonsOld.Right = (report.Data[9] & 2) == 2;
-                                            State.ButtonsOld.Up = (report.Data[9] & 1) == 1;
+                                            /*
+                                            (State.Controls["quad_left"] as ControlButtonQuad).Button0 = (report.Data[9] & 1) == 1;
+                                            (State.Controls["quad_left"] as ControlButtonQuad).Button1 = (report.Data[9] & 2) == 2;
+                                            (State.Controls["quad_left"] as ControlButtonQuad).Button2 = (report.Data[9] & 8) == 8;
+                                            (State.Controls["quad_left"] as ControlButtonQuad).Button3 = (report.Data[9] & 4) == 4;
+                                            */
+
+                                            // these are mutually exclusive in the raw data, so let's act like they are in the code too, even though they use 4 bits
+                                            if ((report.Data[9] & 1) == 1)
+                                            {
+                                                (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.North;
+                                            }
+                                            else if ((report.Data[9] & 2) == 2)
+                                            {
+                                                (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.East;
+                                            }
+                                            else if ((report.Data[9] & 8) == 8)
+                                            {
+                                                (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.South;
+                                            }
+                                            else if ((report.Data[9] & 4) == 4)
+                                            {
+                                                (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.West;
+                                            }
+                                            else
+                                            {
+                                                (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.None;
+                                            }
                                         }
                                         bool LeftAnalogMultiplexMode = (report.Data[10] & 128) == 128;
                                         bool LeftStickClick = (report.Data[10] & 64) == 64;
@@ -409,6 +516,14 @@ namespace VSCView
                                         // Connection detail. 0x01 for disconnect, 0x02 for connect, 0x03 for pairing request.
                                         ConnectionState ConnectionStateV = (ConnectionState)report.Data[4];
 
+                                        switch(ConnectionStateV)
+                                        {
+                                            case ConnectionState.CONNECT:
+                                            case ConnectionState.DISCONNECT:
+                                                UpdateSerial(); // this doesn't work if the controller is not already polling, obviously.  Might need to explicitly code in dongle watching or something.
+                                                break;
+                                        }
+
                                         if (report.Data[4] == 0x01)
                                         {
                                             byte[] tmpBytes = new byte[4];
@@ -448,9 +563,30 @@ namespace VSCView
                 ControllerState NewState = GetState();
                 OnStateUpdated(NewState);
                 Interlocked.Exchange(ref reportUsageLock, 0);
-
-                _device.ReadReport(OnReport);
             }
+            _device.ReadReport(OnReport);
+        }
+
+        public Image GetIcon()
+        {
+            Image Icon = new Bitmap(32 + 4, 16);
+            Graphics g = Graphics.FromImage(Icon);
+
+            switch (ConnectionType)
+            {
+                case EConnectionType.Dongle: g.DrawImage(Properties.Resources.icon_wireless, 0, 0, 16, 16); break;
+                case EConnectionType.USB: g.DrawImage(Properties.Resources.icon_usb, 0, 0, 16, 16); break;
+                case EConnectionType.Bluetooth: g.DrawImage(Properties.Resources.icon_bt, 0, 0, 16, 16); break;
+            }
+
+            switch(ControllerType)
+            {
+                case EControllerType.ReleaseV1: g.DrawImage(Properties.Resources.icon_sc, 16 + 4, 0, 16, 16); break;
+                case EControllerType.ReleaseV2: g.DrawImage(Properties.Resources.icon_sc, 16 + 4, 0, 16, 16); break;
+                case EControllerType.Chell: g.DrawImage(Properties.Resources.icon_chell, 16 + 4, 0, 16, 16); break;
+            }
+
+            return Icon;
         }
 
         /*private void DeviceAttachedHandler()
@@ -477,16 +613,16 @@ namespace VSCView
     {
         public IController[] GetControllers()
         {
-            List<HidDevice> _devices = HidDevices.Enumerate(SteamController.VendorId, SteamController.ProductIdWireless, SteamController.ProductIdWired/*, ProductIdBT*/, SteamController.ProductIdChell).ToList();
+            List<HidDevice> _devices = HidDevices.Enumerate(SteamController.VendorId, SteamController.ProductIdDongle, SteamController.ProductIdWired, /*SteamController.ProductIdBT,*/ SteamController.ProductIdChell).ToList();
             List<SteamController> ControllerList = new List<SteamController>();
-            string wired_m = "&pid_1102&mi_02";
+            //string wired_m = "&pid_1102&mi_02";
             //string dongle_m = "&pid_1142&mi_01";
-            string dongle_m1 = "&pid_1142&mi_01";
-            string dongle_m2 = "&pid_1142&mi_02";
-            string dongle_m3 = "&pid_1142&mi_03";
-            string dongle_m4 = "&pid_1142&mi_04";
+            //string dongle_m1 = "&pid_1142&mi_01";
+            //string dongle_m2 = "&pid_1142&mi_02";
+            //string dongle_m3 = "&pid_1142&mi_03";
+            //string dongle_m4 = "&pid_1142&mi_04";
             //string bt_m = "_PID&1106_";
-            string chell_m = "&pid_1101";
+            //string chell_m = "&pid_1101";
             // we should never have holes, this entire dictionary is just because I don't know if I can trust the order I get the HID devices
             for (int i = 0; i < _devices.Count; i++)
             {
@@ -495,25 +631,33 @@ namespace VSCView
                     HidDevice _device = _devices[i];
                     string devicePath = _device.DevicePath.ToString();
 
-                    if (devicePath.Contains(wired_m))
+                    EConnectionType ConType = EConnectionType.Unknown;
+                    SteamController.EControllerType CtrlType = SteamController.EControllerType.ReleaseV1;
+                    switch (_device.Attributes.ProductId)
                     {
-                        ControllerList.Add(new SteamController(_device, EConnectionType.USB, SteamController.EControllerType.ReleaseV1));
+                        //case SteamController.ProductIdBT:
+                        //    ConType = EConnectionType.Bluetooth;
+                        //    break;
+                        case SteamController.ProductIdWired:
+                            ConType = EConnectionType.USB;
+                            break;
+                        case SteamController.ProductIdDongle:
+                            if (devicePath.Contains("mi_00")) continue;
+                            ConType = EConnectionType.Dongle;
+                            break;
+                        case SteamController.ProductIdChell:
+                            ConType = EConnectionType.USB;
+                            CtrlType = SteamController.EControllerType.Chell;
+                            break;
                     }
-                    else if (devicePath.Contains(dongle_m1)
-                          || devicePath.Contains(dongle_m2)
-                          || devicePath.Contains(dongle_m3)
-                          || devicePath.Contains(dongle_m4))
+
+                    SteamController ctrl = new SteamController(_device, ConType, CtrlType);
+                    ctrl.HalfInitalize();
+                    new Thread(() =>
                     {
-                        ControllerList.Add(new SteamController(_device, EConnectionType.Dongle, SteamController.EControllerType.ReleaseV1));
-                    }
-                    //else// if (devicePath.Contains(bt_m))
-                    //{
-                    //    ControllerList.Add(new SteamController(_device, EConnectionType.BT));
-                    //}
-                    else if (devicePath.Contains(chell_m))
-                    {
-                        ControllerList.Add(new SteamController(_device, EConnectionType.Chell, SteamController.EControllerType.Chell));
-                    }
+                        ctrl.UpdateSerial();
+                    }).Start();
+                    ControllerList.Add(ctrl);
                 }
             }
 

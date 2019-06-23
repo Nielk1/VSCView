@@ -150,28 +150,25 @@ namespace VSCView
         private void LoadControllers(bool firstload)
         {
             tsmiController.DropDownItems.Clear();
+            Controllers.ForEach(dr => dr.DeInitalize());
             Controllers.Clear();
             Controllers.AddRange(Factory.SelectMany(dr => dr.GetControllers()));
 
             for (int i = 0; i < Controllers.Count(); i++)
             {
                 ToolStripItem itm = tsmiController.DropDownItems.Add(Controllers[i].GetName(), null, LoadController);
+                IController c = Controllers[i];
+                Controllers[i].ControllerNameUpdated += () => {
+                    this.Invoke(new Action(() =>
+                    {
+                        itm.Text = c.GetName();
+                    }));
+                };
+                itm.Text = Controllers[i].GetName();
+
+                itm.ImageScaling = ToolStripItemImageScaling.None;
                 itm.Tag = Controllers[i];
-                switch (Controllers[i].ConnectionType)
-                {
-                    case EConnectionType.Dongle:
-                        itm.Image = Properties.Resources.icon_wireless;
-                        break;
-                    case EConnectionType.USB:
-                        itm.Image = Properties.Resources.icon_usb;
-                        break;
-                    case EConnectionType.Bluetooth:
-                        itm.Image = Properties.Resources.icon_bt;
-                        break;
-                    case EConnectionType.Chell:
-                        itm.Image = Properties.Resources.icon_chell;
-                        break;
-                }
+                itm.Image = Controllers[i].GetIcon();
 
                 // load the first controller in the list if it exists
                 if (firstload && i == 0 && Controllers[i] != null)
@@ -288,6 +285,7 @@ namespace VSCView
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             ttimer?.Change(Timeout.Infinite, Timeout.Infinite);
+            Controllers?.ForEach(dr => dr.DeInitalize());
         }
     }
 
