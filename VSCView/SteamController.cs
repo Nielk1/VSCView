@@ -129,16 +129,16 @@ namespace VSCView
             State.Touch["right"] = new ControlTouch(TouchCount: 1, HasClick: true);
             */
 
-            State.Controls["quad:right"] = new ControlButtonQuad(EOrientation.Diamond);
-            State.Controls["quad:left"] = new ControlButtonQuad(EOrientation.Diamond);
+            State.Controls["quad_left"] = new ControlButtonQuad(EOrientation.Diamond);
+            State.Controls["quad_right"] = new ControlButtonQuad(EOrientation.Diamond);
             State.Controls["bumpers"] = new ControlButtonPair();
-            State.Controls["triggers"] = new ControlTriggerPair();
+            State.Controls["triggers"] = new ControlTriggerPair(HasStage2: true);
             State.Controls["menu"] = new ControlButtonPair();
             State.Controls["grip"] = new ControlButtonPair();
             State.Controls["home"] = new ControlButton();
-            State.Controls["stick:left"] = new ControlStick(HasClick: true);
-            State.Controls["touch:left"] = new ControlTouch(TouchCount: 1, HasClick: true);
-            State.Controls["touch:right"] = new ControlTouch(TouchCount: 1, HasClick: true);
+            State.Controls["stick_left"] = new ControlStick(HasClick: true);
+            State.Controls["touch_left"] = new ControlTouch(TouchCount: 1, HasClick: true);
+            State.Controls["touch_right"] = new ControlTouch(TouchCount: 1, HasClick: true);
 
             State.ButtonsOld = new SteamControllerButtons();
 
@@ -251,9 +251,23 @@ namespace VSCView
             );
         }
 
-        public string GetDevicePath()
+        public string GetName()
         {
-            return _device.DevicePath;
+            List<string> NameParts = new List<string>();
+
+            byte[] ManufacturerBytes;
+            _device.ReadManufacturer(out ManufacturerBytes); // Sony Interactive Entertainment
+            string Manufacturer = System.Text.Encoding.Unicode.GetString(ManufacturerBytes)?.Trim('\0');
+            NameParts.Add(Manufacturer);
+
+            byte[] ProductBytes;
+            _device.ReadProduct(out ProductBytes); // DUALSHOCK®4 USB Wireless Adaptor
+            string Product = System.Text.Encoding.Unicode.GetString(ProductBytes)?.Trim('\0');
+            NameParts.Add(Product);
+
+            NameParts.Add(_device.DevicePath);
+
+            return string.Join(@" | ", NameParts.Where(dr => !string.IsNullOrWhiteSpace(dr)).Select(dr => dr.Replace("&", "&&")));
         }
 
         private void OnReport(HidReport report)
@@ -267,7 +281,7 @@ namespace VSCView
 
                 switch (ConnectionType)
                 {
-                    case EConnectionType.BT:
+                    case EConnectionType.Bluetooth:
                         {
                             byte Unknown1 = report.Data[0]; // always 0xC0?
                             VSCEventType EventType = (VSCEventType)report.Data[1];
@@ -291,18 +305,18 @@ namespace VSCView
 
                                         UInt32 PacketIndex = BitConverter.ToUInt32(report.Data, 4);
 
-                                        (State.Controls["quad:right"] as ControlButtonQuad).Button2 = (report.Data[8] & 128) == 128;
-                                        (State.Controls["quad:right"] as ControlButtonQuad).Button3 = (report.Data[8] & 64) == 64;
-                                        (State.Controls["quad:right"] as ControlButtonQuad).Button1 = (report.Data[8] & 32) == 32;
-                                        (State.Controls["quad:right"] as ControlButtonQuad).Button0 = (report.Data[8] & 16) == 16;
+                                        (State.Controls["quad_right"] as ControlButtonQuad).Button2 = (report.Data[8] & 128) == 128;
+                                        (State.Controls["quad_right"] as ControlButtonQuad).Button3 = (report.Data[8] & 64) == 64;
+                                        (State.Controls["quad_right"] as ControlButtonQuad).Button1 = (report.Data[8] & 32) == 32;
+                                        (State.Controls["quad_right"] as ControlButtonQuad).Button0 = (report.Data[8] & 16) == 16;
                                         (State.Controls["bumpers"] as ControlButtonPair).Button0 = (report.Data[8] & 8) == 8;
                                         (State.Controls["bumpers"] as ControlButtonPair).Button1 = (report.Data[8] & 4) == 4;
-                                        State.ButtonsOld.LeftTrigger = (report.Data[8] & 2) == 2;
-                                        State.ButtonsOld.RightTrigger = (report.Data[8] & 1) == 1;
+                                        (State.Controls["triggers"] as ControlTriggerPair).Stage2_0 = (report.Data[8] & 2) == 2;
+                                        (State.Controls["triggers"] as ControlTriggerPair).Stage2_1 = (report.Data[8] & 1) == 1;
 
                                         (State.Controls["grip"] as ControlButtonPair).Button0 = (report.Data[9] & 128) == 128;
                                         (State.Controls["menu"] as ControlButtonPair).Button1 = (report.Data[9] & 64) == 64;
-                                        State.ButtonsOld.Home = (report.Data[9] & 32) == 32;
+                                        (State.Controls["home"] as ControlButton).Button0 = (report.Data[9] & 32) == 32;
                                         (State.Controls["menu"] as ControlButtonPair).Button0 = (report.Data[9] & 16) == 16;
 
                                         if (ControllerType == EControllerType.Chell)
@@ -320,7 +334,8 @@ namespace VSCView
                                             State.ButtonsOld.Up = (report.Data[9] & 1) == 1;
                                         }
                                         bool LeftAnalogMultiplexMode = (report.Data[10] & 128) == 128;
-                                        State.ButtonsOld.LeftStickClick = (report.Data[10] & 64) == 64;
+                                        bool LeftStickClick = (report.Data[10] & 64) == 64;
+                                        (State.Controls["stick_left"] as ControlStick).Click = LeftStickClick;
                                         bool Unknown = (report.Data[10] & 32) == 32; // what is this?
                                         State.ButtonsOld.RightPadTouch = (report.Data[10] & 16) == 16;
                                         bool LeftPadTouch = (report.Data[10] & 8) == 8;
@@ -328,8 +343,8 @@ namespace VSCView
                                         bool ThumbOrLeftPadPress = (report.Data[10] & 2) == 2; // what is this even for?
                                         (State.Controls["grip"] as ControlButtonPair).Button1 = (report.Data[10] & 1) == 1;
 
-                                        State.LeftTrigger = (float)report.Data[11] / byte.MaxValue;
-                                        State.RightTrigger = (float)report.Data[12] / byte.MaxValue;
+                                        (State.Controls["triggers"] as ControlTriggerPair).Analog0 = (float)report.Data[11] / byte.MaxValue;
+                                        (State.Controls["triggers"] as ControlTriggerPair).Analog1 = (float)report.Data[12] / byte.MaxValue;
 
                                         if (LeftAnalogMultiplexMode)
                                         {
@@ -342,8 +357,8 @@ namespace VSCView
                                             }
                                             else
                                             {
-                                                State.LeftStickX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
-                                                State.LeftStickY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
+                                                (State.Controls["stick_left"] as ControlStick).X = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
+                                                (State.Controls["stick_left"] as ControlStick).Y = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
                                             }
                                         }
                                         else
@@ -357,13 +372,13 @@ namespace VSCView
                                             else
                                             {
                                                 State.ButtonsOld.LeftPadTouch = false;
-                                                State.LeftStickX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
-                                                State.LeftStickY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
+                                                (State.Controls["stick_left"] as ControlStick).X = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
+                                                (State.Controls["stick_left"] as ControlStick).Y = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
                                                 State.LeftPadX = 0;
                                                 State.LeftPadY = 0;
                                             }
 
-                                            State.ButtonsOld.LeftPadClick = ThumbOrLeftPadPress && !State.ButtonsOld.LeftStickClick;
+                                            State.ButtonsOld.LeftPadClick = ThumbOrLeftPadPress && !LeftStickClick;
                                         }
 
                                         State.RightPadX = (float)BitConverter.ToInt16(report.Data, 20) / Int16.MaxValue;
@@ -489,7 +504,7 @@ namespace VSCView
                           || devicePath.Contains(dongle_m3)
                           || devicePath.Contains(dongle_m4))
                     {
-                        ControllerList.Add(new SteamController(_device, EConnectionType.Wireless, SteamController.EControllerType.ReleaseV1));
+                        ControllerList.Add(new SteamController(_device, EConnectionType.Dongle, SteamController.EControllerType.ReleaseV1));
                     }
                     //else// if (devicePath.Contains(bt_m))
                     //{
@@ -502,7 +517,7 @@ namespace VSCView
                 }
             }
 
-            return ControllerList.OrderByDescending(dr => dr.ConnectionType).ThenBy(dr => dr.GetDevicePath()).ToArray();
+            return ControllerList.OrderByDescending(dr => dr.ConnectionType).ThenBy(dr => dr.GetName()).ToArray();
         }
     }
 }

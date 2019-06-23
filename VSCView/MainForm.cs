@@ -36,7 +36,7 @@ namespace VSCView
 
             Factory = new List<IControllerFactory>() {
                 new SteamControllerFactory(),
-                new DS4ControllerFactory()
+                new DS4ControllerFactory(),
             };
 
             ControllerData = new ControllerData();
@@ -155,17 +155,17 @@ namespace VSCView
 
             for (int i = 0; i < Controllers.Count(); i++)
             {
-                ToolStripItem itm = tsmiController.DropDownItems.Add(Controllers[i].GetDevicePath(), null, LoadController);
+                ToolStripItem itm = tsmiController.DropDownItems.Add(Controllers[i].GetName(), null, LoadController);
                 itm.Tag = Controllers[i];
                 switch (Controllers[i].ConnectionType)
                 {
-                    case EConnectionType.Wireless:
+                    case EConnectionType.Dongle:
                         itm.Image = Properties.Resources.icon_wireless;
                         break;
                     case EConnectionType.USB:
                         itm.Image = Properties.Resources.icon_usb;
                         break;
-                    case EConnectionType.BT:
+                    case EConnectionType.Bluetooth:
                         itm.Image = Properties.Resources.icon_bt;
                         break;
                     case EConnectionType.Chell:

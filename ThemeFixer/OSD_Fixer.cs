@@ -20,10 +20,13 @@ namespace ThemeFixer
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public int? height { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public int? version { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public List<UI_Item> children { get; set; }
         public void Update()
         {
-            children?.ForEach(dr => dr.Update());
+            if ((version ?? 0) == 0)
+                children?.ForEach(dr => dr.Update());
         }
     }
 
@@ -114,7 +117,7 @@ namespace ThemeFixer
 
             if (!string.IsNullOrWhiteSpace(inputName))
             {
-                inputName = FixInputName(inputName);
+                inputName = FixDigitalInputName(inputName);
             }
 
             if (!string.IsNullOrWhiteSpace(calc))
@@ -126,37 +129,61 @@ namespace ThemeFixer
                         string trimed = raw.Trim();
                         bool invert = trimed.StartsWith("!");
                         trimed = trimed.TrimStart('!');
-                        return (invert ? "!" : string.Empty) + FixInputName(trimed);
+                        return (invert ? "!" : string.Empty) + FixDigitalInputName(trimed);
                     }));
+            }
+
+            if (!string.IsNullOrWhiteSpace(axisName))
+            {
+                axisName = FixAnalogInputName(axisName);
+            }
+            if (!string.IsNullOrWhiteSpace(axisNameX))
+            {
+                axisNameX = FixAnalogInputName(axisNameX);
+            }
+            if (!string.IsNullOrWhiteSpace(axisNameY))
+            {
+                axisNameY = FixAnalogInputName(axisNameY);
             }
 
             children?.ForEach(dr => dr.Update());
         }
 
-        private string FixInputName(string inputName)
+        private string FixDigitalInputName(string inputName)
         {
             switch (inputName.ToLowerInvariant())
             {
-                case "y": return "quad:right-0";
-                case "b": return "quad:right-1";
-                case "a": return "quad:right-2";
-                case "x": return "quad:right-3";
+                case "y":            return "quad_right:0";
+                case "b":            return "quad_right:1";
+                case "a":            return "quad_right:2";
+                case "x":            return "quad_right:3";
                 case "leftbumper":
-                case "lb":
-                    return "bumpers-0";
+                case "lb":           return "bumpers:0";
                 case "rightbumper":
-                case "rb":
-                    return "bumpers-1";
+                case "rb":           return "bumpers:1";
                 case "leftgrip":
-                case "lg":
-                    return "grip-0";
+                case "lg":           return "grip:0";
                 case "rightgrip":
-                case "rg":
-                    return "grip-1";
-                case "start":
-                    return "menu-1";
-                case "select":
-                    return "menu-0";
+                case "rg":           return "grip:1";
+                case "select":       return "menu:0";
+                case "start":        return "menu:1";
+                case "lefttrigger":
+                case "lt":           return "triggers:stage2_0";
+                case "righttrigger":
+                case "rt":           return "triggers:stage2_1";
+                case "steam":        return "home";
+            }
+            return inputName;
+        }
+
+        private string FixAnalogInputName(string inputName)
+        {
+            switch (inputName.ToLowerInvariant())
+            {
+                case "lefttrigger":  return "triggers:analog0";
+                case "righttrigger": return "triggers:analog1";
+                case "leftstickx":   return "stick_left:x";
+                case "leftsticky":   return "stick_left:y";
             }
             return inputName;
         }

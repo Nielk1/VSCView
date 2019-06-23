@@ -9,20 +9,19 @@ namespace VSCView
     public enum EConnectionType
     {
         Unknown,
-        Wireless,
         USB,
-        BT,
+        Bluetooth,
+        Dongle,
         Chell,
     }
     public interface IController
     {
         EConnectionType ConnectionType { get; }
-
         void DeInitalize();
         ControllerState GetState();
         void Initalize();
         void Identify();
-        string GetDevicePath();
+        string GetName();
     }
 
     public interface IControllerFactory

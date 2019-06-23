@@ -133,19 +133,59 @@ namespace VSCView
     public enum EOrientation
     {
         Diamond,
-        Square
+        Square,
+    }
+    public enum EDPadDirection
+    {
+        None,
+        North,
+        NorthEast,
+        East,
+        SouthEast,
+        South,
+        SouthWest,
+        West,
+        NorthWest,
     }
     public class ControlTriggerPair : IControl
     {
+        public bool HasStage2 { get; private set; }
+        public float Analog0 { get; set; }
+        public float Analog1 { get; set; }
+        public bool Stage2_0 { get; set; }
+        public bool Stage2_1 { get; set; }
+
+        public ControlTriggerPair(bool HasStage2)
+        {
+            this.HasStage2 = HasStage2;
+        }
         public T Value<T>(string key)
         {
-            return default;
+            switch (key)
+            {
+                case "analog0":
+                    return (T)Convert.ChangeType(Analog0, typeof(T));
+                case "analog1":
+                    return (T)Convert.ChangeType(Analog1, typeof(T));
+                case "stage2_0":
+                    return (T)Convert.ChangeType(Stage2_0, typeof(T));
+                case "stage2_1":
+                    return (T)Convert.ChangeType(Stage2_1, typeof(T));
+                default:
+                    return default;
+            }
         }
 
         public object Clone()
         {
-            ControlTriggerPair newData = new ControlTriggerPair();
-           
+            ControlTriggerPair newData = new ControlTriggerPair(this.HasStage2);
+
+            newData.Analog0 = this.Analog0;
+            newData.Analog1 = this.Analog1;
+
+            newData.Stage2_0 = this.Stage2_0;
+            newData.Stage2_1 = this.Stage2_1;
+
             return newData;
         }
     }
@@ -159,6 +199,53 @@ namespace VSCView
         public object Clone()
         {
             ControlTrigger newData = new ControlTrigger();
+
+            return newData;
+        }
+    }
+    public class ControlDPad : IControl
+    {
+        //public int StateCount { get; private set; }
+        public EDPadDirection Direction { get; set; }
+        public ControlDPad(/*int StateCount*/)
+        {
+            //this.StateCount = StateCount;
+        }
+
+        public T Value<T>(string key)
+        {
+            switch (key)
+            {
+                case "0":
+                    if (Direction == EDPadDirection.North) return (T)Convert.ChangeType(1, typeof(T));
+                    if (Direction == EDPadDirection.NorthEast) return (T)Convert.ChangeType(1, typeof(T));
+                    if (Direction == EDPadDirection.NorthWest) return (T)Convert.ChangeType(1, typeof(T));
+                    return default;
+                case "1":
+                    if (Direction == EDPadDirection.East) return (T)Convert.ChangeType(1, typeof(T));
+                    if (Direction == EDPadDirection.NorthEast) return (T)Convert.ChangeType(1, typeof(T));
+                    if (Direction == EDPadDirection.SouthEast) return (T)Convert.ChangeType(1, typeof(T));
+                    return default;
+                case "2":
+                    if (Direction == EDPadDirection.South) return (T)Convert.ChangeType(1, typeof(T));
+                    if (Direction == EDPadDirection.SouthEast) return (T)Convert.ChangeType(1, typeof(T));
+                    if (Direction == EDPadDirection.SouthWest) return (T)Convert.ChangeType(1, typeof(T));
+                    return default;
+                case "3":
+                    if (Direction == EDPadDirection.West) return (T)Convert.ChangeType(1, typeof(T));
+                    if (Direction == EDPadDirection.NorthWest) return (T)Convert.ChangeType(1, typeof(T));
+                    if (Direction == EDPadDirection.SouthWest) return (T)Convert.ChangeType(1, typeof(T));
+                    return default;
+                default:
+                    return default;
+            }
+        }
+
+        public object Clone()
+        {
+            ControlDPad newData = new ControlDPad();
+
+            newData.Direction = this.Direction;
 
             return newData;
         }
@@ -179,7 +266,7 @@ namespace VSCView
 
         public T Value<T>(string key)
         {
-            switch(key)
+            switch (key)
             {
                 case "0":
                     return (T)Convert.ChangeType(Button0, typeof(T));
@@ -240,14 +327,18 @@ namespace VSCView
     }
     public class ControlButton : IControl
     {
+        public bool Button0 { get; set; }
         public T Value<T>(string key)
         {
-            return default;
+            return (T)Convert.ChangeType(Button0, typeof(T));
+            //return default;
         }
 
         public object Clone()
         {
             ControlButton newData = new ControlButton();
+
+            newData.Button0 = this.Button0;
 
             return newData;
         }
@@ -255,6 +346,9 @@ namespace VSCView
     public class ControlStick : IControl
     {
         public bool HasClick { get; private set; }
+        public float X { get; set; }
+        public float Y { get; set; }
+        public bool Click { get; internal set; }
 
         public ControlStick(bool HasClick)
         {
@@ -263,12 +357,26 @@ namespace VSCView
 
         public T Value<T>(string key)
         {
-            return default;
+            switch (key)
+            {
+                case "x":
+                    return (T)Convert.ChangeType(X, typeof(T));
+                case "y":
+                    return (T)Convert.ChangeType(Y, typeof(T));
+                case "click":
+                    return (T)Convert.ChangeType(Click, typeof(T));
+                default:
+                    return default;
+            }
         }
 
         public object Clone()
         {
             ControlStick newData = new ControlStick(this.HasClick);
+
+            newData.X = this.X;
+            newData.Y = this.Y;
+            newData.Click = this.Click;
 
             return newData;
         }

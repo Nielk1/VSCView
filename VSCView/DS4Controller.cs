@@ -61,6 +61,8 @@ namespace VSCView
         {
             if (0 == Interlocked.Exchange(ref stateUsageLock, 1))
             {
+                ControllerState newState = (ControllerState)State.Clone();
+                /*
                 ControllerState newState = new ControllerState();
                 newState.ButtonsOld = (SteamControllerButtons)State.ButtonsOld.Clone();
 
@@ -86,7 +88,7 @@ namespace VSCView
                 newState.OrientationZ = State.OrientationZ;
 
                 //newState.DataStuck = State.DataStuck;
-
+                */
                 State = newState;
                 Interlocked.Exchange(ref stateUsageLock, 0);
             }
@@ -108,8 +110,20 @@ namespace VSCView
             StateUpdated?.Invoke(this, e);
         }
 
-        public DS4Controller(HidDevice device)
+        public DS4Controller(HidDevice device, EConnectionType ConnectionType = EConnectionType.Unknown)
         {
+            State.Controls["quad_left"] = new ControlDPad();
+            State.Controls["quad_right"] = new ControlButtonQuad(EOrientation.Diamond);
+            State.Controls["bumpers"] = new ControlButtonPair();
+            State.Controls["triggers"] = new ControlTriggerPair(HasStage2: false);
+            State.Controls["menu"] = new ControlButtonPair();
+            State.Controls["home"] = new ControlButton();
+            State.Controls["stick_left"] = new ControlStick(HasClick: true);
+            State.Controls["stick_right"] = new ControlStick(HasClick: true);
+            State.Controls["touch"] = new ControlTouch(TouchCount: 2, HasClick: true);
+
+            // According to this the normalized domain of the DS4 gyro is 1024 units per rad/s: https://gamedev.stackexchange.com/a/87178
+
             State.ButtonsOld = new SteamControllerButtons();
 
             _device = device;
@@ -168,9 +182,33 @@ namespace VSCView
             );
         }
 
-        public string GetDevicePath()
+        public string GetName()
         {
-            return _device.DevicePath;
+            List<string> NameParts = new List<string>();
+
+            byte[] ManufacturerBytes;
+            _device.ReadManufacturer(out ManufacturerBytes); // Sony Interactive Entertainment
+            string Manufacturer = System.Text.Encoding.Unicode.GetString(ManufacturerBytes)?.Trim('\0');
+            NameParts.Add(Manufacturer);
+
+            byte[] ProductBytes;
+            _device.ReadProduct(out ProductBytes); // DUALSHOCK®4 USB Wireless Adaptor
+            string Product = System.Text.Encoding.Unicode.GetString(ProductBytes)?.Trim('\0');
+            NameParts.Add(Product);
+
+            byte[] SerialNumberBytes;
+            _device.ReadSerialNumber(out SerialNumberBytes); // DUALSHOCK®4 USB Wireless Adaptor
+            string SerialNumber = System.Text.Encoding.Unicode.GetString(SerialNumberBytes)?.Trim('\0');
+            if (string.IsNullOrWhiteSpace(SerialNumber))
+            {
+                NameParts.Add(_device.HardwareId);
+            }
+            else
+            {
+                NameParts.Add(SerialNumber);
+            }
+
+            return string.Join(@" | ", NameParts.Where(dr => !string.IsNullOrWhiteSpace(dr)).Select(dr => dr.Replace("&", "&&")));
         }
 
         private void OnReport(HidReport report)
@@ -185,70 +223,46 @@ namespace VSCView
                 bool BT = report.ReportId == 17;
                 int baseOffset = BT ? 2 : 0;
 
-                State.LeftStickX = (report.Data[baseOffset + 0] - 128) / 128f;
-                State.LeftStickY = -(report.Data[baseOffset + 1] - 128) / 128f;
-                State.RightStickX = (report.Data[baseOffset + 2] - 128) / 128f;
-                State.RightStickY = -(report.Data[baseOffset + 3] - 128) / 128f;
+                (State.Controls["stick_left"] as ControlStick).X = (report.Data[baseOffset + 0] - 128) / 128f;
+                (State.Controls["stick_left"] as ControlStick).Y = -(report.Data[baseOffset + 1] - 128) / 128f;
+                (State.Controls["stick_right"] as ControlStick).X = (report.Data[baseOffset + 2] - 128) / 128f;
+                (State.Controls["stick_right"] as ControlStick).Y = -(report.Data[baseOffset + 3] - 128) / 128f;
 
-                State.ButtonsOld.Y = (report.Data[baseOffset + 4] & 128) == 128;
-                State.ButtonsOld.B = (report.Data[baseOffset + 4] & 64) == 64;
-                State.ButtonsOld.A = (report.Data[baseOffset + 4] & 32) == 32;
-                State.ButtonsOld.X = (report.Data[baseOffset + 4] & 16) == 16;
+                (State.Controls["quad_right"] as ControlButtonQuad).Button0 = (report.Data[baseOffset + 4] & 128) == 128;
+                (State.Controls["quad_right"] as ControlButtonQuad).Button1 = (report.Data[baseOffset + 4] & 64) == 64;
+                (State.Controls["quad_right"] as ControlButtonQuad).Button2 = (report.Data[baseOffset + 4] & 32) == 32;
+                (State.Controls["quad_right"] as ControlButtonQuad).Button3 = (report.Data[baseOffset + 4] & 16) == 16;
 
-                State.ButtonsOld.Up = State.ButtonsOld.Right = State.ButtonsOld.Down = State.ButtonsOld.Left = false;
                 switch ((report.Data[baseOffset + 4] & 0x0f))
                 {
-                    case 0:
-                        State.ButtonsOld.Up = true;
-                        break;
-                    case 1:
-                        State.ButtonsOld.Up = true;
-                        State.ButtonsOld.Right = true;
-                        break;
-                    case 2:
-                        State.ButtonsOld.Right = true;
-                        break;
-                    case 3:
-                        State.ButtonsOld.Right = true;
-                        State.ButtonsOld.Down = true;
-                        break;
-                    case 4:
-                        State.ButtonsOld.Down = true;
-                        break;
-                    case 5:
-                        State.ButtonsOld.Down = true;
-                        State.ButtonsOld.Left = true;
-                        break;
-                    case 6:
-                        State.ButtonsOld.Left = true;
-                        break;
-                    case 7:
-                        State.ButtonsOld.Left = true;
-                        State.ButtonsOld.Up = true;
-                        break;
-                    case 8:
-                        break;
-                    default:
-                        break;
+                    case 0: (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.North; break;
+                    case 1: (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.NorthEast; break;
+                    case 2: (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.East; break;
+                    case 3: (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.SouthEast; break;
+                    case 4: (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.South; break;
+                    case 5: (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.SouthWest; break;
+                    case 6: (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.West; break;
+                    case 7: (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.NorthWest; break;
+                    default: (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.None; break;
                 }
 
-                State.ButtonsOld.RightStickClick = (report.Data[baseOffset + 5] & 128) == 128;
-                State.ButtonsOld.LeftStickClick = (report.Data[baseOffset + 5] & 64) == 64;
-                State.ButtonsOld.Select = (report.Data[baseOffset + 5] & 32) == 32;
-                State.ButtonsOld.Start = (report.Data[baseOffset + 5] & 16) == 16;
-                State.ButtonsOld.RightTrigger = (report.Data[baseOffset + 5] & 8) == 8;
-                State.ButtonsOld.LeftTrigger = (report.Data[baseOffset + 5] & 4) == 4;
-                State.ButtonsOld.RightBumper = (report.Data[baseOffset + 5] & 2) == 2;
-                State.ButtonsOld.LeftBumper = (report.Data[baseOffset + 5] & 1) == 1;
+                (State.Controls["stick_right"] as ControlStick).Click = (report.Data[baseOffset + 5] & 128) == 128;
+                (State.Controls["stick_left"] as ControlStick).Click = (report.Data[baseOffset + 5] & 64) == 64;
+                (State.Controls["menu"] as ControlButtonPair).Button1 = (report.Data[baseOffset + 5] & 32) == 32;
+                (State.Controls["menu"] as ControlButtonPair).Button0 = (report.Data[baseOffset + 5] & 16) == 16;
+                //State.ButtonsOld.RightTrigger = (report.Data[baseOffset + 5] & 8) == 8;
+                //State.ButtonsOld.LeftTrigger = (report.Data[baseOffset + 5] & 4) == 4;
+                (State.Controls["bumpers"] as ControlButtonPair).Button1 = (report.Data[baseOffset + 5] & 2) == 2;
+                (State.Controls["bumpers"] as ControlButtonPair).Button0 = (report.Data[baseOffset + 5] & 1) == 1;
 
                 // counter
                 // bld.Append((report.Data[baseOffset + 6] & 0xfc).ToString().PadLeft(3, '0'));
 
-                State.ButtonsOld.Home = (report.Data[baseOffset + 6] & 0x1) == 0x1;
+                (State.Controls["home"] as ControlButton).Button0 = (report.Data[baseOffset + 6] & 0x1) == 0x1;
                 State.ButtonsOld.DS4PadClick = (report.Data[baseOffset + 6] & 0x2) == 0x2;
 
-                State.LeftTrigger = (float)report.Data[baseOffset + 7] / byte.MaxValue;
-                State.RightTrigger = (float)report.Data[baseOffset + 8] / byte.MaxValue;
+                (State.Controls["triggers"] as ControlTriggerPair).Analog0 = (float)report.Data[baseOffset + 7] / byte.MaxValue;
+                (State.Controls["triggers"] as ControlTriggerPair).Analog1 = (float)report.Data[baseOffset + 8] / byte.MaxValue;
 
                 // GyroTimestamp
                 //bld.Append(BitConverter.ToUInt16(report.Data, baseOffset + 9).ToString().PadLeft(5));
@@ -332,7 +346,9 @@ namespace VSCView
         {
             List<HidDevice> _devices = HidDevices.Enumerate(DS4Controller.VendorId, DS4Controller.ProductIdDongle, DS4Controller.ProductIdWired).ToList();
             List<DS4Controller> ControllerList = new List<DS4Controller>();
+            string bt_hid_id = @"00001124-0000-1000-8000-00805f9b34fb";
             string wired_m = "&pid_09cc";
+            string bt_m = "_pid&09cc";
             string dongle_m = "&pid_0ba0";
 
             for (int i = 0; i < _devices.Count; i++)
@@ -342,18 +358,29 @@ namespace VSCView
                     HidDevice _device = _devices[i];
                     string devicePath = _device.DevicePath.ToString();
 
-                    if (devicePath.Contains(wired_m))
+                    EConnectionType ConType = EConnectionType.Unknown;
+                    switch (_device.Attributes.ProductId)
                     {
-                        ControllerList.Add(new DS4Controller(_device));
+                        case DS4Controller.ProductIdWired:
+                            if (devicePath.Contains(bt_hid_id))
+                            {
+                                ConType = EConnectionType.Bluetooth;
+                            }
+                            else
+                            {
+                                ConType = EConnectionType.USB;
+                            }
+                            break;
+                        case DS4Controller.ProductIdDongle:
+                            ConType = EConnectionType.Dongle;
+                            break;
                     }
-                    else if (devicePath.Contains(dongle_m))
-                    {
-                        ControllerList.Add(new DS4Controller(_device));
-                    }
+
+                    ControllerList.Add(new DS4Controller(_device, ConType));
                 }
             }
 
-            return ControllerList.OrderByDescending(dr => dr.ConnectionType).ThenBy(dr => dr.GetDevicePath()).ToArray();
+            return ControllerList.OrderByDescending(dr => dr.ConnectionType).ThenBy(dr => dr.GetName()).ToArray();
         }
     }
 }

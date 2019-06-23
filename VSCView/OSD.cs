@@ -118,10 +118,12 @@ namespace VSCView
             ControllerState state = ActiveController.GetState();
             if (state.ButtonsOld == null) return false;
 
-            string[] parts = inputName.Split(new char[] { '-' }, 2);
-            if (parts.Length == 2)
+            string[] parts = inputName.Split(new char[] { ':' }, 2);
             {
-                return state.Controls[parts[0]]?.Value<bool>(parts[1]) ?? false;
+                string subkey = (parts.Length > 1) ? parts[1] : string.Empty;
+                bool? val = state.Controls[parts[0]]?.Value<bool>(subkey);
+                if (val.HasValue)
+                    return val.Value;
             }
 
             switch (inputName)
@@ -138,16 +140,16 @@ namespace VSCView
                 //case "leftbumper":
                 //case "lb":
                 //    return state.ButtonsOld.LeftBumper;
-                case "lefttrigger":
-                case "lt":
-                    return state.ButtonsOld.LeftTrigger;
+                //case "lefttrigger":
+                //case "lt":
+                //    return state.ButtonsOld.LeftTrigger;
 
                 //case "rightbumper":
                 //case "rb":
                 //    return state.ButtonsOld.RightBumper;
-                case "righttrigger":
-                case "rt":
-                    return state.ButtonsOld.RightTrigger;
+                //case "righttrigger":
+                //case "rt":
+                //    return state.ButtonsOld.RightTrigger;
 
                 //case "leftgrip":
                 //case "lg":
@@ -158,8 +160,8 @@ namespace VSCView
 
                 //case "start":
                 //    return state.ButtonsOld.Start;
-                case "steam":
-                    return state.ButtonsOld.Home;
+                //case "steam":
+                //    return state.ButtonsOld.Home;
                 //case "select":
                 //    return state.ButtonsOld.Select;
 
@@ -214,6 +216,14 @@ namespace VSCView
 
             ControllerState state = ActiveController.GetState();
 
+            string[] parts = inputName.Split(new char[] { ':' }, 2);
+            {
+                string subkey = (parts.Length > 1) ? parts[1] : string.Empty;
+                float? val = state.Controls[parts[0]]?.Value<float>(subkey);
+                if (val.HasValue)
+                    return val.Value;
+            }
+
             switch (inputName)
             {
                 case "leftpadx": return state.LeftPadX;
@@ -222,11 +232,11 @@ namespace VSCView
                 case "rightpadx": return state.RightPadX;
                 case "rightpady": return state.RightPadY;
 
-                case "leftstickx": return state.LeftStickX;
-                case "leftsticky": return state.LeftStickY;
+                //case "leftstickx": return state.LeftStickX;
+                //case "leftsticky": return state.LeftStickY;
 
-                case "lefttrigger": return state.LeftTrigger;
-                case "righttrigger": return state.RightTrigger;
+                //case "lefttrigger": return state.LeftTrigger;
+                //case "righttrigger": return state.RightTrigger;
 
                 default: return 0;
             }
