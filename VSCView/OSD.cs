@@ -1,12 +1,15 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Flee.PublicTypes;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 
 namespace VSCView
@@ -75,6 +78,14 @@ namespace VSCView
             });
         }
 
+        public void InitalizeController()
+        {
+            for (int i = 0; i < Items.Count; i++)
+            {
+                Items[i].InitalizeController();
+            }
+        }
+
         public void Paint(Graphics graphics)
         {
             for (int i = 0; i < Items.Count; i++)
@@ -108,6 +119,31 @@ namespace VSCView
     public class ControllerData
     {
         public IController ActiveController;
+
+        internal Type GetControlType(string inputName)
+        {
+            if (ActiveController == null) return default;
+
+            ControllerState state = ActiveController.GetState();
+
+            string[] parts = inputName.Split(new char[] { ':' }, 2);
+            string subkey = (parts.Length > 1) ? parts[1] : string.Empty;
+            IControl ctrl = state.Controls[parts[0]];
+            if (ctrl == null) return typeof(bool);
+            return ctrl.Type(subkey);
+        }
+        public T GetControlValue<T>(string inputName)
+        {
+            if (ActiveController == null) return default;
+
+            ControllerState state = ActiveController.GetState();
+
+            string[] parts = inputName.Split(new char[] { ':' }, 2);
+            string subkey = (parts.Length > 1) ? parts[1] : string.Empty;
+            IControl ctrl = state.Controls[parts[0]];
+            if (ctrl == null) return default;
+            return ctrl.Value<T>(subkey);
+        }
 
         public bool GetBasicControl(string inputName)
         {
@@ -165,18 +201,18 @@ namespace VSCView
                 //case "select":
                 //    return state.ButtonsOld.Select;
 
-                case "down":
-                    return state.ButtonsOld.Down;
-                case "left":
-                    return state.ButtonsOld.Left;
-                case "right":
-                    return state.ButtonsOld.Right;
-                case "up":
-                    return state.ButtonsOld.Up;
+                //case "down":
+                //    return state.ButtonsOld.Down;
+                //case "left":
+                //    return state.ButtonsOld.Left;
+                //case "right":
+                //    return state.ButtonsOld.Right;
+                //case "up":
+                //    return state.ButtonsOld.Up;
 
-                case "stickclick":
-                case "sc":
-                    return state.ButtonsOld.LeftStickClick;
+                //case "stickclick":
+                //case "sc":
+                //    return state.ButtonsOld.LeftStickClick;
                 case "leftpadtouch":
                 case "lpt":
                     return state.ButtonsOld.LeftPadTouch;
@@ -398,6 +434,14 @@ namespace VSCView
             });
         }
 
+        public virtual void InitalizeController()
+        {
+            for (int i = 0; i < Items.Count; i++)
+            {
+                Items[i].InitalizeController();
+            }
+        }
+
         public virtual void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
@@ -465,24 +509,28 @@ namespace VSCView
         }
 
         private ControllerData data;
-        private string InputName;
+        //private string InputName;
 
-        private bool output;
+        //private bool output;
 
-        private List<Tuple<bool, string>> calcFunc;
+        //private List<Tuple<bool, string>> calcFunc;
+        private string Calc;
+        private IDynamicExpression calcFunc;
+
+        private ExpressionContext context;
 
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
             base.Initalize(data, cache, themePath, themeData);
             this.data = data;
 
-            output = true;
+            //output = true;
 
-            InputName = themeData["inputName"]?.Value<string>();
-            output = !(themeData["invert"]?.Value<bool>() ?? false);
+            //InputName = themeData["inputName"]?.Value<string>();
+            //output = !(themeData["invert"]?.Value<bool>() ?? false);
 
             // super simplistic parsing for now, only supports single prefix ! and &&
-            string Calc = themeData["calc"]?.Value<string>();
+            /*string Calc = themeData["calc"]?.Value<string>();
             if (!string.IsNullOrWhiteSpace(Calc))
             {
                 calcFunc = Calc
@@ -495,42 +543,59 @@ namespace VSCView
                         return new Tuple<bool, string>(invert, trimed);
                     })
                     .ToList();
+            }*/
+
+            Calc = themeData["input"]?.Value<string>();
+            if (!string.IsNullOrWhiteSpace(Calc))
+            {
+                context = new ExpressionContext();
+                context.Options.ParseCulture = CultureInfo.InvariantCulture;
+                VariableCollection variables = context.Variables;
+
+                // Hook up the required events
+                variables.ResolveVariableType += new EventHandler<ResolveVariableTypeEventArgs>(variables_ResolveVariableType);
+                variables.ResolveVariableValue += new EventHandler<ResolveVariableValueEventArgs>(variables_ResolveVariableValue);
             }
+
+            InitalizeController();
+        }
+
+        public override void InitalizeController()
+        {
+            if (!string.IsNullOrWhiteSpace(Calc))
+            {
+                try
+                {
+                    calcFunc = context.CompileDynamic(Calc.Replace(":", "__colon__"));
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"\r\n{ex}");
+                }
+            }
+
+            base.InitalizeController();
+        }
+
+        private void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
+        {
+            MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
+            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
+            e.VariableValue = Convert.ChangeType(retVal, e.VariableType);
+        }
+
+        private void variables_ResolveVariableType(object sender, ResolveVariableTypeEventArgs e)
+        {
+            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
         }
 
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
 
-            if (calcFunc != null)
+            if (calcFunc != null && (bool)calcFunc?.Evaluate())
             {
-                bool chk = true;
-                for (int i = 0; i < calcFunc.Count; i++)
-                {
-                    Tuple<bool, string> itm = calcFunc[i];
-                    if (itm.Item1)
-                    {
-                        chk &= !data.GetBasicControl(itm.Item2);
-                    }
-                    else
-                    {
-                        chk &= data.GetBasicControl(itm.Item2);
-                    }
-                }
-
-                if (chk && output) base.Paint(graphics);
-            }
-            else if (string.IsNullOrWhiteSpace(InputName))
-            {
-                if (output) base.Paint(graphics);
-            }
-            else if (data.GetBasicControl(InputName))
-            {
-                if (output) base.Paint(graphics);
-            }
-            else
-            {
-                if (!output) base.Paint(graphics);
+                base.Paint(graphics);
             }
         }
     }

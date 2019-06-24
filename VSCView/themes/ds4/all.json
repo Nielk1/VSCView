@@ -32,8 +32,7 @@
             },
             {
               "type": "showhide",
-              "inputName": "triggers:stage2_0",
-              "invert": false,
+              "input": "triggers:stage2_0 OR bumpers2:0",
               "children": [
                 {
                   "type": "image",
@@ -70,8 +69,7 @@
             },
             {
               "type": "showhide",
-              "inputName": "triggers:stage2_1",
-              "invert": false,
+              "input": "triggers:stage2_1 OR bumpers2:1",
               "children": [
                 {
                   "type": "image",
@@ -108,8 +106,7 @@
               "children": [
                 {
                   "type": "showhide",
-                  "inputName": "quad_right:2",
-                  "invert": false,
+                  "input": "quad_right:2",
                   "children": [
                     {
                       "type": "image",
@@ -124,8 +121,7 @@
                 },
                 {
                   "type": "showhide",
-                  "inputName": "quad_right:1",
-                  "invert": false,
+                  "input": "quad_right:1",
                   "children": [
                     {
                       "type": "image",
@@ -140,8 +136,7 @@
                 },
                 {
                   "type": "showhide",
-                  "inputName": "quad_right:3",
-                  "invert": false,
+                  "input": "quad_right:3",
                   "children": [
                     {
                       "type": "image",
@@ -156,8 +151,7 @@
                 },
                 {
                   "type": "showhide",
-                  "inputName": "quad_right:0",
-                  "invert": false,
+                  "input": "quad_right:0",
                   "children": [
                     {
                       "type": "image",
@@ -179,8 +173,7 @@
               "children": [
                 {
                   "type": "showhide",
-                  "inputName": "quad_left:2",
-                  "invert": false,
+                  "input": "quad_left:2",
                   "children": [
                     {
                       "type": "image",
@@ -195,8 +188,7 @@
                 },
                 {
                   "type": "showhide",
-                  "inputName": "quad_left:1",
-                  "invert": false,
+                  "input": "quad_left:1",
                   "children": [
                     {
                       "type": "image",
@@ -211,8 +203,7 @@
                 },
                 {
                   "type": "showhide",
-                  "inputName": "quad_left:3",
-                  "invert": false,
+                  "input": "quad_left:3",
                   "children": [
                     {
                       "type": "image",
@@ -227,8 +218,7 @@
                 },
                 {
                   "type": "showhide",
-                  "inputName": "quad_left:0",
-                  "invert": false,
+                  "input": "quad_left:0",
                   "children": [
                     {
                       "type": "image",
@@ -250,8 +240,7 @@
               "children": [
                 {
                   "type": "showhide",
-                  "inputName": "home",
-                  "invert": false,
+                  "input": "home",
                   "children": [
                     {
                       "type": "image",
@@ -266,8 +255,7 @@
                 },
                 {
                   "type": "showhide",
-                  "inputName": "menu:1",
-                  "invert": false,
+                  "input": "menu:1",
                   "children": [
                     {
                       "type": "image",
@@ -282,8 +270,7 @@
                 },
                 {
                   "type": "showhide",
-                  "inputName": "menu:0",
-                  "invert": false,
+                  "input": "menu:0",
                   "children": [
                     {
                       "type": "image",
@@ -305,8 +292,7 @@
               "children": [
                 {
                   "type": "showhide",
-                  "inputName": "bumpers:0",
-                  "invert": false,
+                  "input": "bumpers:0",
                   "children": [
                     {
                       "type": "image",
@@ -321,8 +307,7 @@
                 },
                 {
                   "type": "showhide",
-                  "inputName": "bumpers:1",
-                  "invert": false,
+                  "input": "bumpers:1",
                   "children": [
                     {
                       "type": "image",
@@ -340,8 +325,7 @@
 
             {
               "type": "showhide",
-              "inputName": "stick_left:click",
-              "invert": false,
+              "input": "stick_left:click",
               "children": [
                 {
                   "type": "image",
@@ -377,8 +361,7 @@
 
             {
               "type": "showhide",
-              "inputName": "stick_right:click",
-              "invert": false,
+              "input": "stick_right:click",
               "children": [
                 {
                   "type": "image",

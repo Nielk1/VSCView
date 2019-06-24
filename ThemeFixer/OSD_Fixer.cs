@@ -49,6 +49,8 @@ namespace ThemeFixer
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public bool? center { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string input { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string inputName { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string calc { get; set; }
@@ -122,15 +124,16 @@ namespace ThemeFixer
 
             if (!string.IsNullOrWhiteSpace(calc))
             {
-                calc = string.Join("&&", calc
+                input = string.Join(" AND ", calc
                     .Split(new string[] { "&&" }, StringSplitOptions.None)
                     .Select(raw =>
                     {
                         string trimed = raw.Trim();
                         bool invert = trimed.StartsWith("!");
                         trimed = trimed.TrimStart('!');
-                        return (invert ? "!" : string.Empty) + FixDigitalInputName(trimed);
+                        return (invert ? "NOT " : string.Empty) + FixDigitalInputName(trimed);
                     }));
+                calc = null;
             }
 
             if (!string.IsNullOrWhiteSpace(axisName))
@@ -172,6 +175,8 @@ namespace ThemeFixer
                 case "righttrigger":
                 case "rt":           return "triggers:stage2_1";
                 case "steam":        return "home";
+                case "stickclick":
+                case "sc":           return "stick_left:click";
             }
             return inputName;
         }

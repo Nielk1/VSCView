@@ -194,6 +194,8 @@ namespace VSCView
             ActiveController.Initalize();
 
             ActiveController.Identify();
+
+            ui.InitalizeController();
         }
 
         private async void LoadTheme(object sender, EventArgs e)

@@ -91,6 +91,7 @@ namespace VSCView
     public interface IControl : ICloneable
     {
         T Value<T>(string key);
+        Type Type(string key);
     }
     public class ControlCollection /*: ICloneable*/// where T : IControl
     {
@@ -175,7 +176,22 @@ namespace VSCView
                     return default;
             }
         }
-
+        public Type Type(string key)
+        {
+            switch (key)
+            {
+                case "analog0":
+                    return typeof(float);
+                case "analog1":
+                    return typeof(float);
+                case "stage2_0":
+                    return typeof(bool);
+                case "stage2_1":
+                    return typeof(bool);
+                default:
+                    return default;
+            }
+        }
         public object Clone()
         {
             ControlTriggerPair newData = new ControlTriggerPair(this.HasStage2);
@@ -201,6 +217,11 @@ namespace VSCView
             ControlTrigger newData = new ControlTrigger();
 
             return newData;
+        }
+
+        public Type Type(string key)
+        {
+            return default;
         }
     }
     public class ControlDPad : IControl
@@ -239,6 +260,10 @@ namespace VSCView
                 default:
                     return default;
             }
+        }
+        public Type Type(string key)
+        {
+            return typeof(bool);
         }
 
         public object Clone()
@@ -280,6 +305,10 @@ namespace VSCView
                     return default;
             }
         }
+        public Type Type(string key)
+        {
+            return typeof(bool);
+        }
 
         public object Clone()
         {
@@ -314,6 +343,10 @@ namespace VSCView
                     return default;
             }
         }
+        public Type Type(string key)
+        {
+            return typeof(bool);
+        }
 
         public object Clone()
         {
@@ -332,6 +365,10 @@ namespace VSCView
         {
             return (T)Convert.ChangeType(Button0, typeof(T));
             //return default;
+        }
+        public Type Type(string key)
+        {
+            return typeof(bool);
         }
 
         public object Clone()
@@ -369,6 +406,20 @@ namespace VSCView
                     return default;
             }
         }
+        public Type Type(string key)
+        {
+            switch (key)
+            {
+                case "x":
+                    return typeof(float);
+                case "y":
+                    return typeof(float);
+                case "click":
+                    return typeof(bool);
+                default:
+                    return default;
+            }
+        }
 
         public object Clone()
         {
@@ -396,7 +447,10 @@ namespace VSCView
         {
             return default;
         }
-
+        public Type Type(string key)
+        {
+            return default;
+        }
         public object Clone()
         {
             ControlTouch newData = new ControlTouch(this.TouchCount, this.HasClick);
