@@ -1,0 +1,124 @@
+{
+    "width": 629,
+    "height": 605,
+    "children": [
+        {
+            "type":"image",
+            "image":"base1.png",
+            "x":314.5,
+            "y":302.5,
+            "width":629,
+            "height":605,
+            "center":true,
+            "children": [
+                {
+                    "x":74,
+                    "y":67,
+                    "children": [
+                        { "type":"showhide", "inputName":"a", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x": -13 , "y": 39, "width":36, "height":36, "center":true } ] },
+                         { "type":"showhide", "inputName":"b", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x": 21, "y":  6, "width":38, "height":36, "center":true } ] },
+                        { "type":"showhide", "inputName":"x", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x": -47.5, "y":  7, "width":38, "height":36, "center":true } ] },
+                        { "type":"showhide", "inputName":"y", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x":  -13, "y": -28, "width":36, "height":36, "center":true } ] }
+                    ]
+                },
+
+                { "type":"showhide", "inputName":"stickclick", "invert":false, "children": [ { "type":"image", "image":"btn-stick.png", "x": -70, "y": 78, "width":80, "height":81, "center":true } ] },
+                {
+                    "type":"slider",
+                    "x": -72,
+                    "y": 68,
+                    "axisNameX":"leftstickx",
+                    "axisNameY":"leftsticky",
+                    "scaleFactorX": 0.0005,
+                    "scaleFactorY": 0.0005,
+                    "children": [
+                        { "type":"image", "image":"stick.png", "x": 1, "y": 9, "width":69, "height":70, "center":true }
+                    ]
+                },
+                {
+                    "x":0,
+                    "y":-29,
+                    "children": [
+                        { "type":"showhide", "inputName":"steam" , "invert":false, "children": [ { "type":"image", "image":"btn-home.png", "x":  -3, "y":  6, "width":51, "height":51, "center":true } ] },
+                        { "type":"showhide", "inputName":"start" , "invert":false, "children": [ { "type":"image", "image":"btn-sub.png" , "x":  47, "y":  15, "width":38, "height":22, "center":true } ] },
+                        { "type":"showhide", "inputName":"select", "invert":false, "children": [ { "type":"image", "image":"btn-sub.png" , "x": -50, "y":  15, "width":38, "height":22, "center":true } ] }
+                    ]
+                },
+                {
+                    "x":0,
+                    "y":150,
+                    "children": [
+					
+                        { "type":"showhide", "inputName":"lg", "invert":false, "children": [ { "type":"image", "image":"leftgrip.png" ,    "x": -208, "y": -52,  "width":130,   "height":140, "center":true } ] },
+                        { "type":"showhide", "inputName":"lt", "invert":false, "children": [ { "type":"image", "image":"LTfull.png" ,      "x": -153, "y": -254, "width":150,   "height":90, "center":true } ] },
+						 { "type":"showhide", "inputName":"lb", "invert":false, "children": [ { "type":"image", "image":"LB.png" ,         "x": -167, "y": -274,  "width":133, "height":63, "center":true } ] },
+                        { "type":"showhide", "inputName":"rg", "invert":false, "children": [ { "type":"image", "image":"rightgrip.png" ,   "x":  206, "y": -45,  "width":130,   "height":140, "center":true } ] },
+                        { "type":"showhide", "inputName":"rt", "invert":false, "children": [ { "type":"image", "image":"RTfull.png" ,      "x":  179, "y": -253, "width":150,   "height":90, "center":true } ] },
+                        { "type":"showhide", "inputName":"rb", "invert":false, "children": [ { "type":"image", "image":"RB.png" ,          "x":  162, "y": -275, "width":135,   "height":68, "center":true } ] }
+                    ]
+                },
+
+                { "type":"showhide", "inputName":"rightpadclick", "invert":false, "children": [ { "type":"image", "image":"btn-hapticG2.png", "x":  164.5, "y": -10, "width":155.5, "height":159, "center":true } ] },
+                {
+                    "x": 171,
+                    "y": -23,
+                    "rot":-15,
+                    "children": [
+                        {
+                            "type":"trailpad",
+                            "inputName":"rightpadtouch",
+                            "x":  0,
+                            "y": 0,
+                            "axisNameX":"rightpadx",
+                            "axisNameY":"rightpady",
+                            "scaleFactorX": 0.0022,
+                            "scaleFactorY": 0.0022,
+                            "image":"padheat.png",
+                            "length":30,
+                            "width":36,
+                            "height":36,
+                            "children": [
+                                { "type":"showhide", "inputName":"rightpadtouch", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x": 0, "y": 0, "width":36, "height":36, "center":true } ] }
+                            ]
+                        }
+                    ]
+                },
+
+                { "type":"showhide", "inputName":"leftpadclick" , "invert":false, "children": [ { "type":"image", "image":"btn-hapticG.png", "x": -168, "y": -13, "width":155, "height":159, "center":true } ] },
+                {
+                    "x": -171,
+                    "y": -23,
+                    "rot": 15,
+                    "children": [
+                        {
+                            "type":"trailpad",
+                            "inputName":"leftpadtouch",
+                            "x": 0,
+                            "y": 0,
+                            "axisNameX":"leftpadx",
+                            "axisNameY":"leftpady",
+                            "scaleFactorX": 0.0022,
+                            "scaleFactorY": 0.0022,
+                            "image":"padheat.png",
+                            "length":30,
+                            "width":36,
+                            "height":36,
+                            "children": [
+                                { "type":"showhide", "inputName":"leftpadtouch", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x": 0, "y": 0, "width":36, "height":36, "center":true } ] }
+                            ]
+                        }
+                    ]
+                },
+
+                {
+                    "x":0,
+                    "y":-170,
+                    "children": [
+                        { "type":"pbar", "axisName":"lefttrigger" , "background":"ffff0000", "foreground":"ff000000", "x": -57, "y": 70, "width":108, "height":23, "min":0, "max":255, "direction": "left" },
+                        { "type":"pbar", "axisName":"righttrigger", "background":"ffff0000", "foreground":"ff000000", "x":  53, "y": 70, "width":108, "height":23, "min":0, "max":255, "direction": "right" }
+                    ]
+                }
+            ]
+        }
+    ]
+}

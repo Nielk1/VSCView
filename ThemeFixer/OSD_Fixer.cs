@@ -43,9 +43,9 @@ namespace ThemeFixer
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public float? rot { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public int? width { get; set; }
+        public float? width { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public int? height { get; set; }
+        public float? height { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public bool? center { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
