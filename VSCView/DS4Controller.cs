@@ -17,6 +17,9 @@ namespace VSCView
         public bool SensorsEnabled;
         private HidDevice _device;
         int stateUsageLock = 0, reportUsageLock = 0;
+        private byte last_touch_timestamp;
+        private bool touch_last_frame;
+        //private DateTime tmp = DateTime.Now;
 
         public event ControllerNameUpdateEvent ControllerNameUpdated;
 
@@ -149,6 +152,7 @@ namespace VSCView
 
             //_device.MonitorDeviceEvents = true;
 
+            touch_last_frame = false;
             Initalized = true;
 
             //_attached = _device.IsConnected;
@@ -279,8 +283,7 @@ namespace VSCView
                 // bld.Append((report.Data[baseOffset + 6] & 0xfc).ToString().PadLeft(3, '0'));
 
                 (State.Controls["home"] as ControlButton).Button0 = (report.Data[baseOffset + 6] & 0x1) == 0x1;
-                State.ButtonsOld.DS4PadClick = (report.Data[baseOffset + 6] & 0x2) == 0x2;
-
+                (State.Controls["touch"] as ControlTouch).Click = (report.Data[baseOffset + 6] & 0x2) == 0x2;
                 (State.Controls["triggers"] as ControlTriggerPair).Analog0 = (float)report.Data[baseOffset + 7] / byte.MaxValue;
                 (State.Controls["triggers"] as ControlTriggerPair).Analog1 = (float)report.Data[baseOffset + 8] / byte.MaxValue;
 
@@ -318,19 +321,35 @@ namespace VSCView
 
                 for (int FingerCounter = 0; FingerCounter < TouchDataCount; FingerCounter++)
                 {
-                    // Touch Pad Counter
-                    // report.Data[baseOffset + 33 + FingerCounter * 8 + 0];
+                    byte touch_timestamp     = report.Data[baseOffset + 33 + (FingerCounter * 9)]; // Touch Pad Counter
+                    //DateTime tmp_now = DateTime.Now;
 
-                    bool Finger1 = (report.Data[baseOffset + 33 + FingerCounter * 8 + 1] & 0x80) != 0x80;
-                    byte Finger1Index = (byte)(report.Data[baseOffset + 33 + FingerCounter * 8 + 1] & 0x7f);
-                    int F1X = report.Data[baseOffset + 33 + FingerCounter * 8 + 2 + 0] | ((report.Data[baseOffset + 33 + FingerCounter * 8 + 2 + 1] & 0xF) << 8);
-                    int F1Y = ((report.Data[baseOffset + 33 + FingerCounter * 8 + 2 + 1] & 0xF0) >> 4) | (report.Data[baseOffset + 33 + FingerCounter * 8 + 2 + 2] << 4);
+                    bool Finger1            = (report.Data[baseOffset + 34 + (FingerCounter * 9)] & 0x80) != 0x80;
+                    byte Finger1Index = (byte)(report.Data[baseOffset + 34 + (FingerCounter * 9)] & 0x7f);
+                    int F1X                  = report.Data[baseOffset + 35 + (FingerCounter * 9)]
+                                           | ((report.Data[baseOffset + 36 + (FingerCounter * 9)] & 0xF) << 8);
+                    int F1Y                = ((report.Data[baseOffset + 36 + (FingerCounter * 9)] & 0xF0) >> 4)
+                                            | (report.Data[baseOffset + 37 + (FingerCounter * 9)] << 4);
 
-                    bool Finger2 = (report.Data[baseOffset + 37 + FingerCounter * 8 + 1] & 0x80) != 0x80;
-                    byte Finger2Index = (byte)(report.Data[baseOffset + 37 + FingerCounter * 8 + 1] & 0x7f);
-                    int F2X = report.Data[baseOffset + 37 + FingerCounter * 8 + 2 + 0] | ((report.Data[baseOffset + 37 + FingerCounter * 8 + 2 + 1] & 0xF) << 8);
-                    int F2Y = ((report.Data[baseOffset + 37 + FingerCounter * 8 + 2 + 1] & 0xF0) >> 4) | (report.Data[baseOffset + 37 + FingerCounter * 8 + 2 + 2] << 4);
+                    bool Finger2 =            (report.Data[baseOffset + 38 + (FingerCounter * 9)] & 0x80) != 0x80;
+                    byte Finger2Index = (byte)(report.Data[baseOffset + 38 + (FingerCounter * 9)] & 0x7f);
+                    int F2X                  = report.Data[baseOffset + 39 + (FingerCounter * 9)]
+                                           | ((report.Data[baseOffset + 40 + (FingerCounter * 9)] & 0xF) << 8);
+                    int F2Y                = ((report.Data[baseOffset + 40 + (FingerCounter * 9)] & 0xF0) >> 4)
+                                            | (report.Data[baseOffset + 41 + (FingerCounter * 9)] << 4);
+
+                    byte TimeDelta = touch_last_frame ? GetOverflowedDelta(last_touch_timestamp, touch_timestamp) : (byte)0;
+
+                    //Console.WriteLine($"{TimeDelta} {(tmp_now - tmp).Milliseconds}");
+
+                    (State.Controls["touch"] as ControlTouch).AddTouch(0, Finger1, F1X / 1919f, F1Y / 942f, TimeDelta);
+                    (State.Controls["touch"] as ControlTouch).AddTouch(1, Finger2, F2X / 1919f, F2Y / 942f, TimeDelta);
+
+                    last_touch_timestamp = touch_timestamp;
+                    //tmp = tmp_now;
                 }
+
+                touch_last_frame = TouchDataCount > 0;
 
                 ControllerState NewState = GetState();
                 OnStateUpdated(NewState);
@@ -338,6 +357,15 @@ namespace VSCView
 
                 _device.ReadReport(OnReport);
             }
+        }
+
+        // Pure function
+        private byte GetOverflowedDelta(byte prev, byte cur, uint overflow = byte.MaxValue + 1)
+        {
+            uint _cur = cur;
+            while(_cur < prev)
+                _cur += overflow;
+            return (byte)(_cur - prev);
         }
 
         public Image GetIcon()

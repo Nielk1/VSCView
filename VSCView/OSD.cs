@@ -651,7 +651,11 @@ namespace VSCView
         private ControllerData data;
         private Image[] ImagePadDecay;
         private List<PointF?> PadPosHistory;
-        private string InputName;
+        //private string InputName;
+        private string Calc;
+        private IDynamicExpression calcFunc;
+
+        private ExpressionContext context;
 
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
@@ -660,7 +664,20 @@ namespace VSCView
 
             PadPosHistory = new List<PointF?>();
 
-            InputName = themeData["inputName"]?.Value<string>();
+            Calc = themeData["input"]?.Value<string>();
+            if (!string.IsNullOrWhiteSpace(Calc))
+            {
+                context = new ExpressionContext();
+                context.Options.ParseCulture = CultureInfo.InvariantCulture;
+                VariableCollection variables = context.Variables;
+
+                // Hook up the required events
+                variables.ResolveVariableType += new EventHandler<ResolveVariableTypeEventArgs>(variables_ResolveVariableType);
+                variables.ResolveVariableValue += new EventHandler<ResolveVariableValueEventArgs>(variables_ResolveVariableValue);
+            }
+
+            InitalizeController();
+
             string imageName = themeData["image"]?.Value<string>();
             int TrailLength = themeData["length"]?.Value<int>()??0;
 
@@ -688,12 +705,39 @@ namespace VSCView
             }
         }
 
+        public override void InitalizeController()
+        {
+            if (!string.IsNullOrWhiteSpace(Calc))
+            {
+                try
+                {
+                    calcFunc = context.CompileDynamic(Calc.Replace(":", "__colon__"));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"\r\n{ex}");
+                }
+            }
+
+            base.InitalizeController();
+        }
+
+        private void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
+        {
+            MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
+            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
+            e.VariableValue = Convert.ChangeType(retVal, e.VariableType);
+        }
+
+        private void variables_ResolveVariableType(object sender, ResolveVariableTypeEventArgs e)
+        {
+            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
+        }
+
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
             graphics.TranslateTransform(X, Y);
-
-            bool ControlHot = data.GetBasicControl(InputName);
 
             PointF? prevCord = null;
             for (int pointfade = 0; pointfade < PadPosHistory.Count && pointfade < ImagePadDecay.Length; pointfade++)
@@ -752,7 +796,8 @@ namespace VSCView
             float AnalogX = string.IsNullOrWhiteSpace(AxisNameX) ? 0 : (data.GetAnalogControl(AxisNameX) * ScaleFactorX);
             float AnalogY = string.IsNullOrWhiteSpace(AxisNameY) ? 0 : (data.GetAnalogControl(AxisNameY) * ScaleFactorY);
 
-            if (string.IsNullOrWhiteSpace(InputName) || data.GetBasicControl(InputName))
+
+            if (calcFunc != null && (bool)calcFunc?.Evaluate())
             {
                 PointF cord = new PointF(AnalogX,-AnalogY);
                 PadPosHistory.Add(cord);

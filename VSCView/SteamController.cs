@@ -444,9 +444,9 @@ namespace VSCView
                                         bool LeftStickClick = (report.Data[10] & 64) == 64;
                                         (State.Controls["stick_left"] as ControlStick).Click = LeftStickClick;
                                         bool Unknown = (report.Data[10] & 32) == 32; // what is this?
-                                        State.ButtonsOld.RightPadTouch = (report.Data[10] & 16) == 16;
+                                        bool RightPadTouch = (report.Data[10] & 16) == 16;
                                         bool LeftPadTouch = (report.Data[10] & 8) == 8;
-                                        State.ButtonsOld.RightPadClick = (report.Data[10] & 4) == 4;
+                                        (State.Controls["touch_right"] as ControlTouch).Click = (report.Data[10] & 4) == 4;
                                         bool ThumbOrLeftPadPress = (report.Data[10] & 2) == 2; // what is this even for?
                                         (State.Controls["grip"] as ControlButtonPair).Button1 = (report.Data[10] & 1) == 1;
 
@@ -458,9 +458,9 @@ namespace VSCView
                                             if (LeftPadTouch)
                                             {
                                                 State.ButtonsOld.LeftPadTouch = true;
-                                                State.ButtonsOld.LeftPadClick = ThumbOrLeftPadPress;
-                                                State.LeftPadX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
-                                                State.LeftPadY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
+                                                float LeftPadX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
+                                                float LeftPadY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
+                                                (State.Controls["touch_left"] as ControlTouch).AddTouch(0, true, LeftPadX, LeftPadY, 0);
                                             }
                                             else
                                             {
@@ -472,24 +472,24 @@ namespace VSCView
                                         {
                                             if (LeftPadTouch)
                                             {
-                                                State.ButtonsOld.LeftPadTouch = true;
-                                                State.LeftPadX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
-                                                State.LeftPadY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
+                                                float LeftPadX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
+                                                float LeftPadY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
+                                                (State.Controls["touch_left"] as ControlTouch).AddTouch(0, true, LeftPadX, LeftPadY, 0);
                                             }
                                             else
                                             {
-                                                State.ButtonsOld.LeftPadTouch = false;
                                                 (State.Controls["stick_left"] as ControlStick).X = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
                                                 (State.Controls["stick_left"] as ControlStick).Y = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
-                                                State.LeftPadX = 0;
-                                                State.LeftPadY = 0;
+                                                (State.Controls["touch_left"] as ControlTouch).AddTouch(0, false, 0, 0, 0);
                                             }
 
-                                            State.ButtonsOld.LeftPadClick = ThumbOrLeftPadPress && !LeftStickClick;
+                                            (State.Controls["touch_left"] as ControlTouch).Click = ThumbOrLeftPadPress && !LeftStickClick;
                                         }
 
-                                        State.RightPadX = (float)BitConverter.ToInt16(report.Data, 20) / Int16.MaxValue;
-                                        State.RightPadY = (float)BitConverter.ToInt16(report.Data, 22) / Int16.MaxValue;
+                                        float RightPadX = (float)BitConverter.ToInt16(report.Data, 20) / Int16.MaxValue;
+                                        float RightPadY = (float)BitConverter.ToInt16(report.Data, 22) / Int16.MaxValue;
+
+                                        (State.Controls["touch_right"] as ControlTouch).AddTouch(0, RightPadTouch, RightPadX, RightPadY, 0);
 
                                         /*
                                         State.DataStuck = CheckSensorDataStuck();

@@ -396,6 +396,91 @@
             },
 
             {
+              "type": "showhide",
+              "input": "touch:click",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "touch.png",
+                  "x": -4,
+                  "y": -40,
+                  "width": 193,
+                  "height": 116,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "x": 0,
+              "y": -60,
+              "rot": 0,
+              "children": [
+                {
+                  "type": "trailpad",
+                  "input": "touch:touch0",
+                  "x": -94,
+                  "y": 0,
+                  "axisNameX": "touch:x0",
+                  "axisNameY": "touch:y0",
+                  "scaleFactorX": 176,
+                  "scaleFactorY": -80,
+                  "image": "padheat.png",
+                  "length": 30,
+                  "width": 36,
+                  "height": 36,
+                  "children": [
+                    {
+                      "type": "showhide",
+                      "input": "touch:touch0",
+                      "children": [
+                        {
+                          "type": "image",
+                          "image": "btn-touch.png",
+                          "x": 0,
+                          "y": 0,
+                          "width": 36,
+                          "height": 36,
+                          "center": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "trailpad",
+                  "input": "touch:touch1",
+                  "x": -90,
+                  "y": 0,
+                  "axisNameX": "touch:x1",
+                  "axisNameY": "touch:y1",
+                  "scaleFactorX": 176,
+                  "scaleFactorY": -80,
+                  "image": "padheat.png",
+                  "length": 30,
+                  "width": 36,
+                  "height": 36,
+                  "children": [
+                    {
+                      "type": "showhide",
+                      "input": "touch:touch1",
+                      "children": [
+                        {
+                          "type": "image",
+                          "image": "btn-touch.png",
+                          "x": 0,
+                          "y": 0,
+                          "width": 36,
+                          "height": 36,
+                          "center": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+
+            {
               "x": 0,
               "y": 170,
               "children": [

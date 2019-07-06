@@ -97,7 +97,7 @@ namespace ThemeFixer
             if (min.HasValue) min /= byte.MaxValue;
             if (max.HasValue) max /= byte.MaxValue;
 
-            if (type == "showhide")
+            if (type == "showhide" || type == "trailpad")
             {
                 if (!string.IsNullOrWhiteSpace(inputName))
                 {
@@ -156,27 +156,31 @@ namespace ThemeFixer
         {
             switch (inputName.ToLowerInvariant())
             {
-                case "y":            return "quad_right:0";
-                case "b":            return "quad_right:1";
-                case "a":            return "quad_right:2";
-                case "x":            return "quad_right:3";
+                case "y":             return "quad_right:0";
+                case "b":             return "quad_right:1";
+                case "a":             return "quad_right:2";
+                case "x":             return "quad_right:3";
                 case "leftbumper":
-                case "lb":           return "bumpers:0";
+                case "lb":            return "bumpers:0";
                 case "rightbumper":
-                case "rb":           return "bumpers:1";
+                case "rb":            return "bumpers:1";
                 case "leftgrip":
-                case "lg":           return "grip:0";
+                case "lg":            return "grip:0";
                 case "rightgrip":
-                case "rg":           return "grip:1";
-                case "select":       return "menu:0";
-                case "start":        return "menu:1";
+                case "rg":            return "grip:1";
+                case "select":        return "menu:0";
+                case "start":         return "menu:1";
                 case "lefttrigger":
-                case "lt":           return "triggers:stage2_0";
+                case "lt":            return "triggers:stage2_0";
                 case "righttrigger":
-                case "rt":           return "triggers:stage2_1";
-                case "steam":        return "home";
+                case "rt":            return "triggers:stage2_1";
+                case "steam":         return "home";
                 case "stickclick":
-                case "sc":           return "stick_left:click";
+                case "sc":            return "stick_left:click";
+                case "leftpadtouch":  return "touch_left:touch0";
+                case "leftpadclick":  return "touch_left:click";
+                case "rightpadtouch": return "touch_right:touch0";
+                case "rightpadclick": return "touch_right:click";
             }
             return inputName;
         }
@@ -189,6 +193,10 @@ namespace ThemeFixer
                 case "righttrigger": return "triggers:analog1";
                 case "leftstickx":   return "stick_left:x";
                 case "leftsticky":   return "stick_left:y";
+                case "leftpadx":     return "touch_left:x0";
+                case "leftpady":     return "touch_left:y0";
+                case "rightpadx":    return "touch_right:x0";
+                case "rightpady":    return "touch_right:y0";
             }
             return inputName;
         }
