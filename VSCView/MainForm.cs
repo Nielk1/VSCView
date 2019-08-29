@@ -292,6 +292,11 @@ namespace VSCView
             ttimer?.Change(Timeout.Infinite, Timeout.Infinite);
             Controllers?.ForEach(dr => dr.DeInitalize());
         }
+
+        private void MinimizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 
     public class NativeMethods

@@ -43,6 +43,7 @@
             this.lblHint1 = new System.Windows.Forms.Label();
             this.lblHint2 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.minimizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,89 +60,88 @@
             this.tsmiSetBackgroundColor,
             this.tsmiAbout,
             this.toolStripSeparator3,
+            this.minimizeToolStripMenuItem,
             this.tsmiExit});
             this.cmsMain.Name = "cmsMain";
-            this.cmsMain.Size = new System.Drawing.Size(223, 190);
+            this.cmsMain.Size = new System.Drawing.Size(190, 220);
             // 
             // tsmiTheme
             // 
             this.tsmiTheme.Name = "tsmiTheme";
-            this.tsmiTheme.Size = new System.Drawing.Size(222, 24);
+            this.tsmiTheme.Size = new System.Drawing.Size(189, 22);
             this.tsmiTheme.Text = "&Theme";
             // 
             // tsmiController
             // 
             this.tsmiController.Name = "tsmiController";
-            this.tsmiController.Size = new System.Drawing.Size(222, 24);
+            this.tsmiController.Size = new System.Drawing.Size(189, 22);
             this.tsmiController.Text = "&Controller";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(219, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
             // 
             // tsmiReloadThemes
             // 
             this.tsmiReloadThemes.Name = "tsmiReloadThemes";
-            this.tsmiReloadThemes.Size = new System.Drawing.Size(222, 24);
+            this.tsmiReloadThemes.Size = new System.Drawing.Size(189, 22);
             this.tsmiReloadThemes.Text = "Reload Themes";
             this.tsmiReloadThemes.Click += new System.EventHandler(this.tsmiReloadThemes_Click);
             // 
             // tsmiReloadControllers
             // 
             this.tsmiReloadControllers.Name = "tsmiReloadControllers";
-            this.tsmiReloadControllers.Size = new System.Drawing.Size(222, 24);
+            this.tsmiReloadControllers.Size = new System.Drawing.Size(189, 22);
             this.tsmiReloadControllers.Text = "Reload Controllers";
             this.tsmiReloadControllers.Click += new System.EventHandler(this.tsmiReloadControllers_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(219, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(186, 6);
             // 
             // tsmiSetBackgroundColor
             // 
             this.tsmiSetBackgroundColor.Name = "tsmiSetBackgroundColor";
-            this.tsmiSetBackgroundColor.Size = new System.Drawing.Size(222, 24);
+            this.tsmiSetBackgroundColor.Size = new System.Drawing.Size(189, 22);
             this.tsmiSetBackgroundColor.Text = "Set Background Color";
             this.tsmiSetBackgroundColor.Click += new System.EventHandler(this.tsmiSetBackgroundColor_Click);
             // 
             // tsmiAbout
             // 
             this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(222, 24);
+            this.tsmiAbout.Size = new System.Drawing.Size(189, 22);
             this.tsmiAbout.Text = "&About";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(219, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(186, 6);
             // 
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(222, 24);
+            this.tsmiExit.Size = new System.Drawing.Size(189, 22);
             this.tsmiExit.Text = "E&xit";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
             // lblHint1
             // 
             this.lblHint1.AutoSize = true;
-            this.lblHint1.Location = new System.Drawing.Point(116, 95);
-            this.lblHint1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHint1.Location = new System.Drawing.Point(87, 77);
             this.lblHint1.Name = "lblHint1";
-            this.lblHint1.Size = new System.Drawing.Size(185, 17);
+            this.lblHint1.Size = new System.Drawing.Size(142, 13);
             this.lblHint1.TabIndex = 1;
             this.lblHint1.Text = "Right Click for Context Menu";
             // 
             // lblHint2
             // 
             this.lblHint2.AutoSize = true;
-            this.lblHint2.Location = new System.Drawing.Point(116, 134);
-            this.lblHint2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHint2.Location = new System.Drawing.Point(87, 109);
             this.lblHint2.Name = "lblHint2";
-            this.lblHint2.Size = new System.Drawing.Size(154, 17);
+            this.lblHint2.Size = new System.Drawing.Size(119, 13);
             this.lblHint2.TabIndex = 2;
             this.lblHint2.Text = "Click and Drag to Move";
             // 
@@ -149,17 +149,23 @@
             // 
             this.colorDialog1.Color = System.Drawing.Color.Lime;
             // 
+            // minimizeToolStripMenuItem
+            // 
+            this.minimizeToolStripMenuItem.Name = "minimizeToolStripMenuItem";
+            this.minimizeToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.minimizeToolStripMenuItem.Text = "&Minimize";
+            this.minimizeToolStripMenuItem.Click += new System.EventHandler(this.MinimizeToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lime;
-            this.ClientSize = new System.Drawing.Size(419, 325);
+            this.ClientSize = new System.Drawing.Size(314, 264);
             this.ContextMenuStrip = this.cmsMain;
             this.Controls.Add(this.lblHint2);
             this.Controls.Add(this.lblHint1);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "VSCView";
@@ -186,5 +192,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiSetBackgroundColor;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.ToolStripMenuItem minimizeToolStripMenuItem;
     }
 }
