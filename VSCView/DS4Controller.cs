@@ -12,7 +12,8 @@ namespace VSCView
     {
         public const int VendorId = 0x054C;
         public const int ProductIdDongle = 0x0BA0;
-        public const int ProductIdWired = 0x09CC; // and BT
+        //public const int ProductIdWired = 0x05C4; // and BT
+        public const int ProductIdWiredV2 = 0x09CC; // and BT
 
         public bool SensorsEnabled;
         private HidDevice _device;
@@ -145,7 +146,8 @@ namespace VSCView
             if (Initalized) return;
 
             // open the device overlapped read so we don't get stuck waiting for a report when we write to it
-            _device.OpenDevice(DeviceMode.Overlapped, DeviceMode.NonOverlapped, ShareMode.ShareRead | ShareMode.ShareWrite);
+            //_device.OpenDevice(DeviceMode.Overlapped, DeviceMode.NonOverlapped, ShareMode.ShareRead | ShareMode.ShareWrite);
+            _device.OpenDevice(DeviceMode.Overlapped, DeviceMode.Overlapped, ShareMode.ShareRead | ShareMode.ShareWrite);
 
             //_device.Inserted += DeviceAttachedHandler;
             //_device.Removed += DeviceRemovedHandler;
@@ -173,8 +175,41 @@ namespace VSCView
             _device.CloseDevice();
         }
 
-        public void Identify()
+        public async void Identify()
         {
+            HidReport report;
+            int offset = 0;
+            if (ConnectionType == EConnectionType.Bluetooth)
+            {
+                report = new HidReport(78)
+                {
+                    ReportId = 0x11,
+                    Data = new byte[] { 0xC0, 0x20, 0x05, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x0f, 0x0f }
+                };
+                offset = 2;
+            }
+            else
+            {
+                report = new HidReport(32)
+                {
+                    ReportId = 0x05,
+                    Data = new byte[] { 0x05, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x0f, 0x0f }
+                };
+            }
+
+            if (_device.WriteReport(report))
+            {
+                Thread.Sleep(250);
+                report.Data[offset + 0] = 0x01;
+                report.Data[offset + 3] = 0x00;
+                report.Data[offset + 4] = 0x00;
+                _device.WriteReport(report);
+                Thread.Sleep(2000);
+                report.Data[offset + 0] = 0x04;
+                report.Data[offset + 8] = 0x01;
+                report.Data[offset + 9] = 0x01;
+                _device.WriteReport(report);
+            }
         }
 
         public bool CheckSensorDataStuck()
@@ -225,11 +260,13 @@ namespace VSCView
             string retVal = "Sony DUALSHOCK®4 Controller";
 
             byte[] SerialNumberBytes;
-            _device.ReadSerialNumber(out SerialNumberBytes); // DUALSHOCK®4 USB Wireless Adaptor
-            string SerialNumber = System.Text.Encoding.Unicode.GetString(SerialNumberBytes)?.Trim('\0');
-            if (!string.IsNullOrWhiteSpace(SerialNumber))
+            if (_device.ReadSerialNumber(out SerialNumberBytes)) // DUALSHOCK®4 USB Wireless Adaptor
             {
-                retVal += $" [{SerialNumber ?? "No ID"}]";
+                string SerialNumber = System.Text.Encoding.Unicode.GetString(SerialNumberBytes)?.Trim('\0');
+                if (!string.IsNullOrWhiteSpace(SerialNumber))
+                {
+                    retVal += $" [{SerialNumber ?? "No ID"}]";
+                }
             }
 
             return retVal;
@@ -244,7 +281,7 @@ namespace VSCView
                 OldState = State; // shouldn't this be a clone?
                 //if (_attached == false) { return; }
 
-                bool BT = report.ReportId == 17;
+                bool BT = report.ReportId == 0x11;
                 int baseOffset = BT ? 2 : 0;
 
                 (State.Controls["stick_left"] as ControlStick).X = (report.Data[baseOffset + 0] - 128) / 128f;
@@ -289,6 +326,7 @@ namespace VSCView
 
                 // GyroTimestamp
                 //bld.Append(BitConverter.ToUInt16(report.Data, baseOffset + 9).ToString().PadLeft(5));
+                // FIX: (timestamp * 16) / 3
 
                 // Battery Power Level
                 //bld.Append(report.Data[baseOffset + 11].ToString("X2") + "   ");
@@ -313,8 +351,6 @@ namespace VSCView
 
                 // ??
                 // bld.Append(report.Data[baseOffset + 30].ToString("X2"));
-
-                // TOUCH COUNTER
                 // bld.Append(report.Data[baseOffset + 31].ToString("X2") + " ");
 
                 int TouchDataCount = report.Data[baseOffset + 32];
@@ -409,7 +445,7 @@ namespace VSCView
     {
         public IController[] GetControllers()
         {
-            List<HidDevice> _devices = HidDevices.Enumerate(DS4Controller.VendorId, DS4Controller.ProductIdDongle, DS4Controller.ProductIdWired).ToList();
+            List<HidDevice> _devices = HidDevices.Enumerate(DS4Controller.VendorId, DS4Controller.ProductIdDongle, DS4Controller.ProductIdWiredV2).ToList();
             List<DS4Controller> ControllerList = new List<DS4Controller>();
             string bt_hid_id = @"00001124-0000-1000-8000-00805f9b34fb";
 
@@ -423,7 +459,7 @@ namespace VSCView
                     EConnectionType ConType = EConnectionType.Unknown;
                     switch (_device.Attributes.ProductId)
                     {
-                        case DS4Controller.ProductIdWired:
+                        case DS4Controller.ProductIdWiredV2:
                             if (devicePath.Contains(bt_hid_id))
                             {
                                 ConType = EConnectionType.Bluetooth;

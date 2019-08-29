@@ -193,7 +193,10 @@ namespace VSCView
             ControllerData.SetController(ActiveController);
             ActiveController.Initalize();
 
-            ActiveController.Identify();
+            new Thread(() =>
+            {
+                ActiveController.Identify();
+            }).Start();
 
             ui.InitalizeController();
         }

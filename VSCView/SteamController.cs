@@ -11,7 +11,7 @@ namespace VSCView
     public class SteamController : IController
     {
         public const int VendorId = 0x28DE; // 10462
-        public const int ProductIdDongle = 0x1142; // 4418;
+        public const int ProductIdDongle = 0x1142; // 4418
         public const int ProductIdWired = 0x1102; // 4354
         public const int ProductIdChell = 0x1101; // 4353
         public const int ProductIdBT = 0x1106; // 4358
@@ -121,18 +121,6 @@ namespace VSCView
         // TODO for now it is safe to assume the startup connection type is correct, however, in the future we will need to have connection events trigger a recheck of the type or something once the V2 controller is out (if ever)
         public SteamController(HidDevice device, EConnectionType connection = EConnectionType.Unknown, EControllerType type = EControllerType.Unknown)
         {
-            /*
-            State.ButtonQuads["primary"] = new ControlButtonQuad();
-            State.ButtonPairs["bumper"] = new ControlButtonPair();
-            State.TriggerPairs["primary"] = new ControlTriggerPair();
-            State.ButtonPairs["menu"] = new ControlButtonPair();
-            State.ButtonPairs["grip"] = new ControlButtonPair();
-            State.Buttons["home"] = new ControlButton();
-            State.Sticks["left"] = new ControlStick(HasClick: true);
-            State.Touch["left"] = new ControlTouch(TouchCount: 1, HasClick: true);
-            State.Touch["right"] = new ControlTouch(TouchCount: 1, HasClick: true);
-            */
-
             State.Controls["quad_left"] = new ControlDPad(/*4*/);
             State.Controls["quad_right"] = new ControlButtonQuad(EOrientation.Diamond);
             State.Controls["bumpers"] = new ControlButtonPair();
@@ -170,7 +158,8 @@ namespace VSCView
             if (Initalized > 0) return;
 
             // open the device overlapped read so we don't get stuck waiting for a report when we write to it
-            _device.OpenDevice(DeviceMode.Overlapped, DeviceMode.NonOverlapped, ShareMode.ShareRead | ShareMode.ShareWrite);
+            //_device.OpenDevice(DeviceMode.Overlapped, DeviceMode.NonOverlapped, ShareMode.ShareRead | ShareMode.ShareWrite);
+            _device.OpenDevice(DeviceMode.Overlapped, DeviceMode.Overlapped, ShareMode.ShareRead | ShareMode.ShareWrite);
 
             //_device.Inserted += DeviceAttachedHandler;
             //_device.Removed += DeviceRemovedHandler;
@@ -281,9 +270,10 @@ namespace VSCView
             reportData[2] = 0x15; // 0x15 = length of data to be written
             reportData[3] = 0x01;
 
-            Thread.Sleep(1000); // why do we need this? race condition?
+            //Thread.Sleep(1000); // why do we need this? race condition?
             var result = _device.WriteFeatureData(reportData);
-            Thread.Sleep(1000); // why do we need this? race condition?
+            if (!result) return false;
+            //Thread.Sleep(1000); // why do we need this? race condition?
             var reply = GetFeatureReport(reportData);
 
             //byte[] reply;
@@ -457,7 +447,6 @@ namespace VSCView
                                         {
                                             if (LeftPadTouch)
                                             {
-                                                State.ButtonsOld.LeftPadTouch = true;
                                                 float LeftPadX = (float)BitConverter.ToInt16(report.Data, 16) / Int16.MaxValue;
                                                 float LeftPadY = (float)BitConverter.ToInt16(report.Data, 18) / Int16.MaxValue;
                                                 (State.Controls["touch_left"] as ControlTouch).AddTouch(0, true, LeftPadX, LeftPadY, 0);
