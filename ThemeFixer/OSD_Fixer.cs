@@ -97,6 +97,37 @@ namespace ThemeFixer
             if (min.HasValue) min /= byte.MaxValue;
             if (max.HasValue) max /= byte.MaxValue;
 
+            // remove rotation from trailpads as we unrotate the raw data now.
+            // also note that 30 deg was wrong, the correct value is actually 15 deg.
+
+            if (rot.HasValue)
+            {
+                bool AnyChildIsTrailpad = type == "trailpad";
+                if (!AnyChildIsTrailpad)
+                {
+                    Queue<UI_Item> TrailpadDive = new Queue<UI_Item>();
+                    children?.ForEach(dr => TrailpadDive.Enqueue(dr));
+                    while (TrailpadDive.Count > 0)
+                    {
+                        UI_Item tmp = TrailpadDive.Dequeue();
+                        if (tmp.type == "trailpad")
+                        {
+                            AnyChildIsTrailpad = true;
+                            break;
+                        }
+                        children?.ForEach(dr => TrailpadDive.Enqueue(dr));
+                    }
+                }
+
+                if (AnyChildIsTrailpad)
+                {
+                    if (rot.HasValue && rot.Value == 15)
+                        rot = null;
+                    if (rot.HasValue && rot.Value == -15)
+                        rot = null;
+                }
+            }
+
             if (type == "showhide" || type == "trailpad")
             {
                 if (!string.IsNullOrWhiteSpace(inputName))

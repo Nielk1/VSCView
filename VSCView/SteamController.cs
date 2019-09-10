@@ -23,6 +23,8 @@ namespace VSCView
         const byte k_nLastSegmentFlag = 0x40;
         const byte k_nSegmentNumberMask = 0x07;
 
+        const float PadAngle = 0.261799f; // 15 deg in radians
+
 
         public bool SensorsEnabled;
         private HidDevice _device;
@@ -72,22 +74,22 @@ namespace VSCView
         private enum EBLEOptionDataChunksBitmask : UInt16
         {
             // First byte uppper nibble
-            k_EBLEButtonChunk1 = 0x10,
-            k_EBLEButtonChunk2 = 0x20,
-            k_EBLEButtonChunk3 = 0x40,
-            k_EBLELeftJoystickChunk = 0x80,
+            BLEButtonChunk1 = 0x10,
+            BLEButtonChunk2 = 0x20,
+            BLEButtonChunk3 = 0x40,
+            BLELeftJoystickChunk = 0x80,
 
             // Second full byte
-            k_EBLELeftTrackpadChunk = 0x100,
-            k_EBLERightTrackpadChunk = 0x200,
-            k_EBLEIMUAccelChunk = 0x400,
-            k_EBLEIMUGyroChunk = 0x800,
-            k_EBLEIMUQuatChunk = 0x1000,
+            BLELeftTrackpadChunk = 0x100,
+            BLERightTrackpadChunk = 0x200,
+            BLEIMUAccelChunk = 0x400,
+            BLEIMUGyroChunk = 0x800,
+            BLEIMUQuatChunk = 0x1000,
         };
         private enum EBLEPacketReportNums : byte
         {
-            k_EBLEReportState = 4,
-            k_EBLEReportStatus = 5,
+            BLEReportState = 4,
+            BLEReportStatus = 5,
         };
         public ControllerState GetState()
         {
@@ -139,7 +141,7 @@ namespace VSCView
             public byte[] ulButtons;
             public byte sTriggerL;
             public byte sTriggerR;
-            public byte[] ulButtons5;
+            public byte[] ulButtons5; // what's this?
 
             public Int16 sLeftStickX;
             public Int16 sLeftStickY;
@@ -160,6 +162,9 @@ namespace VSCView
             public Int16 sGyroQuatX { get; set; }
             public Int16 sGyroQuatY { get; set; }
             public Int16 sGyroQuatZ { get; set; }
+
+            // We only need this bceause we add touch events rather than using the raw touch x/y
+            public bool LeftTouchChange { get; set; }
         }
 
         RawSteamControllerState RawState = new RawSteamControllerState()
@@ -455,76 +460,81 @@ namespace VSCView
                                 EBLEPacketReportNums reportType = (EBLEPacketReportNums)(m_rgubBuffer[0] & 0x0f);
                                 switch(reportType)
                                 {
-                                    case EBLEPacketReportNums.k_EBLEReportState:
+                                    case EBLEPacketReportNums.BLEReportState:
                                         {
                                             EBLEOptionDataChunksBitmask ucOptionDataMask = (EBLEOptionDataChunksBitmask)(BitConverter.ToUInt16(m_rgubBuffer, 0) & 0xfff0);
                                             int pBuf = 2;
 
                                             try
                                             {
-                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.k_EBLEButtonChunk1))
+                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.BLEButtonChunk1))
                                                 {
+                                                    bool LeftTouchOld = (RawState.ulButtons[2] & 8) == 8;
+                                                    bool RightTouchOld = (RawState.ulButtons[2] & 16) == 16;
+
                                                     Array.Copy(m_rgubBuffer, pBuf, RawState.ulButtons, 0, 3);
+
+                                                    if (LeftTouchOld != ((RawState.ulButtons[2] & 8) == 8))
+                                                        RawState.LeftTouchChange = true;
+
+                                                    //if (RightTouchOld != ((RawState.ulButtons[2] & 16) == 16))
+                                                    //    RawState.RightTouchChange = true;
 
                                                     pBuf += 3;
                                                 }
-                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.k_EBLEButtonChunk2))
+                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.BLEButtonChunk2))
                                                 {
                                                     RawState.sTriggerL = m_rgubBuffer[pBuf + 0];
                                                     RawState.sTriggerR = m_rgubBuffer[pBuf + 1];
 
                                                     pBuf += 2;
                                                 }
-                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.k_EBLEButtonChunk3))
+                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.BLEButtonChunk3))
                                                 {
                                                     Array.Copy(m_rgubBuffer, pBuf, RawState.ulButtons5, 0, 3);
+
+                                                    Console.WriteLine($"{Convert.ToString(RawState.ulButtons5[0], 2).PadLeft(8, '0')} {Convert.ToString(RawState.ulButtons5[1], 2).PadLeft(8, '0')} {Convert.ToString(RawState.ulButtons5[2], 2).PadLeft(8, '0')}");
 
                                                     pBuf++;
                                                     pBuf++;
                                                     pBuf++;
                                                 }
-                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.k_EBLELeftJoystickChunk))
+                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.BLELeftJoystickChunk))
                                                 {
                                                     RawState.sLeftStickX = BitConverter.ToInt16(m_rgubBuffer, pBuf);
                                                     RawState.sLeftStickY = BitConverter.ToInt16(m_rgubBuffer, pBuf + sizeof(Int16));
 
                                                     pBuf += sizeof(Int16) + sizeof(Int16);
                                                 }
-                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.k_EBLELeftTrackpadChunk))
+                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.BLELeftTrackpadChunk))
                                                 {
-                                                    RawState.sLeftPadX = BitConverter.ToInt16(m_rgubBuffer, pBuf);
-                                                    RawState.sLeftPadY = BitConverter.ToInt16(m_rgubBuffer, pBuf + sizeof(Int16));
-                                                    Int16 X = RawState.sLeftPadX;
-                                                    Int16 Y = RawState.sLeftPadY;
-                                                    Int16 nPadOffset = 0;
-                                                    if ((RawState.ulButtons[2] & 8) == 8)
-                                                        nPadOffset = 1000;
-                                                    else
-                                                        nPadOffset = 0;
+                                                    int X = BitConverter.ToInt16(m_rgubBuffer, pBuf);
+                                                    int Y = BitConverter.ToInt16(m_rgubBuffer, pBuf + sizeof(Int16));
 
-                                                    RawState.sLeftPadX = (short)(X + nPadOffset);
-                                                    RawState.sLeftPadY = (short)(Y + nPadOffset);
+                                                    RotateXY(-PadAngle, ref X, ref Y);
+
+                                                    RawState.sLeftPadX = (short)Math.Min(Math.Max(X, Int16.MinValue), Int16.MaxValue);
+                                                    RawState.sLeftPadY = (short)Math.Min(Math.Max(Y, Int16.MinValue), Int16.MaxValue);
+
+                                                    RawState.LeftTouchChange = true;
 
                                                     pBuf += sizeof(Int16) + sizeof(Int16);
                                                 }
-                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.k_EBLERightTrackpadChunk))
+                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.BLERightTrackpadChunk))
                                                 {
-                                                    RawState.sRightPadX = BitConverter.ToInt16(m_rgubBuffer, pBuf);
-                                                    RawState.sRightPadY = BitConverter.ToInt16(m_rgubBuffer, pBuf + sizeof(Int16));
-                                                    Int16 X = RawState.sRightPadX;
-                                                    Int16 Y = RawState.sRightPadY;
-                                                    Int16 nPadOffset = 0;
-                                                    if ((RawState.ulButtons[2] & 16) == 16)
-                                                        nPadOffset = 1000;
-                                                    else
-                                                        nPadOffset = 0;
+                                                    int X = BitConverter.ToInt16(m_rgubBuffer, pBuf);
+                                                    int Y = BitConverter.ToInt16(m_rgubBuffer, pBuf + sizeof(Int16));
 
-                                                    RawState.sRightPadX = (short)(X + nPadOffset);
-                                                    RawState.sRightPadY = (short)(Y + nPadOffset);
+                                                    RotateXY(PadAngle, ref X, ref Y);
+
+                                                    RawState.sRightPadX = (short)Math.Min(Math.Max(X, Int16.MinValue), Int16.MaxValue);
+                                                    RawState.sRightPadY = (short)Math.Min(Math.Max(Y, Int16.MinValue), Int16.MaxValue);
+
+                                                    //RawState.RightTouchChange = true;
 
                                                     pBuf += sizeof(Int16) + sizeof(Int16);
                                                 }
-                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.k_EBLEIMUAccelChunk))
+                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.BLEIMUAccelChunk))
                                                 {
                                                     RawState.sAccelX = BitConverter.ToInt16(m_rgubBuffer, pBuf);
                                                     RawState.sAccelY = BitConverter.ToInt16(m_rgubBuffer, pBuf + sizeof(Int16));
@@ -532,7 +542,7 @@ namespace VSCView
 
                                                     pBuf += sizeof(Int16) + sizeof(Int16) + sizeof(Int16);
                                                 }
-                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.k_EBLEIMUGyroChunk))
+                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.BLEIMUGyroChunk))
                                                 {
                                                     RawState.sGyroX = BitConverter.ToInt16(m_rgubBuffer, pBuf);
                                                     RawState.sGyroY = BitConverter.ToInt16(m_rgubBuffer, pBuf + sizeof(Int16));
@@ -540,7 +550,7 @@ namespace VSCView
 
                                                     pBuf += sizeof(Int16) + sizeof(Int16) + sizeof(Int16);
                                                 }
-                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.k_EBLEIMUQuatChunk))
+                                                if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.BLEIMUQuatChunk))
                                                 {
                                                     RawState.sGyroQuatW = BitConverter.ToInt16(m_rgubBuffer, pBuf);
                                                     RawState.sGyroQuatX = BitConverter.ToInt16(m_rgubBuffer, pBuf + sizeof(Int16));
@@ -560,7 +570,7 @@ namespace VSCView
                                             ProcessStateBytes();
                                         }
                                         break;
-                                    case EBLEPacketReportNums.k_EBLEReportStatus:
+                                    case EBLEPacketReportNums.BLEReportStatus:
                                         break;
                                     default:
                                         Console.WriteLine($"Unknown Packet {report.ReportId}\t{BitConverter.ToString(m_rgubBuffer)}");
@@ -606,8 +616,15 @@ namespace VSCView
                                         {
                                             if (LeftPadTouch)
                                             {
-                                                RawState.sLeftPadX = BitConverter.ToInt16(report.Data, 8 + 8);
-                                                RawState.sLeftPadY = BitConverter.ToInt16(report.Data, 8 + 10);
+                                                int X = BitConverter.ToInt16(report.Data, 8 + 8);
+                                                int Y = BitConverter.ToInt16(report.Data, 8 + 10);
+
+                                                RotateXY(-PadAngle, ref X, ref Y);
+
+                                                RawState.sLeftPadX = (short)Math.Min(Math.Max(X, Int16.MinValue), Int16.MaxValue);
+                                                RawState.sLeftPadY = (short)Math.Min(Math.Max(Y, Int16.MinValue), Int16.MaxValue);
+
+                                                RawState.LeftTouchChange = true;
                                             }
                                             else
                                             {
@@ -619,20 +636,39 @@ namespace VSCView
                                         {
                                             if (LeftPadTouch)
                                             {
-                                                RawState.sLeftPadX = BitConverter.ToInt16(report.Data, 8 + 8);
-                                                RawState.sLeftPadY = BitConverter.ToInt16(report.Data, 8 + 10);
+                                                int X = BitConverter.ToInt16(report.Data, 8 + 8);
+                                                int Y = BitConverter.ToInt16(report.Data, 8 + 10);
+
+                                                RotateXY(-PadAngle, ref X, ref Y);
+
+                                                RawState.sLeftPadX = (short)Math.Min(Math.Max(X, Int16.MinValue), Int16.MaxValue);
+                                                RawState.sLeftPadY = (short)Math.Min(Math.Max(Y, Int16.MinValue), Int16.MaxValue);
                                             }
                                             else
                                             {
+                                                RawState.sLeftPadX = 0;
+                                                RawState.sLeftPadY = 0;
+
                                                 RawState.sLeftStickX = BitConverter.ToInt16(report.Data, 8 + 8);
                                                 RawState.sLeftStickY = BitConverter.ToInt16(report.Data, 8 + 10);
                                             }
 
+                                            RawState.LeftTouchChange = true;
+
                                             (State.Controls["touch_left"] as ControlTouch).Click = ThumbOrLeftPadPress && !LeftStickClick;
                                         }
 
-                                        RawState.sRightPadX = BitConverter.ToInt16(report.Data, 8 + 12);
-                                        RawState.sRightPadY = BitConverter.ToInt16(report.Data, 8 + 14);
+                                        {
+                                            int X = BitConverter.ToInt16(report.Data, 8 + 12);
+                                            int Y = BitConverter.ToInt16(report.Data, 8 + 14);
+
+                                            RotateXY(PadAngle, ref X, ref Y);
+
+                                            RawState.sRightPadX = (short)Math.Min(Math.Max(X, Int16.MinValue), Int16.MaxValue);
+                                            RawState.sRightPadY = (short)Math.Min(Math.Max(Y, Int16.MinValue), Int16.MaxValue);
+                                        }
+
+                                        //RawState.RightTouchChange = true;
 
                                         RawState.sAccelX = BitConverter.ToInt16(report.Data, 8 + 20);
                                         RawState.sAccelY = BitConverter.ToInt16(report.Data, 8 + 22);
@@ -707,6 +743,14 @@ namespace VSCView
             _device.ReadReport(OnReport);
         }
 
+        private void RotateXY(float padAngle, ref int x, ref int y, int cx = 0, int cy = 0)
+        {
+            int xrot = (int)(Math.Cos(padAngle) * (x - cx) - Math.Sin(padAngle) * (y - cy) + cx);
+            int yrot = (int)(Math.Sin(padAngle) * (x - cx) + Math.Cos(padAngle) * (y - cy) + cy);
+
+            x = xrot;
+            y = yrot;
+        }
 
         const int k_nMaxSegmentSize = 19;
         const int k_nMaxSegmentPayloadSize = k_nMaxSegmentSize - 1;
@@ -749,6 +793,7 @@ namespace VSCView
 
             if (ControllerType == EControllerType.Chell)
             {
+                // for the Chell controller, these are the 4 face buttons
                 State.ButtonsOld.Touch0 = (RawState.ulButtons[1] & 0x01) == 0x01;
                 State.ButtonsOld.Touch1 = (RawState.ulButtons[1] & 0x02) == 0x02;
                 State.ButtonsOld.Touch2 = (RawState.ulButtons[1] & 0x04) == 0x04;
@@ -756,13 +801,6 @@ namespace VSCView
             }
             else
             {
-                /*
-                (State.Controls["quad_left"] as ControlButtonQuad).Button0 = (StateBytes[1] & 1) == 1;
-                (State.Controls["quad_left"] as ControlButtonQuad).Button1 = (StateBytes[1] & 2) == 2;
-                (State.Controls["quad_left"] as ControlButtonQuad).Button2 = (StateBytes[1] & 8) == 8;
-                (State.Controls["quad_left"] as ControlButtonQuad).Button3 = (StateBytes[1] & 4) == 4;
-                */
-
                 // these are mutually exclusive in the raw data, so let's act like they are in the code too, even though they use 4 bits
                 if ((RawState.ulButtons[1] & 1) == 1)
                 {
@@ -785,10 +823,10 @@ namespace VSCView
                     (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.None;
                 }
             }
-            bool LeftAnalogMultiplexMode = (RawState.ulButtons[2] & 128) == 128;
+            //bool LeftAnalogMultiplexMode = (RawState.ulButtons[2] & 128) == 128;
             bool LeftStickClick = (RawState.ulButtons[2] & 64) == 64;
             (State.Controls["stick_left"] as ControlStick).Click = LeftStickClick;
-            bool Unknown = (RawState.ulButtons[2] & 32) == 32; // what is this?
+            //bool Unknown = (RawState.ulButtons[2] & 32) == 32; // what is this?
             bool RightPadTouch = (RawState.ulButtons[2] & 16) == 16;
             bool LeftPadTouch = (RawState.ulButtons[2] & 8) == 8;
             (State.Controls["touch_right"] as ControlTouch).Click = (RawState.ulButtons[2] & 4) == 4;
@@ -798,36 +836,13 @@ namespace VSCView
             (State.Controls["triggers"] as ControlTriggerPair).Analog0 = (float)RawState.sTriggerL / byte.MaxValue;
             (State.Controls["triggers"] as ControlTriggerPair).Analog1 = (float)RawState.sTriggerR / byte.MaxValue;
 
-            if (LeftAnalogMultiplexMode)
+            (State.Controls["stick_left"] as ControlStick).X = (float)RawState.sLeftStickX / Int16.MaxValue;
+            (State.Controls["stick_left"] as ControlStick).Y = (float)RawState.sLeftStickY / Int16.MaxValue;
+            if (RawState.LeftTouchChange)
             {
-                if (LeftPadTouch)
-                {
-                    float LeftPadX = (float)RawState.sLeftPadX / Int16.MaxValue;
-                    float LeftPadY = (float)RawState.sLeftPadY / Int16.MaxValue;
-                    (State.Controls["touch_left"] as ControlTouch).AddTouch(0, true, LeftPadX, LeftPadY, 0);
-                }
-                else
-                {
-                    (State.Controls["stick_left"] as ControlStick).X = (float)RawState.sLeftStickX / Int16.MaxValue;
-                    (State.Controls["stick_left"] as ControlStick).Y = (float)RawState.sLeftStickY / Int16.MaxValue;
-                }
-            }
-            else
-            {
-                if (LeftPadTouch)
-                {
-                    float LeftPadX = (float)RawState.sLeftPadX / Int16.MaxValue;
-                    float LeftPadY = (float)RawState.sLeftPadY / Int16.MaxValue;
-                    (State.Controls["touch_left"] as ControlTouch).AddTouch(0, true, LeftPadX, LeftPadY, 0);
-                }
-                else
-                {
-                    (State.Controls["stick_left"] as ControlStick).X = (float)RawState.sLeftStickX / Int16.MaxValue;
-                    (State.Controls["stick_left"] as ControlStick).Y = (float)RawState.sLeftStickY / Int16.MaxValue;
-                    (State.Controls["touch_left"] as ControlTouch).AddTouch(0, false, 0, 0, 0);
-                }
-
-                (State.Controls["touch_left"] as ControlTouch).Click = ThumbOrLeftPadPress && !LeftStickClick;
+                float LeftPadX = LeftPadTouch ? (float)RawState.sLeftPadX / Int16.MaxValue : 0f;
+                float LeftPadY = LeftPadTouch ? (float)RawState.sLeftPadY / Int16.MaxValue : 0f;
+                (State.Controls["touch_left"] as ControlTouch).AddTouch(0, LeftPadTouch, LeftPadX, LeftPadY, 0);
             }
 
             float RightPadX = (float)RawState.sRightPadX / Int16.MaxValue;
@@ -850,6 +865,8 @@ namespace VSCView
             State.OrientationX = RawState.sGyroQuatX;
             State.OrientationY = RawState.sGyroQuatY;
             State.OrientationZ = RawState.sGyroQuatZ;
+
+            RawState.LeftTouchChange = false;
         }
 
         public Image GetIcon()
@@ -898,17 +915,16 @@ namespace VSCView
     {
         public IController[] GetControllers()
         {
-            List<HidDevice> _devices = HidDevices.Enumerate(SteamController.VendorId, SteamController.ProductIdDongle, SteamController.ProductIdWired, SteamController.ProductIdBT, SteamController.ProductIdChell).ToList();
+            List<HidDevice> _devices = HidDevices.Enumerate(
+                SteamController.VendorId,
+                SteamController.ProductIdDongle,
+                SteamController.ProductIdWired,
+                SteamController.ProductIdBT,
+                SteamController.ProductIdChell
+            ).ToList();
+
             List<SteamController> ControllerList = new List<SteamController>();
-            //string wired_m = "&pid_1102&mi_02";
-            //string dongle_m = "&pid_1142&mi_01";
-            //string dongle_m1 = "&pid_1142&mi_01";
-            //string dongle_m2 = "&pid_1142&mi_02";
-            //string dongle_m3 = "&pid_1142&mi_03";
-            //string dongle_m4 = "&pid_1142&mi_04";
-            //string bt_m = "_PID&1106_";
-            //string chell_m = "&pid_1101";
-            // we should never have holes, this entire dictionary is just because I don't know if I can trust the order I get the HID devices
+
             for (int i = 0; i < _devices.Count; i++)
             {
                 if (_devices[i] != null)
@@ -921,17 +937,15 @@ namespace VSCView
                     switch (_device.Attributes.ProductId)
                     {
                         case SteamController.ProductIdBT:
-                            if (!devicePath.Contains("col03")) continue;
+                            if (!devicePath.Contains("col03")) continue; // skip anything that isn't the controller's custom HID device
                             ConType = EConnectionType.Bluetooth;
                             break;
                         case SteamController.ProductIdWired:
-                            if (devicePath.Contains("mi_00")) continue;
-                            if (devicePath.Contains("mi_01")) continue;
-                            if (!devicePath.Contains("mi_02")) continue;
+                            if (!devicePath.Contains("mi_02")) continue; // skip anything that isn't the controller's custom HID device
                             ConType = EConnectionType.USB;
                             break;
                         case SteamController.ProductIdDongle:
-                            if (devicePath.Contains("mi_00")) continue;
+                            if (devicePath.Contains("mi_00")) continue; // skip the dongle itself
                             ConType = EConnectionType.Dongle;
                             break;
                         case SteamController.ProductIdChell:
