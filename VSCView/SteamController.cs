@@ -837,16 +837,16 @@ namespace VSCView
             (State.Controls["triggers"] as ControlTriggerPair).Analog1 = (float)RawState.sTriggerR / byte.MaxValue;
 
             (State.Controls["stick_left"] as ControlStick).X = (float)RawState.sLeftStickX / Int16.MaxValue;
-            (State.Controls["stick_left"] as ControlStick).Y = (float)RawState.sLeftStickY / Int16.MaxValue;
+            (State.Controls["stick_left"] as ControlStick).Y = (float)-RawState.sLeftStickY / Int16.MaxValue;
             if (RawState.LeftTouchChange)
             {
                 float LeftPadX = LeftPadTouch ? (float)RawState.sLeftPadX / Int16.MaxValue : 0f;
-                float LeftPadY = LeftPadTouch ? (float)RawState.sLeftPadY / Int16.MaxValue : 0f;
+                float LeftPadY = LeftPadTouch ? (float)-RawState.sLeftPadY / Int16.MaxValue : 0f;
                 (State.Controls["touch_left"] as ControlTouch).AddTouch(0, LeftPadTouch, LeftPadX, LeftPadY, 0);
             }
 
             float RightPadX = (float)RawState.sRightPadX / Int16.MaxValue;
-            float RightPadY = (float)RawState.sRightPadY / Int16.MaxValue;
+            float RightPadY = (float)-RawState.sRightPadY / Int16.MaxValue;
 
             (State.Controls["touch_right"] as ControlTouch).AddTouch(0, RightPadTouch, RightPadX, RightPadY, 0);
 

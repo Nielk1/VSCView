@@ -285,9 +285,9 @@ namespace VSCView
                 int baseOffset = BT ? 2 : 0;
 
                 (State.Controls["stick_left"] as ControlStick).X = (report.Data[baseOffset + 0] - 128) / 128f;
-                (State.Controls["stick_left"] as ControlStick).Y = -(report.Data[baseOffset + 1] - 128) / 128f;
+                (State.Controls["stick_left"] as ControlStick).Y = (report.Data[baseOffset + 1] - 128) / 128f;
                 (State.Controls["stick_right"] as ControlStick).X = (report.Data[baseOffset + 2] - 128) / 128f;
-                (State.Controls["stick_right"] as ControlStick).Y = -(report.Data[baseOffset + 3] - 128) / 128f;
+                (State.Controls["stick_right"] as ControlStick).Y = (report.Data[baseOffset + 3] - 128) / 128f;
 
                 (State.Controls["quad_right"] as ControlButtonQuad).Button0 = (report.Data[baseOffset + 4] & 128) == 128;
                 (State.Controls["quad_right"] as ControlButtonQuad).Button1 = (report.Data[baseOffset + 4] & 64) == 64;
@@ -378,8 +378,8 @@ namespace VSCView
 
                     //Console.WriteLine($"{TimeDelta} {(tmp_now - tmp).Milliseconds}");
 
-                    (State.Controls["touch"] as ControlTouch).AddTouch(0, Finger1, F1X / 1919f, F1Y / 942f, TimeDelta);
-                    (State.Controls["touch"] as ControlTouch).AddTouch(1, Finger2, F2X / 1919f, F2Y / 942f, TimeDelta);
+                    (State.Controls["touch"] as ControlTouch).AddTouch(0, Finger1, (F1X / 1919f) * 2f - 1f, (F1Y / 942f) * 2f - 1f, TimeDelta);
+                    (State.Controls["touch"] as ControlTouch).AddTouch(1, Finger2, (F2X / 1919f) * 2f - 1f, (F2Y / 942f) * 2f - 1f, TimeDelta);
 
                     last_touch_timestamp = touch_timestamp;
                     //tmp = tmp_now;

@@ -51,6 +51,12 @@ namespace ThemeFixer
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string input { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string inputX { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string inputY { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string inputR { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string inputName { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string calc { get; set; }
@@ -174,10 +180,16 @@ namespace ThemeFixer
             if (!string.IsNullOrWhiteSpace(axisNameX))
             {
                 axisNameX = FixAnalogInputName(axisNameX);
+                inputX = axisNameX;
+                if (scaleFactorX.HasValue)
+                    inputX += " * " + scaleFactorX.Value;
             }
             if (!string.IsNullOrWhiteSpace(axisNameY))
             {
                 axisNameY = FixAnalogInputName(axisNameY);
+                inputY = axisNameY;
+                if (scaleFactorY.HasValue)
+                    inputY += " * " + scaleFactorY.Value;
             }
 
             children?.ForEach(dr => dr.Update());

@@ -90,6 +90,7 @@ namespace VSCView
         {
             for (int i = 0; i < Items.Count; i++)
             {
+                Items[i].CalculateValues();
                 Items[i].Paint(graphics);
             }
         }
@@ -442,6 +443,14 @@ namespace VSCView
             }
         }
 
+        public virtual void CalculateValues()
+        {
+            for (int i = 0; i < Items.Count; i++)
+            {
+                Items[i].CalculateValues();
+            }
+        }
+
         public virtual void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
@@ -593,7 +602,7 @@ namespace VSCView
         {
             Matrix preserve = graphics.Transform;
 
-            if (calcFunc != null && (bool)calcFunc?.Evaluate())
+            if (calcFunc != null && (bool)Convert.ChangeType(calcFunc?.Evaluate(), typeof(bool)))
             {
                 base.Paint(graphics);
             }
@@ -607,31 +616,134 @@ namespace VSCView
         }
 
         private ControllerData data;
-        protected string AxisNameX;
-        protected string AxisNameY;
-        protected float ScaleFactorX;
-        protected float ScaleFactorY;
+        //protected string AxisNameX;
+        //protected string AxisNameY;
+        //protected float ScaleFactorX;
+        //protected float ScaleFactorY;
+
+        private string CalcX;
+        protected IDynamicExpression calcXFunc;
+        private string CalcY;
+        protected IDynamicExpression calcYFunc;
+        private string CalcR;
+        protected IDynamicExpression calcRFunc;
+
+        private ExpressionContext NumericContext;
+
+        // cache anlog values
+        protected float AnalogX = 0;
+        protected float AnalogY = 0;
+        protected float AnalogR = 0;
 
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
             base.Initalize(data, cache, themePath, themeData);
             this.data = data;
 
-            AxisNameX = themeData["axisNameX"]?.Value<string>();
-            AxisNameY = themeData["axisNameY"]?.Value<string>();
+            //AxisNameX = themeData["axisNameX"]?.Value<string>();
+            //AxisNameY = themeData["axisNameY"]?.Value<string>();
 
-            ScaleFactorX = themeData["scaleFactorX"]?.Value<float>() ?? 0;
-            ScaleFactorY = themeData["scaleFactorY"]?.Value<float>() ?? 0;
+            //ScaleFactorX = themeData["scaleFactorX"]?.Value<float>() ?? 0;
+            //ScaleFactorY = themeData["scaleFactorY"]?.Value<float>() ?? 0;
+
+            CalcX = themeData["inputX"]?.Value<string>();
+            CalcY = themeData["inputY"]?.Value<string>();
+            CalcR = themeData["inputR"]?.Value<string>();
+
+            if (!string.IsNullOrWhiteSpace(CalcX)
+             || !string.IsNullOrWhiteSpace(CalcY)
+             || !string.IsNullOrWhiteSpace(CalcR))
+            {
+                NumericContext = new ExpressionContext();
+                NumericContext.Options.ParseCulture = CultureInfo.InvariantCulture;
+                VariableCollection variables = NumericContext.Variables;
+
+                // Hook up the required events
+                variables.ResolveVariableType += new EventHandler<ResolveVariableTypeEventArgs>(variables_ResolveVariableType);
+                variables.ResolveVariableValue += new EventHandler<ResolveVariableValueEventArgs>(variables_ResolveVariableValue);
+            }
+
+            InitalizeController();
+        }
+
+        public override void InitalizeController()
+        {
+            if (!string.IsNullOrWhiteSpace(CalcX))
+            {
+                try
+                {
+                    calcXFunc = NumericContext.CompileDynamic(CalcX.Replace(":", "__colon__"));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to compile dynamic formula \"{CalcX}\"\r\n{ex}");
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(CalcY))
+            {
+                try
+                {
+                    calcYFunc = NumericContext.CompileDynamic(CalcY.Replace(":", "__colon__"));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to compile dynamic formula \"{CalcY}\"\r\n{ex}");
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(CalcR))
+            {
+                try
+                {
+                    calcRFunc = NumericContext.CompileDynamic(CalcR.Replace(":", "__colon__"));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to compile dynamic formula \"{CalcR}\"\r\n{ex}");
+                }
+            }
+
+            base.InitalizeController();
+        }
+
+        public override void CalculateValues()
+        {
+            AnalogX = 0;
+            if (calcXFunc != null)
+                 AnalogX = (float)Convert.ChangeType(calcXFunc?.Evaluate(), typeof(float));
+
+            AnalogY = 0;
+            if (calcYFunc != null)
+                AnalogY = (float)Convert.ChangeType(calcYFunc?.Evaluate(), typeof(float));
+
+            AnalogR = 0;
+            if (calcRFunc != null)
+                AnalogR = (float)Convert.ChangeType(calcRFunc?.Evaluate(), typeof(float));
+
+            base.CalculateValues();
+        }
+
+        private void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
+        {
+            MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
+            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
+            e.VariableValue = Convert.ChangeType(retVal, e.VariableType);
+        }
+
+        private void variables_ResolveVariableType(object sender, ResolveVariableTypeEventArgs e)
+        {
+            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
+            if (e.VariableType == typeof(bool))
+                e.VariableType = typeof(int);
         }
 
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
 
-            float AnalogX = string.IsNullOrWhiteSpace(AxisNameX) ? 0 : (data.GetAnalogControl(AxisNameX) * ScaleFactorX);
-            float AnalogY = string.IsNullOrWhiteSpace(AxisNameY) ? 0 : (data.GetAnalogControl(AxisNameY) * ScaleFactorY);
-
-            graphics.TranslateTransform(AnalogX, -AnalogY);
+            graphics.TranslateTransform(AnalogX, AnalogY);
+            graphics.RotateTransform(AnalogR);
 
             base.Paint(graphics);
 
@@ -790,16 +902,11 @@ namespace VSCView
                 prevCord = cord;
             }
 
-
             if (PadPosHistory.Count >= ImagePadDecay.Length && PadPosHistory.Count > 0) PadPosHistory.RemoveAt(0);
 
-            float AnalogX = string.IsNullOrWhiteSpace(AxisNameX) ? 0 : (data.GetAnalogControl(AxisNameX) * ScaleFactorX);
-            float AnalogY = string.IsNullOrWhiteSpace(AxisNameY) ? 0 : (data.GetAnalogControl(AxisNameY) * ScaleFactorY);
-
-
-            if (calcFunc != null && (bool)calcFunc?.Evaluate())
+            if (calcFunc != null && (bool)Convert.ChangeType(calcFunc?.Evaluate(), typeof(bool)))
             {
-                PointF cord = new PointF(AnalogX,-AnalogY);
+                PointF cord = new PointF(AnalogX,AnalogY);
                 PadPosHistory.Add(cord);
             }
             else
@@ -881,6 +988,7 @@ namespace VSCView
                 case "left":
                     graphics.FillRectangle(new SolidBrush(Background), Width - (Width * Analog), 0, Width * Analog, Height);
                     break;
+                case "right":
                 default:
                     graphics.FillRectangle(new SolidBrush(Background), 0, 0, Width * Analog, Height);
                     break;
