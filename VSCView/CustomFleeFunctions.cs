@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace VSCView
 {
-    // Declare a class with some static functions
     public static class CustomFleeFunctions
     {
-        // Declare a function that takes a variable number of arguments
         public static int Max(params int[] args)
         {
             if (args.Length == 0)
@@ -23,6 +21,20 @@ namespace VSCView
             }
 
             return max;
+        }
+        public static int Min(params int[] args)
+        {
+            if (args.Length == 0)
+                return 0;
+
+            int min = args[0];
+
+            foreach (int i in args)
+            {
+                min = Math.Min(min, i);
+            }
+
+            return min;
         }
     }
 }
