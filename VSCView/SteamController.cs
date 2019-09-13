@@ -480,6 +480,8 @@ namespace VSCView
                                                     //if (RightTouchOld != ((RawState.ulButtons[2] & 16) == 16))
                                                     //    RawState.RightTouchChange = true;
 
+                                                    //Console.WriteLine($"{Convert.ToString(RawState.ulButtons[0], 2).PadLeft(8, '0')} {Convert.ToString(RawState.ulButtons[1], 2).PadLeft(8, '0')} {Convert.ToString(RawState.ulButtons[2], 2).PadLeft(8, '0')}");
+
                                                     pBuf += 3;
                                                 }
                                                 if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.BLEButtonChunk2))
@@ -646,8 +648,9 @@ namespace VSCView
                                             }
                                             else
                                             {
-                                                RawState.sLeftPadX = 0;
-                                                RawState.sLeftPadY = 0;
+                                                // we're trying to fix the pad jumping to center by not sending new coords if the pad is not touched
+                                                //RawState.sLeftPadX = 0;
+                                                //RawState.sLeftPadY = 0;
 
                                                 RawState.sLeftStickX = BitConverter.ToInt16(report.Data, 8 + 8);
                                                 RawState.sLeftStickY = BitConverter.ToInt16(report.Data, 8 + 10);
@@ -655,9 +658,10 @@ namespace VSCView
 
                                             RawState.LeftTouchChange = true;
 
-                                            (State.Controls["touch_left"] as ControlTouch).Click = ThumbOrLeftPadPress && !LeftStickClick;
+                                            //(State.Controls["touch_left"] as ControlTouch).Click = ThumbOrLeftPadPress && !LeftStickClick;
                                         }
 
+                                        if (RightPadTouch) // we're trying to fix the pad jumping to center by not sending new coords if the pad is not touched
                                         {
                                             int X = BitConverter.ToInt16(report.Data, 8 + 12);
                                             int Y = BitConverter.ToInt16(report.Data, 8 + 14);
@@ -849,6 +853,7 @@ namespace VSCView
             float RightPadY = (float)-RawState.sRightPadY / Int16.MaxValue;
 
             (State.Controls["touch_right"] as ControlTouch).AddTouch(0, RightPadTouch, RightPadX, RightPadY, 0);
+            (State.Controls["touch_left"] as ControlTouch).Click = ThumbOrLeftPadPress && !LeftStickClick;
 
             /*
             State.DataStuck = CheckSensorDataStuck();
