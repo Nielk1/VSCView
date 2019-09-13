@@ -510,29 +510,35 @@ namespace VSCView
                                                 }
                                                 if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.BLELeftTrackpadChunk))
                                                 {
-                                                    int X = BitConverter.ToInt16(m_rgubBuffer, pBuf);
-                                                    int Y = BitConverter.ToInt16(m_rgubBuffer, pBuf + sizeof(Int16));
+                                                    if ((RawState.ulButtons[2] & 8) == 8) // let's only set the X/Y with a touch to avoid jumps to 0
+                                                    {
+                                                        int X = BitConverter.ToInt16(m_rgubBuffer, pBuf);
+                                                        int Y = BitConverter.ToInt16(m_rgubBuffer, pBuf + sizeof(Int16));
 
-                                                    RotateXY(-PadAngle, ref X, ref Y);
+                                                        RotateXY(-PadAngle, ref X, ref Y);
 
-                                                    RawState.sLeftPadX = (short)Math.Min(Math.Max(X, Int16.MinValue), Int16.MaxValue);
-                                                    RawState.sLeftPadY = (short)Math.Min(Math.Max(Y, Int16.MinValue), Int16.MaxValue);
+                                                        RawState.sLeftPadX = (short)Math.Min(Math.Max(X, Int16.MinValue), Int16.MaxValue);
+                                                        RawState.sLeftPadY = (short)Math.Min(Math.Max(Y, Int16.MinValue), Int16.MaxValue);
 
-                                                    RawState.LeftTouchChange = true;
+                                                        RawState.LeftTouchChange = true;
+                                                    }
 
                                                     pBuf += sizeof(Int16) + sizeof(Int16);
                                                 }
                                                 if (ucOptionDataMask.HasFlag(EBLEOptionDataChunksBitmask.BLERightTrackpadChunk))
                                                 {
-                                                    int X = BitConverter.ToInt16(m_rgubBuffer, pBuf);
-                                                    int Y = BitConverter.ToInt16(m_rgubBuffer, pBuf + sizeof(Int16));
+                                                    if ((RawState.ulButtons[2] & 16) == 16) // let's only set the X/Y with a touch to avoid jumps to 0
+                                                    {
+                                                        int X = BitConverter.ToInt16(m_rgubBuffer, pBuf);
+                                                        int Y = BitConverter.ToInt16(m_rgubBuffer, pBuf + sizeof(Int16));
 
-                                                    RotateXY(PadAngle, ref X, ref Y);
+                                                        RotateXY(PadAngle, ref X, ref Y);
 
-                                                    RawState.sRightPadX = (short)Math.Min(Math.Max(X, Int16.MinValue), Int16.MaxValue);
-                                                    RawState.sRightPadY = (short)Math.Min(Math.Max(Y, Int16.MinValue), Int16.MaxValue);
+                                                        RawState.sRightPadX = (short)Math.Min(Math.Max(X, Int16.MinValue), Int16.MaxValue);
+                                                        RawState.sRightPadY = (short)Math.Min(Math.Max(Y, Int16.MinValue), Int16.MaxValue);
 
-                                                    //RawState.RightTouchChange = true;
+                                                        //RawState.RightTouchChange = true;
+                                                    }
 
                                                     pBuf += sizeof(Int16) + sizeof(Int16);
                                                 }
