@@ -575,6 +575,8 @@ namespace VSCView
 
         //private ExpressionContext BooleanContext;
 
+        protected bool Digital;
+
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
             base.Initalize(data, cache, themePath, themeData);
@@ -634,6 +636,15 @@ namespace VSCView
             base.InitalizeController();
         }
 
+        public override void CalculateValues()
+        {
+            Digital = false;
+            if (calcFunc != null)
+                Digital = (bool)Convert.ChangeType(calcFunc?.Evaluate(), typeof(bool));
+
+            base.CalculateValues();
+        }
+
         /*private void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
         {
             MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
@@ -650,7 +661,8 @@ namespace VSCView
         {
             Matrix preserve = graphics.Transform;
 
-            if (calcFunc != null && (bool)Convert.ChangeType(calcFunc?.Evaluate(), typeof(bool)))
+            //if (calcFunc != null && (bool)Convert.ChangeType(calcFunc?.Evaluate(), typeof(bool)))
+            if (Digital)
             {
                 base.Paint(graphics);
             }
@@ -802,6 +814,7 @@ namespace VSCView
         private IDynamicExpression calcFunc;
 
         //private ExpressionContext BooleanContext;
+        protected bool Digital;
 
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
@@ -869,6 +882,15 @@ namespace VSCView
             base.InitalizeController();
         }
 
+        public override void CalculateValues()
+        {
+            Digital = false;
+            if (calcFunc != null)
+                Digital = (bool)Convert.ChangeType(calcFunc?.Evaluate(), typeof(bool));
+
+            base.CalculateValues();
+        }
+
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
@@ -927,7 +949,8 @@ namespace VSCView
 
             if (PadPosHistory.Count >= ImagePadDecay.Length && PadPosHistory.Count > 0) PadPosHistory.RemoveAt(0);
 
-            if (calcFunc != null && (bool)Convert.ChangeType(calcFunc?.Evaluate(), typeof(bool)))
+            //if (calcFunc != null && (bool)Convert.ChangeType(calcFunc?.Evaluate(), typeof(bool)))
+            if (Digital)
             {
                 PointF cord = new PointF(AnalogX,AnalogY);
                 PadPosHistory.Add(cord);
