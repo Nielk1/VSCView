@@ -63,6 +63,7 @@ namespace VSCView
                 }
                 catch { }
             }
+
             LoadControllers(true);
         }
 

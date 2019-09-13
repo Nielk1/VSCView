@@ -26,7 +26,11 @@ namespace ThemeFixer
         public void Update()
         {
             if ((version ?? 0) == 0)
+            {
                 children?.ForEach(dr => dr.Update());
+                version = 1;
+            }
+
         }
     }
 
@@ -183,6 +187,8 @@ namespace ThemeFixer
                 inputX = axisNameX;
                 if (scaleFactorX.HasValue)
                     inputX += " * " + scaleFactorX.Value;
+                axisNameX = null;
+                scaleFactorX = null;
             }
             if (!string.IsNullOrWhiteSpace(axisNameY))
             {
@@ -190,6 +196,18 @@ namespace ThemeFixer
                 inputY = axisNameY;
                 if (scaleFactorY.HasValue)
                     inputY += " * " + scaleFactorY.Value;
+                axisNameY = null;
+                scaleFactorY = null;
+            }
+
+            if (!string.IsNullOrWhiteSpace(axisName))
+            {
+                axisName = FixAnalogInputName(axisName);
+                input = axisName;
+                //if (scaleFactor.HasValue)
+                //    input += " * " + scaleFactor.Value;
+                axisName = null;
+                //scaleFactor = null;
             }
 
             children?.ForEach(dr => dr.Update());

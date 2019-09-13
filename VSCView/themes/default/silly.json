@@ -1,144 +1,415 @@
 {
-    "name": "Silly",
-    "width": 629,
-    "height": 605,
-    "children": [
+  "name": "Silly",
+  "width": 629,
+  "height": 605,
+  "version": 1,
+  "children": [
+    {
+      "type": "image",
+      "image": "base.png",
+      "x": 314.5,
+      "y": 302.5,
+      "width": 629.0,
+      "height": 605.0,
+      "center": true,
+      "children": [
         {
-            "type":"image",
-            "image":"base.png",
-            "x":314.5,
-            "y":302.5,
-            "width":629,
-            "height":605,
-            "center":true,
-            "children": [
+          "x": 74.0,
+          "y": 67.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "quad_right:2",
+              "children": [
                 {
-                    "x":74,
-                    "y":67,
-                    "children": [
-                        { "type":"showhide", "inputName":"a", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x":  0, "y": 35, "width":36, "height":36, "center":true } ] },
-                        { "type":"showhide", "inputName":"b", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x": 35, "y":  0, "width":36, "height":36, "center":true } ] },
-                        { "type":"showhide", "inputName":"x", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x":-35, "y":  0, "width":36, "height":36, "center":true } ] },
-                        { "type":"showhide", "inputName":"y", "invert":false, "children": [ { "type":"image", "image":"btn-face.png", "x":  0, "y":-35, "width":36, "height":36, "center":true } ] },
-                        { "type":"showhide", "inputName":"rightpadtouch", "invert":true, "children": [
-                            { "type":"showhide", "calc":"!a && !b && !x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":"!a && !b && !x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":" a &&  b &&  x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":"!a &&  b &&  x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":" a && !b &&  x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":" a &&  b && !x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":" a &&  b &&  x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":" a && !b && !x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":"!a &&  b &&  x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -30, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":"!a && !b && !x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y": -65, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":" a && !b && !x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -30, "y":   5, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":"!a &&  b && !x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x":   5, "y": -30, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":"!a && !b &&  x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -65, "y": -30, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":" a &&  b && !x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x":  -5, "y":  -5, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":" a && !b &&  x && !y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -55, "y":  -5, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":"!a && !b &&  x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -55, "y": -55, "width":381, "height":457, "center":false } ] },
-                            { "type":"showhide", "calc":"!a &&  b && !x &&  y", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x":  -5, "y": -55, "width":381, "height":457, "center":false } ] }
-                        ] }
-                    ]
-                },
-
-                { "type":"showhide", "inputName":"stickclick", "invert":false, "children": [ { "type":"image", "image":"btn-stick.png", "x": -73, "y": 67, "width":105, "height":105, "center":true } ] },
-                {
-                    "type":"slider",
-                    "x": -72,
-                    "y": 67,
-                    "axisNameX":"leftstickx",
-                    "axisNameY":"leftsticky",
-                    "scaleFactorX": 0.0005,
-                    "scaleFactorY": 0.0005,
-                    "children": [
-                        { "type":"image", "image":"stick.png", "x": 0, "y": 0, "width":69, "height":70, "center":true },
-                        { "type":"showhide", "inputName":"leftpadtouch", "invert":true, "children": [ { "type":"image", "image":"paw.png", "x": 30, "y": -30, "width":-381, "height":457, "center":false } ] }
-                    ]
-                },
-                {
-                    "x":0,
-                    "y":-29,
-                    "children": [
-                        { "type":"showhide", "inputName":"steam" , "invert":false, "children": [ { "type":"image", "image":"btn-home.png", "x":   0, "y": -8, "width":51, "height":51, "center":true } ] },
-                        { "type":"showhide", "inputName":"start" , "invert":false, "children": [ { "type":"image", "image":"btn-sub.png" , "x":  52, "y":  0, "width":38, "height":22, "center":true } ] },
-                        { "type":"showhide", "inputName":"select", "invert":false, "children": [ { "type":"image", "image":"btn-sub.png" , "x": -52, "y":  0, "width":38, "height":22, "center":true } ] }
-                    ]
-                },
-                {
-                    "x":0,
-                    "y":-235,
-                    "children": [
-                        { "type":"showhide", "inputName":"lg", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":  -75, "y":   0, "width":50, "height":50, "center":true } ] },
-                        { "type":"showhide", "inputName":"lt", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x": -163, "y":  48, "width":50, "height":50, "center":true } ] },
-                        { "type":"showhide", "inputName":"lb", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x": -163, "y": -28, "width":50, "height":50, "center":true } ] },
-                        { "type":"showhide", "inputName":"rg", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":   75, "y":   0, "width":50, "height":50, "center":true } ] },
-                        { "type":"showhide", "inputName":"rt", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":  163, "y":  48, "width":50, "height":50, "center":true } ] },
-                        { "type":"showhide", "inputName":"rb", "invert":false, "children": [ { "type":"image", "image":"btn-trigger.png" , "x":  163, "y": -28, "width":50, "height":50, "center":true } ] }
-                    ]
-                },
-
-                { "type":"showhide", "inputName":"rightpadclick", "invert":false, "children": [ { "type":"image", "image":"btn-haptic.png", "x":  171, "y": -23, "width":156, "height":160, "center":true } ] },
-                {
-                    "x": 171,
-                    "y": -23,
-                    "rot":-15,
-                    "children": [
-                        {
-                            "type":"trailpad",
-                            "inputName":"rightpadtouch",
-                            "x":  0,
-                            "y": 0,
-                            "axisNameX":"rightpadx",
-                            "axisNameY":"rightpady",
-                            "scaleFactorX": 0.0017,
-                            "scaleFactorY": 0.0017,
-                            "image":"padheat.png",
-                            "length":30,
-                            "width":72,
-                            "height":72,
-                            "children": [
-                                { "type":"showhide", "inputName":"rightpadtouch", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": -40, "y": -40, "width":381, "height":457, "center":false } ] }
-                            ]
-                        }
-                    ]
-                },
-
-                { "type":"showhide", "inputName":"leftpadclick" , "invert":false, "children": [ { "type":"image", "image":"btn-haptic.png", "x": -171, "y": -23, "width":156, "height":160, "center":true } ] },
-                {
-                    "x": -171,
-                    "y": -23,
-                    "rot": 15,
-                    "children": [
-                        {
-                            "type":"trailpad",
-                            "inputName":"leftpadtouch",
-                            "x": 0,
-                            "y": 0,
-                            "axisNameX":"leftpadx",
-                            "axisNameY":"leftpady",
-                            "scaleFactorX": 0.0017,
-                            "scaleFactorY": 0.0017,
-                            "image":"padheat.png",
-                            "length":30,
-                            "width":72,
-                            "height":72,
-                            "children": [
-                                { "type":"showhide", "inputName":"leftpadtouch", "invert":false, "children": [ { "type":"image", "image":"paw.png", "x": 40, "y": -40, "width":-381, "height":457, "center":false } ] }
-                            ]
-                        }
-                    ]
-                },
-
-                {
-                    "x":0,
-                    "y":-170,
-                    "children": [
-                        { "type":"pbar", "axisName":"lefttrigger" , "background":"ff007894", "foreground":"ff00d2f8", "x": -65, "y": 0, "width":120, "height":15, "min":0, "max":255, "direction": "right" },
-                        { "type":"pbar", "axisName":"righttrigger", "background":"ff007894", "foreground":"ff00d2f8", "x":  65, "y": 0, "width":120, "height":15, "min":0, "max":255, "direction": "left" }
-                    ]
+                  "type": "image",
+                  "image": "btn-face.png",
+                  "x": 0.0,
+                  "y": 35.0,
+                  "width": 36.0,
+                  "height": 36.0,
+                  "center": true
                 }
-            ]
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:1",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-face.png",
+                  "x": 35.0,
+                  "y": 0.0,
+                  "width": 36.0,
+                  "height": 36.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:3",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-face.png",
+                  "x": -35.0,
+                  "y": 0.0,
+                  "width": 36.0,
+                  "height": 36.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:0",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-face.png",
+                  "x": 0.0,
+                  "y": -35.0,
+                  "width": 36.0,
+                  "height": 36.0,
+                  "center": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "input": "stick_left:click",
+          "children": [
+            {
+              "type": "image",
+              "image": "btn-stick.png",
+              "x": -73.0,
+              "y": 67.0,
+              "width": 105.0,
+              "height": 105.0,
+              "center": true
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": -72.0,
+          "y": 67.0,
+          "inputX": "stick_left:x * 16.3835",
+          "inputY": "stick_left:y * 16.3835",
+          "children": [
+            {
+              "type": "image",
+              "image": "stick.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 69.0,
+              "height": 70.0,
+              "center": true
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": -29.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "home",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-home.png",
+                  "x": 0.0,
+                  "y": -8.0,
+                  "width": 51.0,
+                  "height": 51.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "menu:1",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-sub.png",
+                  "x": 52.0,
+                  "y": 0.0,
+                  "width": 38.0,
+                  "height": 22.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "menu:0",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-sub.png",
+                  "x": -52.0,
+                  "y": 0.0,
+                  "width": 38.0,
+                  "height": 22.0,
+                  "center": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": -235.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "grip:0",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-trigger.png",
+                  "x": -75.0,
+                  "y": 0.0,
+                  "width": 50.0,
+                  "height": 50.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "triggers:stage2_0",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-trigger.png",
+                  "x": -163.0,
+                  "y": 48.0,
+                  "width": 50.0,
+                  "height": 50.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "bumpers:0",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-trigger.png",
+                  "x": -163.0,
+                  "y": -28.0,
+                  "width": 50.0,
+                  "height": 50.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "grip:1",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-trigger.png",
+                  "x": 75.0,
+                  "y": 0.0,
+                  "width": 50.0,
+                  "height": 50.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "triggers:stage2_1",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-trigger.png",
+                  "x": 163.0,
+                  "y": 48.0,
+                  "width": 50.0,
+                  "height": 50.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "bumpers:1",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-trigger.png",
+                  "x": 163.0,
+                  "y": -28.0,
+                  "width": 50.0,
+                  "height": 50.0,
+                  "center": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "type": "showhide",
+              "input": "touch_right:click",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-haptic.png",
+                  "x": 171.0,
+                  "y": -23.0,
+                  "width": 156.0,
+                  "height": 160.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "x": 171.0,
+              "y": -23.0,
+              "children": [
+                {
+                  "type": "trailpad",
+                  "image": "padheat.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 72.0,
+                  "height": 72.0,
+                  "input": "touch_right:touch0",
+                  "inputX": "touch_right:x0 * 55.7039",
+                  "inputY": "touch_right:y0 * 55.7039",
+                  "length": 30
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "type": "showhide",
+              "input": "touch_left:click",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-haptic.png",
+                  "x": -171.0,
+                  "y": -23.0,
+                  "width": 156.0,
+                  "height": 160.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "x": -171.0,
+              "y": -23.0,
+              "children": [
+                {
+                  "type": "trailpad",
+                  "image": "padheat.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 72.0,
+                  "height": 72.0,
+                  "input": "touch_left:touch0",
+                  "inputX": "touch_left:x0 * 55.7039",
+                  "inputY": "touch_left:y0 * 55.7039",
+                  "length": 30
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": -170.0,
+          "children": [
+            {
+              "type": "pbar",
+              "x": -65.0,
+              "y": 0.0,
+              "width": 120.0,
+              "height": 15.0,
+              "input": "triggers:analog0",
+              "direction": "right",
+              "min": 0.0,
+              "max": 1.0,
+              "foreground": "ff00d2f8",
+              "background": "ff007894"
+            },
+            {
+              "type": "pbar",
+              "x": 65.0,
+              "y": 0.0,
+              "width": 120.0,
+              "height": 15.0,
+              "input": "triggers:analog1",
+              "direction": "left",
+              "min": 0.0,
+              "max": 1.0,
+              "foreground": "ff00d2f8",
+              "background": "ff007894"
+            }
+          ]
         }
-    ]
+      ]
+    },
+    {
+      "x": 314.5,
+      "y": 302.5,
+      "children": [
+        {
+          "type": "slider",
+          "x": -60,
+          "y": 60,
+          "center": true,
+          "inputX": "(stick_left:x * 16.3835) + (touch_left:touch0 * -90) + (touch_left:x0 * 55.7039)",
+          "inputY": "(stick_left:y * 16.3835) + (touch_left:touch0 * -90) + (touch_left:y0 * 55.7039)",
+          "children": [
+            {
+              "type": "image",
+              "image": "paw.png",
+              "x": 30.0,
+              "y": -30.0,
+              "width": -381.0,
+              "height": 457.0,
+              "center": false
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": 50,
+          "y": 50,
+          "inputX": "(((quad_right:1 * 15) + (quad_right:3 * -15)) / max(1,quad_right:0 + quad_right:1 + quad_right:2 + quad_right:3)) + (touch_right:touch0 * 100) + (touch_right:x0 * 55.7039) + (max(quad_right:0, quad_right:1, quad_right:2, quad_right:3) * touch_right:touch0 * -25)",
+          "inputY": "(((quad_right:2 * 15) + (quad_right:0 * -15)) / max(1,quad_right:0 + quad_right:1 + quad_right:2 + quad_right:3)) + (touch_right:touch0 * -80) + (touch_right:y0 * 55.7039) + (max(quad_right:0, quad_right:1, quad_right:2, quad_right:3) * touch_right:touch0 * 25)",
+          "center": true,
+          "children": [
+            {
+              "type": "image",
+              "image": "paw.png",
+              "x": -30.0,
+              "y": -30.0,
+              "width": 381.0,
+              "height": 457.0,
+              "center": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

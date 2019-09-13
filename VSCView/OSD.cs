@@ -386,6 +386,7 @@ namespace VSCView
         public float Rot { get; private set; }
 
         private UI_ImageCache cache;
+        private ControllerData data;
         private List<UI_Item> Items;
 
         public UI_Item(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
@@ -393,9 +394,36 @@ namespace VSCView
             Initalize(data, cache, themePath, themeData);
         }
 
+        //protected ExpressionContext BooleanContext;
+        protected ExpressionContext NumericContext;
+
         protected virtual void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
             this.cache = cache;
+            this.data = data;
+
+            /*{
+                BooleanContext = new ExpressionContext();
+                BooleanContext.Options.ParseCulture = CultureInfo.InvariantCulture;
+                VariableCollection variables = BooleanContext.Variables;
+
+                // Hook up the required events
+                variables.ResolveVariableType += new EventHandler<ResolveVariableTypeEventArgs>(variables_ResolveVariableType);
+                variables.ResolveVariableValue += new EventHandler<ResolveVariableValueEventArgs>(variables_ResolveVariableValue);
+            }*/
+
+            {
+                NumericContext = new ExpressionContext();
+                NumericContext.Options.ParseCulture = CultureInfo.InvariantCulture;
+                VariableCollection variables = NumericContext.Variables;
+
+                NumericContext.Imports.AddType(typeof(CustomFleeFunctions));
+
+                // Hook up the required events
+                variables.ResolveVariableType += new EventHandler<ResolveVariableTypeEventArgs>(variables_ResolveVariableTypeNumeric);
+                variables.ResolveVariableValue += new EventHandler<ResolveVariableValueEventArgs>(variables_ResolveVariableValue);
+            }
+
             Items = new List<UI_Item>();
 
             X = themeData["x"]?.Value<float>() ?? 0;
@@ -433,6 +461,25 @@ namespace VSCView
                         throw new Exception("Unknown UI Widget Type");
                 }
             });
+        }
+
+        protected void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
+        {
+            MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
+            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
+            e.VariableValue = Convert.ChangeType(retVal, e.VariableType);
+        }
+
+        /*protected void variables_ResolveVariableType(object sender, ResolveVariableTypeEventArgs e)
+        {
+            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
+        }*/
+
+        protected void variables_ResolveVariableTypeNumeric(object sender, ResolveVariableTypeEventArgs e)
+        {
+            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
+            if (e.VariableType == typeof(bool))
+                e.VariableType = typeof(int);
         }
 
         public virtual void InitalizeController()
@@ -526,7 +573,7 @@ namespace VSCView
         private string Calc;
         private IDynamicExpression calcFunc;
 
-        private ExpressionContext context;
+        //private ExpressionContext BooleanContext;
 
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
@@ -555,16 +602,16 @@ namespace VSCView
             }*/
 
             Calc = themeData["input"]?.Value<string>();
-            if (!string.IsNullOrWhiteSpace(Calc))
+            /*if (!string.IsNullOrWhiteSpace(Calc))
             {
-                context = new ExpressionContext();
-                context.Options.ParseCulture = CultureInfo.InvariantCulture;
-                VariableCollection variables = context.Variables;
+                BooleanContext = new ExpressionContext();
+                BooleanContext.Options.ParseCulture = CultureInfo.InvariantCulture;
+                VariableCollection variables = BooleanContext.Variables;
 
                 // Hook up the required events
                 variables.ResolveVariableType += new EventHandler<ResolveVariableTypeEventArgs>(variables_ResolveVariableType);
                 variables.ResolveVariableValue += new EventHandler<ResolveVariableValueEventArgs>(variables_ResolveVariableValue);
-            }
+            }*/
 
             InitalizeController();
         }
@@ -575,7 +622,8 @@ namespace VSCView
             {
                 try
                 {
-                    calcFunc = context.CompileDynamic(Calc.Replace(":", "__colon__"));
+                    //calcFunc = BooleanContext.CompileDynamic(Calc.Replace(":", "__colon__"));
+                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__"));
                 }
                 catch(Exception ex)
                 {
@@ -586,7 +634,7 @@ namespace VSCView
             base.InitalizeController();
         }
 
-        private void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
+        /*private void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
         {
             MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
             object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
@@ -596,7 +644,7 @@ namespace VSCView
         private void variables_ResolveVariableType(object sender, ResolveVariableTypeEventArgs e)
         {
             e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
-        }
+        }*/
 
         public override void Paint(Graphics graphics)
         {
@@ -628,7 +676,7 @@ namespace VSCView
         private string CalcR;
         protected IDynamicExpression calcRFunc;
 
-        private ExpressionContext NumericContext;
+        //private ExpressionContext NumericContext;
 
         // cache anlog values
         protected float AnalogX = 0;
@@ -650,7 +698,7 @@ namespace VSCView
             CalcY = themeData["inputY"]?.Value<string>();
             CalcR = themeData["inputR"]?.Value<string>();
 
-            if (!string.IsNullOrWhiteSpace(CalcX)
+            /*if (!string.IsNullOrWhiteSpace(CalcX)
              || !string.IsNullOrWhiteSpace(CalcY)
              || !string.IsNullOrWhiteSpace(CalcR))
             {
@@ -659,9 +707,9 @@ namespace VSCView
                 VariableCollection variables = NumericContext.Variables;
 
                 // Hook up the required events
-                variables.ResolveVariableType += new EventHandler<ResolveVariableTypeEventArgs>(variables_ResolveVariableType);
+                variables.ResolveVariableType += new EventHandler<ResolveVariableTypeEventArgs>(variables_ResolveVariableTypeNumeric);
                 variables.ResolveVariableValue += new EventHandler<ResolveVariableValueEventArgs>(variables_ResolveVariableValue);
-            }
+            }*/
 
             InitalizeController();
         }
@@ -724,20 +772,6 @@ namespace VSCView
             base.CalculateValues();
         }
 
-        private void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
-        {
-            MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
-            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
-            e.VariableValue = Convert.ChangeType(retVal, e.VariableType);
-        }
-
-        private void variables_ResolveVariableType(object sender, ResolveVariableTypeEventArgs e)
-        {
-            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
-            if (e.VariableType == typeof(bool))
-                e.VariableType = typeof(int);
-        }
-
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
@@ -767,7 +801,7 @@ namespace VSCView
         private string Calc;
         private IDynamicExpression calcFunc;
 
-        private ExpressionContext context;
+        //private ExpressionContext BooleanContext;
 
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
@@ -777,16 +811,16 @@ namespace VSCView
             PadPosHistory = new List<PointF?>();
 
             Calc = themeData["input"]?.Value<string>();
-            if (!string.IsNullOrWhiteSpace(Calc))
+            /*if (!string.IsNullOrWhiteSpace(Calc))
             {
-                context = new ExpressionContext();
-                context.Options.ParseCulture = CultureInfo.InvariantCulture;
-                VariableCollection variables = context.Variables;
+                BooleanContext = new ExpressionContext();
+                BooleanContext.Options.ParseCulture = CultureInfo.InvariantCulture;
+                VariableCollection variables = BooleanContext.Variables;
 
                 // Hook up the required events
                 variables.ResolveVariableType += new EventHandler<ResolveVariableTypeEventArgs>(variables_ResolveVariableType);
                 variables.ResolveVariableValue += new EventHandler<ResolveVariableValueEventArgs>(variables_ResolveVariableValue);
-            }
+            }*/
 
             InitalizeController();
 
@@ -823,7 +857,8 @@ namespace VSCView
             {
                 try
                 {
-                    calcFunc = context.CompileDynamic(Calc.Replace(":", "__colon__"));
+                    //calcFunc = BooleanContext.CompileDynamic(Calc.Replace(":", "__colon__"));
+                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__"));
                 }
                 catch (Exception ex)
                 {
@@ -832,18 +867,6 @@ namespace VSCView
             }
 
             base.InitalizeController();
-        }
-
-        private void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
-        {
-            MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
-            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
-            e.VariableValue = Convert.ChangeType(retVal, e.VariableType);
-        }
-
-        private void variables_ResolveVariableType(object sender, ResolveVariableTypeEventArgs e)
-        {
-            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
         }
 
         public override void Paint(Graphics graphics)
@@ -927,7 +950,7 @@ namespace VSCView
         }
 
         private ControllerData data;
-        protected string AxisName;
+        //protected string AxisName;
         protected string Direction;
         protected float Min;
         protected float Max;
@@ -936,15 +959,20 @@ namespace VSCView
         protected Color Foreground;
         protected Color Background;
 
+        private string Calc;
+        private IDynamicExpression calcFunc;
+
+        protected float Analog = 0;
+
         protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
         {
             base.Initalize(data, cache, themePath, themeData);
             this.data = data;
 
             Background = Color.White;
-            Foreground = Color.Black ;
+            Foreground = Color.Black;
 
-            AxisName = themeData["axisName"]?.Value<string>();
+            //AxisName = themeData["axisName"]?.Value<string>();
             Direction = themeData["direction"]?.Value<string>();
 
             Min = themeData["min"]?.Value<float>() ?? 0;
@@ -965,14 +993,47 @@ namespace VSCView
                 Background = Color.FromArgb(int.Parse(BackgroundCode, System.Globalization.NumberStyles.HexNumber));
             }
             catch { }
+
+            Calc = themeData["input"]?.Value<string>();
+
+            InitalizeController();
+        }
+
+        public override void InitalizeController()
+        {
+            if (!string.IsNullOrWhiteSpace(Calc))
+            {
+                try
+                {
+                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__"));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"\r\n{ex}");
+                }
+            }
+
+            base.InitalizeController();
+        }
+
+        public override void CalculateValues()
+        {
+            Analog = 0;
+            if (calcFunc != null)
+            {
+                Analog = (float)Convert.ChangeType(calcFunc?.Evaluate(), typeof(float));
+                Analog = Math.Max(Math.Min((Analog - Min) / (Max - Min), 1.0f), 0.0f);
+            }
+
+            base.CalculateValues();
         }
 
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
 
-            float Analog = string.IsNullOrWhiteSpace(AxisName) ? 0 : (data.GetAnalogControl(AxisName));
-            Analog = Math.Max(Math.Min((Analog - Min) / (Max - Min), 1.0f), 0.0f);
+            //float Analog = string.IsNullOrWhiteSpace(AxisName) ? 0 : (data.GetAnalogControl(AxisName));
+            //Analog = Math.Max(Math.Min((Analog - Min) / (Max - Min), 1.0f), 0.0f);
 
             graphics.TranslateTransform(X, Y);
             graphics.TranslateTransform(-Width / 2, -Height / 2);

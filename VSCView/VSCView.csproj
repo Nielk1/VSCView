@@ -67,6 +67,7 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="ControllerState.cs" />
+    <Compile Include="CustomFleeFunctions.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
