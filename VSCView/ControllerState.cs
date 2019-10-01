@@ -39,9 +39,21 @@ namespace VSCView
         //public bool RightPadTouch { get; set; }
         //public bool RightPadClick { get; set; }
 
+        /// <summary>
+        /// touchnw
+        /// </summary>
         public bool Touch0 { get; set; }
+        /// <summary>
+        /// touchne
+        /// </summary>
         public bool Touch1 { get; set; }
+        /// <summary>
+        /// touchsw
+        /// </summary>
         public bool Touch2 { get; set; }
+        /// <summary>
+        /// touchse
+        /// </summary>
         public bool Touch3 { get; set; }
 
         public virtual object Clone()

@@ -805,10 +805,10 @@ namespace VSCView
             if (ControllerType == EControllerType.Chell)
             {
                 // for the Chell controller, these are the 4 face buttons
-                State.ButtonsOld.Touch0 = (RawState.ulButtons[1] & 0x01) == 0x01;
-                State.ButtonsOld.Touch1 = (RawState.ulButtons[1] & 0x02) == 0x02;
-                State.ButtonsOld.Touch2 = (RawState.ulButtons[1] & 0x04) == 0x04;
-                State.ButtonsOld.Touch3 = (RawState.ulButtons[1] & 0x08) == 0x08;
+                State.ButtonsOld.Touch0 = (RawState.ulButtons[1] & 0x01) == 0x01; // NW
+                State.ButtonsOld.Touch1 = (RawState.ulButtons[1] & 0x02) == 0x02; // NE
+                State.ButtonsOld.Touch2 = (RawState.ulButtons[1] & 0x04) == 0x04; // SW
+                State.ButtonsOld.Touch3 = (RawState.ulButtons[1] & 0x08) == 0x08; // SE
             }
             else
             {
