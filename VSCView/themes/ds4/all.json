@@ -391,7 +391,7 @@
 
             {
               "type": "showhide",
-              "input": "touch:click OR touch_right:click",
+              "input": "touch_center:click OR touch_right:click",
               "children": [
                 {
                   "type": "image",
@@ -411,11 +411,11 @@
               "children": [
                 {
                   "type": "trailpad",
-                  "input": "touch:touch0 OR touch_left:touch0",
+                  "input": "touch_center:touch0 OR touch_left:touch0",
                   "x": -5,
                   "y": 0,
-                  "inputX": "(touch:x0 * 88) + (touch_left:x0 * 44 - 44)",
-                  "inputY": "(touch:y0 + touch_left:y0) * 35",
+                  "inputX": "(touch_center:x0 * 88) + (touch_left:x0 * 44 - 44)",
+                  "inputY": "(touch_center:y0 + touch_left:y0) * 35",
                   "image": "padheat.png",
                   "length": 30,
                   "width": 36,
@@ -423,7 +423,7 @@
                   "children": [
                     {
                       "type": "showhide",
-                      "input": "touch:touch0",
+                      "input": "touch_center:touch0",
                       "children": [
                         {
                           "type": "image",
@@ -440,11 +440,11 @@
                 },
                 {
                   "type": "trailpad",
-                  "input": "touch:touch1 OR touch_right:touch0",
+                  "input": "touch_center:touch1 OR touch_right:touch0",
                   "x": -5,
                   "y": 0,
-                  "inputX": "(touch:x1 * 88) + (touch_right:x0 * 44 + 44)",
-                  "inputY": "(touch:y1 + touch_right:y0) * 35",
+                  "inputX": "(touch_center:x1 * 88) + (touch_right:x0 * 44 + 44)",
+                  "inputY": "(touch_center:y1 + touch_right:y0) * 35",
                   "image": "padheat.png",
                   "length": 30,
                   "width": 36,
@@ -452,7 +452,7 @@
                   "children": [
                     {
                       "type": "showhide",
-                      "input": "touch:touch1",
+                      "input": "touch_center:touch1",
                       "children": [
                         {
                           "type": "image",

@@ -130,7 +130,7 @@ namespace VSCView
             State.Controls["home"] = new ControlButton();
             State.Controls["stick_left"] = new ControlStick(HasClick: true);
             State.Controls["stick_right"] = new ControlStick(HasClick: true);
-            State.Controls["touch"] = new ControlTouch(TouchCount: 2, HasClick: true);
+            State.Controls["touch_center"] = new ControlTouch(TouchCount: 2, HasClick: true);
 
             // According to this the normalized domain of the DS4 gyro is 1024 units per rad/s: https://gamedev.stackexchange.com/a/87178
 
@@ -320,7 +320,7 @@ namespace VSCView
                 // bld.Append((report.Data[baseOffset + 6] & 0xfc).ToString().PadLeft(3, '0'));
 
                 (State.Controls["home"] as ControlButton).Button0 = (report.Data[baseOffset + 6] & 0x1) == 0x1;
-                (State.Controls["touch"] as ControlTouch).Click = (report.Data[baseOffset + 6] & 0x2) == 0x2;
+                (State.Controls["touch_center"] as ControlTouch).Click = (report.Data[baseOffset + 6] & 0x2) == 0x2;
                 (State.Controls["triggers"] as ControlTriggerPair).Analog0 = (float)report.Data[baseOffset + 7] / byte.MaxValue;
                 (State.Controls["triggers"] as ControlTriggerPair).Analog1 = (float)report.Data[baseOffset + 8] / byte.MaxValue;
 
@@ -378,8 +378,8 @@ namespace VSCView
 
                     //Console.WriteLine($"{TimeDelta} {(tmp_now - tmp).Milliseconds}");
 
-                    (State.Controls["touch"] as ControlTouch).AddTouch(0, Finger1, (F1X / 1919f) * 2f - 1f, (F1Y / 942f) * 2f - 1f, TimeDelta);
-                    (State.Controls["touch"] as ControlTouch).AddTouch(1, Finger2, (F2X / 1919f) * 2f - 1f, (F2Y / 942f) * 2f - 1f, TimeDelta);
+                    (State.Controls["touch_center"] as ControlTouch).AddTouch(0, Finger1, (F1X / 1919f) * 2f - 1f, (F1Y / 942f) * 2f - 1f, TimeDelta);
+                    (State.Controls["touch_center"] as ControlTouch).AddTouch(1, Finger2, (F2X / 1919f) * 2f - 1f, (F2Y / 942f) * 2f - 1f, TimeDelta);
 
                     last_touch_timestamp = touch_timestamp;
                     //tmp = tmp_now;
