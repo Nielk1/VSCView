@@ -42,18 +42,22 @@ namespace VSCView
         /// <summary>
         /// touchnw
         /// </summary>
+        [Obsolete]
         public bool Touch0 { get; set; }
         /// <summary>
         /// touchne
         /// </summary>
+        [Obsolete]
         public bool Touch1 { get; set; }
         /// <summary>
         /// touchsw
         /// </summary>
+        [Obsolete]
         public bool Touch2 { get; set; }
         /// <summary>
         /// touchse
         /// </summary>
+        [Obsolete]
         public bool Touch3 { get; set; }
 
         public virtual object Clone()

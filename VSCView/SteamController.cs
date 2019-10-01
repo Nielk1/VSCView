@@ -199,6 +199,11 @@ namespace VSCView
             State.Controls["touch_left"] = new ControlTouch(TouchCount: 1, HasClick: true);
             State.Controls["touch_right"] = new ControlTouch(TouchCount: 1, HasClick: true);
 
+            if(type == EControllerType.Chell)
+            {
+                State.Controls["quad_center"] = new ControlButtonQuad(EOrientation.Square);
+            }
+
             State.ButtonsOld = new SteamControllerButtons();
 
             _device = device;
@@ -788,10 +793,10 @@ namespace VSCView
             //OldState = State; // shouldn't this be a clone?
             OldState = (ControllerState)State.Clone(); // shouldn't this be a clone?
 
-            (State.Controls["quad_right"] as ControlButtonQuad).Button2 = (RawState.ulButtons[0] & 128) == 128;
-            (State.Controls["quad_right"] as ControlButtonQuad).Button3 = (RawState.ulButtons[0] & 64) == 64;
-            (State.Controls["quad_right"] as ControlButtonQuad).Button1 = (RawState.ulButtons[0] & 32) == 32;
-            (State.Controls["quad_right"] as ControlButtonQuad).Button0 = (RawState.ulButtons[0] & 16) == 16;
+            (State.Controls["quad_right"] as ControlButtonQuad).Button2 = (RawState.ulButtons[0] & 128) == 128; // A - S SE
+            (State.Controls["quad_right"] as ControlButtonQuad).Button3 = (RawState.ulButtons[0] & 64) == 64;   // X - W SW
+            (State.Controls["quad_right"] as ControlButtonQuad).Button1 = (RawState.ulButtons[0] & 32) == 32;   // B - E NE
+            (State.Controls["quad_right"] as ControlButtonQuad).Button0 = (RawState.ulButtons[0] & 16) == 16;   // Y - N NW
             (State.Controls["bumpers"] as ControlButtonPair).Button0 = (RawState.ulButtons[0] & 8) == 8;
             (State.Controls["bumpers"] as ControlButtonPair).Button1 = (RawState.ulButtons[0] & 4) == 4;
             (State.Controls["triggers"] as ControlTriggerPair).Stage2_0 = (RawState.ulButtons[0] & 2) == 2;
@@ -805,10 +810,10 @@ namespace VSCView
             if (ControllerType == EControllerType.Chell)
             {
                 // for the Chell controller, these are the 4 face buttons
-                State.ButtonsOld.Touch0 = (RawState.ulButtons[1] & 0x01) == 0x01; // NW
-                State.ButtonsOld.Touch1 = (RawState.ulButtons[1] & 0x02) == 0x02; // NE
-                State.ButtonsOld.Touch2 = (RawState.ulButtons[1] & 0x04) == 0x04; // SW
-                State.ButtonsOld.Touch3 = (RawState.ulButtons[1] & 0x08) == 0x08; // SE
+                (State.Controls["quad_center"] as ControlButtonQuad).Button0 = (RawState.ulButtons[1] & 0x01) == 0x01; // State.ButtonsOld.Touch0 = (RawState.ulButtons[1] & 0x01) == 0x01; // NW
+                (State.Controls["quad_center"] as ControlButtonQuad).Button1 = (RawState.ulButtons[1] & 0x02) == 0x02; // State.ButtonsOld.Touch1 = (RawState.ulButtons[1] & 0x02) == 0x02; // NE
+                (State.Controls["quad_center"] as ControlButtonQuad).Button3 = (RawState.ulButtons[1] & 0x04) == 0x04; // State.ButtonsOld.Touch2 = (RawState.ulButtons[1] & 0x04) == 0x04; // SW
+                (State.Controls["quad_center"] as ControlButtonQuad).Button2 = (RawState.ulButtons[1] & 0x08) == 0x08; // State.ButtonsOld.Touch3 = (RawState.ulButtons[1] & 0x08) == 0x08; // SE
             }
             else
             {
