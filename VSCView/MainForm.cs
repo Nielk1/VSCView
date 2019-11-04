@@ -315,10 +315,11 @@ namespace VSCView
             }).WaitForExit();
             settings.PreviousPid = Process.GetCurrentProcess().Id;
             SaveSettings();
+            RegistryKey whitelistKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\HidGuardian\Parameters\Whitelist\" + Process.GetCurrentProcess().Id, false);
+            hIDGuardianWhitelistToolStripMenuItem.Checked = whitelistKey != null;
         }
-    }
 
-    public class NativeMethods
+        public class NativeMethods
     {
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, IntPtr lParam);
