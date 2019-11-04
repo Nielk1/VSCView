@@ -37,7 +37,12 @@ namespace VSCView
             InitializeComponent();
 
             RegistryKey winLogonKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\HidGuardian", false);
-            hIDGuardianWhitelistToolStripMenuItem.Visible = winLogonKey != null;
+            if (winLogonKey != null)
+            {
+                hIDGuardianWhitelistToolStripMenuItem.Visible = true;
+                RegistryKey whitelistKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\HidGuardian\Parameters\Whitelist\" + Process.GetCurrentProcess().Id, false);
+                hIDGuardianWhitelistToolStripMenuItem.Checked = whitelistKey != null;
+            }
 
             Factory = new List<IControllerFactory>() {
                 new SteamControllerFactory(),
