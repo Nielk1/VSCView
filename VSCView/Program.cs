@@ -21,9 +21,13 @@ namespace VSCView
                 int oldPid = int.Parse(args[1]);
                 int newPid = int.Parse(args[2]);
 
-                if (oldPid != 0)
-                    Microsoft.Win32.Registry.LocalMachine.DeleteSubKey(@"SYSTEM\CurrentControlSet\Services\HidGuardian\Parameters\Whitelist\" + oldPid);
 
+                if (oldPid != 0)
+                    try
+                    {
+                        Microsoft.Win32.Registry.LocalMachine.DeleteSubKey(@"SYSTEM\CurrentControlSet\Services\HidGuardian\Parameters\Whitelist\" + oldPid);
+                    }
+                    catch { }
                 Microsoft.Win32.Registry.LocalMachine.CreateSubKey(@"SYSTEM\CurrentControlSet\Services\HidGuardian\Parameters\Whitelist\" + newPid);
             }
         }
