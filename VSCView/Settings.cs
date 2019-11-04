@@ -10,5 +10,6 @@ namespace VSCView
     {
         public string Theme { get; set; }
         public string Background { get; set; }
+        public int PreviousPid { get; set; }
     }
 }

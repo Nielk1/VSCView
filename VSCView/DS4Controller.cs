@@ -12,7 +12,7 @@ namespace VSCView
     {
         public const int VendorId = 0x054C;
         public const int ProductIdDongle = 0x0BA0;
-        //public const int ProductIdWired = 0x05C4; // and BT
+        public const int ProductIdWired = 0x05C4; // and BT
         public const int ProductIdWiredV2 = 0x09CC; // and BT
 
         public bool SensorsEnabled;
@@ -25,44 +25,6 @@ namespace VSCView
         public event ControllerNameUpdateEvent ControllerNameUpdated;
 
         #region DATA STRUCTS
-        public enum VSCEventType
-        {
-            CONTROL_UPDATE = 0x01,
-            CONNECTION_DETAIL = 0x03,
-            BATTERY_UPDATE = 0x04,
-        }
-
-        public enum ConnectionState
-        {
-            DISCONNECT = 0x01,
-            CONNECT = 0x02,
-            PAIRING = 0x03,
-        }
-
-        public enum Melody : UInt32
-        {
-            Warm_and_Happy = 0x00,
-            Invader = 0x01,
-            Controller_Confirmed = 0x02,
-            Victory = 0x03,
-            Rise_and_Shine = 0x04,
-            Shorty = 0x05,
-            Warm_Boot = 0x06,
-            Next_Level = 0x07,
-            Shake_it_off = 0x08,
-            Access_Denied = 0x09,
-            Deactivate = 0x0a,
-            Discovery = 0x0b,
-            Triumph = 0x0c,
-            The_Mann = 0x0d,
-        }
-
-        public enum EControllerType
-        {
-            Chell,
-            ReleaseV1,
-            ReleaseV2,
-        }
 
         public ControllerState GetState()
         {
@@ -445,7 +407,7 @@ namespace VSCView
     {
         public IController[] GetControllers()
         {
-            List<HidDevice> _devices = HidDevices.Enumerate(DS4Controller.VendorId, DS4Controller.ProductIdDongle, DS4Controller.ProductIdWiredV2).ToList();
+            List<HidDevice> _devices = HidDevices.Enumerate(DS4Controller.VendorId, DS4Controller.ProductIdDongle, DS4Controller.ProductIdWired, DS4Controller.ProductIdWiredV2).ToList();
             List<DS4Controller> ControllerList = new List<DS4Controller>();
             string bt_hid_id = @"00001124-0000-1000-8000-00805f9b34fb";
 
@@ -459,6 +421,7 @@ namespace VSCView
                     EConnectionType ConType = EConnectionType.Unknown;
                     switch (_device.Attributes.ProductId)
                     {
+                        case DS4Controller.ProductIdWired:
                         case DS4Controller.ProductIdWiredV2:
                             if (devicePath.Contains(bt_hid_id))
                             {

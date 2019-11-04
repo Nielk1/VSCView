@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -33,6 +35,9 @@ namespace VSCView
         {
             this.FormBorderStyle = FormBorderStyle.None;
             InitializeComponent();
+
+            RegistryKey winLogonKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\HidGuardian", false);
+            hIDGuardianWhitelistToolStripMenuItem.Visible = winLogonKey != null;
 
             Factory = new List<IControllerFactory>() {
                 new SteamControllerFactory(),
@@ -297,6 +302,19 @@ namespace VSCView
         private void MinimizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void HIDGuardianWhitelistToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo()
+            {
+                FileName = System.Reflection.Assembly.GetEntryAssembly().Location,
+                Arguments = $"admin {settings.PreviousPid} {Process.GetCurrentProcess().Id}",
+                UseShellExecute = true,
+                Verb = "runas",
+            }).WaitForExit();
+            settings.PreviousPid = Process.GetCurrentProcess().Id;
+            SaveSettings();
         }
     }
 
