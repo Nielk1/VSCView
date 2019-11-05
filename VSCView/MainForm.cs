@@ -56,7 +56,7 @@ namespace VSCView
 
             LoadThemes();
             LoadSettings();
-            if(File.Exists("ctrl.last"))
+            if (File.Exists("ctrl.last"))
             {
                 settings.Theme = File.ReadAllText("ctrl.last");
                 File.Delete("ctrl.last");
@@ -169,7 +169,8 @@ namespace VSCView
             {
                 ToolStripItem itm = tsmiController.DropDownItems.Add(Controllers[i].GetName(), null, LoadController);
                 IController c = Controllers[i];
-                Controllers[i].ControllerNameUpdated += () => {
+                Controllers[i].ControllerNameUpdated += () =>
+                {
                     this.Invoke(new Action(() =>
                     {
                         itm.Text = c.GetName();
@@ -290,7 +291,7 @@ namespace VSCView
 
         private void tsmiSetBackgroundColor_Click(object sender, EventArgs e)
         {
-            if(colorDialog1.ShowDialog() == DialogResult.OK)
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
                 this.BackColor = colorDialog1.Color;
                 settings.Background = ColorTranslator.ToHtml(this.BackColor);
@@ -323,8 +324,9 @@ namespace VSCView
             RegistryKey whitelistKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\HidGuardian\Parameters\Whitelist\" + Process.GetCurrentProcess().Id, false);
             hIDGuardianWhitelistToolStripMenuItem.Checked = whitelistKey != null;
         }
+    }
 
-        public class NativeMethods
+    public class NativeMethods
     {
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, IntPtr lParam);
