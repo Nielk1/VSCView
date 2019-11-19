@@ -443,7 +443,7 @@
                   "input": "touch_center:touch1 OR touch_right:touch0",
                   "x": -5,
                   "y": 0,
-                  "inputX": "(touch_center:x1 * 88) + touch_left:touch0 * (touch_right:x0 * 44 + 44)",
+                  "inputX": "(touch_center:x1 * 88) + touch_right:touch0 * (touch_right:x0 * 44 + 44)",
                   "inputY": "(touch_center:y1 + touch_right:y0) * 35",
                   "image": "padheat.png",
                   "length": 30,

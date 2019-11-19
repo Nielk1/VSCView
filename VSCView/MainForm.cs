@@ -20,6 +20,8 @@ namespace VSCView
         public static SensorCollector sensorData;
         public static int frameTime = (int)(1000 / 60); // 16ms interval => ~62fps
 
+        Dictionary<string, ToolStripMenuItem> ThemeMenuItems = new Dictionary<string, ToolStripMenuItem>();
+
         ControllerData ControllerData;
         IController ActiveController;
         List<IController> Controllers = new List<IController>();
@@ -111,12 +113,38 @@ namespace VSCView
         private void LoadThemes()
         {
             tsmiTheme.DropDownItems.Clear();
+            ThemeMenuItems.Clear();
 
             if (!Directory.Exists("themes")) Directory.CreateDirectory("themes");
-            string[] themeParents = Directory.GetDirectories("themes");
+            string[] themeParents = Directory.GetFiles("themes", "theme.json", SearchOption.AllDirectories);
+            themeParents = themeParents.Select(dr => Path.GetDirectoryName(dr)).Distinct().ToArray();
 
             foreach (string themeParent in themeParents)
             {
+                string[] PathMiddleParts = themeParent.Split(Path.DirectorySeparatorChar).Reverse().Skip(1).Reverse().Skip(1).ToArray();
+
+                ToolStripMenuItem parentMenuItem = tsmiTheme;
+                for (int j = 0; j < PathMiddleParts.Length; j++)
+                {
+                    string dir_key = string.Join(Path.DirectorySeparatorChar.ToString(), PathMiddleParts.Take(j + 1).ToArray());
+                    if (!ThemeMenuItems.ContainsKey(dir_key))
+                    {
+                        string nameFile = Path.Combine("themes", dir_key, "name.txt");
+                        string icon_file = Path.Combine("themes", dir_key, "icon.png");
+                        string name = File.Exists(nameFile) ? File.ReadAllText(nameFile).Trim() : null;
+                        if (string.IsNullOrWhiteSpace(name))
+                            name = PathMiddleParts.Skip(j).First();
+                        ThemeMenuItems[dir_key] = new ToolStripMenuItem(name);
+                        if (File.Exists(icon_file))
+                        {
+                            ThemeMenuItems[dir_key].Image = Image.FromFile(icon_file);
+                            ThemeMenuItems[dir_key].ImageScaling = ToolStripItemImageScaling.None;
+                        }
+                        parentMenuItem.DropDownItems.Add(ThemeMenuItems[dir_key]);
+                    }
+                    parentMenuItem = ThemeMenuItems[dir_key];
+                }
+
                 string ThemeName = Path.GetFileName(themeParent);
                 try
                 {
@@ -131,7 +159,13 @@ namespace VSCView
                 catch { }
 
                 ToolStripMenuItem itmTop = new ToolStripMenuItem(ThemeName);
-                tsmiTheme.DropDownItems.Add(itmTop);
+                string themeIconFile = Path.Combine(themeParent, "icon.png");
+                if (File.Exists(themeIconFile))
+                {
+                    itmTop.Image = Image.FromFile(themeIconFile);
+                    itmTop.ImageScaling = ToolStripItemImageScaling.None;
+                }
+                parentMenuItem.DropDownItems.Add(itmTop);
 
                 string[] themeFiles = Directory.GetFiles(themeParent, "*.json", SearchOption.TopDirectoryOnly);
                 foreach (string themeFile in themeFiles)
@@ -210,7 +244,7 @@ namespace VSCView
                 ActiveController.Identify();
             }).Start();
 
-            ui.InitalizeController();
+            ui?.InitalizeController();
         }
 
         private async void LoadTheme(object sender, EventArgs e)

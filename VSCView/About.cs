@@ -25,10 +25,24 @@ namespace VSCView
 
             {
                 if (!Directory.Exists("themes")) Directory.CreateDirectory("themes");
-                string[] themeParents = Directory.GetDirectories("themes");
+                string[] themeParents = Directory.GetFiles("themes", "theme.json", SearchOption.AllDirectories);
+                themeParents = themeParents.Select(dr => Path.GetDirectoryName(dr)).Distinct().ToArray();
 
                 foreach (string themeParent in themeParents)
                 {
+                    string[] PathMiddleParts = themeParent.Split(Path.DirectorySeparatorChar).Reverse().Skip(1).Reverse().Skip(1).ToArray();
+                    List<string> PathBits = new List<string>();
+                    for (int j = 0; j < PathMiddleParts.Length; j++)
+                    {
+                        string dir_key = string.Join(Path.DirectorySeparatorChar.ToString(), PathMiddleParts.Take(j + 1).ToArray());
+                        string nameFile = Path.Combine("themes", dir_key, "name.txt");
+                        string name = File.Exists(nameFile) ? File.ReadAllText(nameFile).Trim() : null;
+                        if (string.IsNullOrWhiteSpace(name))
+                            name = PathMiddleParts.Skip(j).First();
+                        PathBits.Add(name);
+                    }
+                    string ParentBits = string.Join(Path.DirectorySeparatorChar.ToString(), PathBits.ToArray());
+
                     string ThemeName = Path.GetFileName(themeParent);
                     List<ThemeDescAuthors> authors = null;
                     try
@@ -61,6 +75,7 @@ namespace VSCView
                             }
                         });
                         authors = authors?.Where(dr => dr.name != null).ToList();
+                        ThemeName = string.IsNullOrWhiteSpace(ParentBits) ? ThemeName : ParentBits + Path.DirectorySeparatorChar + ThemeName;
                         if (authors?.Any(dr => dr.url != null) ?? false) // at least one url
                         {
                             LinkLabel label = new LinkLabel();
