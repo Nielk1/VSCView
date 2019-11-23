@@ -345,14 +345,22 @@ namespace VSCView
 
         public T Value<T>(string key)
         {
-            try
+            switch (key)
             {
-                string[] parts = key.Split(',');
-                return (T)Convert.ChangeType(Button[int.Parse(parts[0]), int.Parse(parts[1])], typeof(T));
-            }
-            catch
-            {
-                return default;
+                case "width":
+                    return (T)Convert.ChangeType(Width, typeof(T));
+                case "height":
+                    return (T)Convert.ChangeType(Height, typeof(T));
+                default:
+                try
+                {
+                    string[] parts = key.Split(',');
+                    return (T)Convert.ChangeType(Button[int.Parse(parts[0]), int.Parse(parts[1])], typeof(T));
+                }
+                catch
+                {
+                    return default;
+                }
             }
         }
         public Type Type(string key)
@@ -569,38 +577,12 @@ namespace VSCView
 
     public class ControllerState : ICloneable
     {
-        /*public ControlCollection<ControlTriggerPair> TriggerPairs { get; private set; }
-        public ControlCollection<ControlTrigger> Triggers { get; private set; }
-        public ControlCollection<ControlButtonQuad> ButtonQuads { get; private set; }
-        public ControlCollection<ControlButtonPair> ButtonPairs { get; private set; }
-        public ControlCollection<ControlButton> Buttons { get; private set; }
-        public ControlCollection<ControlStick> Sticks { get; private set; }
-        public ControlCollection<ControlTouch> Touch { get; private set; }*/
         public ControlCollection Controls { get; private set; }
 
         public ControllerState()
         {
-            /*TriggerPairs = new ControlCollection<ControlTriggerPair>();
-            Triggers = new ControlCollection<ControlTrigger>();
-            ButtonQuads = new ControlCollection<ControlButtonQuad>();
-            ButtonPairs = new ControlCollection<ControlButtonPair>();
-            Buttons = new ControlCollection<ControlButton>();*/
             Controls = new ControlCollection();
         }
-
-        public SteamControllerButtons ButtonsOld { get; set; }
-
-        public float LeftTrigger { get; set; }
-        public float RightTrigger { get; set; }
-
-        public float LeftStickX { get; set; }
-        public float LeftStickY { get; set; }
-        public float LeftPadX { get; set; }
-        public float LeftPadY { get; set; }
-        public float RightStickX { get; set; }
-        public float RightStickY { get; set; }
-        public float RightPadX { get; set; }
-        public float RightPadY { get; set; }
 
         public Int16 AccelerometerX { get; set; }
         public Int16 AccelerometerY { get; set; }
@@ -620,18 +602,6 @@ namespace VSCView
             ControllerState newState = new ControllerState();
 
             newState.Controls = (ControlCollection)this.Controls.Clone();
-
-            newState.ButtonsOld = (SteamControllerButtons)this.ButtonsOld.Clone();
-
-            newState.LeftTrigger = this.LeftTrigger;
-            newState.RightTrigger = this.RightTrigger;
-
-            newState.LeftStickX = this.LeftStickX;
-            newState.LeftStickY = this.LeftStickY;
-            newState.LeftPadX = this.LeftPadX;
-            newState.LeftPadY = this.LeftPadY;
-            newState.RightPadX = this.RightPadX;
-            newState.RightPadY = this.RightPadY;
 
             newState.AccelerometerX = this.AccelerometerX;
             newState.AccelerometerY = this.AccelerometerY;

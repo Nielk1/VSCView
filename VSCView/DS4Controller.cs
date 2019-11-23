@@ -96,8 +96,6 @@ namespace VSCView
 
             // According to this the normalized domain of the DS4 gyro is 1024 units per rad/s: https://gamedev.stackexchange.com/a/87178
 
-            State.ButtonsOld = new SteamControllerButtons();
-
             _device = device;
 
             Initalized = false;

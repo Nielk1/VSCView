@@ -212,8 +212,6 @@ namespace VSCView
                 State.Controls["grid_center"] = new ControlButtonGrid(2, 2);
             }
 
-            State.ButtonsOld = new SteamControllerButtons();
-
             _device = device;
             ConnectionType = connection;
             ControllerType = type;
