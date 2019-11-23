@@ -70,7 +70,7 @@ namespace VSCView
         ControllerState State = new ControllerState();
         ControllerState OldState = new ControllerState();
 
-        bool Initalized;
+        int Initalized;
 
         public delegate void StateUpdatedEventHandler(object sender, ControllerState e);
         public event StateUpdatedEventHandler StateUpdated;
@@ -98,12 +98,22 @@ namespace VSCView
 
             _device = device;
 
-            Initalized = false;
+            Initalized = 0;
         }
 
         public void Initalize()
         {
-            if (Initalized) return;
+            if (Initalized > 1) return;
+
+            HalfInitalize();
+
+            Initalized = 2;
+            _device.ReadReport(OnReport);
+        }
+
+        public void HalfInitalize()
+        {
+            if (Initalized > 0) return;
 
             // open the device overlapped read so we don't get stuck waiting for a report when we write to it
             //_device.OpenDevice(DeviceMode.Overlapped, DeviceMode.NonOverlapped, ShareMode.ShareRead | ShareMode.ShareWrite);
@@ -114,24 +124,27 @@ namespace VSCView
 
             //_device.MonitorDeviceEvents = true;
 
+            Initalized = 1;
             touch_last_frame = false;
-            Initalized = true;
 
             //_attached = _device.IsConnected;
 
-            _device.ReadReport(OnReport);
+            if (ConnectionType == EConnectionType.Dongle)
+            {
+                _device.ReadReport(OnReport);
+            }
         }
 
         public void DeInitalize()
         {
-            if (!Initalized) return;
+            if (Initalized == 0) return;
 
             //_device.Inserted -= DeviceAttachedHandler;
             //_device.Removed -= DeviceRemovedHandler;
 
             //_device.MonitorDeviceEvents = false;
 
-            Initalized = false;
+            Initalized = 0;
             _device.CloseDevice();
         }
 
@@ -189,52 +202,128 @@ namespace VSCView
 
         public string GetName()
         {
-            /*
-            List<string> NameParts = new List<string>();
-
-            byte[] ManufacturerBytes;
-            _device.ReadManufacturer(out ManufacturerBytes); // Sony Interactive Entertainment
-            string Manufacturer = System.Text.Encoding.Unicode.GetString(ManufacturerBytes)?.Trim('\0');
-            NameParts.Add(Manufacturer);
-
-            byte[] ProductBytes;
-            _device.ReadProduct(out ProductBytes); // DUALSHOCK®4 USB Wireless Adaptor
-            string Product = System.Text.Encoding.Unicode.GetString(ProductBytes)?.Trim('\0');
-            NameParts.Add(Product);
-
-            byte[] SerialNumberBytes;
-            _device.ReadSerialNumber(out SerialNumberBytes); // DUALSHOCK®4 USB Wireless Adaptor
-            string SerialNumber = System.Text.Encoding.Unicode.GetString(SerialNumberBytes)?.Trim('\0');
-            if (string.IsNullOrWhiteSpace(SerialNumber))
+            switch (ConnectionType)
             {
-                NameParts.Add(_device.DevicePath);
+                case EConnectionType.Dongle:
+                    {
+                        bool hasDevice = true;
+                        byte[] data;
+                        _device.ReadFeatureData(out data, 0xE3);
+                        UInt16 local_VID = BitConverter.ToUInt16(data, 1);
+                        UInt16 local_PID = BitConverter.ToUInt16(data, 3);
+                        string retVal = $"Sony Device <{local_PID:X4}>";//"DUALSHOCK®4 USB Wireless Adaptor";
+                        switch (local_VID)
+                        {
+                            case 0:
+                                retVal = "DUALSHOCK®4 USB Wireless Adaptor";
+                                hasDevice = false;
+                                break;
+                            case VendorId:
+                                switch (local_PID)
+                                {
+                                    case ProductIdWired:
+                                        retVal = $"Sony DUALSHOCK®4 Controller V1";
+                                        break;
+                                    case ProductIdWiredV2:
+                                        retVal = $"Sony DUALSHOCK®4 Controller V2";
+                                        break;
+                                        //default:
+                                        //    retVal = 
+                                        //    break;
+                                }
+                                break;
+                            default:
+                                retVal = $"Unknown <{local_VID:X4},{local_PID:X4}>";
+                                break;
+                        }
+
+                        if(!hasDevice)
+                        {
+                            return retVal;
+                        }
+
+                        string Serial = null;
+
+                        if (_device.Attributes.VendorId == VendorId
+                        && (_device.Attributes.ProductId == ProductIdWired || _device.Attributes.ProductId == ProductIdWiredV2 || _device.Attributes.ProductId == ProductIdDongle))
+                        {
+                            try
+                            {
+                                _device.ReadFeatureData(out data, 0x12);
+                                Serial = string.Join(":", data.Skip(1).Take(6).Reverse().Select(dr => $"{dr:X2}").ToArray());
+                                if (Serial == "00:00:00:00:00:00")
+                                    Serial = null;
+                            }
+                            catch { }
+                        }
+                        if (string.IsNullOrWhiteSpace(Serial))
+                        {
+                            byte[] SerialNumberBytes;
+                            if (_device.ReadSerialNumber(out SerialNumberBytes)) // DUALSHOCK®4 USB Wireless Adaptor
+                            {
+                                string SerialNumber = System.Text.Encoding.Unicode.GetString(SerialNumberBytes)?.Trim('\0');
+                                if (!string.IsNullOrWhiteSpace(SerialNumber))
+                                {
+                                    Serial = SerialNumber;
+                                }
+                            }
+                        }
+                        if (string.IsNullOrWhiteSpace(Serial))
+                            Serial = null;
+
+                        return retVal += $" [{Serial ?? "No ID"}]";
+                    }
+                default:
+                    {
+                        string retVal = "Sony DUALSHOCK®4 Controller";
+
+                        switch (_device.Attributes.ProductId)
+                        {
+                            case ProductIdWired:
+                                retVal = $"Sony DUALSHOCK®4 Controller V1";
+                                break;
+                            case ProductIdWiredV2:
+                                retVal = $"Sony DUALSHOCK®4 Controller V2";
+                                break;
+                        }
+
+                        string Serial = null;
+
+                        if (_device.Attributes.VendorId == VendorId
+                        && (_device.Attributes.ProductId == ProductIdWired || _device.Attributes.ProductId == ProductIdWiredV2 || _device.Attributes.ProductId == ProductIdDongle))
+                        {
+                            try
+                            {
+                                byte[] data;
+                                _device.ReadFeatureData(out data, 0x12);
+                                Serial = string.Join(":", data.Skip(1).Take(6).Reverse().Select(dr => $"{dr:X2}").ToArray());
+                            }
+                            catch { }
+                        }
+                        if (string.IsNullOrWhiteSpace(Serial))
+                        {
+                            byte[] SerialNumberBytes;
+                            if (_device.ReadSerialNumber(out SerialNumberBytes)) // DUALSHOCK®4 USB Wireless Adaptor
+                            {
+                                string SerialNumber = System.Text.Encoding.Unicode.GetString(SerialNumberBytes)?.Trim('\0');
+                                if (!string.IsNullOrWhiteSpace(SerialNumber))
+                                {
+                                    Serial = SerialNumber;
+                                }
+                            }
+                        }
+                        if (string.IsNullOrWhiteSpace(Serial))
+                            Serial = null;
+
+                        return retVal += $" [{Serial ?? "No ID"}]"; ;
+                    }
             }
-            else
-            {
-                NameParts.Add(SerialNumber);
-            }
-
-            return string.Join(@" | ", NameParts.Where(dr => !string.IsNullOrWhiteSpace(dr)).Select(dr => dr.Replace("&", "&&")));
-            */
-
-            string retVal = "Sony DUALSHOCK®4 Controller";
-
-            byte[] SerialNumberBytes;
-            if (_device.ReadSerialNumber(out SerialNumberBytes)) // DUALSHOCK®4 USB Wireless Adaptor
-            {
-                string SerialNumber = System.Text.Encoding.Unicode.GetString(SerialNumberBytes)?.Trim('\0');
-                if (!string.IsNullOrWhiteSpace(SerialNumber))
-                {
-                    retVal += $" [{SerialNumber ?? "No ID"}]";
-                }
-            }
-
-            return retVal;
         }
 
+        bool DisconnectedBit = false;
         private void OnReport(HidReport report)
         {
-            if (!Initalized) return;
+            if (Initalized < 1) return;
 
             if (0 == Interlocked.Exchange(ref reportUsageLock, 1))
             {
@@ -313,25 +402,32 @@ namespace VSCView
                 // bld.Append(report.Data[baseOffset + 30].ToString("X2"));
                 // bld.Append(report.Data[baseOffset + 31].ToString("X2") + " ");
 
+                bool DisconnectedFlag = (report.Data[baseOffset + 30] & 0x04) == 0x04;
+                if (DisconnectedFlag != DisconnectedBit)
+                {
+                    DisconnectedBit = DisconnectedFlag;
+                    ControllerNameUpdated?.Invoke();
+                }
+
                 int TouchDataCount = report.Data[baseOffset + 32];
 
                 for (int FingerCounter = 0; FingerCounter < TouchDataCount; FingerCounter++)
                 {
-                    byte touch_timestamp     = report.Data[baseOffset + 33 + (FingerCounter * 9)]; // Touch Pad Counter
+                    byte touch_timestamp = report.Data[baseOffset + 33 + (FingerCounter * 9)]; // Touch Pad Counter
                     //DateTime tmp_now = DateTime.Now;
 
-                    bool Finger1            = (report.Data[baseOffset + 34 + (FingerCounter * 9)] & 0x80) != 0x80;
+                    bool Finger1 = (report.Data[baseOffset + 34 + (FingerCounter * 9)] & 0x80) != 0x80;
                     byte Finger1Index = (byte)(report.Data[baseOffset + 34 + (FingerCounter * 9)] & 0x7f);
-                    int F1X                  = report.Data[baseOffset + 35 + (FingerCounter * 9)]
+                    int F1X = report.Data[baseOffset + 35 + (FingerCounter * 9)]
                                            | ((report.Data[baseOffset + 36 + (FingerCounter * 9)] & 0xF) << 8);
-                    int F1Y                = ((report.Data[baseOffset + 36 + (FingerCounter * 9)] & 0xF0) >> 4)
+                    int F1Y = ((report.Data[baseOffset + 36 + (FingerCounter * 9)] & 0xF0) >> 4)
                                             | (report.Data[baseOffset + 37 + (FingerCounter * 9)] << 4);
 
-                    bool Finger2 =            (report.Data[baseOffset + 38 + (FingerCounter * 9)] & 0x80) != 0x80;
+                    bool Finger2 = (report.Data[baseOffset + 38 + (FingerCounter * 9)] & 0x80) != 0x80;
                     byte Finger2Index = (byte)(report.Data[baseOffset + 38 + (FingerCounter * 9)] & 0x7f);
-                    int F2X                  = report.Data[baseOffset + 39 + (FingerCounter * 9)]
+                    int F2X = report.Data[baseOffset + 39 + (FingerCounter * 9)]
                                            | ((report.Data[baseOffset + 40 + (FingerCounter * 9)] & 0xF) << 8);
-                    int F2Y                = ((report.Data[baseOffset + 40 + (FingerCounter * 9)] & 0xF0) >> 4)
+                    int F2Y = ((report.Data[baseOffset + 40 + (FingerCounter * 9)] & 0xF0) >> 4)
                                             | (report.Data[baseOffset + 41 + (FingerCounter * 9)] << 4);
 
                     byte TimeDelta = touch_last_frame ? GetOverflowedDelta(last_touch_timestamp, touch_timestamp) : (byte)0;
@@ -351,6 +447,8 @@ namespace VSCView
                 OnStateUpdated(NewState);
                 Interlocked.Exchange(ref reportUsageLock, 0);
 
+                if (ConnectionType == EConnectionType.Dongle && DisconnectedFlag)
+                    Thread.Sleep(1000); // if we're a dongle and we're not connected we might only be partially initalized, so slow roll our read
                 _device.ReadReport(OnReport);
             }
         }
@@ -435,7 +533,9 @@ namespace VSCView
                             break;
                     }
 
-                    ControllerList.Add(new DS4Controller(_device, ConType));
+                    DS4Controller ctrl = new DS4Controller(_device, ConType);
+                    ctrl.HalfInitalize();
+                    ControllerList.Add(ctrl);
                 }
             }
 

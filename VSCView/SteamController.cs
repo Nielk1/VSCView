@@ -427,31 +427,6 @@ namespace VSCView
 
         public string GetName()
         {
-            /*
-            List<string> NameParts = new List<string>();
-
-            byte[] ManufacturerBytes;
-            _device.ReadManufacturer(out ManufacturerBytes); // Sony Interactive Entertainment
-            string Manufacturer = System.Text.Encoding.Unicode.GetString(ManufacturerBytes)?.Trim('\0');
-            NameParts.Add(Manufacturer);
-
-            byte[] ProductBytes;
-            _device.ReadProduct(out ProductBytes); // DUALSHOCK®4 USB Wireless Adaptor
-            string Product = System.Text.Encoding.Unicode.GetString(ProductBytes)?.Trim('\0');
-            NameParts.Add(Product);
-
-            if(string.IsNullOrWhiteSpace(Serial))
-            {
-                NameParts.Add(_device.DevicePath);
-            }
-            else
-            {
-                NameParts.Add(Serial);
-            }
-
-            return string.Join(@" | ", NameParts.Where(dr => !string.IsNullOrWhiteSpace(dr)).Select(dr => dr.Replace("&", "&&")));
-            */
-
             string retVal = "Valve Steam Controller";
             switch(ControllerType)
             {
