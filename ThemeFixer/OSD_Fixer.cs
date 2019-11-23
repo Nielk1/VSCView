@@ -243,13 +243,13 @@ namespace ThemeFixer
                 case "rightpadtouch": return "touch_right:touch0";
                 case "rightpadclick": return "touch_right:click";
                 case "touch0":
-                case "touchnw":       return "quad_center:0";
+                case "touchnw":       return "grid_center:0,0";
                 case "touch1":
-                case "touchne":       return "quad_center:1";
+                case "touchne":       return "grid_center:1,0";
                 case "touch2":
-                case "touchsw":       return "quad_center:3";
+                case "touchsw":       return "grid_center:0,1";
                 case "touch3":
-                case "touchse":       return "quad_center:2";
+                case "touchse":       return "grid_center:1,1";
 
             }
             return inputName;

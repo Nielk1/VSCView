@@ -130,7 +130,7 @@ namespace VSCView
         }
         #endregion
 
-        
+
         public string Serial { get; private set; }
 
         ControllerState State = new ControllerState();
@@ -178,6 +178,14 @@ namespace VSCView
         public EConnectionType ConnectionType { get; private set; }
         public EControllerType ControllerType { get; private set; }
 
+        private enum InternalConState
+        {
+            Unknown,
+            Disconnected,
+            Connected,
+        }
+        private InternalConState ConState;
+
         public delegate void StateUpdatedEventHandler(object sender, ControllerState e);
         public event StateUpdatedEventHandler StateUpdated;
         protected virtual void OnStateUpdated(ControllerState e)
@@ -189,7 +197,7 @@ namespace VSCView
         public SteamController(HidDevice device, EConnectionType connection = EConnectionType.Unknown, EControllerType type = EControllerType.Unknown)
         {
             State.Controls["quad_left"] = new ControlDPad(/*4*/);
-            State.Controls["quad_right"] = new ControlButtonQuad(EOrientation.Diamond);
+            State.Controls["quad_right"] = new ControlButtonQuad();
             State.Controls["bumpers"] = new ControlButtonPair();
             State.Controls["triggers"] = new ControlTriggerPair(HasStage2: true);
             State.Controls["menu"] = new ControlButtonPair();
@@ -199,9 +207,9 @@ namespace VSCView
             State.Controls["touch_left"] = new ControlTouch(TouchCount: 1, HasClick: true);
             State.Controls["touch_right"] = new ControlTouch(TouchCount: 1, HasClick: true);
 
-            if(type == EControllerType.Chell)
+            if (type == EControllerType.Chell)
             {
-                State.Controls["quad_center"] = new ControlButtonQuad(EOrientation.Square);
+                State.Controls["grid_center"] = new ControlButtonGrid(2, 2);
             }
 
             State.ButtonsOld = new SteamControllerButtons();
@@ -239,6 +247,17 @@ namespace VSCView
             //_device.MonitorDeviceEvents = true;
 
             Initalized = 1;
+
+            new Thread(() =>
+            {
+                try {
+                    while (Initalized > 0)
+                    {
+                        UpdateMetadata();
+                        Thread.Sleep(1000);
+                    }
+                } catch { }
+            }).Start();
         }
 
         public event ControllerNameUpdateEvent ControllerNameUpdated;
@@ -334,7 +353,8 @@ namespace VSCView
             var result = _device.WriteFeatureData(reportData);
             return result;
         }
-        
+
+
         public bool UpdateSerial()
         {
             byte[] reportData = new byte[64];
@@ -343,23 +363,53 @@ namespace VSCView
             reportData[3] = 0x01;
 
             //Thread.Sleep(1000); // why do we need this? race condition?
-            var result = _device.WriteFeatureData(reportData);
-            if (!result) return false;
+            //var result = _device.WriteFeatureData(reportData);
+            //if (!result) return false;
             //Thread.Sleep(1000); // why do we need this? race condition?
             var reply = GetFeatureReport(reportData);
 
             //byte[] reply;
             //bool success = _device.ReadFeatureData(out reply, 0);
 
-            if (reply == null || reply[1] != 0xae || reply[2] != 0x15 || reply[3] != 0x01)
+            if (reply == null || reply[1] != 0xae || reply[4] == 0)
             {
                 Serial = null;
                 ControllerNameUpdated?.Invoke();
                 return false;
             }
-            Serial = System.Text.Encoding.UTF8.GetString(reply.Skip(4).Take(10).ToArray());
+            //Serial = System.Text.Encoding.UTF8.GetString(reply.Skip(4).Take(10).ToArray());
+            string NewSerial = System.Text.Encoding.UTF8.GetString(reply.Skip(4).Take(reply[4]).ToArray());
+            NewSerial = NewSerial.Split('\0')[0];
+            if (NewSerial.Length > 0) Serial = NewSerial;
             ControllerNameUpdated?.Invoke();
             return true;
+        }
+        private void ClearSerial()
+        {
+            if (Serial != null)
+            {
+                Serial = null;
+                ControllerNameUpdated?.Invoke();
+            }
+        }
+
+        private void UpdateMetadata()
+        {
+            //if (ConnectionType == EConnectionType.Bluetooth) return; // not sure how to do this on BT, might be normal?
+            //if (ControllerType == EControllerType.Chell) return; // does Chell support this?
+
+            switch (ConState)
+            {
+                case InternalConState.Unknown:
+                case InternalConState.Connected:
+                    if (Serial == null)
+                        UpdateSerial();
+                    break;
+                case InternalConState.Disconnected:
+                    ClearSerial();
+                    break;
+            }
+
         }
 
         public bool CheckSensorDataStuck()
@@ -599,6 +649,7 @@ namespace VSCView
                             byte Unknown1 = report.Data[0]; // always 0x01?
                             byte Unknown2 = report.Data[1]; // always 0x00?
                             VSCEventType EventType = (VSCEventType)report.Data[2];
+                            //report.Data[3] // length
 
                             switch (EventType)
                             {
@@ -606,7 +657,6 @@ namespace VSCView
                                     break;
                                 case VSCEventType.CONTROL_UPDATE:
                                     {
-                                        //report.Data[3] // 0x3C?
 
                                         UInt32 PacketIndex = BitConverter.ToUInt32(report.Data, 4);
 
@@ -697,6 +747,8 @@ namespace VSCView
                                         RawState.sGyroQuatZ = BitConverter.ToInt16(report.Data, 8 + 38);
 
                                         ProcessStateBytes();
+
+                                        ConState = InternalConState.Connected;
                                     }
                                     break;
 
@@ -710,19 +762,11 @@ namespace VSCView
                                         switch(ConnectionStateV)
                                         {
                                             case ConnectionState.CONNECT:
-                                            case ConnectionState.DISCONNECT:
-                                                UpdateSerial(); // this doesn't work if the controller is not already polling, obviously.  Might need to explicitly code in dongle watching or something.
+                                                ConState = InternalConState.Connected;
                                                 break;
-                                        }
-
-                                        if (report.Data[4] == 0x01)
-                                        {
-                                            byte[] tmpBytes = new byte[4];
-                                            tmpBytes[1] = report.Data[5];
-                                            tmpBytes[2] = report.Data[6];
-                                            tmpBytes[3] = report.Data[7];
-
-                                            //BitConverter.ToUInt32(tmpBytes, 0); // Timestamp
+                                            case ConnectionState.DISCONNECT:
+                                                ConState = InternalConState.Disconnected;
+                                                break;
                                         }
                                     }
                                     break;
@@ -810,10 +854,10 @@ namespace VSCView
             if (ControllerType == EControllerType.Chell)
             {
                 // for the Chell controller, these are the 4 face buttons
-                (State.Controls["quad_center"] as ControlButtonQuad).Button0 = (RawState.ulButtons[1] & 0x01) == 0x01; // State.ButtonsOld.Touch0 = (RawState.ulButtons[1] & 0x01) == 0x01; // NW
-                (State.Controls["quad_center"] as ControlButtonQuad).Button1 = (RawState.ulButtons[1] & 0x02) == 0x02; // State.ButtonsOld.Touch1 = (RawState.ulButtons[1] & 0x02) == 0x02; // NE
-                (State.Controls["quad_center"] as ControlButtonQuad).Button3 = (RawState.ulButtons[1] & 0x04) == 0x04; // State.ButtonsOld.Touch2 = (RawState.ulButtons[1] & 0x04) == 0x04; // SW
-                (State.Controls["quad_center"] as ControlButtonQuad).Button2 = (RawState.ulButtons[1] & 0x08) == 0x08; // State.ButtonsOld.Touch3 = (RawState.ulButtons[1] & 0x08) == 0x08; // SE
+                (State.Controls["grid_center"] as ControlButtonGrid).Button[0, 0] = (RawState.ulButtons[1] & 0x01) == 0x01; // State.ButtonsOld.Touch0 = (RawState.ulButtons[1] & 0x01) == 0x01; // NW
+                (State.Controls["grid_center"] as ControlButtonGrid).Button[1, 0] = (RawState.ulButtons[1] & 0x02) == 0x02; // State.ButtonsOld.Touch1 = (RawState.ulButtons[1] & 0x02) == 0x02; // NE
+                (State.Controls["grid_center"] as ControlButtonGrid).Button[0, 1] = (RawState.ulButtons[1] & 0x04) == 0x04; // State.ButtonsOld.Touch2 = (RawState.ulButtons[1] & 0x04) == 0x04; // SW
+                (State.Controls["grid_center"] as ControlButtonGrid).Button[1, 1] = (RawState.ulButtons[1] & 0x08) == 0x08; // State.ButtonsOld.Touch3 = (RawState.ulButtons[1] & 0x08) == 0x08; // SE
             }
             else
             {
@@ -973,10 +1017,6 @@ namespace VSCView
 
                     SteamController ctrl = new SteamController(_device, ConType, CtrlType);
                     ctrl.HalfInitalize();
-                    new Thread(() =>
-                    {
-                        ctrl.UpdateSerial();
-                    }).Start();
                     ControllerList.Add(ctrl);
                 }
             }

@@ -84,7 +84,7 @@ namespace VSCView
             this.ConnectionType = ConnectionType;
 
             State.Controls["quad_left"] = new ControlDPad();
-            State.Controls["quad_right"] = new ControlButtonQuad(EOrientation.Diamond);
+            State.Controls["quad_right"] = new ControlButtonQuad();
             State.Controls["bumpers"] = new ControlButtonPair();
             State.Controls["bumpers2"] = new ControlButtonPair();
             State.Controls["triggers"] = new ControlTriggerPair(HasStage2: false);

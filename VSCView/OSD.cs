@@ -146,139 +146,6 @@ namespace VSCView
             return ctrl.Value<T>(subkey);
         }
 
-        public bool GetBasicControl(string inputName)
-        {
-            if (ActiveController == null) return false;
-
-            inputName = inputName.ToLowerInvariant();
-
-            ControllerState state = ActiveController.GetState();
-            if (state.ButtonsOld == null) return false;
-
-            string[] parts = inputName.Split(new char[] { ':' }, 2);
-            {
-                string subkey = (parts.Length > 1) ? parts[1] : string.Empty;
-                bool? val = state.Controls[parts[0]]?.Value<bool>(subkey);
-                if (val.HasValue)
-                    return val.Value;
-            }
-
-            switch (inputName)
-            {
-                //case "a":
-                //    return state.ButtonsOld.A;
-                //case "b":
-                //    return state.ButtonsOld.B;
-                //case "x":
-                //    return state.ButtonsOld.X;
-                //case "y":
-                //    return state.ButtonsOld.Y;
-
-                //case "leftbumper":
-                //case "lb":
-                //    return state.ButtonsOld.LeftBumper;
-                //case "lefttrigger":
-                //case "lt":
-                //    return state.ButtonsOld.LeftTrigger;
-
-                //case "rightbumper":
-                //case "rb":
-                //    return state.ButtonsOld.RightBumper;
-                //case "righttrigger":
-                //case "rt":
-                //    return state.ButtonsOld.RightTrigger;
-
-                //case "leftgrip":
-                //case "lg":
-                //    return state.ButtonsOld.LeftGrip;
-                //case "rightgrip":
-                //case "rg":
-                //    return state.ButtonsOld.RightGrip;
-
-                //case "start":
-                //    return state.ButtonsOld.Start;
-                //case "steam":
-                //    return state.ButtonsOld.Home;
-                //case "select":
-                //    return state.ButtonsOld.Select;
-
-                //case "down":
-                //    return state.ButtonsOld.Down;
-                //case "left":
-                //    return state.ButtonsOld.Left;
-                //case "right":
-                //    return state.ButtonsOld.Right;
-                //case "up":
-                //    return state.ButtonsOld.Up;
-
-                //case "stickclick":
-                //case "sc":
-                //    return state.ButtonsOld.LeftStickClick;
-                //case "leftpadtouch":
-                //case "lpt":
-                //    return state.ButtonsOld.LeftPadTouch;
-                //case "leftpadclick":
-                //case "lpc":
-                //    return state.ButtonsOld.LeftPadClick;
-                //case "rightpadtouch":
-                //case "rpt":
-                //    return state.ButtonsOld.RightPadTouch;
-                //case "rightpadclick":
-                //case "rpc":
-                //    return state.ButtonsOld.RightPadClick;
-
-                //case "touch0":
-                //case "touchnw":
-                //    return state.ButtonsOld.Touch0;
-                //case "touch1":
-                //case "touchne":
-                //    return state.ButtonsOld.Touch1;
-                //case "touch2":
-                //case "touchsw":
-                //    return state.ButtonsOld.Touch2;
-                //case "touch3":
-                //case "touchse":
-                //    return state.ButtonsOld.Touch3;
-
-                default:
-                    return false;
-            }
-        }
-
-        public float GetAnalogControl(string inputName)
-        {
-            if (ActiveController == null) return 0;
-
-            inputName = inputName.ToLowerInvariant();
-
-            ControllerState state = ActiveController.GetState();
-
-            string[] parts = inputName.Split(new char[] { ':' }, 2);
-            {
-                string subkey = (parts.Length > 1) ? parts[1] : string.Empty;
-                float? val = state.Controls[parts[0]]?.Value<float>(subkey);
-                if (val.HasValue)
-                    return val.Value;
-            }
-
-            switch (inputName)
-            {
-                case "leftpadx": return state.LeftPadX;
-                case "leftpady": return state.LeftPadY;
-
-                case "rightpadx": return state.RightPadX;
-                case "rightpady": return state.RightPadY;
-
-                //case "leftstickx": return state.LeftStickX;
-                //case "leftsticky": return state.LeftStickY;
-
-                //case "lefttrigger": return state.LeftTrigger;
-                //case "righttrigger": return state.RightTrigger;
-
-                default: return 0;
-            }
-        }
-
         public ControllerState GetState()
         {
             if (ActiveController == null) return null;
@@ -466,18 +333,18 @@ namespace VSCView
         protected void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
         {
             MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
-            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
+            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__comma__", ",").Replace("__colon__", ":") });
             e.VariableValue = Convert.ChangeType(retVal, e.VariableType);
         }
 
         /*protected void variables_ResolveVariableType(object sender, ResolveVariableTypeEventArgs e)
         {
-            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
+            e.VariableType = data.GetControlType(e.VariableName.Replace("__comma__", ",").Replace("__colon__", ":"));
         }*/
 
         protected void variables_ResolveVariableTypeNumeric(object sender, ResolveVariableTypeEventArgs e)
         {
-            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
+            e.VariableType = data.GetControlType(e.VariableName.Replace("__comma__", ",").Replace("__colon__", ":"));
             if (e.VariableType == typeof(bool))
                 e.VariableType = typeof(int);
         }
@@ -624,8 +491,8 @@ namespace VSCView
             {
                 try
                 {
-                    //calcFunc = BooleanContext.CompileDynamic(Calc.Replace(":", "__colon__"));
-                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__"));
+                    //calcFunc = BooleanContext.CompileDynamic(Calc.Replace(":", "__colon__").Replace(",", "__comma__"));
+                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__").Replace(",", "__comma__"));
                 }
                 catch(Exception ex)
                 {
@@ -648,13 +515,13 @@ namespace VSCView
         /*private void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
         {
             MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
-            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
+            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__comma__", ",").Replace("__colon__", ":") });
             e.VariableValue = Convert.ChangeType(retVal, e.VariableType);
         }
 
         private void variables_ResolveVariableType(object sender, ResolveVariableTypeEventArgs e)
         {
-            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
+            e.VariableType = data.GetControlType(e.VariableName.Replace("__comma__", ",").Replace("__colon__", ":"));
         }*/
 
         public override void Paint(Graphics graphics)
@@ -732,7 +599,7 @@ namespace VSCView
             {
                 try
                 {
-                    calcXFunc = NumericContext.CompileDynamic(CalcX.Replace(":", "__colon__"));
+                    calcXFunc = NumericContext.CompileDynamic(CalcX.Replace(":", "__colon__").Replace(",", "__comma__"));
                 }
                 catch (Exception ex)
                 {
@@ -744,7 +611,7 @@ namespace VSCView
             {
                 try
                 {
-                    calcYFunc = NumericContext.CompileDynamic(CalcY.Replace(":", "__colon__"));
+                    calcYFunc = NumericContext.CompileDynamic(CalcY.Replace(":", "__colon__").Replace(",", "__comma__"));
                 }
                 catch (Exception ex)
                 {
@@ -756,7 +623,7 @@ namespace VSCView
             {
                 try
                 {
-                    calcRFunc = NumericContext.CompileDynamic(CalcR.Replace(":", "__colon__"));
+                    calcRFunc = NumericContext.CompileDynamic(CalcR.Replace(":", "__colon__").Replace(",", "__comma__"));
                 }
                 catch (Exception ex)
                 {
@@ -870,8 +737,8 @@ namespace VSCView
             {
                 try
                 {
-                    //calcFunc = BooleanContext.CompileDynamic(Calc.Replace(":", "__colon__"));
-                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__"));
+                    //calcFunc = BooleanContext.CompileDynamic(Calc.Replace(":", "__colon__").Replace(",", "__comma__"));
+                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__").Replace(",", "__comma__"));
                 }
                 catch (Exception ex)
                 {
@@ -1028,7 +895,7 @@ namespace VSCView
             {
                 try
                 {
-                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__"));
+                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__").Replace(",", "__comma__"));
                 }
                 catch (Exception ex)
                 {

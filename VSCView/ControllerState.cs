@@ -147,11 +147,6 @@ namespace VSCView
         }
     }
 
-    public enum EOrientation
-    {
-        Diamond,
-        Square,
-    }
     public enum EDPadDirection
     {
         None,
@@ -293,16 +288,13 @@ namespace VSCView
     }
     public class ControlButtonQuad : IControl
     {
-        public EOrientation Orientation { get; private set; }
-
         public bool Button0 { get; set; }
         public bool Button1 { get; set; }
         public bool Button2 { get; set; }
         public bool Button3 { get; set; }
 
-        public ControlButtonQuad(EOrientation Orientation)
+        public ControlButtonQuad()
         {
-            this.Orientation = Orientation;
         }
 
         public T Value<T>(string key)
@@ -328,12 +320,53 @@ namespace VSCView
 
         public object Clone()
         {
-            ControlButtonQuad newData = new ControlButtonQuad(this.Orientation);
+            ControlButtonQuad newData = new ControlButtonQuad();
 
             newData.Button0 = this.Button0;
             newData.Button1 = this.Button1;
             newData.Button2 = this.Button2;
             newData.Button3 = this.Button3;
+
+            return newData;
+        }
+    }
+    public class ControlButtonGrid : IControl
+    {
+        public bool[,] Button { get; set; }
+        private int Width;
+        private int Height;
+
+        public ControlButtonGrid(int width, int height)
+        {
+            Width = width;
+            Height = height;
+            Button = new bool[Width, Height];
+        }
+
+        public T Value<T>(string key)
+        {
+            try
+            {
+                string[] parts = key.Split(',');
+                return (T)Convert.ChangeType(Button[int.Parse(parts[0]), int.Parse(parts[1])], typeof(T));
+            }
+            catch
+            {
+                return default;
+            }
+        }
+        public Type Type(string key)
+        {
+            return typeof(bool);
+        }
+
+        public object Clone()
+        {
+            ControlButtonGrid newData = new ControlButtonGrid(Width, Height);
+
+            for (int w = 0; w < Width; w++)
+                for (int h = 0; h < Height; h++)
+                    newData.Button[w, h] = this.Button[w, h];
 
             return newData;
         }
