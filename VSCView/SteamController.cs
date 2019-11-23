@@ -97,32 +97,6 @@ namespace VSCView
             {
                 ControllerState newState = (ControllerState)State.Clone();
 
-                /*ControllerState newState = new ControllerState();
-                newState.ButtonsOld = (SteamControllerButtons)State.ButtonsOld.Clone();
-
-                newState.LeftTrigger = State.LeftTrigger;
-                newState.RightTrigger = State.RightTrigger;
-
-                newState.LeftStickX = State.LeftStickX;
-                newState.LeftStickY = State.LeftStickY;
-                newState.LeftPadX = State.LeftPadX;
-                newState.LeftPadY = State.LeftPadY;
-                newState.RightPadX = State.RightPadX;
-                newState.RightPadY = State.RightPadY;
-
-                newState.AccelerometerX = State.AccelerometerX;
-                newState.AccelerometerY = State.AccelerometerY;
-                newState.AccelerometerZ = State.AccelerometerZ;
-                newState.AngularVelocityX = State.AngularVelocityX;
-                newState.AngularVelocityY = State.AngularVelocityY;
-                newState.AngularVelocityZ = State.AngularVelocityZ;
-                newState.OrientationW = State.OrientationW;
-                newState.OrientationX = State.OrientationX;
-                newState.OrientationY = State.OrientationY;
-                newState.OrientationZ = State.OrientationZ;
-
-                //newState.DataStuck = State.DataStuck;*/
-
                 State = newState;
                 Interlocked.Exchange(ref stateUsageLock, 0);
             }
@@ -211,6 +185,8 @@ namespace VSCView
             {
                 State.Controls["grid_center"] = new ControlButtonGrid(2, 2);
             }
+
+            State.Controls["motion"] = new ControlMotion();
 
             _device = device;
             ConnectionType = connection;
@@ -413,15 +389,15 @@ namespace VSCView
         public bool CheckSensorDataStuck()
         {
             return (OldState != null &&
-                State.AccelerometerX == 0 &&
-                State.AccelerometerY == 0 &&
-                State.AccelerometerZ == 0 ||
-                State.AccelerometerX == OldState.AccelerometerX &&
-                State.AccelerometerY == OldState.AccelerometerY &&
-                State.AccelerometerZ == OldState.AccelerometerZ ||
-                State.AngularVelocityX == OldState.AngularVelocityX &&
-                State.AngularVelocityY == OldState.AngularVelocityY &&
-                State.AngularVelocityZ == OldState.AngularVelocityZ
+                (State.Controls["motion"] as ControlMotion).AccelerometerX == 0 &&
+                (State.Controls["motion"] as ControlMotion).AccelerometerY == 0 &&
+                (State.Controls["motion"] as ControlMotion).AccelerometerZ == 0 ||
+                (State.Controls["motion"] as ControlMotion).AccelerometerX == (OldState.Controls["motion"] as ControlMotion).AccelerometerX &&
+                (State.Controls["motion"] as ControlMotion).AccelerometerY == (OldState.Controls["motion"] as ControlMotion).AccelerometerY &&
+                (State.Controls["motion"] as ControlMotion).AccelerometerZ == (OldState.Controls["motion"] as ControlMotion).AccelerometerZ ||
+                (State.Controls["motion"] as ControlMotion).AngularVelocityX == (OldState.Controls["motion"] as ControlMotion).AngularVelocityX &&
+                (State.Controls["motion"] as ControlMotion).AngularVelocityY == (OldState.Controls["motion"] as ControlMotion).AngularVelocityY &&
+                (State.Controls["motion"] as ControlMotion).AngularVelocityZ == (OldState.Controls["motion"] as ControlMotion).AngularVelocityZ
             );
         }
 
@@ -889,16 +865,16 @@ namespace VSCView
             if (!SensorsEnabled || DataStuck) { EnableGyroSensors(); }
             */
 
-            State.AccelerometerX = RawState.sAccelX;
-            State.AccelerometerY = RawState.sAccelY;
-            State.AccelerometerZ = RawState.sAccelZ;
-            State.AngularVelocityX = RawState.sGyroX;
-            State.AngularVelocityY = RawState.sGyroY;
-            State.AngularVelocityZ = RawState.sGyroZ;
-            State.OrientationW = RawState.sGyroQuatW;
-            State.OrientationX = RawState.sGyroQuatX;
-            State.OrientationY = RawState.sGyroQuatY;
-            State.OrientationZ = RawState.sGyroQuatZ;
+            (State.Controls["motion"] as ControlMotion).AccelerometerX = RawState.sAccelX;
+            (State.Controls["motion"] as ControlMotion).AccelerometerY = RawState.sAccelY;
+            (State.Controls["motion"] as ControlMotion).AccelerometerZ = RawState.sAccelZ;
+            (State.Controls["motion"] as ControlMotion).AngularVelocityX = RawState.sGyroX;
+            (State.Controls["motion"] as ControlMotion).AngularVelocityY = RawState.sGyroY;
+            (State.Controls["motion"] as ControlMotion).AngularVelocityZ = RawState.sGyroZ;
+            (State.Controls["motion"] as ControlMotion).OrientationW = RawState.sGyroQuatW;
+            (State.Controls["motion"] as ControlMotion).OrientationX = RawState.sGyroQuatX;
+            (State.Controls["motion"] as ControlMotion).OrientationY = RawState.sGyroQuatY;
+            (State.Controls["motion"] as ControlMotion).OrientationZ = RawState.sGyroQuatZ;
 
             RawState.LeftTouchChange = false;
         }

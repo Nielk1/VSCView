@@ -103,14 +103,14 @@ namespace VSCView
                 Data = new SensorData();
                 if (Smoothing)
                 {
-                    Data.qW = qwEMA.NextValue(stateData.OrientationW * 1.0f / 32768);
-                    Data.qX = qxEMA.NextValue(stateData.OrientationX * 1.0f / 32768);
-                    Data.qY = qyEMA.NextValue(stateData.OrientationY * 1.0f / 32768);
-                    Data.qZ = qzEMA.NextValue(stateData.OrientationZ * 1.0f / 32768);
+                    Data.qW = qwEMA.NextValue((stateData.Controls["motion"] as ControlMotion).OrientationW * 1.0f / 32768);
+                    Data.qX = qxEMA.NextValue((stateData.Controls["motion"] as ControlMotion).OrientationX * 1.0f / 32768);
+                    Data.qY = qyEMA.NextValue((stateData.Controls["motion"] as ControlMotion).OrientationY * 1.0f / 32768);
+                    Data.qZ = qzEMA.NextValue((stateData.Controls["motion"] as ControlMotion).OrientationZ * 1.0f / 32768);
 
-                    Data.gX = (int)gxEMA.NextValue(stateData.AngularVelocityX);
-                    Data.gY = (int)gyEMA.NextValue(stateData.AngularVelocityY);
-                    Data.gZ = (int)gzEMA.NextValue(stateData.AngularVelocityZ);
+                    Data.gX = (int)gxEMA.NextValue((stateData.Controls["motion"] as ControlMotion).AngularVelocityX);
+                    Data.gY = (int)gyEMA.NextValue((stateData.Controls["motion"] as ControlMotion).AngularVelocityY);
+                    Data.gZ = (int)gzEMA.NextValue((stateData.Controls["motion"] as ControlMotion).AngularVelocityZ);
 
                     /*
                     Data.aX = (int)axEMA.NextValue(stateData.AccelerometerX);
@@ -120,14 +120,14 @@ namespace VSCView
                 }
                 else if (stateData != null)
                 {
-                    Data.qW = stateData.OrientationW * 1.0f / 32768;
-                    Data.qX = stateData.OrientationX * 1.0f / 32768;
-                    Data.qY = stateData.OrientationY * 1.0f / 32768;
-                    Data.qZ = stateData.OrientationZ * 1.0f / 32768;
+                    Data.qW = (stateData.Controls["motion"] as ControlMotion).OrientationW * 1.0f / 32768;
+                    Data.qX = (stateData.Controls["motion"] as ControlMotion).OrientationX * 1.0f / 32768;
+                    Data.qY = (stateData.Controls["motion"] as ControlMotion).OrientationY * 1.0f / 32768;
+                    Data.qZ = (stateData.Controls["motion"] as ControlMotion).OrientationZ * 1.0f / 32768;
 
-                    Data.gX = stateData.AngularVelocityX;
-                    Data.gY = stateData.AngularVelocityY;
-                    Data.gZ = stateData.AngularVelocityZ;
+                    Data.gX = (stateData.Controls["motion"] as ControlMotion).AngularVelocityX;
+                    Data.gY = (stateData.Controls["motion"] as ControlMotion).AngularVelocityY;
+                    Data.gZ = (stateData.Controls["motion"] as ControlMotion).AngularVelocityZ;
 
                     /*
                     Data.aX = stateData.AccelerometerX;

@@ -93,6 +93,7 @@ namespace VSCView
             State.Controls["stick_left"] = new ControlStick(HasClick: true);
             State.Controls["stick_right"] = new ControlStick(HasClick: true);
             State.Controls["touch_center"] = new ControlTouch(TouchCount: 2, HasClick: true);
+            State.Controls["motion"] = new ControlMotion();
 
             // According to this the normalized domain of the DS4 gyro is 1024 units per rad/s: https://gamedev.stackexchange.com/a/87178
 
@@ -188,15 +189,15 @@ namespace VSCView
         public bool CheckSensorDataStuck()
         {
             return (OldState != null &&
-                State.AccelerometerX == 0 &&
-                State.AccelerometerY == 0 &&
-                State.AccelerometerZ == 0 ||
-                State.AccelerometerX == OldState.AccelerometerX &&
-                State.AccelerometerY == OldState.AccelerometerY &&
-                State.AccelerometerZ == OldState.AccelerometerZ ||
-                State.AngularVelocityX == OldState.AngularVelocityX &&
-                State.AngularVelocityY == OldState.AngularVelocityY &&
-                State.AngularVelocityZ == OldState.AngularVelocityZ
+                (State.Controls["motion"] as ControlMotion).AccelerometerX == 0 &&
+                (State.Controls["motion"] as ControlMotion).AccelerometerY == 0 &&
+                (State.Controls["motion"] as ControlMotion).AccelerometerZ == 0 ||
+                (State.Controls["motion"] as ControlMotion).AccelerometerX == (OldState.Controls["motion"] as ControlMotion).AccelerometerX &&
+                (State.Controls["motion"] as ControlMotion).AccelerometerY == (OldState.Controls["motion"] as ControlMotion).AccelerometerY &&
+                (State.Controls["motion"] as ControlMotion).AccelerometerZ == (OldState.Controls["motion"] as ControlMotion).AccelerometerZ ||
+                (State.Controls["motion"] as ControlMotion).AngularVelocityX == (OldState.Controls["motion"] as ControlMotion).AngularVelocityX &&
+                (State.Controls["motion"] as ControlMotion).AngularVelocityY == (OldState.Controls["motion"] as ControlMotion).AngularVelocityY &&
+                (State.Controls["motion"] as ControlMotion).AngularVelocityZ == (OldState.Controls["motion"] as ControlMotion).AngularVelocityZ
             );
         }
 
@@ -380,12 +381,12 @@ namespace VSCView
                 // Battery Power Level
                 //bld.Append(report.Data[baseOffset + 11].ToString("X2") + "   ");
 
-                State.AngularVelocityX = BitConverter.ToInt16(report.Data, baseOffset + 12);
-                State.AngularVelocityZ = BitConverter.ToInt16(report.Data, baseOffset + 14);
-                State.AngularVelocityY = BitConverter.ToInt16(report.Data, baseOffset + 16);
-                State.AccelerometerX = BitConverter.ToInt16(report.Data, baseOffset + 18);
-                State.AccelerometerY = BitConverter.ToInt16(report.Data, baseOffset + 20);
-                State.AccelerometerZ = BitConverter.ToInt16(report.Data, baseOffset + 22);
+                (State.Controls["motion"] as ControlMotion).AngularVelocityX = BitConverter.ToInt16(report.Data, baseOffset + 12);
+                (State.Controls["motion"] as ControlMotion).AngularVelocityZ = BitConverter.ToInt16(report.Data, baseOffset + 14);
+                (State.Controls["motion"] as ControlMotion).AngularVelocityY = BitConverter.ToInt16(report.Data, baseOffset + 16);
+                (State.Controls["motion"] as ControlMotion).AccelerometerX = BitConverter.ToInt16(report.Data, baseOffset + 18);
+                (State.Controls["motion"] as ControlMotion).AccelerometerY = BitConverter.ToInt16(report.Data, baseOffset + 20);
+                (State.Controls["motion"] as ControlMotion).AccelerometerZ = BitConverter.ToInt16(report.Data, baseOffset + 22);
 
                 // ??
                 // bld.Append(report.Data[baseOffset + 27].ToString("X2"));
