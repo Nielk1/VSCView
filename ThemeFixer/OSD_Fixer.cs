@@ -98,6 +98,10 @@ namespace ThemeFixer
         public string shadowu { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string shadowd { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore, PropertyName = "winform.smoothing")]
+        public string winform_smoothing { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore, PropertyName = "winform.interpolation")]
+        public string winform_interpolation { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public List<UI_Item> children { get; set; }
         public void Update()

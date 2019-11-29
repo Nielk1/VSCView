@@ -104,8 +104,9 @@ namespace VSCView
         }
         #endregion
 
-
+#if Serial
         public string Serial { get; private set; }
+#endif
 
         ControllerState State = new ControllerState();
         ControllerState OldState = new ControllerState();
@@ -159,6 +160,7 @@ namespace VSCView
             Connected,
         }
         private InternalConState ConState;
+        private DateTime ConnectedTime;
 
         public delegate void StateUpdatedEventHandler(object sender, ControllerState e);
         public event StateUpdatedEventHandler StateUpdated;
@@ -193,6 +195,8 @@ namespace VSCView
             ControllerType = type;
 
             Initalized = 0;
+
+            ConnectedTime = DateTime.MinValue;
         }
 
         public void Initalize()
@@ -222,6 +226,7 @@ namespace VSCView
 
             Initalized = 1;
 
+#if Serial
             new Thread(() =>
             {
                 try {
@@ -232,6 +237,7 @@ namespace VSCView
                     }
                 } catch { }
             }).Start();
+#endif
         }
 
         public event ControllerNameUpdateEvent ControllerNameUpdated;
@@ -328,9 +334,14 @@ namespace VSCView
             return result;
         }
 
-
+#if Serial
         public bool UpdateSerial()
         {
+            // Avoiding trying to talk to the controller if it hasn't been around for 10 seconds.
+            // This will allow steam time to talk to the controller as otherwise we steal Steam's feature requests.
+            if (ConnectedTime.AddSeconds(10) > DateTime.UtcNow)
+                return false;
+
             byte[] reportData = new byte[64];
             reportData[1] = 0xAE; // 0xAE = get serial
             reportData[2] = 0x15; // 0x15 = length of data to be written
@@ -385,6 +396,7 @@ namespace VSCView
             }
 
         }
+#endif
 
         public bool CheckSensorDataStuck()
         {
@@ -410,7 +422,17 @@ namespace VSCView
                 case EControllerType.ReleaseV2: retVal += " V2"; break;
                 case EControllerType.Chell: retVal += " Chell"; break;
             }
-            retVal += $" [{Serial ?? "No ID"}]";
+            if (ConState == InternalConState.Disconnected)
+            {
+                retVal += $" <{ConState}>";
+            }
+            else
+            {
+                retVal += $" <{ConState}>";
+#if Serial
+                retVal += $" [{Serial ?? "No ID"}]";
+#endif
+            }
             return retVal;
         }
 
@@ -698,6 +720,8 @@ namespace VSCView
                                         ProcessStateBytes();
 
                                         ConState = InternalConState.Connected;
+                                        ConnectedTime = DateTime.UtcNow;
+                                        ControllerNameUpdated?.Invoke();
                                     }
                                     break;
 
@@ -712,9 +736,12 @@ namespace VSCView
                                         {
                                             case ConnectionState.CONNECT:
                                                 ConState = InternalConState.Connected;
+                                                ConnectedTime = DateTime.UtcNow;
+                                                ControllerNameUpdated?.Invoke();
                                                 break;
                                             case ConnectionState.DISCONNECT:
                                                 ConState = InternalConState.Disconnected;
+                                                ControllerNameUpdated?.Invoke();
                                                 break;
                                         }
                                     }

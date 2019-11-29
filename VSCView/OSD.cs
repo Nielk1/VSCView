@@ -252,6 +252,9 @@ namespace VSCView
         public float Y { get; private set; }
         public float Rot { get; private set; }
 
+        public SmoothingMode? SmoothingMode { get; private set; }
+        public InterpolationMode? InterpolationMode { get; private set; }
+
         private UI_ImageCache cache;
         private ControllerData data;
         private List<UI_Item> Items;
@@ -296,6 +299,17 @@ namespace VSCView
             X = themeData["x"]?.Value<float>() ?? 0;
             Y = themeData["y"]?.Value<float>() ?? 0;
             Rot = themeData["rot"]?.Value<float>() ?? 0;
+
+            try
+            {
+                SmoothingMode = (SmoothingMode)Enum.Parse(typeof(SmoothingMode), themeData["winform.smoothing"].Value<string>());
+            }
+            catch { }
+            try
+            {
+                InterpolationMode = (InterpolationMode)Enum.Parse(typeof(InterpolationMode), themeData["winform.interpolation"].Value<string>());
+            }
+            catch { }
 
             themeData["children"]?.ToList().ForEach(child =>
             {
@@ -368,6 +382,7 @@ namespace VSCView
         public virtual void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
+
             graphics.TranslateTransform(X, Y);
             graphics.RotateTransform(Rot);
 
@@ -416,7 +431,13 @@ namespace VSCView
 
             if (DisplayImage != null)
             {
+                graphics.SmoothingMode = SmoothingMode ?? System.Drawing.Drawing2D.SmoothingMode.Default;
+                graphics.InterpolationMode = InterpolationMode ?? System.Drawing.Drawing2D.InterpolationMode.Default;
+
                 graphics.DrawImage(DisplayImage, X, Y, Width, Height);
+
+                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+                graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
             }
 
             graphics.Transform = preserve;
@@ -763,6 +784,9 @@ namespace VSCView
             Matrix preserve = graphics.Transform;
             graphics.TranslateTransform(X, Y);
 
+            graphics.SmoothingMode = SmoothingMode ?? System.Drawing.Drawing2D.SmoothingMode.Default;
+            graphics.InterpolationMode = InterpolationMode ?? System.Drawing.Drawing2D.InterpolationMode.Default;
+
             PointF? prevCord = null;
             for (int pointfade = 0; pointfade < PadPosHistory.Count && pointfade < ImagePadDecay.Length; pointfade++)
             {
@@ -828,6 +852,9 @@ namespace VSCView
             }
 
             graphics.Transform = preserve;
+
+            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+            graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
 
             base.Paint(graphics);
         }
@@ -928,6 +955,9 @@ namespace VSCView
             graphics.TranslateTransform(X, Y);
             graphics.TranslateTransform(-Width / 2, -Height / 2);
 
+            graphics.SmoothingMode = SmoothingMode ?? System.Drawing.Drawing2D.SmoothingMode.Default;
+            graphics.InterpolationMode = InterpolationMode ?? System.Drawing.Drawing2D.InterpolationMode.Default;
+
             switch (Direction)
             {
                 case "up":
@@ -948,6 +978,9 @@ namespace VSCView
             graphics.DrawRectangle(new Pen(Foreground, 2), 0, 0, Width, Height);
 
             graphics.Transform = preserve;
+
+            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+            graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
 
             base.Paint(graphics);
         }
@@ -1021,6 +1054,9 @@ namespace VSCView
 
             var sensorData = MainForm.sensorData.Data; // use the cache!
 
+            graphics.SmoothingMode = SmoothingMode ?? System.Drawing.Drawing2D.SmoothingMode.Default;
+            graphics.InterpolationMode = InterpolationMode ?? System.Drawing.Drawing2D.InterpolationMode.Default;
+
             if (sensorData != null)
             {
                 switch (DisplayType)
@@ -1065,6 +1101,9 @@ namespace VSCView
                         break;
                 }
             }
+
+            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+            graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
 
             graphics.Transform = preserve;
         }

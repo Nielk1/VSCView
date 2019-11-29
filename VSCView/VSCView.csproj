@@ -90,6 +90,15 @@
     <None Include="themes\steamcontrollerchell\default\nogyro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="themes\steamcontroller\existentialegg\black_stencil\gyro.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\existentialegg\black_stencil\nogyro.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\existentialegg\black_stencil\theme.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="themes\steamcontroller\docteur\all.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -103,6 +112,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\dualshock4\default\theme.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\firesale\nogyro.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\firesale\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\minimal\accel.json">
@@ -207,31 +222,31 @@
     <None Include="themes\steamcontroller\default\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\gyro.json">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\gyro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\nogyro.json">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\nogyro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\theme.json">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\accel-symbol.json">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\accel-symbol.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\Accel.json">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\Accel.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\gyro-symbol.json">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro-symbol.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\gyro.json">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\nogyro.json">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\nogyro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\theme.json">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\default\compact.json">
@@ -266,103 +281,103 @@
     <None Include="themes\steamcontroller\default\paw.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\base.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\base.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\btn-face.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\btn-face.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\btn-haptic.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\btn-haptic.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\btn-home.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\btn-home.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\btn-stick.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\btn-stick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\btn-sub.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\btn-sub.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\btn-trigger.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\btn-trigger.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\gyro.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\gyro.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\gyro_d.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\gyro_d.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\gyro_l.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\gyro_l.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\gyro_r.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\gyro_r.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\gyro_u.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\gyro_u.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\padheat.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\padheat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2018\stick.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2018\stick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\base.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\base.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\btn-face.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\btn-face.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\btn-haptic.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\btn-haptic.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\btn-home.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\btn-home.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\btn-stick.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\btn-stick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\btn-sub.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\btn-sub.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\btn-trigger.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\btn-trigger.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\gyro-smbl.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro-smbl.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\gyro-smbl_d.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro-smbl_d.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\gyro-smbl_l.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro-smbl_l.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\gyro-smbl_r.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro-smbl_r.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\gyro-smbl_u.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro-smbl_u.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\gyro.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\gyro_d.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro_d.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\gyro_l.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro_l.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\gyro_r.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro_r.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\gyro_u.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro_u.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\padheat.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\padheat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\outline_2019\stick.png">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\stick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Nielk1_eyes_128.png" />
@@ -533,6 +548,117 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\steamcontrollerchell\name.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\base.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\btn-face.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\btn-haptic.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\btn-home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\btn-pad.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\btn-stick.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\btn-sub.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\btn-trigger.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\btn_grip_l.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\btn_grip_r.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\bt_bumper.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\bt_bumper_l.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\bt_bumper_r.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\gyro.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\gyro_d.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\gyro_l.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\gyro_r.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\gyro_u.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\padheat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\black_stencil\stick.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\existentialegg\name.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\base.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\btn-a.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\btn-b.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\btn-home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\btn-pad.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\btn-stick.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\btn-sub-left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\btn-sub-right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\btn-x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\btn-y.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\padheat-l.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\padheat-r.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\star1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\star2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\firesale\stick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\steamcontroller\icon.png">

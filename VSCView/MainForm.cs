@@ -205,10 +205,15 @@ namespace VSCView
                 IController c = Controllers[i];
                 Controllers[i].ControllerNameUpdated += () =>
                 {
-                    this.Invoke(new Action(() =>
+                    try
                     {
-                        itm.Text = c.GetName();
-                    }));
+                        if (this.Created && !this.Disposing && !this.IsDisposed)
+                            this.Invoke(new Action(() =>
+                            {
+                                itm.Text = c.GetName();
+                            }));
+                    }
+                    catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
                 };
                 itm.Text = Controllers[i].GetName();
 

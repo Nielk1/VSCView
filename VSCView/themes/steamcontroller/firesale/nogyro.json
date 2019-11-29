@@ -1,0 +1,285 @@
+{
+  "name": "No Gyro, Triggers, Bumpers, or Grips",
+  "width": 180,
+  "height": 128,
+  "version": 1,
+  "children": [
+    {
+      "type": "image",
+      "image": "base.png",
+      "winform.smoothing": "None",
+      "winform.interpolation": "NearestNeighbor",
+      "x": 90.0,
+      "y": 64.0,
+      "width": 180.0,
+      "height": 128.0,
+      "center": true,
+      "children": [
+        {
+          "x": 22.0,
+          "y": -2.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "quad_right:2",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-a.png",
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor",
+                  "x": 0.0,
+                  "y": 10.0,
+                  "width": 11.0,
+                  "height": 11.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:1",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-b.png",
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor",
+                  "x": 10.0,
+                  "y": 0.0,
+                  "width": 11.0,
+                  "height": 11.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:3",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-x.png",
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor",
+                  "x": -10.0,
+                  "y": 0.0,
+                  "width": 11.0,
+                  "height": 11.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:0",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-y.png",
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor",
+                  "x": 0.0,
+                  "y": -10.0,
+                  "width": 11.0,
+                  "height": 11.0,
+                  "center": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": -21.0,
+          "y": -2.0,
+          "inputX": "stick_left:x * 4.5",
+          "inputY": "stick_left:y * 4.5",
+          "children": [
+            {
+              "type": "showhide",
+              "input": "stick_left:click",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-stick.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 30.0,
+                  "height": 30.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "image",
+              "image": "stick.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 22.0,
+              "height": 22.0,
+              "center": true
+            }
+          ]
+        },
+        {
+          "x": -1.0,
+          "y": -30.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "home",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-home.png",
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor",
+                  "x": 0.0,
+                  "y": -2.0,
+                  "width": 15.0,
+                  "height": 15.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "menu:1",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-sub-right.png",
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor",
+                  "x": 15.0,
+                  "y": 0.0,
+                  "width": 11.0,
+                  "height": 7.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "menu:0",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "btn-sub-left.png",
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor",
+                  "x": -15.0,
+                  "y": 0.0,
+                  "width": 11.0,
+                  "height": 7.0,
+                  "center": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "input": "touch_right:click",
+          "children": [
+            {
+              "type": "image",
+              "image": "btn-pad.png",
+              "x": 49.0,
+              "y": -29.0,
+              "width": 56.0,
+              "height": 56.0,
+              "center": true
+            }
+          ]
+        },
+        {
+          "x": 50.0,
+          "y": -30.0,
+          "children": [
+            {
+              "type": "trailpad",
+              "image": "padheat-r.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 18.0,
+              "height": 18.0,
+              "input": "touch_right:touch0",
+              "inputX": "touch_right:x0 * 16",
+              "inputY": "touch_right:y0 * 16",
+              "length": 30,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "touch_right:touch0",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "star2.png",
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 15.0,
+                      "height": 15.0,
+                      "center": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "input": "touch_left:click",
+          "children": [
+            {
+              "type": "image",
+              "image": "btn-pad.png",
+              "x": -49.0,
+              "y": -29.0,
+              "width": 56.0,
+              "height": 56.0,
+              "center": true
+            }
+          ]
+        },
+        {
+          "x": -50.0,
+          "y": -30.0,
+          "children": [
+            {
+              "type": "trailpad",
+              "image": "padheat-l.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 18.0,
+              "height": 18.0,
+              "input": "touch_left:touch0",
+              "inputX": "touch_left:x0 * 16",
+              "inputY": "touch_left:y0 * 16",
+              "length": 30,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "touch_left:touch0",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "star2.png",
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 15.0,
+                      "height": 15.0,
+                      "center": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -36,6 +36,7 @@
             this.tsmiReloadThemes = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiReloadControllers = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.hIDGuardianWhitelistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSetBackgroundColor = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -44,7 +45,6 @@
             this.lblHint1 = new System.Windows.Forms.Label();
             this.lblHint2 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.hIDGuardianWhitelistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,6 +103,14 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(191, 6);
             // 
+            // hIDGuardianWhitelistToolStripMenuItem
+            // 
+            this.hIDGuardianWhitelistToolStripMenuItem.Name = "hIDGuardianWhitelistToolStripMenuItem";
+            this.hIDGuardianWhitelistToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.hIDGuardianWhitelistToolStripMenuItem.Text = "HID Guardian &Whitelist";
+            this.hIDGuardianWhitelistToolStripMenuItem.Visible = false;
+            this.hIDGuardianWhitelistToolStripMenuItem.Click += new System.EventHandler(this.HIDGuardianWhitelistToolStripMenuItem_Click);
+            // 
             // tsmiSetBackgroundColor
             // 
             this.tsmiSetBackgroundColor.Name = "tsmiSetBackgroundColor";
@@ -157,14 +165,6 @@
             // colorDialog1
             // 
             this.colorDialog1.Color = System.Drawing.Color.Lime;
-            // 
-            // hIDGuardianWhitelistToolStripMenuItem
-            // 
-            this.hIDGuardianWhitelistToolStripMenuItem.Name = "hIDGuardianWhitelistToolStripMenuItem";
-            this.hIDGuardianWhitelistToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.hIDGuardianWhitelistToolStripMenuItem.Text = "HID Guardian &Whitelist";
-            this.hIDGuardianWhitelistToolStripMenuItem.Visible = false;
-            this.hIDGuardianWhitelistToolStripMenuItem.Click += new System.EventHandler(this.HIDGuardianWhitelistToolStripMenuItem_Click);
             // 
             // MainForm
             // 
