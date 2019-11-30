@@ -135,6 +135,9 @@
     <None Include="themes\steamcontrollerchell\default\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="themes\steamcontroller\nielk1\silly\theme.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="themes\steamcontroller\white\base.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -160,18 +163,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\white\gyro.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="themes\steamcontroller\white\gyro_d.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="themes\steamcontroller\white\gyro_l.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="themes\steamcontroller\white\gyro_r.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="themes\steamcontroller\white\gyro_u.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\white\padheat.png">
@@ -216,7 +207,7 @@
     <None Include="themes\steamcontroller\default\nogyro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\default\silly.json">
+    <None Include="themes\steamcontroller\nielk1\silly\catpaws.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\default\theme.json">
@@ -278,7 +269,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="themes\steamcontroller\default\paw.png">
+    <None Include="themes\steamcontroller\nielk1\silly\paw.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\existentialegg\outline_2018\base.png">
@@ -456,31 +447,10 @@
     <None Include="themes\steamcontroller\minimal\btn-haptic.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\minimal\btn-home.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="themes\steamcontroller\minimal\btn-stick.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="themes\steamcontroller\minimal\btn-sub.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="themes\steamcontroller\minimal\btn-trigger.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\minimal\gyro.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="themes\steamcontroller\minimal\gyro_d.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="themes\steamcontroller\minimal\gyro_l.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="themes\steamcontroller\minimal\gyro_r.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="themes\steamcontroller\minimal\gyro_u.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\minimal\padheat.png">

@@ -23,7 +23,7 @@
                     ]
                 },
 
-                { "type":"showhide", "inputName":"stickclick", "invert":false, "children": [ { "type":"image", "image":"btn-stick.png", "x": -71, "y": 81, "width":105, "height":105, "center":true } ] },
+                { "type":"showhide", "inputName":"stickclick", "invert":false, "children": [ { "type":"image", "image":"\\steamcontroller\\default\\btn-stick.png", "x": -71, "y": 81, "width":105, "height":105, "center":true } ] },
                 {
                     "type":"slider",
                     "x": -70,
@@ -40,9 +40,9 @@
                     "x":-4,
                     "y":-26,
                     "children": [
-                        { "type":"showhide", "inputName":"steam" , "invert":false, "children": [ { "type":"image", "image":"btn-home.png", "x":   1, "y": -8, "width":51, "height":51, "center":true } ] },
-                        { "type":"showhide", "inputName":"start" , "invert":false, "children": [ { "type":"image", "image":"btn-sub.png" , "x":  53, "y":  2, "width":38, "height":22, "center":true } ] },
-                        { "type":"showhide", "inputName":"select", "invert":false, "children": [ { "type":"image", "image":"btn-sub.png" , "x": -51, "y":  1, "width":38, "height":22, "center":true } ] }
+                        { "type":"showhide", "inputName":"steam" , "invert":false, "children": [ { "type":"image", "image":"\\steamcontroller\\default\\btn-home.png", "x":   1, "y": -8, "width":51, "height":51, "center":true } ] },
+                        { "type":"showhide", "inputName":"start" , "invert":false, "children": [ { "type":"image", "image":"\\steamcontroller\\default\\btn-sub.png" , "x":  53, "y":  2, "width":38, "height":22, "center":true } ] },
+                        { "type":"showhide", "inputName":"select", "invert":false, "children": [ { "type":"image", "image":"\\steamcontroller\\default\\btn-sub.png" , "x": -51, "y":  1, "width":38, "height":22, "center":true } ] }
                     ]
                 }, 
                 {
@@ -131,10 +131,10 @@
                             "height":77,
                             "mode": "gyro",
                             "image":"gyro.png",
-                            "shadowl":"gyro_l.png",
-                            "shadowr":"gyro_r.png",
-                            "shadowu":"gyro_u.png",
-                            "shadowd":"gyro_d.png",
+                            "shadowl":"\\steamcontroller\\default\\gyro_l.png",
+                            "shadowr":"\\steamcontroller\\default\\gyro_r.png",
+                            "shadowu":"\\steamcontroller\\default\\gyro_u.png",
+                            "shadowd":"\\steamcontroller\\default\\gyro_d.png",
                             "tilttranslatex":55,
                             "tilttranslatey":40
                         }

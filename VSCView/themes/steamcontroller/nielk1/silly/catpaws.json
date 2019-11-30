@@ -1,12 +1,12 @@
 {
-  "name": "Silly",
+  "name": "Cat Paws",
   "width": 629,
   "height": 605,
   "version": 1,
   "children": [
     {
       "type": "image",
-      "image": "base.png",
+      "image": "\\steamcontroller\\default\\base.png",
       "x": 314.5,
       "y": 302.5,
       "width": 629.0,
@@ -23,7 +23,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-face.png",
+                  "image": "\\steamcontroller\\default\\btn-face.png",
                   "x": 0.0,
                   "y": 35.0,
                   "width": 36.0,
@@ -38,7 +38,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-face.png",
+                  "image": "\\steamcontroller\\default\\btn-face.png",
                   "x": 35.0,
                   "y": 0.0,
                   "width": 36.0,
@@ -53,7 +53,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-face.png",
+                  "image": "\\steamcontroller\\default\\btn-face.png",
                   "x": -35.0,
                   "y": 0.0,
                   "width": 36.0,
@@ -68,7 +68,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-face.png",
+                  "image": "\\steamcontroller\\default\\btn-face.png",
                   "x": 0.0,
                   "y": -35.0,
                   "width": 36.0,
@@ -85,7 +85,7 @@
           "children": [
             {
               "type": "image",
-              "image": "btn-stick.png",
+              "image": "\\steamcontroller\\default\\btn-stick.png",
               "x": -73.0,
               "y": 67.0,
               "width": 105.0,
@@ -103,7 +103,7 @@
           "children": [
             {
               "type": "image",
-              "image": "stick.png",
+              "image": "\\steamcontroller\\default\\stick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 69.0,
@@ -122,7 +122,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-home.png",
+                  "image": "\\steamcontroller\\default\\btn-home.png",
                   "x": 0.0,
                   "y": -8.0,
                   "width": 51.0,
@@ -137,7 +137,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-sub.png",
+                  "image": "\\steamcontroller\\default\\btn-sub.png",
                   "x": 52.0,
                   "y": 0.0,
                   "width": 38.0,
@@ -152,7 +152,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-sub.png",
+                  "image": "\\steamcontroller\\default\\btn-sub.png",
                   "x": -52.0,
                   "y": 0.0,
                   "width": 38.0,
@@ -173,7 +173,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-trigger.png",
+                  "image": "\\steamcontroller\\default\\btn-trigger.png",
                   "x": -75.0,
                   "y": 0.0,
                   "width": 50.0,
@@ -188,7 +188,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-trigger.png",
+                  "image": "\\steamcontroller\\default\\btn-trigger.png",
                   "x": -163.0,
                   "y": 48.0,
                   "width": 50.0,
@@ -203,7 +203,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-trigger.png",
+                  "image": "\\steamcontroller\\default\\btn-trigger.png",
                   "x": -163.0,
                   "y": -28.0,
                   "width": 50.0,
@@ -218,7 +218,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-trigger.png",
+                  "image": "\\steamcontroller\\default\\btn-trigger.png",
                   "x": 75.0,
                   "y": 0.0,
                   "width": 50.0,
@@ -233,7 +233,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-trigger.png",
+                  "image": "\\steamcontroller\\default\\btn-trigger.png",
                   "x": 163.0,
                   "y": 48.0,
                   "width": 50.0,
@@ -248,7 +248,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-trigger.png",
+                  "image": "\\steamcontroller\\default\\btn-trigger.png",
                   "x": 163.0,
                   "y": -28.0,
                   "width": 50.0,
@@ -267,7 +267,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-haptic.png",
+                  "image": "\\steamcontroller\\default\\btn-haptic.png",
                   "x": 171.0,
                   "y": -23.0,
                   "width": 156.0,
@@ -282,7 +282,7 @@
               "children": [
                 {
                   "type": "trailpad",
-                  "image": "padheat.png",
+                  "image": "\\steamcontroller\\default\\padheat.png",
                   "x": 0.0,
                   "y": 0.0,
                   "width": 72.0,
@@ -304,7 +304,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "btn-haptic.png",
+                  "image": "\\steamcontroller\\default\\btn-haptic.png",
                   "x": -171.0,
                   "y": -23.0,
                   "width": 156.0,
@@ -319,7 +319,7 @@
               "children": [
                 {
                   "type": "trailpad",
-                  "image": "padheat.png",
+                  "image": "\\steamcontroller\\default\\padheat.png",
                   "x": 0.0,
                   "y": 0.0,
                   "width": 72.0,
