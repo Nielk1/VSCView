@@ -16,8 +16,8 @@
       "center": true,
       "children": [
         {
-          "x": 22.0,
-          "y": -2.0,
+          "x": 21.5,
+          "y": -2.5,
           "children": [
             {
               "type": "showhide",
@@ -114,6 +114,7 @@
             {
               "type": "image",
               "image": "stick.png",
+              "winform.interpolation": "NearestNeighbor",
               "x": 0.0,
               "y": 0.0,
               "width": 22.0,
@@ -123,8 +124,8 @@
           ]
         },
         {
-          "x": -1.0,
-          "y": -30.0,
+          "x": -0.5,
+          "y": -30.5,
           "children": [
             {
               "type": "showhide",
@@ -217,6 +218,8 @@
                     {
                       "type": "image",
                       "image": "star2.png",
+                      "winform.smoothing": "None",
+                      "winform.interpolation": "Low",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 15.0,
@@ -267,6 +270,8 @@
                     {
                       "type": "image",
                       "image": "star2.png",
+                      "winform.smoothing": "None",
+                      "winform.interpolation": "Low",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 15.0,

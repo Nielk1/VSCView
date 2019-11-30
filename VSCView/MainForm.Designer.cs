@@ -38,6 +38,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.hIDGuardianWhitelistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSetBackgroundColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiResetWindowSize = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.minimizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +61,7 @@
             this.toolStripSeparator2,
             this.hIDGuardianWhitelistToolStripMenuItem,
             this.tsmiSetBackgroundColor,
+            this.tsmiResetWindowSize,
             this.tsmiAbout,
             this.toolStripSeparator3,
             this.minimizeToolStripMenuItem,
@@ -117,6 +119,13 @@
             this.tsmiSetBackgroundColor.Size = new System.Drawing.Size(194, 22);
             this.tsmiSetBackgroundColor.Text = "Set Background Color";
             this.tsmiSetBackgroundColor.Click += new System.EventHandler(this.tsmiSetBackgroundColor_Click);
+            // 
+            // tsmiResetWindowSize
+            // 
+            this.tsmiResetWindowSize.Name = "tsmiResetWindowSize";
+            this.tsmiResetWindowSize.Size = new System.Drawing.Size(194, 22);
+            this.tsmiResetWindowSize.Text = "Reset Window Size";
+            this.tsmiResetWindowSize.Click += new System.EventHandler(this.TsmiResetWindowSize_Click);
             // 
             // tsmiAbout
             // 
@@ -180,6 +189,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "VSCView";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.cmsMain.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -204,5 +214,6 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.ToolStripMenuItem minimizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hIDGuardianWhitelistToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiResetWindowSize;
     }
 }

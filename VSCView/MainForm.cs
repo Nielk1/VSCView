@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -35,8 +36,9 @@ namespace VSCView
 
         public MainForm()
         {
-            this.FormBorderStyle = FormBorderStyle.None;
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None; // no borders
+            this.SetStyle(ControlStyles.ResizeRedraw, true); // this is to avoid visual artifacts
 
             RegistryKey winLogonKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\HidGuardian", false);
             if (winLogonKey != null)
@@ -63,6 +65,11 @@ namespace VSCView
                 settings.Theme = File.ReadAllText("ctrl.last");
                 File.Delete("ctrl.last");
             }
+            if(settings.CustomSize)
+            {
+                this.Width = settings.Width ?? this.Width;
+                this.Height = settings.Height ?? this.Height;
+            }
             if (!string.IsNullOrWhiteSpace(settings.Theme) && File.Exists(settings.Theme))
             {
                 LoadTheme(settings.Theme, false); // we'll just let this task spool off on its own and pray
@@ -78,6 +85,49 @@ namespace VSCView
 
             LoadControllers(true);
         }
+
+        #region Resizeing
+        private const int HTLEFT = 10;
+        private const int HTRIGHT = 11;
+        private const int HTTOP = 12;
+        private const int HTTOPLEFT = 13;
+        private const int HTTOPRIGHT = 14;
+        private const int HTBOTTOM = 15;
+        private const int HTBOTTOMLEFT = 16;
+        private const int HTBOTTOMRIGHT = 17;
+
+        const int cornerSize = 10; // you can rename this variable if you like
+
+        Rectangle Top { get { return new Rectangle(0, 0, this.ClientSize.Width, cornerSize); } }
+        Rectangle Left { get { return new Rectangle(0, 0, cornerSize, this.ClientSize.Height); } }
+        Rectangle Bottom { get { return new Rectangle(0, this.ClientSize.Height - cornerSize, this.ClientSize.Width, cornerSize); } }
+        Rectangle Right { get { return new Rectangle(this.ClientSize.Width - cornerSize, 0, cornerSize, this.ClientSize.Height); } }
+
+        Rectangle TopLeft { get { return new Rectangle(0, 0, cornerSize, cornerSize); } }
+        Rectangle TopRight { get { return new Rectangle(this.ClientSize.Width - cornerSize, 0, cornerSize, cornerSize); } }
+        Rectangle BottomLeft { get { return new Rectangle(0, this.ClientSize.Height - cornerSize, cornerSize, cornerSize); } }
+        Rectangle BottomRight { get { return new Rectangle(this.ClientSize.Width - cornerSize, this.ClientSize.Height - cornerSize, cornerSize, cornerSize); } }
+
+        protected override void WndProc(ref Message message)
+        {
+            base.WndProc(ref message);
+
+            if (message.Msg == 0x84) // WM_NCHITTEST
+            {
+                var cursor = this.PointToClient(Cursor.Position);
+
+                if (TopLeft.Contains(cursor)) message.Result = (IntPtr)HTTOPLEFT;
+                else if (TopRight.Contains(cursor)) message.Result = (IntPtr)HTTOPRIGHT;
+                else if (BottomLeft.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMLEFT;
+                else if (BottomRight.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMRIGHT;
+
+                else if (Top.Contains(cursor)) message.Result = (IntPtr)HTTOP;
+                else if (Left.Contains(cursor)) message.Result = (IntPtr)HTLEFT;
+                else if (Right.Contains(cursor)) message.Result = (IntPtr)HTRIGHT;
+                else if (Bottom.Contains(cursor)) message.Result = (IntPtr)HTBOTTOM;
+            }
+        }
+        #endregion Resizeing
 
         private void Render(object stateInfo)
         {
@@ -270,8 +320,11 @@ namespace VSCView
             }
 
             ui = new UI(ControllerData, Path.GetDirectoryName(path), skinJson);
-            this.Width = ui.Width;
-            this.Height = ui.Height;
+            if (!settings.CustomSize)
+            {
+                this.Width = ui.Width;
+                this.Height = ui.Height;
+            }
 
             if (recordLast)
             {
@@ -304,7 +357,18 @@ namespace VSCView
             // Call the OnPaint method of the base class.  
             base.OnPaint(e);
 
-            ui?.Paint(e.Graphics);
+            if (ui != null)
+            {
+                float ratio = Math.Min(1.0f * this.Width / ui.Width, 1.0f * this.Height / ui.Height);
+
+                Matrix preserve = e.Graphics.Transform;
+
+                e.Graphics.ScaleTransform(ratio, ratio);
+
+                ui.Paint(e.Graphics);
+
+                e.Graphics.Transform = preserve;
+            }
         }
 
         private void tsmiExit_Click(object sender, EventArgs e)
@@ -362,6 +426,38 @@ namespace VSCView
             SaveSettings();
             RegistryKey whitelistKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\HidGuardian\Parameters\Whitelist\" + Process.GetCurrentProcess().Id, false);
             hIDGuardianWhitelistToolStripMenuItem.Checked = whitelistKey != null;
+        }
+
+        private void TsmiResetWindowSize_Click(object sender, EventArgs e)
+        {
+            if (ui != null)
+            {
+                this.Width = ui.Width;
+                this.Height = ui.Height;
+                settings.CustomSize = false;
+                settings.Width = null;
+                settings.Height = null;
+                SaveSettings();
+            }
+        }
+
+        private void MainForm_ResizeEnd(object sender, EventArgs e)
+        {
+            if (ui != null && (ui.Width != this.Width || ui.Height != this.Height))
+            {
+                settings.CustomSize = true;
+                settings.Width = this.Width;
+                settings.Height = this.Height;
+            }
+            else
+            {
+                this.Width = ui.Width;
+                this.Height = ui.Height;
+                settings.CustomSize = false;
+                settings.Width = null;
+                settings.Height = null;
+            }
+            SaveSettings();
         }
     }
 
