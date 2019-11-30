@@ -354,7 +354,7 @@ namespace VSCView
                 default:
                 try
                 {
-                    string[] parts = key.Split(',');
+                    string[] parts = key.Split(':');
                     return (T)Convert.ChangeType(Button[int.Parse(parts[0]), int.Parse(parts[1])], typeof(T));
                 }
                 catch

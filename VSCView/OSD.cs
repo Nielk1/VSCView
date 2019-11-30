@@ -347,18 +347,18 @@ namespace VSCView
         protected void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
         {
             MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
-            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__comma__", ",").Replace("__colon__", ":") });
+            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
             e.VariableValue = Convert.ChangeType(retVal, e.VariableType);
         }
 
         /*protected void variables_ResolveVariableType(object sender, ResolveVariableTypeEventArgs e)
         {
-            e.VariableType = data.GetControlType(e.VariableName.Replace("__comma__", ",").Replace("__colon__", ":"));
+            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
         }*/
 
         protected void variables_ResolveVariableTypeNumeric(object sender, ResolveVariableTypeEventArgs e)
         {
-            e.VariableType = data.GetControlType(e.VariableName.Replace("__comma__", ",").Replace("__colon__", ":"));
+            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
             if (e.VariableType == typeof(bool))
                 e.VariableType = typeof(int);
         }
@@ -512,8 +512,8 @@ namespace VSCView
             {
                 try
                 {
-                    //calcFunc = BooleanContext.CompileDynamic(Calc.Replace(":", "__colon__").Replace(",", "__comma__"));
-                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__").Replace(",", "__comma__"));
+                    //calcFunc = BooleanContext.CompileDynamic(Calc.Replace(":", "__colon__"));
+                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__"));
                 }
                 catch(Exception ex)
                 {
@@ -536,13 +536,13 @@ namespace VSCView
         /*private void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
         {
             MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
-            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__comma__", ",").Replace("__colon__", ":") });
+            object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
             e.VariableValue = Convert.ChangeType(retVal, e.VariableType);
         }
 
         private void variables_ResolveVariableType(object sender, ResolveVariableTypeEventArgs e)
         {
-            e.VariableType = data.GetControlType(e.VariableName.Replace("__comma__", ",").Replace("__colon__", ":"));
+            e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
         }*/
 
         public override void Paint(Graphics graphics)
@@ -620,7 +620,7 @@ namespace VSCView
             {
                 try
                 {
-                    calcXFunc = NumericContext.CompileDynamic(CalcX.Replace(":", "__colon__").Replace(",", "__comma__"));
+                    calcXFunc = NumericContext.CompileDynamic(CalcX.Replace(":", "__colon__"));
                 }
                 catch (Exception ex)
                 {
@@ -632,7 +632,7 @@ namespace VSCView
             {
                 try
                 {
-                    calcYFunc = NumericContext.CompileDynamic(CalcY.Replace(":", "__colon__").Replace(",", "__comma__"));
+                    calcYFunc = NumericContext.CompileDynamic(CalcY.Replace(":", "__colon__"));
                 }
                 catch (Exception ex)
                 {
@@ -644,7 +644,7 @@ namespace VSCView
             {
                 try
                 {
-                    calcRFunc = NumericContext.CompileDynamic(CalcR.Replace(":", "__colon__").Replace(",", "__comma__"));
+                    calcRFunc = NumericContext.CompileDynamic(CalcR.Replace(":", "__colon__"));
                 }
                 catch (Exception ex)
                 {
@@ -758,8 +758,8 @@ namespace VSCView
             {
                 try
                 {
-                    //calcFunc = BooleanContext.CompileDynamic(Calc.Replace(":", "__colon__").Replace(",", "__comma__"));
-                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__").Replace(",", "__comma__"));
+                    //calcFunc = BooleanContext.CompileDynamic(Calc.Replace(":", "__colon__"));
+                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__"));
                 }
                 catch (Exception ex)
                 {
@@ -922,7 +922,7 @@ namespace VSCView
             {
                 try
                 {
-                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__").Replace(",", "__comma__"));
+                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__"));
                 }
                 catch (Exception ex)
                 {
