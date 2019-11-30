@@ -99,13 +99,13 @@
     <None Include="themes\steamcontroller\existentialegg\black_stencil\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\docteur\all.json">
+    <None Include="themes\steamcontroller\docteurcontroller\all.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\docteur\nogyro.json">
+    <None Include="themes\steamcontroller\docteurcontroller\nogyro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\docteur\theme.json">
+    <None Include="themes\steamcontroller\docteurcontroller\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\dualshock4\default\all.json">
@@ -114,10 +114,10 @@
     <None Include="themes\dualshock4\default\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\firesale\nogyro.json">
+    <None Include="themes\steamcontroller\nielk1\firesale\nogyro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\firesale\theme.json">
+    <None Include="themes\steamcontroller\nielk1\firesale\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\minimal\accel.json">
@@ -532,6 +532,24 @@
     <Content Include="themes\dualshock4\name.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="themes\steamcontroller\default\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\nielk1\firesale\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\nielk1\name.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\minimal\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\nielk1\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\white\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="themes\steamcontrollerchell\default\btn-trigger.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -548,6 +566,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\steamcontrollerchell\name.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\docteurcontroller\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\steamcontroller\existentialegg\black_stencil\base.png">
@@ -616,49 +637,49 @@
     <Content Include="themes\steamcontroller\existentialegg\name.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\base.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\base.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\btn-a.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\btn-a.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\btn-b.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\btn-b.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\btn-home.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\btn-home.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\btn-pad.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\btn-pad.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\btn-stick.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\btn-stick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\btn-sub-left.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\btn-sub-left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\btn-sub-right.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\btn-sub-right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\btn-x.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\btn-x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\btn-y.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\btn-y.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\padheat-l.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\padheat-l.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\padheat-r.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\padheat-r.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\star1.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\star1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\star2.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\star2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\firesale\stick.png">
+    <Content Include="themes\steamcontroller\nielk1\firesale\stick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\steamcontroller\icon.png">
@@ -670,67 +691,67 @@
     <None Include="Resources\icon_ds4.png" />
     <None Include="Resources\icon_sc.png" />
     <None Include="Resources\icon_ds4_dongle.png" />
-    <Content Include="themes\steamcontroller\docteur\base1.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\base1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\btn-face.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\btn-face.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\btn-haptic.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\btn-haptic.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\btn-hapticG.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\btn-hapticG.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\btn-hapticG2.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\btn-hapticG2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\btn-home.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\btn-home.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\btn-stick.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\btn-stick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\btn-sub.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\btn-sub.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\gyro.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\gyro.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\gyro_d.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\gyro_d.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\gyro_l.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\gyro_l.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\gyro_r.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\gyro_r.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\gyro_u.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\gyro_u.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\LB.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\LB.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\leftgrip.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\leftgrip.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\LTfull.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\LTfull.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\padheat.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\padheat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\RB.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\RB.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\rightgrip.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\rightgrip.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\RTfull.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\RTfull.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\steamcontroller\docteur\stick.png">
+    <Content Include="themes\steamcontroller\docteurcontroller\stick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\dualshock4\default\base.png">
