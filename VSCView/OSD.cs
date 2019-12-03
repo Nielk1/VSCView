@@ -305,12 +305,14 @@ namespace VSCView
 
             try
             {
-                SmoothingMode = (SmoothingMode)Enum.Parse(typeof(SmoothingMode), themeData["winform.smoothing"].Value<string>());
+                if (themeData.ContainsKey("winform.smoothing"))
+                    SmoothingMode = (SmoothingMode)Enum.Parse(typeof(SmoothingMode), themeData["winform.smoothing"].Value<string>());
             }
             catch { }
             try
             {
-                InterpolationMode = (InterpolationMode)Enum.Parse(typeof(InterpolationMode), themeData["winform.interpolation"].Value<string>());
+                if (themeData.ContainsKey("winform.interpolation"))
+                    InterpolationMode = (InterpolationMode)Enum.Parse(typeof(InterpolationMode), themeData["winform.interpolation"].Value<string>());
             }
             catch { }
 

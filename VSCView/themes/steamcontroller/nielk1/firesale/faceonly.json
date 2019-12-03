@@ -1,7 +1,7 @@
 {
-  "name": "No Gyro",
+  "name": "Face Only",
   "width": 180,
-  "height": 148,
+  "height": 128,
   "version": 1,
   "children": [
     {
@@ -10,7 +10,7 @@
       "winform.smoothing": "None",
       "winform.interpolation": "NearestNeighbor",
       "x": 90.0,
-      "y": 84.0,
+      "y": 64.0,
       "width": 180.0,
       "height": 128.0,
       "center": true,
@@ -281,165 +281,6 @@
                   ]
                 }
               ]
-            }
-          ]
-        },
-
-        {
-          "type": "showhide",
-          "x": -50.0,
-          "y": -30.0,
-          "input": "triggers:analog0 > 0",
-          "children": [
-            {
-              "type": "slider",
-              "x": 0.0,
-              "y": 0.0,
-              "inputR": "triggers:analog0 * -35 - 10",
-              "children": [
-                {
-                  "type": "slider",
-                  "x": 0.0,
-                  "y": 0.0,
-                  "inputY": "triggers:stage2_0 * 6",
-                  "children": [
-                    {
-                      "y": -44.0,
-                      "rot": 180,
-                      "children": [
-                        {
-                          "type": "image",
-                          "image": "indicator-arrow.png",
-                          "winform.interpolation": "NearestNeighbor",
-                          "x": 0.0,
-                          "y": 0.0,
-                          "width": 19.0,
-                          "height": 11.0,
-                          "center": true
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "showhide",
-          "x": 50.0,
-          "y": -30.0,
-          "input": "triggers:analog1 > 0",
-          "children": [
-            {
-              "type": "slider",
-              "x": 0.0,
-              "y": 0.0,
-              "inputR": "triggers:analog1 * 35 + 10",
-              "children": [
-                {
-                  "type": "slider",
-                  "x": 0.0,
-                  "y": 0.0,
-                  "inputY": "triggers:stage2_1 * 6",
-                  "children": [
-                    {
-                      "y": -44.0,
-                      "rot": 180,
-                      "children": [
-                        {
-                          "type": "image",
-                          "image": "indicator-arrow.png",
-                          "winform.interpolation": "NearestNeighbor",
-                          "x": 0.0,
-                          "y": 0.0,
-                          "width": 19.0,
-                          "height": 11.0,
-                          "center": true
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-
-        {
-          "type": "showhide",
-          "input": "bumpers:0",
-          "y": -72,
-          "x": -32,
-          "rot": 180,
-          "children": [
-            {
-              "type": "image",
-              "image": "indicator-arrow.png",
-              "winform.interpolation": "NearestNeighbor",
-              "x": 0.0,
-              "y": 0.0,
-              "width": 19.0,
-              "height": 11.0,
-              "center": true
-            }
-          ]
-        },
-        {
-          "type": "showhide",
-          "input": "bumpers:1",
-          "y": -72,
-          "x": 32,
-          "rot": 180,
-          "children": [
-            {
-              "type": "image",
-              "image": "indicator-arrow.png",
-              "winform.interpolation": "NearestNeighbor",
-              "x": 0.0,
-              "y": 0.0,
-              "width": 19.0,
-              "height": 11.0,
-              "center": true
-            }
-          ]
-        },
-
-        {
-          "type": "showhide",
-          "input": "grip:0",
-          "y": 38,
-          "x": -32,
-          "rot": -45,
-          "children": [
-            {
-              "type": "image",
-              "image": "indicator-arrow.png",
-              "winform.interpolation": "NearestNeighbor",
-              "x": 0.0,
-              "y": 0.0,
-              "width": 19.0,
-              "height": 11.0,
-              "center": true
-            }
-          ]
-        },
-        {
-          "type": "showhide",
-          "input": "grip:1",
-          "y": 38,
-          "x": 32,
-          "rot": 45,
-          "children": [
-            {
-              "type": "image",
-              "image": "indicator-arrow.png",
-              "winform.interpolation": "NearestNeighbor",
-              "x": 0.0,
-              "y": 0.0,
-              "width": 19.0,
-              "height": 11.0,
-              "center": true
             }
           ]
         }
