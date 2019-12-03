@@ -117,10 +117,7 @@
     <None Include="themes\steamcontroller\nielk1\firesale\nogyro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\nielk1\firesale\test.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="themes\steamcontroller\nielk1\firesale\nogyro-faceonly.json">
+    <None Include="themes\steamcontroller\nielk1\firesale\faceonly.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\nielk1\firesale\theme.json">
