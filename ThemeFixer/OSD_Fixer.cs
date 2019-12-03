@@ -52,6 +52,9 @@ namespace ThemeFixer
         public float? rot { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string ang { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public float? width { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
@@ -189,6 +192,9 @@ namespace ThemeFixer
                         rot = null;
                 }
             }
+
+            if (type == "pbar")
+                center = true; // old behavior is the new centered behavior
 
             if (type == "showhide" || type == "trailpad")
             {

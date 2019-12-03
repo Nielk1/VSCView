@@ -69,6 +69,9 @@ namespace VSCView
                     case "pbar":
                         Items.Add(new UL_PBar(data, cache, themePath, (JObject)child));
                         break;
+                    case "ppie":
+                        Items.Add(new UL_PPie(data, cache, themePath, (JObject)child));
+                        break;
                     case "basic3d1":
                         Items.Add(new UL_Basic3D1(data, cache, themePath, (JObject)child));
                         break;
@@ -334,6 +337,9 @@ namespace VSCView
                         break;
                     case "pbar":
                         Items.Add(new UL_PBar(data, cache, themePath, (JObject)child));
+                        break;
+                    case "ppie":
+                        Items.Add(new UL_PPie(data, cache, themePath, (JObject)child));
                         break;
                     case "basic3d1":
                         Items.Add(new UL_Basic3D1(data, cache, themePath, (JObject)child));
@@ -867,10 +873,14 @@ namespace VSCView
         }
 
         private ControllerData data;
+        private UI_ImageCache cache;
+        protected Image DisplayImage;
         //protected string AxisName;
         protected string Direction;
+        protected string TextureRenderMode;
         protected float Width;
         protected float Height;
+        protected bool DrawFromCenter;
         protected Color Foreground;
         protected Color Background;
 
@@ -887,15 +897,23 @@ namespace VSCView
         {
             base.Initalize(data, cache, themePath, themeData);
             this.data = data;
+            this.cache = cache;
 
             Background = Color.White;
             Foreground = Color.Black;
 
+            string ImageName = themeData["image"]?.Value<string>();
+            if (!string.IsNullOrWhiteSpace(ImageName))
+                DisplayImage = cache.LoadImage(ImageName);
+
             //AxisName = themeData["axisName"]?.Value<string>();
             Direction = themeData["direction"]?.Value<string>();
 
+            TextureRenderMode = themeData["mode"]?.Value<string>();
+
             Width = themeData["width"]?.Value<float>() ?? 0;
             Height = themeData["height"]?.Value<float>() ?? 0;
+            DrawFromCenter = themeData["center"]?.Value<bool>() ?? false;
 
             string ForegroundCode = themeData["foreground"]?.Value<string>();
             string BackgroundCode = themeData["background"]?.Value<string>();
@@ -979,6 +997,8 @@ namespace VSCView
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
+            if (!DrawFromCenter) // these draw centered by default
+                graphics.TranslateTransform(Width / 2, Height / 2);
 
             //float Analog = string.IsNullOrWhiteSpace(AxisName) ? 0 : (data.GetAnalogControl(AxisName));
             //Analog = Math.Max(Math.Min((Analog - Min) / (Max - Min), 1.0f), 0.0f);
@@ -992,21 +1012,212 @@ namespace VSCView
             switch (Direction)
             {
                 case "up":
-                    graphics.FillRectangle(new SolidBrush(Background), 0, Height - (Height * Analog), Width, Height * Analog);
+                    if(DisplayImage != null)
+                        if(TextureRenderMode == "stretch")
+                            graphics.DrawImage(DisplayImage, 0, Height - (Height * Analog), Width, Height * Analog);
+                        else
+                            graphics.DrawImage(DisplayImage, new RectangleF(0, Height - (Height * Analog), Width, Height * Analog), new RectangleF(0, DisplayImage.Height - (DisplayImage.Height * Analog), DisplayImage.Width, DisplayImage.Height * Analog), GraphicsUnit.Pixel);
+                    else
+                        graphics.FillRectangle(new SolidBrush(Background), 0, Height - (Height * Analog), Width, Height * Analog);
                     break;
                 case "down":
-                    graphics.FillRectangle(new SolidBrush(Background), 0, 0, Width, Height * Analog);
+                    if (DisplayImage != null)
+                        if(TextureRenderMode == "stretch")
+                        graphics.DrawImage(DisplayImage, 0, 0, Width, Height * Analog);
+                        else
+                        graphics.DrawImage(DisplayImage, new RectangleF(0, 0, Width, Height * Analog), new RectangleF(0, 0, DisplayImage.Width, DisplayImage.Height * Analog), GraphicsUnit.Pixel);
+                    else
+                        graphics.FillRectangle(new SolidBrush(Background), 0, 0, Width, Height * Analog);
                     break;
                 case "left":
-                    graphics.FillRectangle(new SolidBrush(Background), Width - (Width * Analog), 0, Width * Analog, Height);
+                    if (DisplayImage != null)
+                        if(TextureRenderMode == "stretch")
+                            graphics.DrawImage(DisplayImage, Width - (Width * Analog), 0, Width * Analog, Height);
+                        else
+                            graphics.DrawImage(DisplayImage, new RectangleF(Width - (Width * Analog), 0, Width * Analog, Height), new RectangleF(DisplayImage.Width - (DisplayImage.Width * Analog), 0, DisplayImage.Width * Analog, DisplayImage.Height), GraphicsUnit.Pixel);
+                    else
+                        graphics.FillRectangle(new SolidBrush(Background), Width - (Width * Analog), 0, Width * Analog, Height);
                     break;
                 case "right":
                 default:
-                    graphics.FillRectangle(new SolidBrush(Background), 0, 0, Width * Analog, Height);
+                    if (DisplayImage != null)
+                        if(TextureRenderMode == "stretch")
+                            graphics.DrawImage(DisplayImage, 0, 0, Width * Analog, Height);
+                        else
+                            graphics.DrawImage(DisplayImage, new RectangleF(0, 0, Width * Analog, Height), new RectangleF(0, 0, DisplayImage.Width * Analog, DisplayImage.Height), GraphicsUnit.Pixel);
+                    else
+                        graphics.FillRectangle(new SolidBrush(Background), 0, 0, Width * Analog, Height);
                     break;
             }
 
-            graphics.DrawRectangle(new Pen(Foreground, 2), 0, 0, Width, Height);
+            if (DisplayImage == null)
+                graphics.DrawRectangle(new Pen(Foreground, 2), 0, 0, Width, Height);
+
+            graphics.Transform = preserve;
+
+            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+            graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+
+            base.Paint(graphics);
+        }
+    }
+
+    public class UL_PPie : UI_Item
+    {
+        public UL_PPie(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData) : base(data, cache, themePath, themeData)
+        {
+        }
+
+        private ControllerData data;
+        private UI_ImageCache cache;
+        protected Image DisplayImage;
+        protected float Width;
+        protected float Height;
+        protected bool DrawFromCenter;
+        protected Color Background;
+
+        private string Calc;
+        private IDynamicExpression calcFunc;
+        private string StartCalc;
+        private IDynamicExpression startCalcFunc;
+        private string MinCalc;
+        private IDynamicExpression minCalcFunc;
+        private string MaxCalc;
+        private IDynamicExpression maxCalcFunc;
+
+        protected float Analog = 0;
+        protected float BaseAngle = 0;
+
+        protected override void Initalize(ControllerData data, UI_ImageCache cache, string themePath, JObject themeData)
+        {
+            base.Initalize(data, cache, themePath, themeData);
+            this.data = data;
+            this.cache = cache;
+
+            Background = Color.White;
+
+            string ImageName = themeData["image"]?.Value<string>();
+            if (!string.IsNullOrWhiteSpace(ImageName))
+                DisplayImage = cache.LoadImage(ImageName);
+
+            Width = themeData["width"]?.Value<float>() ?? 0;
+            Height = themeData["height"]?.Value<float>() ?? 0;
+            DrawFromCenter = themeData["center"]?.Value<bool>() ?? false;
+
+            string BackgroundCode = themeData["background"]?.Value<string>();
+
+            try
+            {
+                Background = Color.FromArgb(int.Parse(BackgroundCode, System.Globalization.NumberStyles.HexNumber));
+            }
+            catch { }
+
+            Calc = themeData["input"]?.Value<string>();
+            StartCalc = themeData["ang"]?.Value<string>();
+            MinCalc = themeData["min"]?.Value<string>();
+            MaxCalc = themeData["max"]?.Value<string>();
+
+            InitalizeController();
+        }
+
+        public override void InitalizeController()
+        {
+            if (!string.IsNullOrWhiteSpace(Calc))
+            {
+                try
+                {
+                    calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__"));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"\r\n{ex}");
+                }
+                try
+                {
+                    startCalcFunc = NumericContext.CompileDynamic(StartCalc.Replace(":", "__colon__"));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"\r\n{ex}");
+                }
+                try
+                {
+                    minCalcFunc = NumericContext.CompileDynamic(MinCalc.Replace(":", "__colon__"));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to compile dynamic formula \"{MinCalc}\"\r\n{ex}");
+                }
+                try
+                {
+                    maxCalcFunc = NumericContext.CompileDynamic(MaxCalc.Replace(":", "__colon__"));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to compile dynamic formula \"{MaxCalc}\"\r\n{ex}");
+                }
+            }
+
+            base.InitalizeController();
+        }
+
+        public override void CalculateValues()
+        {
+            Analog = 0;
+            float Min = 0f;
+            float Max = 1f;
+
+            if (minCalcFunc != null)
+            {
+                Min = (float)Convert.ChangeType(minCalcFunc?.Evaluate(), typeof(float));
+            }
+
+            if (minCalcFunc != null)
+            {
+                Max = (float)Convert.ChangeType(maxCalcFunc?.Evaluate(), typeof(float));
+            }
+
+            if (calcFunc != null)
+            {
+                Analog = (float)Convert.ChangeType(calcFunc?.Evaluate(), typeof(float));
+                Analog = Math.Max(Math.Min((Analog - Min) / (Max - Min), 1.0f), 0.0f);
+            }
+
+            if (startCalcFunc != null)
+            {
+                BaseAngle = (float)Convert.ChangeType(startCalcFunc?.Evaluate(), typeof(float));
+            }
+
+            base.CalculateValues();
+        }
+
+        public override void Paint(Graphics graphics)
+        {
+            Matrix preserve = graphics.Transform;
+            if (!DrawFromCenter) // these draw centered by default
+                graphics.TranslateTransform(Width / 2, Height / 2);
+
+            //float Analog = string.IsNullOrWhiteSpace(AxisName) ? 0 : (data.GetAnalogControl(AxisName));
+            //Analog = Math.Max(Math.Min((Analog - Min) / (Max - Min), 1.0f), 0.0f);
+
+            graphics.TranslateTransform(X, Y);
+            graphics.TranslateTransform(-Width / 2, -Height / 2);
+
+            graphics.SmoothingMode = SmoothingMode ?? System.Drawing.Drawing2D.SmoothingMode.Default;
+            graphics.InterpolationMode = InterpolationMode ?? System.Drawing.Drawing2D.InterpolationMode.Default;
+
+            if (DisplayImage != null)
+            {
+                GraphicsPath pth = new GraphicsPath();
+                pth.AddPie(X, Y, Width, Height, BaseAngle, 360 * Analog);
+                graphics.Clip = new Region(pth);
+                graphics.DrawImage(DisplayImage, 0, 0, Width, Height);
+                graphics.ResetClip();
+            }
+            else
+            {
+                graphics.FillPie(new SolidBrush(Background), 0, 0, Width, Height, BaseAngle, 360 * Analog);
+            }
 
             graphics.Transform = preserve;
 
