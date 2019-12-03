@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -149,7 +150,7 @@ namespace ThemeFixer
             {
                 try
                 {
-                    min = (float.Parse(min) / byte.MaxValue).ToString();
+                    min = (float.Parse(min) / byte.MaxValue).ToString(CultureInfo.InvariantCulture);
                 }
                 catch { }
             }
@@ -157,7 +158,7 @@ namespace ThemeFixer
             {
                 try
                 {
-                    max = (float.Parse(max) / byte.MaxValue).ToString();
+                    max = (float.Parse(max) / byte.MaxValue).ToString(CultureInfo.InvariantCulture);
                 }
                 catch { }
             }
@@ -244,7 +245,7 @@ namespace ThemeFixer
                 axisNameX = FixAnalogInputName(axisNameX);
                 inputX = axisNameX;
                 if (scaleFactorX.HasValue)
-                    inputX += " * " + scaleFactorX.Value;
+                    inputX += " * " + scaleFactorX.Value.ToString(CultureInfo.InvariantCulture);
                 axisNameX = null;
                 scaleFactorX = null;
             }
@@ -253,7 +254,7 @@ namespace ThemeFixer
                 axisNameY = FixAnalogInputName(axisNameY);
                 inputY = axisNameY;
                 if (scaleFactorY.HasValue)
-                    inputY += " * " + scaleFactorY.Value;
+                    inputY += " * " + scaleFactorY.Value.ToString(CultureInfo.InvariantCulture);
                 axisNameY = null;
                 scaleFactorY = null;
             }
