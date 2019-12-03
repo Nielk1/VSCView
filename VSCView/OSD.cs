@@ -869,8 +869,6 @@ namespace VSCView
         private ControllerData data;
         //protected string AxisName;
         protected string Direction;
-        protected float Min;
-        protected float Max;
         protected float Width;
         protected float Height;
         protected Color Foreground;
@@ -878,6 +876,10 @@ namespace VSCView
 
         private string Calc;
         private IDynamicExpression calcFunc;
+        private string MinCalc;
+        private IDynamicExpression minCalcFunc;
+        private string MaxCalc;
+        private IDynamicExpression maxCalcFunc;
 
         protected float Analog = 0;
 
@@ -892,8 +894,6 @@ namespace VSCView
             //AxisName = themeData["axisName"]?.Value<string>();
             Direction = themeData["direction"]?.Value<string>();
 
-            Min = themeData["min"]?.Value<float>() ?? 0;
-            Max = themeData["max"]?.Value<float>() ?? 0;
             Width = themeData["width"]?.Value<float>() ?? 0;
             Height = themeData["height"]?.Value<float>() ?? 0;
 
@@ -912,6 +912,8 @@ namespace VSCView
             catch { }
 
             Calc = themeData["input"]?.Value<string>();
+            MinCalc = themeData["min"]?.Value<string>();
+            MaxCalc = themeData["max"]?.Value<string>();
 
             InitalizeController();
         }
@@ -928,6 +930,22 @@ namespace VSCView
                 {
                     Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"\r\n{ex}");
                 }
+                try
+                {
+                    minCalcFunc = NumericContext.CompileDynamic(MinCalc.Replace(":", "__colon__"));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to compile dynamic formula \"{MinCalc}\"\r\n{ex}");
+                }
+                try
+                {
+                    maxCalcFunc = NumericContext.CompileDynamic(MaxCalc.Replace(":", "__colon__"));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to compile dynamic formula \"{MaxCalc}\"\r\n{ex}");
+                }
             }
 
             base.InitalizeController();
@@ -936,6 +954,19 @@ namespace VSCView
         public override void CalculateValues()
         {
             Analog = 0;
+            float Min = 0f;
+            float Max = 1f;
+
+            if (minCalcFunc != null)
+            {
+                Min = (float)Convert.ChangeType(minCalcFunc?.Evaluate(), typeof(float));
+            }
+
+            if (minCalcFunc != null)
+            {
+                Max = (float)Convert.ChangeType(maxCalcFunc?.Evaluate(), typeof(float));
+            }
+
             if (calcFunc != null)
             {
                 Analog = (float)Convert.ChangeType(calcFunc?.Evaluate(), typeof(float));

@@ -443,20 +443,21 @@ namespace VSCView
 
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
-            if (ui != null && (ui.Width != this.Width || ui.Height != this.Height))
-            {
-                settings.CustomSize = true;
-                settings.Width = this.Width;
-                settings.Height = this.Height;
-            }
-            else
-            {
-                this.Width = ui.Width;
-                this.Height = ui.Height;
-                settings.CustomSize = false;
-                settings.Width = null;
-                settings.Height = null;
-            }
+            if (ui != null)
+                if (ui.Width != this.Width || ui.Height != this.Height)
+                {
+                    settings.CustomSize = true;
+                    settings.Width = this.Width;
+                    settings.Height = this.Height;
+                }
+                else
+                {
+                    this.Width = ui.Width;
+                    this.Height = ui.Height;
+                    settings.CustomSize = false;
+                    settings.Width = null;
+                    settings.Height = null;
+                }
             SaveSettings();
         }
     }

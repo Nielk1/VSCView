@@ -38,78 +38,126 @@ namespace ThemeFixer
     {
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string @type { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string image { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public float? x { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public float? y { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public float? rot { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public float? width { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public float? height { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public bool? center { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string input { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string inputX { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string inputY { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string inputR { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string inputName { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string calc { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public bool? invert { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string axisNameX { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string axisNameY { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public float? scaleFactorX { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public float? scaleFactorY { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string axisName { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string direction { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public float? min { get; set; }
+        public string min { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public float? max { get; set; }
+        public string max { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public int? length { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string foreground { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string background { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string mode { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string shadowl { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string shadowr { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string shadowu { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string shadowd { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore, PropertyName = "winform.smoothing")]
         public string winform_smoothing { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore, PropertyName = "winform.interpolation")]
         public string winform_interpolation { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public List<UI_Item> children { get; set; }
+
         public void Update()
         {
             if (scaleFactorX.HasValue) scaleFactorX *= Int16.MaxValue;
             if (scaleFactorY.HasValue) scaleFactorY *= Int16.MaxValue;
-            if (min.HasValue) min /= byte.MaxValue;
-            if (max.HasValue) max /= byte.MaxValue;
+            if (min != null)
+            {
+                try
+                {
+                    min = (float.Parse(min) / byte.MaxValue).ToString();
+                }
+                catch { }
+            }
+            if (max != null)
+            {
+                try
+                {
+                    max = (float.Parse(max) / byte.MaxValue).ToString();
+                }
+                catch { }
+            }
 
             // remove rotation from trailpads as we unrotate the raw data now.
             // also note that 30 deg was wrong, the correct value is actually 15 deg.
