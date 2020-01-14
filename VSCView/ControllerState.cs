@@ -6,104 +6,6 @@ using System.Threading.Tasks;
 
 namespace VSCView
 {
-    public class SteamControllerButtons : ICloneable
-    {
-        //public bool A { get; set; }
-        //public bool B { get; set; }
-        //public bool X { get; set; }
-        //public bool Y { get; set; }
-
-        //public bool LeftBumper { get; set; }
-        //public bool LeftTrigger { get; set; }
-
-        //public bool RightBumper { get; set; }
-        //public bool RightTrigger { get; set; }
-
-        //public bool LeftGrip { get; set; }
-        //public bool RightGrip { get; set; }
-
-        //public bool Start { get; set; }
-        //public bool Home { get; set; }
-        //public bool Select { get; set; }
-        //public bool DS4PadClick { get; set; }
-
-        //public bool Down { get; set; }
-        //public bool Left { get; set; }
-        //public bool Right { get; set; }
-        //public bool Up { get; set; }
-
-        //public bool LeftStickClick { get; set; }
-        //public bool LeftPadTouch { get; set; }
-        //public bool LeftPadClick { get; set; }
-        //public bool RightStickClick { get; set; }
-        //public bool RightPadTouch { get; set; }
-        //public bool RightPadClick { get; set; }
-
-        /// <summary>
-        /// touchnw
-        /// </summary>
-        [Obsolete]
-        public bool Touch0 { get; set; }
-        /// <summary>
-        /// touchne
-        /// </summary>
-        [Obsolete]
-        public bool Touch1 { get; set; }
-        /// <summary>
-        /// touchsw
-        /// </summary>
-        [Obsolete]
-        public bool Touch2 { get; set; }
-        /// <summary>
-        /// touchse
-        /// </summary>
-        [Obsolete]
-        public bool Touch3 { get; set; }
-
-        public virtual object Clone()
-        {
-            SteamControllerButtons buttons = (SteamControllerButtons)base.MemberwiseClone();
-
-            //buttons.A = A;
-            //buttons.B = B;
-            //buttons.X = X;
-            //buttons.Y = Y;
-
-            //buttons.LeftBumper = LeftBumper;
-            //buttons.LeftTrigger = LeftTrigger;
-
-            //buttons.RightBumper = RightBumper;
-            //buttons.RightTrigger = RightTrigger;
-
-            //buttons.LeftGrip = LeftGrip;
-            //buttons.RightGrip = RightGrip;
-
-            //buttons.Start = Start;
-            //buttons.Home = Home;
-            //buttons.Select = Select;
-
-            //buttons.Down = Down;
-            //buttons.Left = Left;
-            //buttons.Right = Right;
-            //buttons.Up = Up;
-
-            //buttons.LeftStickClick = LeftStickClick;
-            //buttons.LeftPadTouch = LeftPadTouch;
-            //buttons.LeftPadClick = LeftPadClick;
-            //buttons.RightStickClick = RightStickClick;
-            //buttons.RightPadTouch = RightPadTouch;
-            //buttons.RightPadClick = RightPadClick;
-
-            buttons.Touch0 = Touch0;
-            buttons.Touch1 = Touch1;
-            buttons.Touch2 = Touch2;
-            buttons.Touch3 = Touch3;
-
-            //buttons.DS4PadClick = DS4PadClick;
-
-            return buttons;
-        }
-    }
     public interface IControl : ICloneable
     {
         T Value<T>(string key);
@@ -161,13 +63,72 @@ namespace VSCView
     }
     public class ControlTriggerPair : IControl
     {
-        public bool HasStage2 { get; private set; }
-        public float Analog0 { get; set; }
-        public float Analog1 { get; set; }
-        public bool Stage2_0 { get; set; }
-        public bool Stage2_1 { get; set; }
+        private bool _hasStage2;
+        public bool HasStage2
+        {
+            get { return _hasStage2; }
+            private set
+            {
+                _hasStage2 = value;
+                Left.Stage2 = _hasStage2;
+                Right.Stage2 = _hasStage2;
+            }
+        }
+        public ControlTrigger Left { get; private set; }
+        public ControlTrigger Right { get; private set; }
 
         public ControlTriggerPair(bool HasStage2)
+        {
+            this.HasStage2 = HasStage2;
+            this.Left = new ControlTrigger(HasStage2);
+            this.Right = new ControlTrigger(HasStage2);
+        }
+        public ControlTriggerPair(bool HasStage2, ControlTrigger Left, ControlTrigger Right)
+        {
+            this.HasStage2 = HasStage2;
+            this.Left = (ControlTrigger)Left.Clone();
+            this.Right = (ControlTrigger)Right.Clone();
+        }
+        public T Value<T>(string key)
+        {
+            string[] parts = key.Split(new char[] { ':' }, 2);
+            switch (parts[0])
+            {
+                case "l":
+                    return (T)Convert.ChangeType(Left.Value<T>(parts[1]), typeof(T));
+                case "r":
+                    return (T)Convert.ChangeType(Right.Value<T>(parts[1]), typeof(T));
+                default:
+                    return default;
+            }
+        }
+        public Type Type(string key)
+        {
+            string[] parts = key.Split(new char[] { ':' }, 2);
+            switch (parts[0])
+            {
+                case "l":
+                    return Left.Type(parts[1]);
+                case "r":
+                    return Right.Type(parts[1]);
+                default:
+                    return default;
+            }
+        }
+        public object Clone()
+        {
+            ControlTriggerPair newData = new ControlTriggerPair(this.HasStage2, Left, Right);
+
+            return newData;
+        }
+    }
+    public class ControlTrigger : IControl
+    {
+        public bool HasStage2 { get; private set; }
+        public float Analog { get; set; }
+        public bool Stage2 { get; set; }
+
+        public ControlTrigger(bool HasStage2)
         {
             this.HasStage2 = HasStage2;
         }
@@ -175,14 +136,10 @@ namespace VSCView
         {
             switch (key)
             {
-                case "analog0":
-                    return (T)Convert.ChangeType(Analog0, typeof(T));
-                case "analog1":
-                    return (T)Convert.ChangeType(Analog1, typeof(T));
-                case "stage2_0":
-                    return (T)Convert.ChangeType(Stage2_0, typeof(T));
-                case "stage2_1":
-                    return (T)Convert.ChangeType(Stage2_1, typeof(T));
+                case "analog":
+                    return (T)Convert.ChangeType(Analog, typeof(T));
+                case "stage2":
+                    return (T)Convert.ChangeType(Stage2, typeof(T));
                 default:
                     return default;
             }
@@ -191,13 +148,9 @@ namespace VSCView
         {
             switch (key)
             {
-                case "analog0":
+                case "analog":
                     return typeof(float);
-                case "analog1":
-                    return typeof(float);
-                case "stage2_0":
-                    return typeof(bool);
-                case "stage2_1":
+                case "stage2":
                     return typeof(bool);
                 default:
                     return default;
@@ -205,34 +158,13 @@ namespace VSCView
         }
         public object Clone()
         {
-            ControlTriggerPair newData = new ControlTriggerPair(this.HasStage2);
+            ControlTrigger newData = new ControlTrigger(this.HasStage2);
 
-            newData.Analog0 = this.Analog0;
-            newData.Analog1 = this.Analog1;
+            newData.Analog = this.Analog;
 
-            newData.Stage2_0 = this.Stage2_0;
-            newData.Stage2_1 = this.Stage2_1;
+            newData.Stage2 = this.Stage2;
 
             return newData;
-        }
-    }
-    public class ControlTrigger : IControl
-    {
-        public T Value<T>(string key)
-        {
-            return default;
-        }
-
-        public object Clone()
-        {
-            ControlTrigger newData = new ControlTrigger();
-
-            return newData;
-        }
-
-        public Type Type(string key)
-        {
-            return default;
         }
     }
     public class ControlDPad : IControl
