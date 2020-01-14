@@ -206,14 +206,14 @@
               "y": 0.0,
               "width": 18.0,
               "height": 18.0,
-              "input": "touch_right:touch0",
-              "inputX": "touch_right:x0 * 16",
-              "inputY": "touch_right:y0 * 16",
+              "input": "touch_right:0:touch",
+              "inputX": "touch_right:0:x * 16",
+              "inputY": "touch_right:0:y * 16",
               "length": 30,
               "children": [
                 {
                   "type": "showhide",
-                  "input": "touch_right:touch0",
+                  "input": "touch_right:0:touch",
                   "children": [
                     {
                       "type": "image",
@@ -258,14 +258,14 @@
               "y": 0.0,
               "width": 18.0,
               "height": 18.0,
-              "input": "touch_left:touch0",
-              "inputX": "touch_left:x0 * 16",
-              "inputY": "touch_left:y0 * 16",
+              "input": "touch_left:0:touch",
+              "inputX": "touch_left:0:x * 16",
+              "inputY": "touch_left:0:y * 16",
               "length": 30,
               "children": [
                 {
                   "type": "showhide",
-                  "input": "touch_left:touch0",
+                  "input": "touch_left:0:touch",
                   "children": [
                     {
                       "type": "image",
@@ -289,19 +289,19 @@
           "type": "showhide",
           "x": -50.0,
           "y": -30.0,
-          "input": "triggers:analog0 > 0",
+          "input": "triggers:l:analog > 0",
           "children": [
             {
               "type": "slider",
               "x": 0.0,
               "y": 0.0,
-              "inputR": "triggers:analog0 * -35 - 10",
+              "inputR": "triggers:l:analog * -35 - 10",
               "children": [
                 {
                   "type": "slider",
                   "x": 0.0,
                   "y": 0.0,
-                  "inputY": "triggers:stage2_0 * 5",
+                  "inputY": "triggers:l:stage2 * 5",
                   "children": [
                     {
                       "y": -42.0,
@@ -329,19 +329,19 @@
           "type": "showhide",
           "x": 50.0,
           "y": -30.0,
-          "input": "triggers:analog1 > 0",
+          "input": "triggers:r:analog > 0",
           "children": [
             {
               "type": "slider",
               "x": 0.0,
               "y": 0.0,
-              "inputR": "triggers:analog1 * 35 + 10",
+              "inputR": "triggers:r:analog * 35 + 10",
               "children": [
                 {
                   "type": "slider",
                   "x": 0.0,
                   "y": 0.0,
-                  "inputY": "triggers:stage2_1 * 5",
+                  "inputY": "triggers:r:stage2 * 5",
                   "children": [
                     {
                       "y": -42.0,

@@ -63,61 +63,57 @@ namespace VSCView
     }
     public class ControlTriggerPair : IControl
     {
-        private bool _hasStage2;
-        public bool HasStage2
-        {
-            get { return _hasStage2; }
-            private set
-            {
-                _hasStage2 = value;
-                Left.Stage2 = _hasStage2;
-                Right.Stage2 = _hasStage2;
-            }
-        }
-        public ControlTrigger Left { get; private set; }
-        public ControlTrigger Right { get; private set; }
+        public bool HasStage2 { get; private set; }
+        public float L_Analog { get; set; }
+        public float R_Analog { get; set; }
+        public bool L_Stage2 { get; set; }
+        public bool R_Stage2 { get; set; }
 
         public ControlTriggerPair(bool HasStage2)
         {
             this.HasStage2 = HasStage2;
-            this.Left = new ControlTrigger(HasStage2);
-            this.Right = new ControlTrigger(HasStage2);
-        }
-        public ControlTriggerPair(bool HasStage2, ControlTrigger Left, ControlTrigger Right)
-        {
-            this.HasStage2 = HasStage2;
-            this.Left = (ControlTrigger)Left.Clone();
-            this.Right = (ControlTrigger)Right.Clone();
         }
         public T Value<T>(string key)
         {
-            string[] parts = key.Split(new char[] { ':' }, 2);
-            switch (parts[0])
+            switch (key)
             {
-                case "l":
-                    return (T)Convert.ChangeType(Left.Value<T>(parts[1]), typeof(T));
-                case "r":
-                    return (T)Convert.ChangeType(Right.Value<T>(parts[1]), typeof(T));
+                case "l:analog":
+                    return (T)Convert.ChangeType(L_Analog, typeof(T));
+                case "r:analog":
+                    return (T)Convert.ChangeType(R_Analog, typeof(T));
+                case "l:stage2":
+                    return (T)Convert.ChangeType(L_Stage2, typeof(T));
+                case "r:stage2":
+                    return (T)Convert.ChangeType(R_Stage2, typeof(T));
                 default:
                     return default;
             }
         }
         public Type Type(string key)
         {
-            string[] parts = key.Split(new char[] { ':' }, 2);
-            switch (parts[0])
+            switch (key)
             {
-                case "l":
-                    return Left.Type(parts[1]);
-                case "r":
-                    return Right.Type(parts[1]);
+                case "l:analog":
+                    return typeof(float);
+                case "r:analog":
+                    return typeof(float);
+                case "l:stage2":
+                    return typeof(bool);
+                case "r:stage2":
+                    return typeof(bool);
                 default:
                     return default;
             }
         }
         public object Clone()
         {
-            ControlTriggerPair newData = new ControlTriggerPair(this.HasStage2, Left, Right);
+            ControlTriggerPair newData = new ControlTriggerPair(this.HasStage2);
+
+            newData.L_Analog = this.L_Analog;
+            newData.R_Analog = this.R_Analog;
+
+            newData.L_Stage2 = this.L_Stage2;
+            newData.R_Stage2 = this.R_Stage2;
 
             return newData;
         }
@@ -313,8 +309,8 @@ namespace VSCView
     }
     public class ControlButtonPair : IControl
     {
-        public bool Button0 { get; set; }
-        public bool Button1 { get; set; }
+        public bool Left { get; set; }
+        public bool Right { get; set; }
 
         public ControlButtonPair()
         {
@@ -325,9 +321,9 @@ namespace VSCView
             switch (key)
             {
                 case "l":
-                    return (T)Convert.ChangeType(Button0, typeof(T));
+                    return (T)Convert.ChangeType(Left, typeof(T));
                 case "r":
-                    return (T)Convert.ChangeType(Button1, typeof(T));
+                    return (T)Convert.ChangeType(Right, typeof(T));
                 default:
                     return default;
             }
@@ -341,8 +337,8 @@ namespace VSCView
         {
             ControlButtonPair newData = new ControlButtonPair();
 
-            newData.Button0 = this.Button0;
-            newData.Button1 = this.Button1;
+            newData.Left = this.Left;
+            newData.Right = this.Right;
 
             return newData;
         }
@@ -448,13 +444,13 @@ namespace VSCView
 
             for (int i = 0; i < TouchCount; i++)
             {
-                if (key == $"x{i}")
+                if (key == $"{i}:x")
                     return (T)Convert.ChangeType(X[i], typeof(T));
 
-                if (key == $"y{i}")
+                if (key == $"{i}:y")
                     return (T)Convert.ChangeType(Y[i], typeof(T));
 
-                if (key == $"touch{i}")
+                if (key == $"{i}:touch")
                     return (T)Convert.ChangeType(Touch[i], typeof(T));
             }
 
@@ -467,13 +463,13 @@ namespace VSCView
 
             for (int i = 0; i < TouchCount; i++)
             {
-                if (key == $"x{i}")
+                if (key == $"{i}:x")
                     return typeof(float);
 
-                if (key == $"y{i}")
+                if (key == $"{i}:y")
                     return typeof(float);
 
-                if (key == $"touch{i}")
+                if (key == $"{i}:touch")
                     return typeof(bool);
             }
 

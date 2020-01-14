@@ -184,7 +184,7 @@
             },
             {
               "type": "showhide",
-              "input": "triggers:stage2_0",
+              "input": "triggers:l:stage2",
               "children": [
                 {
                   "type": "image",
@@ -229,7 +229,7 @@
             },
             {
               "type": "showhide",
-              "input": "triggers:stage2_1",
+              "input": "triggers:r:stage2",
               "children": [
                 {
                   "type": "image",
@@ -287,9 +287,9 @@
                   "y": 0.0,
                   "width": 72.0,
                   "height": 72.0,
-                  "input": "touch_right:touch0",
-                  "inputX": "touch_right:x0 * 55.7039",
-                  "inputY": "touch_right:y0 * 55.7039",
+                  "input": "touch_right:0:touch",
+                  "inputX": "touch_right:0:x * 55.7039",
+                  "inputY": "touch_right:0:y * 55.7039",
                   "length": 30
                 }
               ]
@@ -324,9 +324,9 @@
                   "y": 0.0,
                   "width": 72.0,
                   "height": 72.0,
-                  "input": "touch_left:touch0",
-                  "inputX": "touch_left:x0 * 55.7039",
-                  "inputY": "touch_left:y0 * 55.7039",
+                  "input": "touch_left:0:touch",
+                  "inputX": "touch_left:0:x * 55.7039",
+                  "inputY": "touch_left:0:y * 55.7039",
                   "length": 30
                 }
               ]
@@ -343,7 +343,7 @@
               "y": 0.0,
               "width": 120.0,
               "height": 15.0,
-              "input": "triggers:analog0",
+              "input": "triggers:l:analog",
               "direction": "right",
               "min": 0.0,
               "max": 1.0,
@@ -357,7 +357,7 @@
               "y": 0.0,
               "width": 120.0,
               "height": 15.0,
-              "input": "triggers:analog1",
+              "input": "triggers:r:analog",
               "direction": "left",
               "min": 0.0,
               "max": 1.0,
@@ -378,14 +378,14 @@
           "x": -80,
           "y": 60,
           "center": true,
-          "inputX": "(stick_left:x * 16.3835) + (touch_left:touch0 * -90) + (touch_left:x0 * 55.7039)",
-          "inputY": "(stick_left:y * 16.3835) + (touch_left:touch0 * -90) + (touch_left:y0 * 55.7039)",
+          "inputX": "(stick_left:x * 16.3835) + (touch_left:0:touch * -90) + (touch_left:0:x * 55.7039)",
+          "inputY": "(stick_left:y * 16.3835) + (touch_left:0:touch * -90) + (touch_left:0:y * 55.7039)",
           "children": [
             {
               "type": "slider",
               "x": 0,
               "y": 0,
-              "inputR": "-25 + 0.1 * ((stick_left:x * 16.3835) + (touch_left:touch0 * -90) + (touch_left:x0 * 55.7039))",
+              "inputR": "-25 + 0.1 * ((stick_left:x * 16.3835) + (touch_left:0:touch * -90) + (touch_left:0:x * 55.7039))",
               "center": true,
               "children": [
                 {
@@ -405,15 +405,15 @@
           "type": "slider",
           "x": 70,
           "y": 50,
-          "inputX": "(((quad_right:e * 15) + (quad_right:w * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:touch0 * 100) + (touch_right:x0 * 55.7039) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:touch0 * -25)",
-          "inputY": "(((quad_right:s * 15) + (quad_right:n * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:touch0 * -80) + (touch_right:y0 * 55.7039) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:touch0 * 25)",
+          "inputX": "(((quad_right:e * 15) + (quad_right:w * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:0:touch * 100) + (touch_right:0:x * 55.7039) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:0:touch * -25)",
+          "inputY": "(((quad_right:s * 15) + (quad_right:n * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:0:touch * -80) + (touch_right:0:y * 55.7039) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:0:touch * 25)",
           "center": true,
           "children": [
             {
               "type": "slider",
               "x": 0,
               "y": 0,
-              "inputR": "25 + 0.1 * ((((quad_right:e * 15) + (quad_right:w * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:touch0 * 100) + (touch_right:x0 * 55.7039) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:touch0 * -25))",
+              "inputR": "25 + 0.1 * ((((quad_right:e * 15) + (quad_right:w * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:0:touch * 100) + (touch_right:0:x * 55.7039) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:0:touch * -25))",
               "center": true,
               "children": [
                 {

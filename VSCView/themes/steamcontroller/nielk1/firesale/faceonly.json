@@ -206,14 +206,14 @@
               "y": 0.0,
               "width": 18.0,
               "height": 18.0,
-              "input": "touch_right:touch0",
-              "inputX": "touch_right:x0 * 16",
-              "inputY": "touch_right:y0 * 16",
+              "input": "touch_right:0:touch",
+              "inputX": "touch_right:0:x * 16",
+              "inputY": "touch_right:0:y * 16",
               "length": 30,
               "children": [
                 {
                   "type": "showhide",
-                  "input": "touch_right:touch0",
+                  "input": "touch_right:0:touch",
                   "children": [
                     {
                       "type": "image",
@@ -258,14 +258,14 @@
               "y": 0.0,
               "width": 18.0,
               "height": 18.0,
-              "input": "touch_left:touch0",
-              "inputX": "touch_left:x0 * 16",
-              "inputY": "touch_left:y0 * 16",
+              "input": "touch_left:0:touch",
+              "inputX": "touch_left:0:x * 16",
+              "inputY": "touch_left:0:y * 16",
               "length": 30,
               "children": [
                 {
                   "type": "showhide",
-                  "input": "touch_left:touch0",
+                  "input": "touch_left:0:touch",
                   "children": [
                     {
                       "type": "image",

@@ -641,7 +641,7 @@ namespace VSCView
                                         bool LeftPadTouch = (RawState.ulButtons[2] & 8) == 8;
                                         (State.Controls["touch_right"] as ControlTouch).Click = (RawState.ulButtons[2] & 4) == 4;
                                         bool ThumbOrLeftPadPress = (RawState.ulButtons[2] & 2) == 2; // what is this even for?
-                                        (State.Controls["grip"] as ControlButtonPair).Button1 = (RawState.ulButtons[2] & 1) == 1;
+                                        (State.Controls["grip"] as ControlButtonPair).Right = (RawState.ulButtons[2] & 1) == 1;
 
                                         RawState.sTriggerL = report.Data[8 + 3];
                                         RawState.sTriggerR = report.Data[8 + 4];
@@ -817,15 +817,15 @@ namespace VSCView
             (State.Controls["quad_right"] as ControlButtonQuad).Button3 = (RawState.ulButtons[0] & 64) == 64;   // X - W SW
             (State.Controls["quad_right"] as ControlButtonQuad).Button1 = (RawState.ulButtons[0] & 32) == 32;   // B - E NE
             (State.Controls["quad_right"] as ControlButtonQuad).Button0 = (RawState.ulButtons[0] & 16) == 16;   // Y - N NW
-            (State.Controls["bumpers"] as ControlButtonPair).Button0 = (RawState.ulButtons[0] & 8) == 8;
-            (State.Controls["bumpers"] as ControlButtonPair).Button1 = (RawState.ulButtons[0] & 4) == 4;
-            (State.Controls["triggers"] as ControlTriggerPair).Stage2_0 = (RawState.ulButtons[0] & 2) == 2;
-            (State.Controls["triggers"] as ControlTriggerPair).Stage2_1 = (RawState.ulButtons[0] & 1) == 1;
+            (State.Controls["bumpers"] as ControlButtonPair).Left = (RawState.ulButtons[0] & 8) == 8;
+            (State.Controls["bumpers"] as ControlButtonPair).Right = (RawState.ulButtons[0] & 4) == 4;
+            (State.Controls["triggers"] as ControlTriggerPair).L_Stage2 = (RawState.ulButtons[0] & 2) == 2;
+            (State.Controls["triggers"] as ControlTriggerPair).R_Stage2 = (RawState.ulButtons[0] & 1) == 1;
 
-            (State.Controls["grip"] as ControlButtonPair).Button0 = (RawState.ulButtons[1] & 128) == 128;
-            (State.Controls["menu"] as ControlButtonPair).Button1 = (RawState.ulButtons[1] & 64) == 64;
+            (State.Controls["grip"] as ControlButtonPair).Left = (RawState.ulButtons[1] & 128) == 128;
+            (State.Controls["menu"] as ControlButtonPair).Right = (RawState.ulButtons[1] & 64) == 64;
             (State.Controls["home"] as ControlButton).Button0 = (RawState.ulButtons[1] & 32) == 32;
-            (State.Controls["menu"] as ControlButtonPair).Button0 = (RawState.ulButtons[1] & 16) == 16;
+            (State.Controls["menu"] as ControlButtonPair).Left = (RawState.ulButtons[1] & 16) == 16;
 
             if (ControllerType == EControllerType.Chell)
             {
@@ -867,10 +867,10 @@ namespace VSCView
             bool LeftPadTouch = (RawState.ulButtons[2] & 8) == 8;
             (State.Controls["touch_right"] as ControlTouch).Click = (RawState.ulButtons[2] & 4) == 4;
             bool ThumbOrLeftPadPress = (RawState.ulButtons[2] & 2) == 2; // what is this even for?
-            (State.Controls["grip"] as ControlButtonPair).Button1 = (RawState.ulButtons[2] & 1) == 1;
+            (State.Controls["grip"] as ControlButtonPair).Right = (RawState.ulButtons[2] & 1) == 1;
 
-            (State.Controls["triggers"] as ControlTriggerPair).Analog0 = (float)RawState.sTriggerL / byte.MaxValue;
-            (State.Controls["triggers"] as ControlTriggerPair).Analog1 = (float)RawState.sTriggerR / byte.MaxValue;
+            (State.Controls["triggers"] as ControlTriggerPair).L_Analog = (float)RawState.sTriggerL / byte.MaxValue;
+            (State.Controls["triggers"] as ControlTriggerPair).R_Analog = (float)RawState.sTriggerR / byte.MaxValue;
 
             (State.Controls["stick_left"] as ControlStick).X = (float)RawState.sLeftStickX / Int16.MaxValue;
             (State.Controls["stick_left"] as ControlStick).Y = (float)-RawState.sLeftStickY / Int16.MaxValue;

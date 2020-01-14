@@ -13,7 +13,7 @@
       "children": [
         {
           "type": "slider",
-          "inputY": "triggers:analog0 * 7",
+          "inputY": "triggers:l:analog * 7",
           "x": -180,
           "y": 0,
           "width": 73,
@@ -31,7 +31,7 @@
             },
             {
               "type": "showhide",
-              "input": "triggers:stage2_0 OR bumpers2:l",
+              "input": "triggers:l:stage2 OR bumpers2:l",
               "children": [
                 {
                   "type": "image",
@@ -49,7 +49,7 @@
 
         {
           "type": "slider",
-          "inputY": "triggers:analog1 * 7",
+          "inputY": "triggers:r:analog * 7",
           "x": 171,
           "y": 0,
           "width": 73,
@@ -67,7 +67,7 @@
             },
             {
               "type": "showhide",
-              "input": "triggers:stage2_1 OR bumpers2:r",
+              "input": "triggers:r:stage2 OR bumpers2:r",
               "children": [
                 {
                   "type": "image",
@@ -411,11 +411,11 @@
               "children": [
                 {
                   "type": "trailpad",
-                  "input": "touch_center:touch0 OR touch_left:touch0",
+                  "input": "touch_center:0:touch OR touch_left:0:touch",
                   "x": -5,
                   "y": 0,
-                  "inputX": "(touch_center:x0 * 88) + touch_left:touch0 * (touch_left:x0 * 44 - 44)",
-                  "inputY": "(touch_center:y0 + touch_left:y0) * 35",
+                  "inputX": "(touch_center:0:x * 88) + touch_left:0:touch * (touch_left:0:x * 44 - 44)",
+                  "inputY": "(touch_center:0:y + touch_left:0:y) * 35",
                   "image": "padheat.png",
                   "length": 30,
                   "width": 36,
@@ -423,7 +423,7 @@
                   "children": [
                     {
                       "type": "showhide",
-                      "input": "touch_center:touch0",
+                      "input": "touch_center:0:touch",
                       "children": [
                         {
                           "type": "image",
@@ -440,11 +440,11 @@
                 },
                 {
                   "type": "trailpad",
-                  "input": "touch_center:touch1 OR touch_right:touch0",
+                  "input": "touch_center:1:touch OR touch_right:0:touch",
                   "x": -5,
                   "y": 0,
-                  "inputX": "(touch_center:x1 * 88) + touch_right:touch0 * (touch_right:x0 * 44 + 44)",
-                  "inputY": "(touch_center:y1 + touch_right:y0) * 35",
+                  "inputX": "(touch_center:1:x * 88) + touch_right:0:touch * (touch_right:0:x * 44 + 44)",
+                  "inputY": "(touch_center:1:y + touch_right:0:y) * 35",
                   "image": "padheat.png",
                   "length": 30,
                   "width": 36,
@@ -452,7 +452,7 @@
                   "children": [
                     {
                       "type": "showhide",
-                      "input": "touch_center:touch1",
+                      "input": "touch_center:1:touch",
                       "children": [
                         {
                           "type": "image",

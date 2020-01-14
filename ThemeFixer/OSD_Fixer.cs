@@ -291,15 +291,15 @@ namespace ThemeFixer
                 case "select":        return "menu:l";
                 case "start":         return "menu:r";
                 case "lefttrigger":
-                case "lt":            return "triggers:stage2_0";
+                case "lt":            return "triggers:l:stage2";
                 case "righttrigger":
-                case "rt":            return "triggers:stage2_1";
+                case "rt":            return "triggers:r:stage2";
                 case "steam":         return "home";
                 case "stickclick":
                 case "sc":            return "stick_left:click";
-                case "leftpadtouch":  return "touch_left:touch0";
+                case "leftpadtouch":  return "touch_left:0:touch";
                 case "leftpadclick":  return "touch_left:click";
-                case "rightpadtouch": return "touch_right:touch0";
+                case "rightpadtouch": return "touch_right:0:touch";
                 case "rightpadclick": return "touch_right:click";
                 case "touch0":
                 case "touchnw":       return "grid_center:0:0";
@@ -318,14 +318,14 @@ namespace ThemeFixer
         {
             switch (inputName.ToLowerInvariant())
             {
-                case "lefttrigger":  return "triggers:analog0";
-                case "righttrigger": return "triggers:analog1";
+                case "lefttrigger":  return "triggers:l:analog";
+                case "righttrigger": return "triggers:r:analog";
                 case "leftstickx":   return "stick_left:x";
                 case "leftsticky":   return "stick_left:y";
-                case "leftpadx":     return "touch_left:x0";
-                case "leftpady":     return "touch_left:y0";
-                case "rightpadx":    return "touch_right:x0";
-                case "rightpady":    return "touch_right:y0";
+                case "leftpadx":     return "touch_left:0:x";
+                case "leftpady":     return "touch_left:0:y";
+                case "rightpadx":    return "touch_right:0:x";
+                case "rightpady":    return "touch_right:0:y";
             }
             return inputName;
         }

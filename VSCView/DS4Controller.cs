@@ -359,20 +359,20 @@ namespace VSCView
 
                 (State.Controls["stick_right"] as ControlStick).Click = (report.Data[baseOffset + 5] & 128) == 128;
                 (State.Controls["stick_left"] as ControlStick).Click = (report.Data[baseOffset + 5] & 64) == 64;
-                (State.Controls["menu"] as ControlButtonPair).Button1 = (report.Data[baseOffset + 5] & 32) == 32;
-                (State.Controls["menu"] as ControlButtonPair).Button0 = (report.Data[baseOffset + 5] & 16) == 16;
-                (State.Controls["bumpers2"] as ControlButtonPair).Button1 = (report.Data[baseOffset + 5] & 8) == 8;
-                (State.Controls["bumpers2"] as ControlButtonPair).Button0 = (report.Data[baseOffset + 5] & 4) == 4;
-                (State.Controls["bumpers"] as ControlButtonPair).Button1 = (report.Data[baseOffset + 5] & 2) == 2;
-                (State.Controls["bumpers"] as ControlButtonPair).Button0 = (report.Data[baseOffset + 5] & 1) == 1;
+                (State.Controls["menu"] as ControlButtonPair).Right = (report.Data[baseOffset + 5] & 32) == 32;
+                (State.Controls["menu"] as ControlButtonPair).Left = (report.Data[baseOffset + 5] & 16) == 16;
+                (State.Controls["bumpers2"] as ControlButtonPair).Right = (report.Data[baseOffset + 5] & 8) == 8;
+                (State.Controls["bumpers2"] as ControlButtonPair).Left = (report.Data[baseOffset + 5] & 4) == 4;
+                (State.Controls["bumpers"] as ControlButtonPair).Right = (report.Data[baseOffset + 5] & 2) == 2;
+                (State.Controls["bumpers"] as ControlButtonPair).Left = (report.Data[baseOffset + 5] & 1) == 1;
 
                 // counter
                 // bld.Append((report.Data[baseOffset + 6] & 0xfc).ToString().PadLeft(3, '0'));
 
                 (State.Controls["home"] as ControlButton).Button0 = (report.Data[baseOffset + 6] & 0x1) == 0x1;
                 (State.Controls["touch_center"] as ControlTouch).Click = (report.Data[baseOffset + 6] & 0x2) == 0x2;
-                (State.Controls["triggers"] as ControlTriggerPair).Analog0 = (float)report.Data[baseOffset + 7] / byte.MaxValue;
-                (State.Controls["triggers"] as ControlTriggerPair).Analog1 = (float)report.Data[baseOffset + 8] / byte.MaxValue;
+                (State.Controls["triggers"] as ControlTriggerPair).L_Analog = (float)report.Data[baseOffset + 7] / byte.MaxValue;
+                (State.Controls["triggers"] as ControlTriggerPair).R_Analog = (float)report.Data[baseOffset + 8] / byte.MaxValue;
 
                 // GyroTimestamp
                 //bld.Append(BitConverter.ToUInt16(report.Data, baseOffset + 9).ToString().PadLeft(5));
