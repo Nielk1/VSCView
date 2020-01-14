@@ -98,15 +98,15 @@ namespace VSCView
 
         const int cornerSize = 10; // you can rename this variable if you like
 
-        Rectangle Top { get { return new Rectangle(0, 0, this.ClientSize.Width, cornerSize); } }
-        Rectangle Left { get { return new Rectangle(0, 0, cornerSize, this.ClientSize.Height); } }
-        Rectangle Bottom { get { return new Rectangle(0, this.ClientSize.Height - cornerSize, this.ClientSize.Width, cornerSize); } }
-        Rectangle Right { get { return new Rectangle(this.ClientSize.Width - cornerSize, 0, cornerSize, this.ClientSize.Height); } }
+        Rectangle TopRect { get { return new Rectangle(0, 0, this.ClientSize.Width, cornerSize); } }
+        Rectangle LeftRect { get { return new Rectangle(0, 0, cornerSize, this.ClientSize.Height); } }
+        Rectangle BottomRect { get { return new Rectangle(0, this.ClientSize.Height - cornerSize, this.ClientSize.Width, cornerSize); } }
+        Rectangle RightRect { get { return new Rectangle(this.ClientSize.Width - cornerSize, 0, cornerSize, this.ClientSize.Height); } }
 
-        Rectangle TopLeft { get { return new Rectangle(0, 0, cornerSize, cornerSize); } }
-        Rectangle TopRight { get { return new Rectangle(this.ClientSize.Width - cornerSize, 0, cornerSize, cornerSize); } }
-        Rectangle BottomLeft { get { return new Rectangle(0, this.ClientSize.Height - cornerSize, cornerSize, cornerSize); } }
-        Rectangle BottomRight { get { return new Rectangle(this.ClientSize.Width - cornerSize, this.ClientSize.Height - cornerSize, cornerSize, cornerSize); } }
+        Rectangle TopLeftRect { get { return new Rectangle(0, 0, cornerSize, cornerSize); } }
+        Rectangle TopRightRect { get { return new Rectangle(this.ClientSize.Width - cornerSize, 0, cornerSize, cornerSize); } }
+        Rectangle BottomLeftRect { get { return new Rectangle(0, this.ClientSize.Height - cornerSize, cornerSize, cornerSize); } }
+        Rectangle BottomRightRect { get { return new Rectangle(this.ClientSize.Width - cornerSize, this.ClientSize.Height - cornerSize, cornerSize, cornerSize); } }
 
         protected override void WndProc(ref Message message)
         {
@@ -116,15 +116,15 @@ namespace VSCView
             {
                 var cursor = this.PointToClient(Cursor.Position);
 
-                if (TopLeft.Contains(cursor)) message.Result = (IntPtr)HTTOPLEFT;
-                else if (TopRight.Contains(cursor)) message.Result = (IntPtr)HTTOPRIGHT;
-                else if (BottomLeft.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMLEFT;
-                else if (BottomRight.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMRIGHT;
+                if (TopLeftRect.Contains(cursor)) message.Result = (IntPtr)HTTOPLEFT;
+                else if (TopRightRect.Contains(cursor)) message.Result = (IntPtr)HTTOPRIGHT;
+                else if (BottomLeftRect.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMLEFT;
+                else if (BottomRightRect.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMRIGHT;
 
-                else if (Top.Contains(cursor)) message.Result = (IntPtr)HTTOP;
-                else if (Left.Contains(cursor)) message.Result = (IntPtr)HTLEFT;
-                else if (Right.Contains(cursor)) message.Result = (IntPtr)HTRIGHT;
-                else if (Bottom.Contains(cursor)) message.Result = (IntPtr)HTBOTTOM;
+                else if (TopRect.Contains(cursor)) message.Result = (IntPtr)HTTOP;
+                else if (LeftRect.Contains(cursor)) message.Result = (IntPtr)HTLEFT;
+                else if (RightRect.Contains(cursor)) message.Result = (IntPtr)HTRIGHT;
+                else if (BottomRect.Contains(cursor)) message.Result = (IntPtr)HTBOTTOM;
             }
         }
         #endregion Resizeing
