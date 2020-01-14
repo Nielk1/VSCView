@@ -123,6 +123,9 @@
     <None Include="themes\steamcontroller\ahmemon\buh-lack\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="themes\steamcontroller\docteurcontroller\gyro.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="themes\steamcontroller\existentialegg\black_stencil\gyro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -132,7 +135,7 @@
     <None Include="themes\steamcontroller\existentialegg\black_stencil\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\docteurcontroller\all.json">
+    <None Include="themes\steamcontroller\docteurcontroller\accel.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\docteurcontroller\nogyro.json">
@@ -261,7 +264,7 @@
     <None Include="themes\steamcontroller\existentialegg\outline_2019\accel-symbol.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\existentialegg\outline_2019\Accel.json">
+    <None Include="themes\steamcontroller\existentialegg\outline_2019\accel.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\existentialegg\outline_2019\gyro-symbol.json">

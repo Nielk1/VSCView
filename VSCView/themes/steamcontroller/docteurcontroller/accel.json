@@ -1,5 +1,5 @@
 {
-    "name": "No Gyro",
+    "name": "Accel",
     "width": 629,
     "height": 605,
     "children": [
@@ -117,6 +117,28 @@
                     "children": [
                         { "type":"pbar", "axisName":"lefttrigger" , "background":"ffff0000", "foreground":"ff000000", "x": -57, "y": 70, "width":108, "height":23, "min":0, "max":255, "direction": "left" },
                         { "type":"pbar", "axisName":"righttrigger", "background":"ffff0000", "foreground":"ff000000", "x":  53, "y": 70, "width":108, "height":23, "min":0, "max":255, "direction": "right" }
+                    ]
+                },
+
+                {
+                    "x":165,
+                    "y":230,
+                    "children": [
+                        {
+                            "type":"basic3d1",
+                            "x": -165,
+                            "y": 16,
+                            "width":130,
+                            "height":98,
+                            "mode": "accel",
+                            "image":"gyro.png",
+                            "shadowl":"gyro_l.png",
+                            "shadowr":"gyro_r.png",
+                            "shadowu":"gyro_u.png",
+                            "shadowd":"gyro_d.png",
+                            "tilttranslatex":55,
+                            "tilttranslatey":40
+                        }
                     ]
                 }
             ]

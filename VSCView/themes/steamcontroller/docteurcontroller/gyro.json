@@ -1,4 +1,5 @@
 {
+    "name": "Gyro",
     "width": 629,
     "height": 605,
     "children": [
@@ -51,7 +52,7 @@
 					
                         { "type":"showhide", "inputName":"lg", "invert":false, "children": [ { "type":"image", "image":"leftgrip.png" ,    "x": -208, "y": -52,  "width":130,   "height":140, "center":true } ] },
                         { "type":"showhide", "inputName":"lt", "invert":false, "children": [ { "type":"image", "image":"LTfull.png" ,      "x": -153, "y": -254, "width":150,   "height":90, "center":true } ] },
-						 { "type":"showhide", "inputName":"lb", "invert":false, "children": [ { "type":"image", "image":"LB.png" ,         "x": -167, "y": -274,  "width":133, "height":63, "center":true } ] },
+						            { "type":"showhide", "inputName":"lb", "invert":false, "children": [ { "type":"image", "image":"LB.png" ,         "x": -167, "y": -274,  "width":133, "height":63, "center":true } ] },
                         { "type":"showhide", "inputName":"rg", "invert":false, "children": [ { "type":"image", "image":"rightgrip.png" ,   "x":  206, "y": -45,  "width":130,   "height":140, "center":true } ] },
                         { "type":"showhide", "inputName":"rt", "invert":false, "children": [ { "type":"image", "image":"RTfull.png" ,      "x":  179, "y": -253, "width":150,   "height":90, "center":true } ] },
                         { "type":"showhide", "inputName":"rb", "invert":false, "children": [ { "type":"image", "image":"RB.png" ,          "x":  162, "y": -275, "width":135,   "height":68, "center":true } ] }
@@ -60,8 +61,8 @@
 
                 { "type":"showhide", "inputName":"rightpadclick", "invert":false, "children": [ { "type":"image", "image":"btn-hapticG2.png", "x":  164.5, "y": -10, "width":155.5, "height":159, "center":true } ] },
                 {
-                    "x": 171,
-                    "y": -23,
+                    "x": 163,
+                    "y": -10,
                     "rot":-15,
                     "children": [
                         {
@@ -86,8 +87,8 @@
 
                 { "type":"showhide", "inputName":"leftpadclick" , "invert":false, "children": [ { "type":"image", "image":"btn-hapticG.png", "x": -168, "y": -13, "width":155, "height":159, "center":true } ] },
                 {
-                    "x": -171,
-                    "y": -23,
+                    "x": -163,
+                    "y": -10,
                     "rot": 15,
                     "children": [
                         {
