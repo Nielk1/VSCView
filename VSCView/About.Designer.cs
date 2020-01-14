@@ -205,7 +205,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 25);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(572, 136);
+            this.tabPage5.Size = new System.Drawing.Size(468, 136);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Themes";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -221,7 +221,7 @@
             this.pnlThemes.Location = new System.Drawing.Point(3, 3);
             this.pnlThemes.Name = "pnlThemes";
             this.pnlThemes.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlThemes.Size = new System.Drawing.Size(566, 130);
+            this.pnlThemes.Size = new System.Drawing.Size(462, 130);
             this.pnlThemes.TabIndex = 0;
             this.pnlThemes.WrapContents = false;
             // 
@@ -232,7 +232,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(572, 136);
+            this.tabPage2.Size = new System.Drawing.Size(468, 136);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "VSCView License";
             // 
@@ -248,7 +248,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(572, 136);
+            this.textBox1.Size = new System.Drawing.Size(468, 136);
             this.textBox1.TabIndex = 35;
             this.textBox1.TabStop = false;
             this.textBox1.Text = resources.GetString("textBox1.Text");
@@ -260,7 +260,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(572, 136);
+            this.tabPage3.Size = new System.Drawing.Size(468, 136);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "HidLibrary License";
             // 
@@ -276,7 +276,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox2.Size = new System.Drawing.Size(572, 136);
+            this.textBox2.Size = new System.Drawing.Size(468, 136);
             this.textBox2.TabIndex = 36;
             this.textBox2.TabStop = false;
             this.textBox2.Text = resources.GetString("textBox2.Text");
@@ -288,7 +288,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(572, 136);
+            this.tabPage4.Size = new System.Drawing.Size(468, 136);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Newtonsoft.Json License";
             // 
@@ -304,7 +304,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox3.Size = new System.Drawing.Size(572, 136);
+            this.textBox3.Size = new System.Drawing.Size(468, 136);
             this.textBox3.TabIndex = 37;
             this.textBox3.TabStop = false;
             this.textBox3.Text = resources.GetString("textBox3.Text");
