@@ -359,15 +359,18 @@ namespace VSCView
 
             if (ui != null)
             {
-                float ratio = Math.Min(1.0f * this.Width / ui.Width, 1.0f * this.Height / ui.Height);
+                float ratioWidth = 1.0f * this.Width / ui.Width;
+                float ratioHeight = 1.0f * this.Height / ui.Height;
+                float ratio = Math.Min(ratioWidth, ratioHeight);
 
-                Matrix preserve = e.Graphics.Transform;
+                //Matrix preserve = e.Graphics.Transform;
 
+                e.Graphics.TranslateTransform(ui.Width * (ratioWidth - ratio) / 2, ui.Height * (ratioHeight - ratio) / 2);
                 e.Graphics.ScaleTransform(ratio, ratio);
 
                 ui.Paint(e.Graphics);
 
-                e.Graphics.Transform = preserve;
+                //e.Graphics.Transform = preserve;
             }
         }
 
