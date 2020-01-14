@@ -276,20 +276,20 @@ namespace ThemeFixer
         {
             switch (inputName.ToLowerInvariant())
             {
-                case "y":             return "quad_right:0";
-                case "b":             return "quad_right:1";
-                case "a":             return "quad_right:2";
-                case "x":             return "quad_right:3";
+                case "y":             return "quad_right:n";
+                case "b":             return "quad_right:e";
+                case "a":             return "quad_right:s";
+                case "x":             return "quad_right:w";
                 case "leftbumper":
-                case "lb":            return "bumpers:0";
+                case "lb":            return "bumpers:l";
                 case "rightbumper":
-                case "rb":            return "bumpers:1";
+                case "rb":            return "bumpers:r";
                 case "leftgrip":
-                case "lg":            return "grip:0";
+                case "lg":            return "grip:l";
                 case "rightgrip":
-                case "rg":            return "grip:1";
-                case "select":        return "menu:0";
-                case "start":         return "menu:1";
+                case "rg":            return "grip:r";
+                case "select":        return "menu:l";
+                case "start":         return "menu:r";
                 case "lefttrigger":
                 case "lt":            return "triggers:stage2_0";
                 case "righttrigger":

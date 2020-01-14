@@ -1,5 +1,5 @@
 {
-  "name": "No Gyro",
+  "name": "Face and Shoulder",
   "width": 180,
   "height": 148,
   "version": 1,
@@ -21,7 +21,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "quad_right:2",
+              "input": "quad_right:s",
               "children": [
                 {
                   "type": "image",
@@ -38,7 +38,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:1",
+              "input": "quad_right:e",
               "children": [
                 {
                   "type": "image",
@@ -55,7 +55,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:3",
+              "input": "quad_right:w",
               "children": [
                 {
                   "type": "image",
@@ -72,7 +72,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:0",
+              "input": "quad_right:n",
               "children": [
                 {
                   "type": "image",
@@ -146,7 +146,7 @@
             },
             {
               "type": "showhide",
-              "input": "menu:1",
+              "input": "menu:r",
               "children": [
                 {
                   "type": "image",
@@ -163,7 +163,7 @@
             },
             {
               "type": "showhide",
-              "input": "menu:0",
+              "input": "menu:l",
               "children": [
                 {
                   "type": "image",
@@ -301,10 +301,10 @@
                   "type": "slider",
                   "x": 0.0,
                   "y": 0.0,
-                  "inputY": "triggers:stage2_0 * 6",
+                  "inputY": "triggers:stage2_0 * 5",
                   "children": [
                     {
-                      "y": -44.0,
+                      "y": -42.0,
                       "rot": 180,
                       "children": [
                         {
@@ -341,10 +341,10 @@
                   "type": "slider",
                   "x": 0.0,
                   "y": 0.0,
-                  "inputY": "triggers:stage2_1 * 6",
+                  "inputY": "triggers:stage2_1 * 5",
                   "children": [
                     {
-                      "y": -44.0,
+                      "y": -42.0,
                       "rot": 180,
                       "children": [
                         {
@@ -368,7 +368,7 @@
 
         {
           "type": "showhide",
-          "input": "bumpers:0",
+          "input": "bumpers:l",
           "y": -72,
           "x": -32,
           "rot": 180,
@@ -387,7 +387,7 @@
         },
         {
           "type": "showhide",
-          "input": "bumpers:1",
+          "input": "bumpers:r",
           "y": -72,
           "x": 32,
           "rot": 180,
@@ -407,7 +407,7 @@
 
         {
           "type": "showhide",
-          "input": "grip:0",
+          "input": "grip:l",
           "y": 38,
           "x": -32,
           "rot": -45,
@@ -426,7 +426,7 @@
         },
         {
           "type": "showhide",
-          "input": "grip:1",
+          "input": "grip:r",
           "y": 38,
           "x": 32,
           "rot": 45,

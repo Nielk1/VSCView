@@ -21,7 +21,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "quad_right:2",
+              "input": "quad_right:s",
               "children": [
                 {
                   "type": "image",
@@ -38,7 +38,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:1",
+              "input": "quad_right:e",
               "children": [
                 {
                   "type": "image",
@@ -55,7 +55,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:3",
+              "input": "quad_right:w",
               "children": [
                 {
                   "type": "image",
@@ -72,7 +72,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:0",
+              "input": "quad_right:n",
               "children": [
                 {
                   "type": "image",
@@ -146,7 +146,7 @@
             },
             {
               "type": "showhide",
-              "input": "menu:1",
+              "input": "menu:r",
               "children": [
                 {
                   "type": "image",
@@ -163,7 +163,7 @@
             },
             {
               "type": "showhide",
-              "input": "menu:0",
+              "input": "menu:l",
               "children": [
                 {
                   "type": "image",

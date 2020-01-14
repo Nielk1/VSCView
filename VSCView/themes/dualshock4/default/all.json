@@ -31,7 +31,7 @@
             },
             {
               "type": "showhide",
-              "input": "triggers:stage2_0 OR bumpers2:0",
+              "input": "triggers:stage2_0 OR bumpers2:l",
               "children": [
                 {
                   "type": "image",
@@ -67,7 +67,7 @@
             },
             {
               "type": "showhide",
-              "input": "triggers:stage2_1 OR bumpers2:1",
+              "input": "triggers:stage2_1 OR bumpers2:r",
               "children": [
                 {
                   "type": "image",
@@ -104,7 +104,7 @@
               "children": [
                 {
                   "type": "showhide",
-                  "input": "quad_right:2",
+                  "input": "quad_right:s",
                   "children": [
                     {
                       "type": "image",
@@ -119,7 +119,7 @@
                 },
                 {
                   "type": "showhide",
-                  "input": "quad_right:1",
+                  "input": "quad_right:e",
                   "children": [
                     {
                       "type": "image",
@@ -134,7 +134,7 @@
                 },
                 {
                   "type": "showhide",
-                  "input": "quad_right:3",
+                  "input": "quad_right:w",
                   "children": [
                     {
                       "type": "image",
@@ -149,7 +149,7 @@
                 },
                 {
                   "type": "showhide",
-                  "input": "quad_right:0",
+                  "input": "quad_right:n",
                   "children": [
                     {
                       "type": "image",
@@ -171,7 +171,7 @@
               "children": [
                 {
                   "type": "showhide",
-                  "input": "quad_left:2",
+                  "input": "quad_left:s",
                   "children": [
                     {
                       "type": "image",
@@ -186,7 +186,7 @@
                 },
                 {
                   "type": "showhide",
-                  "input": "quad_left:1",
+                  "input": "quad_left:e",
                   "children": [
                     {
                       "type": "image",
@@ -201,7 +201,7 @@
                 },
                 {
                   "type": "showhide",
-                  "input": "quad_left:3",
+                  "input": "quad_left:w",
                   "children": [
                     {
                       "type": "image",
@@ -216,7 +216,7 @@
                 },
                 {
                   "type": "showhide",
-                  "input": "quad_left:0",
+                  "input": "quad_left:n",
                   "children": [
                     {
                       "type": "image",
@@ -253,7 +253,7 @@
                 },
                 {
                   "type": "showhide",
-                  "input": "menu:1",
+                  "input": "menu:r",
                   "children": [
                     {
                       "type": "image",
@@ -268,7 +268,7 @@
                 },
                 {
                   "type": "showhide",
-                  "input": "menu:0",
+                  "input": "menu:l",
                   "children": [
                     {
                       "type": "image",
@@ -290,7 +290,7 @@
               "children": [
                 {
                   "type": "showhide",
-                  "input": "bumpers:0",
+                  "input": "bumpers:l",
                   "children": [
                     {
                       "type": "image",
@@ -305,7 +305,7 @@
                 },
                 {
                   "type": "showhide",
-                  "input": "bumpers:1",
+                  "input": "bumpers:r",
                   "children": [
                     {
                       "type": "image",

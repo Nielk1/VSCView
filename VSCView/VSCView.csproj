@@ -90,6 +90,39 @@
     <None Include="themes\steamcontrollerchell\default\nogyro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="themes\steamcontroller\ahmemon\ah_nom_inal\accel.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\ahmemon\ah_nom_inal\gyro.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\ahmemon\ah_nom_inal\nogyro.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\ahmemon\ah_nom_inal\theme.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\ahmemon\buh-lack\accel-symbol.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\ahmemon\buh-lack\Accel.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\ahmemon\buh-lack\base.png.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\ahmemon\buh-lack\gyro-symbol.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\ahmemon\buh-lack\gyro.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\ahmemon\buh-lack\nogyro.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\ahmemon\buh-lack\theme.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="themes\steamcontroller\existentialegg\black_stencil\gyro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -114,7 +147,7 @@
     <None Include="themes\dualshock4\default\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\nielk1\firesale\nogyro.json">
+    <None Include="themes\steamcontroller\nielk1\firesale\faceshoulder.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\nielk1\firesale\faceonly.json">
@@ -503,6 +536,111 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\dualshock4\name.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\base.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\btn-face.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\btn-haptic.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\btn-home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\btn-stick.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\btn-sub.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\btn-trigger.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\gyro.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\gyro_d.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\gyro_l.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\gyro_r.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\gyro_u.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\padheat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\ah_nom_inal\stick.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\base.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\btn-face.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\btn-haptic.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\btn-home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\btn-stick.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\btn-sub.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\btn-trigger.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\gyro-smbl.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\gyro-smbl_d.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\gyro-smbl_l.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\gyro-smbl_r.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\gyro-smbl_u.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\gyro.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\gyro_d.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\gyro_l.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\gyro_r.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\gyro_u.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\padheat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\buh-lack\stick.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\ahmemon\name.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\steamcontroller\default\icon.png">

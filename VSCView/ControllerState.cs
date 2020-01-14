@@ -248,22 +248,22 @@ namespace VSCView
         {
             switch (key)
             {
-                case "0":
+                case "n":
                     if (Direction == EDPadDirection.North) return (T)Convert.ChangeType(1, typeof(T));
                     if (Direction == EDPadDirection.NorthEast) return (T)Convert.ChangeType(1, typeof(T));
                     if (Direction == EDPadDirection.NorthWest) return (T)Convert.ChangeType(1, typeof(T));
                     return default;
-                case "1":
+                case "e":
                     if (Direction == EDPadDirection.East) return (T)Convert.ChangeType(1, typeof(T));
                     if (Direction == EDPadDirection.NorthEast) return (T)Convert.ChangeType(1, typeof(T));
                     if (Direction == EDPadDirection.SouthEast) return (T)Convert.ChangeType(1, typeof(T));
                     return default;
-                case "2":
+                case "s":
                     if (Direction == EDPadDirection.South) return (T)Convert.ChangeType(1, typeof(T));
                     if (Direction == EDPadDirection.SouthEast) return (T)Convert.ChangeType(1, typeof(T));
                     if (Direction == EDPadDirection.SouthWest) return (T)Convert.ChangeType(1, typeof(T));
                     return default;
-                case "3":
+                case "w":
                     if (Direction == EDPadDirection.West) return (T)Convert.ChangeType(1, typeof(T));
                     if (Direction == EDPadDirection.NorthWest) return (T)Convert.ChangeType(1, typeof(T));
                     if (Direction == EDPadDirection.SouthWest) return (T)Convert.ChangeType(1, typeof(T));
@@ -301,13 +301,13 @@ namespace VSCView
         {
             switch (key)
             {
-                case "0":
+                case "n":
                     return (T)Convert.ChangeType(Button0, typeof(T));
-                case "1":
+                case "e":
                     return (T)Convert.ChangeType(Button1, typeof(T));
-                case "2":
+                case "s":
                     return (T)Convert.ChangeType(Button2, typeof(T));
-                case "3":
+                case "w":
                     return (T)Convert.ChangeType(Button3, typeof(T));
                 default:
                     return default;
@@ -392,9 +392,9 @@ namespace VSCView
         {
             switch (key)
             {
-                case "0":
+                case "l":
                     return (T)Convert.ChangeType(Button0, typeof(T));
-                case "1":
+                case "r":
                     return (T)Convert.ChangeType(Button1, typeof(T));
                 default:
                     return default;
