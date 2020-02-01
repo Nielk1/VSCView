@@ -150,6 +150,21 @@
     <None Include="themes\dualshock4\default\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="themes\steamcontroller\Ishmobile\lineart\Line-black-background.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\Ishmobile\lineart\Line-blue-background.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\Ishmobile\lineart\Line-only.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\Ishmobile\lineart\Line-white-background.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\Ishmobile\lineart\theme.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="themes\steamcontroller\nielk1\firesale\faceshoulder.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -647,6 +662,201 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\steamcontroller\default\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\base-black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\base-blue.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\base-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\base.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-a-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-a.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-b-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-b.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-face-black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-face-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-face.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-haptic.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-home-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-leftbumper-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-leftbumper.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-leftgrip-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-leftgrip.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-leftpad-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-leftpad.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-lefttrigger-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-lefttrigger.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-rightbumper-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-rightbumper.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-rightgrip-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-rightgrip.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-rightpad-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-rightpad.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-righttrigger-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-righttrigger.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-select-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-select.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-start-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-start.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-stick-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-stick.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-x-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-y-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\btn-y.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl-black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl-blue.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl2_d.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl2_l.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl2_r.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl2_u.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl3_d.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl3_l.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl3_r.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl3_u.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl_d.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl_l.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl_r.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\gyro-smbl_u.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\padheat-black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\padheat-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\padheat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\stick-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\lineart\stick.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\Ishmobile\name.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\steamcontroller\nielk1\firesale\icon.png">
