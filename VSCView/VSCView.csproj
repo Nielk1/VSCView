@@ -150,16 +150,16 @@
     <None Include="themes\dualshock4\default\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\Ishmobile\lineart\Line-black-background.json">
+    <None Include="themes\steamcontroller\Ishmobile\lineart\line-black-background.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\Ishmobile\lineart\Line-blue-background.json">
+    <None Include="themes\steamcontroller\Ishmobile\lineart\line-blue-background.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\Ishmobile\lineart\Line-only.json">
+    <None Include="themes\steamcontroller\Ishmobile\lineart\line-only.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="themes\steamcontroller\Ishmobile\lineart\Line-white-background.json">
+    <None Include="themes\steamcontroller\Ishmobile\lineart\line-white-background.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontroller\Ishmobile\lineart\theme.json">
