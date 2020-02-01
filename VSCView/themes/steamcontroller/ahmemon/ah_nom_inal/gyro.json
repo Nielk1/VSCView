@@ -98,8 +98,8 @@
           "type": "slider",
           "x": -70.0,
           "y": 82.0,
-          "inputX": "stick_left:x * 16.3835",
-          "inputY": "stick_left:y * 16.3835",
+          "inputX": "stick_left:x * 16",
+          "inputY": "stick_left:y * 16",
           "children": [
             {
               "type": "image",
@@ -287,8 +287,8 @@
               "width": 36.0,
               "height": 36.0,
               "input": "touch_right:0:touch",
-              "inputX": "touch_right:0:x * 72.0874",
-              "inputY": "touch_right:0:y * 72.0874",
+              "inputX": "touch_right:0:x * 72",
+              "inputY": "touch_right:0:y * 72",
               "length": 30,
               "children": [
                 {
@@ -338,8 +338,8 @@
               "width": 36.0,
               "height": 36.0,
               "input": "touch_left:0:touch",
-              "inputX": "touch_left:0:x * 72.0874",
-              "inputY": "touch_left:0:y * 72.0874",
+              "inputX": "touch_left:0:x * 72",
+              "inputY": "touch_left:0:y * 72",
               "length": 30,
               "children": [
                 {

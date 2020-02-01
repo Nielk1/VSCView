@@ -1,9 +1,6 @@
 {
   "name": "ahNOMinal 2",
-	"authors": [
-    {
-      "name": "ahMEmon",
-      "url": "https://www.twitch.tv/ahmemon"
-    }
-	]
+  "authors": [
+    { "name": "ahMEmon", "url": "https://www.twitch.tv/ahmemon" }
+  ]
 }

@@ -98,8 +98,8 @@
           "type": "slider",
           "x": -72.0,
           "y": 67.0,
-          "inputX": "stick_left:x * 16.3835",
-          "inputY": "stick_left:y * 16.3835",
+          "inputX": "stick_left:x * 16",
+          "inputY": "stick_left:y * 16",
           "children": [
             {
               "type": "image",
@@ -378,15 +378,15 @@
           "x": -80.0,
           "y": 60.0,
           "center": true,
-          "inputX": "(stick_left:x * 16.3835) + (touch_left:0:touch * -90) + (touch_left:0:x * 55.7039)",
-          "inputY": "(stick_left:y * 16.3835) + (touch_left:0:touch * -90) + (touch_left:0:y * 55.7039)",
+          "inputX": "(stick_left:x * 16) + (touch_left:0:touch * -90) + (touch_left:0:x * 55.7039)",
+          "inputY": "(stick_left:y * 16) + (touch_left:0:touch * -90) + (touch_left:0:y * 55.7039)",
           "children": [
             {
               "type": "slider",
               "x": 0.0,
               "y": 0.0,
               "center": true,
-              "inputR": "-25 + 0.1 * ((stick_left:x * 16.3835) + (touch_left:0:touch * -90) + (touch_left:0:x * 55.7039))",
+              "inputR": "-25 + 0.1 * ((stick_left:x * 16) + (touch_left:0:touch * -90) + (touch_left:0:x * 55.7039))",
               "children": [
                 {
                   "type": "image",

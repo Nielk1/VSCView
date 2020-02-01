@@ -319,8 +319,8 @@
               "width": 36.0,
               "height": 36.0,
               "input": "touch_right:0:touch",
-              "inputX": "touch_right:0:x * 72.0874",
-              "inputY": "touch_right:0:y * 72.0874",
+              "inputX": "touch_right:0:x * 72",
+              "inputY": "touch_right:0:y * 72",
               "length": 30,
               "children": [
                 {
@@ -369,8 +369,8 @@
               "width": 36.0,
               "height": 36.0,
               "input": "touch_left:0:touch",
-              "inputX": "touch_left:0:x * 72.0874",
-              "inputY": "touch_left:0:y * 72.0874",
+              "inputX": "touch_left:0:x * 72",
+              "inputY": "touch_left:0:y * 72",
               "length": 30,
               "children": [
                 {
