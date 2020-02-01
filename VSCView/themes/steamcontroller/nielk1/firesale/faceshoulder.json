@@ -7,13 +7,13 @@
     {
       "type": "image",
       "image": "base.png",
-      "winform.smoothing": "None",
-      "winform.interpolation": "NearestNeighbor",
       "x": 90.0,
       "y": 84.0,
       "width": 180.0,
       "height": 128.0,
       "center": true,
+      "winform.smoothing": "None",
+      "winform.interpolation": "NearestNeighbor",
       "children": [
         {
           "x": 21.5,
@@ -26,13 +26,13 @@
                 {
                   "type": "image",
                   "image": "btn-a.png",
-                  "winform.smoothing": "None",
-                  "winform.interpolation": "NearestNeighbor",
                   "x": 0.0,
                   "y": 10.0,
                   "width": 11.0,
                   "height": 11.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor"
                 }
               ]
             },
@@ -43,13 +43,13 @@
                 {
                   "type": "image",
                   "image": "btn-b.png",
-                  "winform.smoothing": "None",
-                  "winform.interpolation": "NearestNeighbor",
                   "x": 10.0,
                   "y": 0.0,
                   "width": 11.0,
                   "height": 11.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor"
                 }
               ]
             },
@@ -60,13 +60,13 @@
                 {
                   "type": "image",
                   "image": "btn-x.png",
-                  "winform.smoothing": "None",
-                  "winform.interpolation": "NearestNeighbor",
                   "x": -10.0,
                   "y": 0.0,
                   "width": 11.0,
                   "height": 11.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor"
                 }
               ]
             },
@@ -77,13 +77,13 @@
                 {
                   "type": "image",
                   "image": "btn-y.png",
-                  "winform.smoothing": "None",
-                  "winform.interpolation": "NearestNeighbor",
                   "x": 0.0,
                   "y": -10.0,
                   "width": 11.0,
                   "height": 11.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor"
                 }
               ]
             }
@@ -114,12 +114,12 @@
             {
               "type": "image",
               "image": "stick.png",
-              "winform.interpolation": "NearestNeighbor",
               "x": 0.0,
               "y": 0.0,
               "width": 22.0,
               "height": 22.0,
-              "center": true
+              "center": true,
+              "winform.interpolation": "NearestNeighbor"
             }
           ]
         },
@@ -134,13 +134,13 @@
                 {
                   "type": "image",
                   "image": "btn-home.png",
-                  "winform.smoothing": "None",
-                  "winform.interpolation": "NearestNeighbor",
                   "x": 0.0,
                   "y": -2.0,
                   "width": 15.0,
                   "height": 15.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor"
                 }
               ]
             },
@@ -151,13 +151,13 @@
                 {
                   "type": "image",
                   "image": "btn-sub-right.png",
-                  "winform.smoothing": "None",
-                  "winform.interpolation": "NearestNeighbor",
                   "x": 15.0,
                   "y": 0.0,
                   "width": 11.0,
                   "height": 7.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor"
                 }
               ]
             },
@@ -168,13 +168,13 @@
                 {
                   "type": "image",
                   "image": "btn-sub-left.png",
-                  "winform.smoothing": "None",
-                  "winform.interpolation": "NearestNeighbor",
                   "x": -15.0,
                   "y": 0.0,
                   "width": 11.0,
                   "height": 7.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "None",
+                  "winform.interpolation": "NearestNeighbor"
                 }
               ]
             }
@@ -218,13 +218,13 @@
                     {
                       "type": "image",
                       "image": "star2.png",
-                      "winform.smoothing": "None",
-                      "winform.interpolation": "Low",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 15.0,
                       "height": 15.0,
-                      "center": true
+                      "center": true,
+                      "winform.smoothing": "None",
+                      "winform.interpolation": "Low"
                     }
                   ]
                 }
@@ -270,13 +270,13 @@
                     {
                       "type": "image",
                       "image": "star2.png",
-                      "winform.smoothing": "None",
-                      "winform.interpolation": "Low",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 15.0,
                       "height": 15.0,
-                      "center": true
+                      "center": true,
+                      "winform.smoothing": "None",
+                      "winform.interpolation": "Low"
                     }
                   ]
                 }
@@ -284,7 +284,6 @@
             }
           ]
         },
-
         {
           "type": "showhide",
           "x": -50.0,
@@ -305,17 +304,17 @@
                   "children": [
                     {
                       "y": -42.0,
-                      "rot": 180,
+                      "rot": 180.0,
                       "children": [
                         {
                           "type": "image",
                           "image": "indicator-arrow.png",
-                          "winform.interpolation": "NearestNeighbor",
                           "x": 0.0,
                           "y": 0.0,
                           "width": 19.0,
                           "height": 11.0,
-                          "center": true
+                          "center": true,
+                          "winform.interpolation": "NearestNeighbor"
                         }
                       ]
                     }
@@ -345,17 +344,17 @@
                   "children": [
                     {
                       "y": -42.0,
-                      "rot": 180,
+                      "rot": 180.0,
                       "children": [
                         {
                           "type": "image",
                           "image": "indicator-arrow.png",
-                          "winform.interpolation": "NearestNeighbor",
                           "x": 0.0,
                           "y": 0.0,
                           "width": 19.0,
                           "height": 11.0,
-                          "center": true
+                          "center": true,
+                          "winform.interpolation": "NearestNeighbor"
                         }
                       ]
                     }
@@ -365,81 +364,79 @@
             }
           ]
         },
-
         {
           "type": "showhide",
+          "x": -32.0,
+          "y": -72.0,
+          "rot": 180.0,
           "input": "bumpers:l",
-          "y": -72,
-          "x": -32,
-          "rot": 180,
           "children": [
             {
               "type": "image",
               "image": "indicator-arrow.png",
-              "winform.interpolation": "NearestNeighbor",
               "x": 0.0,
               "y": 0.0,
               "width": 19.0,
               "height": 11.0,
-              "center": true
+              "center": true,
+              "winform.interpolation": "NearestNeighbor"
             }
           ]
         },
         {
           "type": "showhide",
+          "x": 32.0,
+          "y": -72.0,
+          "rot": 180.0,
           "input": "bumpers:r",
-          "y": -72,
-          "x": 32,
-          "rot": 180,
           "children": [
             {
               "type": "image",
               "image": "indicator-arrow.png",
-              "winform.interpolation": "NearestNeighbor",
               "x": 0.0,
               "y": 0.0,
               "width": 19.0,
               "height": 11.0,
-              "center": true
+              "center": true,
+              "winform.interpolation": "NearestNeighbor"
             }
           ]
         },
-
         {
           "type": "showhide",
+          "x": -32.0,
+          "y": 38.0,
+          "rot": -45.0,
           "input": "grip:l",
-          "y": 38,
-          "x": -32,
-          "rot": -45,
           "children": [
             {
               "type": "image",
               "image": "indicator-arrow.png",
-              "winform.interpolation": "NearestNeighbor",
               "x": 0.0,
               "y": 0.0,
               "width": 19.0,
               "height": 11.0,
-              "center": true
+              "center": true,
+              "winform.interpolation": "NearestNeighbor"
             }
           ]
         },
         {
           "type": "showhide",
+          "x": 32.0,
+          "y": 38.0,
+          "rot": 45.0,
           "input": "grip:r",
-          "y": 38,
-          "x": 32,
-          "rot": 45,
           "children": [
             {
               "type": "image",
               "image": "indicator-arrow.png",
-              "winform.interpolation": "NearestNeighbor",
               "x": 0.0,
               "y": 0.0,
               "width": 19.0,
               "height": 11.0,
-              "center": true
+              "center": true,
+              "winform.interpolation": "NearestNeighbor"
             }
           ]
         }

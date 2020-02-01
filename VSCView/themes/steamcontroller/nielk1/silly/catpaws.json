@@ -343,13 +343,13 @@
               "y": 0.0,
               "width": 120.0,
               "height": 15.0,
+              "center": true,
               "input": "triggers:l:analog",
               "direction": "right",
-              "min": 0.0,
-              "max": 1.0,
+              "min": "0.0",
+              "max": "1.0",
               "foreground": "ff00d2f8",
-              "background": "ff007894",
-              "center": true
+              "background": "ff007894"
             },
             {
               "type": "pbar",
@@ -357,13 +357,13 @@
               "y": 0.0,
               "width": 120.0,
               "height": 15.0,
+              "center": true,
               "input": "triggers:r:analog",
               "direction": "left",
-              "min": 0.0,
-              "max": 1.0,
+              "min": "0.0",
+              "max": "1.0",
               "foreground": "ff00d2f8",
-              "background": "ff007894",
-              "center": true
+              "background": "ff007894"
             }
           ]
         }
@@ -375,18 +375,18 @@
       "children": [
         {
           "type": "slider",
-          "x": -80,
-          "y": 60,
+          "x": -80.0,
+          "y": 60.0,
           "center": true,
           "inputX": "(stick_left:x * 16.3835) + (touch_left:0:touch * -90) + (touch_left:0:x * 55.7039)",
           "inputY": "(stick_left:y * 16.3835) + (touch_left:0:touch * -90) + (touch_left:0:y * 55.7039)",
           "children": [
             {
               "type": "slider",
-              "x": 0,
-              "y": 0,
-              "inputR": "-25 + 0.1 * ((stick_left:x * 16.3835) + (touch_left:0:touch * -90) + (touch_left:0:x * 55.7039))",
+              "x": 0.0,
+              "y": 0.0,
               "center": true,
+              "inputR": "-25 + 0.1 * ((stick_left:x * 16.3835) + (touch_left:0:touch * -90) + (touch_left:0:x * 55.7039))",
               "children": [
                 {
                   "type": "image",
@@ -403,18 +403,18 @@
         },
         {
           "type": "slider",
-          "x": 70,
-          "y": 50,
+          "x": 70.0,
+          "y": 50.0,
+          "center": true,
           "inputX": "(((quad_right:e * 15) + (quad_right:w * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:0:touch * 100) + (touch_right:0:x * 55.7039) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:0:touch * -25)",
           "inputY": "(((quad_right:s * 15) + (quad_right:n * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:0:touch * -80) + (touch_right:0:y * 55.7039) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:0:touch * 25)",
-          "center": true,
           "children": [
             {
               "type": "slider",
-              "x": 0,
-              "y": 0,
-              "inputR": "25 + 0.1 * ((((quad_right:e * 15) + (quad_right:w * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:0:touch * 100) + (touch_right:0:x * 55.7039) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:0:touch * -25))",
+              "x": 0.0,
+              "y": 0.0,
               "center": true,
+              "inputR": "25 + 0.1 * ((((quad_right:e * 15) + (quad_right:w * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:0:touch * 100) + (touch_right:0:x * 55.7039) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:0:touch * -25))",
               "children": [
                 {
                   "type": "image",
