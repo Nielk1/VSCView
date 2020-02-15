@@ -9,17 +9,17 @@ Themes
   * Default by Nielk1
 * ﻿Steam Controller
   * Default by Nielk1
-  * ahNOMinal 2 by ahMEmon
-  * Buh-Lack by ahMEmon
-  * Docteur Controller by Docteur Controller
-  * Black Stencil by ExistentialEgg
-  * Outline 2018 by ExistentialEgg
-  * Outline 2019 by ExistentialEgg
-  * Grey Minimal by CriticalComposer
-  * Line Art by Ishmobile
+  * ahNOMinal 2 by [ahMEmon](https://www.twitch.tv/ahmemon)
+  * Buh-Lack by [ahMEmon](https://www.twitch.tv/ahmemon)
+  * Docteur Controller by [Docteur Controller](https://www.youtube.com/channel/UC1GoAgop-6tbftsU4qtpSOQ)
+  * Black Stencil by [ExistentialEgg](https://www.youtube.com/user/ExistentialEgg)
+  * Outline 2018 by [ExistentialEgg](https://www.youtube.com/user/ExistentialEgg)
+  * Outline 2019 by [ExistentialEgg](https://www.youtube.com/user/ExistentialEgg)
+  * Grey Minimal by [CriticalComposer](https://www.youtube.com/c/criticalcomposer)
+  * Line Art by [Ishmobile](https://www.youtube.com/channel/UCTAPOuAcWv9JGdiQsVVSxkQ)
   * Silly/Cat Paws by Nielk1
   * Fire Sale by Nielk1
-  * White Cerberus by 8BitCerberus
+  * White Cerberus by [8BitCerberus](https://github.com/8BitCerberus/vscview-themes)
 * ﻿Steam Controller Chell
   * Default by Nielk1
 
