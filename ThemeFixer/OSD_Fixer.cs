@@ -205,7 +205,7 @@ namespace ThemeFixer
                     {
                         if (invert.HasValue && invert.Value)
                         {
-                            calc = @"!" + inputName;
+                            calc = @"not tobool(" + inputName + ")";
                         }
                         else
                         {

@@ -211,15 +211,24 @@ Flee Functions
 --------------
 * `max(params float[])` - Return maximum number
 * `min(params float[])` - Return minimum number
-* `tobool(object)` - Convert almost anything to a bool, null implies false
+* `tobool(object)` - Convert almost anything to a bool, null implies false, needed in some cases because all variables are numbers by default
 * `math.function()` - any function from [.net's math library](https://docs.microsoft.com/en-us/dotnet/api/system.math?view=netframework-4.6.2)
-
 
 Examples
 --------
 ```json
 {
   "input": "math.abs(stick_left:x) > 0.1"
+}
+```
+```json
+{
+  "input": "not tobool(trigges:l:stage2)"
+}
+```
+```json
+{
+  "input": "not (trigges:l:stage2 > 0)"
 }
 ```
 ```json
