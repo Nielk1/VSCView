@@ -1,14 +1,14 @@
 {
-  "name": "Face Only",
+  "name": "Accurate Face and Shoulder",
   "width": 180,
-  "height": 128,
+  "height": 148,
   "version": 1,
   "children": [
     {
       "type": "image",
-      "image": "base.png",
+      "image": "base2.png",
       "x": 90.0,
-      "y": 64.0,
+      "y": 84.0,
       "width": 180.0,
       "height": 128.0,
       "center": true,
@@ -113,7 +113,7 @@
             },
             {
               "type": "image",
-              "image": "stick.png",
+              "image": "stick2.png",
               "x": 0.0,
               "y": 0.0,
               "width": 22.0,
@@ -281,6 +281,162 @@
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "x": -50.0,
+          "y": -30.0,
+          "input": "triggers:l:analog > 0",
+          "children": [
+            {
+              "type": "slider",
+              "x": 0.0,
+              "y": 0.0,
+              "inputR": "triggers:l:analog * -35 - 10",
+              "children": [
+                {
+                  "type": "slider",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "inputY": "triggers:l:stage2 * 5",
+                  "children": [
+                    {
+                      "y": -42.0,
+                      "rot": 180.0,
+                      "children": [
+                        {
+                          "type": "image",
+                          "image": "indicator-arrow.png",
+                          "x": 0.0,
+                          "y": 0.0,
+                          "width": 19.0,
+                          "height": 11.0,
+                          "center": true,
+                          "winform.interpolation": "NearestNeighbor"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "x": 50.0,
+          "y": -30.0,
+          "input": "triggers:r:analog > 0",
+          "children": [
+            {
+              "type": "slider",
+              "x": 0.0,
+              "y": 0.0,
+              "inputR": "triggers:r:analog * 35 + 10",
+              "children": [
+                {
+                  "type": "slider",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "inputY": "triggers:r:stage2 * 5",
+                  "children": [
+                    {
+                      "y": -42.0,
+                      "rot": 180.0,
+                      "children": [
+                        {
+                          "type": "image",
+                          "image": "indicator-arrow.png",
+                          "x": 0.0,
+                          "y": 0.0,
+                          "width": 19.0,
+                          "height": 11.0,
+                          "center": true,
+                          "winform.interpolation": "NearestNeighbor"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "x": -32.0,
+          "y": -72.0,
+          "rot": 180.0,
+          "input": "bumpers:l",
+          "children": [
+            {
+              "type": "image",
+              "image": "indicator-arrow.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 19.0,
+              "height": 11.0,
+              "center": true,
+              "winform.interpolation": "NearestNeighbor"
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "x": 32.0,
+          "y": -72.0,
+          "rot": 180.0,
+          "input": "bumpers:r",
+          "children": [
+            {
+              "type": "image",
+              "image": "indicator-arrow.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 19.0,
+              "height": 11.0,
+              "center": true,
+              "winform.interpolation": "NearestNeighbor"
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "x": -32.0,
+          "y": 38.0,
+          "rot": -45.0,
+          "input": "grip:l",
+          "children": [
+            {
+              "type": "image",
+              "image": "indicator-arrow.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 19.0,
+              "height": 11.0,
+              "center": true,
+              "winform.interpolation": "NearestNeighbor"
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "x": 32.0,
+          "y": 38.0,
+          "rot": 45.0,
+          "input": "grip:r",
+          "children": [
+            {
+              "type": "image",
+              "image": "indicator-arrow.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 19.0,
+              "height": 11.0,
+              "center": true,
+              "winform.interpolation": "NearestNeighbor"
             }
           ]
         }

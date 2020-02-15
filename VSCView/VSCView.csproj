@@ -177,6 +177,12 @@
     <None Include="themes\steamcontroller\ishmobile\lineart\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="themes\steamcontroller\nielk1\firesale\accuratefaceonly.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\nielk1\firesale\accuratefaceshoulder.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="themes\steamcontroller\nielk1\firesale\faceshoulder.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -860,10 +866,16 @@
     <Content Include="themes\steamcontroller\ishmobile\name.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="themes\steamcontroller\nielk1\firesale\base2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="themes\steamcontroller\nielk1\firesale\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\steamcontroller\nielk1\firesale\indicator-arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\nielk1\firesale\stick2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\steamcontroller\nielk1\name.txt">

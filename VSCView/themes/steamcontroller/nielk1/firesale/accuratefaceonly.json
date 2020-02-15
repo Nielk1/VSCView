@@ -1,12 +1,12 @@
 {
-  "name": "Face Only",
+  "name": "Accurate Face Only",
   "width": 180,
   "height": 128,
   "version": 1,
   "children": [
     {
       "type": "image",
-      "image": "base.png",
+      "image": "base2.png",
       "x": 90.0,
       "y": 64.0,
       "width": 180.0,
@@ -113,7 +113,7 @@
             },
             {
               "type": "image",
-              "image": "stick.png",
+              "image": "stick2.png",
               "x": 0.0,
               "y": 0.0,
               "width": 22.0,
