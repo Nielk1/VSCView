@@ -1,10 +1,11 @@
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](YOUR_EMAIL_CODE)
+
 # VSCView
 OSD for Steam Controller
 
 The HID Library fork with crude edits you'll need to compile this project from source: https://github.com/Nielk1/HidLibrary
 
-Themes
-------
+## Themes
 * ﻿DualShock 4
   * Default by Nielk1
 * ﻿Steam Controller
@@ -23,8 +24,7 @@ Themes
 * ﻿Steam Controller Chell
   * Default by Nielk1
 
-Element Properties
-------------------
+## Element Properties
 * *root*
   * name - string
   * height - number
@@ -118,8 +118,7 @@ Element Properties
 	  * "accel"
 	  * "gyro"
 
-Controller Parts
-----------------
+## Controller Parts
 * ﻿DualShock 4
   * `"quad_left"` = ControlDPad()
   * `"quad_right"` = ControlButtonQuad()
@@ -157,8 +156,7 @@ Controller Parts
   * `"grid_center"` = ControlButtonGrid(2, 2)
   * `"motion"` = ControlMotion()
 
-Flee Variables
---------------
+## Flee Variables
 * ControlTrigger
   * `analog` - 0.0 to 1.0 value
   * `stage2` - Stage2 0/1
@@ -207,35 +205,39 @@ Flee Variables
   * `orientation:y` - OrientationY
   * `orientation:z` - OrientationZ
 
-Flee Functions
---------------
+## Flee Functions
 * `max(params float[])` - Return maximum number
 * `min(params float[])` - Return minimum number
 * `tobool(object)` - Convert almost anything to a bool, null implies false, needed in some cases because all variables are numbers by default
 * `math.function()` - any function from [.net's math library](https://docs.microsoft.com/en-us/dotnet/api/system.math?view=netframework-4.6.2)
 
-Examples
---------
+## Examples
+### value range change for 0/1 true/false
 ```json
 {
   "input": "math.abs(stick_left:x) > 0.1"
 }
 ```
+### invert variable
+(this is needed because all controller state variables are numbers)
 ```json
 {
   "input": "not tobool(trigges:l:stage2)"
 }
 ```
+### invert variable (alterate)
 ```json
 {
   "input": "not (trigges:l:stage2 > 0)"
 }
 ```
+### function call
 ```json
 {
   "input": "max(triggers:l:analog, triggers:r:analog)"
 }
 ```
+### math library function call
 ```json
 {
   "inputX": "(((quad_right:e * 15) + (quad_right:w * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:0:touch * 100) + (touch_right:0:x * 55) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:0:touch * -25)",
