@@ -229,13 +229,13 @@ The HID Library fork with crude edits you'll need to compile this project from s
   "input": "not (trigges:l:stage2 > 0)"
 }
 ```
-### function call
+### math library function call
 ```json
 {
-  "input": "max(triggers:l:analog, triggers:r:analog)"
+  "input": "math.max(triggers:l:analog, triggers:r:analog)"
 }
 ```
-### math library function call
+### complex formula with function calls
 ```json
 {
   "inputX": "(((quad_right:e * 15) + (quad_right:w * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:0:touch * 100) + (touch_right:0:x * 55) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:0:touch * -25)",
