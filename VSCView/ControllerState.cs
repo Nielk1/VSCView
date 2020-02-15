@@ -216,10 +216,10 @@ namespace VSCView
     }
     public class ControlButtonQuad : IControl
     {
-        public bool Button0 { get; set; }
-        public bool Button1 { get; set; }
-        public bool Button2 { get; set; }
-        public bool Button3 { get; set; }
+        public bool ButtonN { get; set; }
+        public bool ButtonE { get; set; }
+        public bool ButtonS { get; set; }
+        public bool ButtonW { get; set; }
 
         public ControlButtonQuad()
         {
@@ -230,13 +230,13 @@ namespace VSCView
             switch (key)
             {
                 case "n":
-                    return (T)Convert.ChangeType(Button0, typeof(T));
+                    return (T)Convert.ChangeType(ButtonN, typeof(T));
                 case "e":
-                    return (T)Convert.ChangeType(Button1, typeof(T));
+                    return (T)Convert.ChangeType(ButtonE, typeof(T));
                 case "s":
-                    return (T)Convert.ChangeType(Button2, typeof(T));
+                    return (T)Convert.ChangeType(ButtonS, typeof(T));
                 case "w":
-                    return (T)Convert.ChangeType(Button3, typeof(T));
+                    return (T)Convert.ChangeType(ButtonW, typeof(T));
                 default:
                     return default;
             }
@@ -250,10 +250,10 @@ namespace VSCView
         {
             ControlButtonQuad newData = new ControlButtonQuad();
 
-            newData.Button0 = this.Button0;
-            newData.Button1 = this.Button1;
-            newData.Button2 = this.Button2;
-            newData.Button3 = this.Button3;
+            newData.ButtonN = this.ButtonN;
+            newData.ButtonE = this.ButtonE;
+            newData.ButtonS = this.ButtonS;
+            newData.ButtonW = this.ButtonW;
 
             return newData;
         }

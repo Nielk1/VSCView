@@ -291,6 +291,7 @@ namespace VSCView
                 VariableCollection variables = NumericContext.Variables;
 
                 NumericContext.Imports.AddType(typeof(CustomFleeFunctions));
+                NumericContext.Imports.AddType(typeof(Math), "math");
 
                 // Hook up the required events
                 variables.ResolveVariableType += new EventHandler<ResolveVariableTypeEventArgs>(variables_ResolveVariableTypeNumeric);

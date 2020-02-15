@@ -339,10 +339,10 @@ namespace VSCView
                 (State.Controls["stick_right"] as ControlStick).X = (report.Data[baseOffset + 2] - 128) / 128f;
                 (State.Controls["stick_right"] as ControlStick).Y = (report.Data[baseOffset + 3] - 128) / 128f;
 
-                (State.Controls["quad_right"] as ControlButtonQuad).Button0 = (report.Data[baseOffset + 4] & 128) == 128;
-                (State.Controls["quad_right"] as ControlButtonQuad).Button1 = (report.Data[baseOffset + 4] & 64) == 64;
-                (State.Controls["quad_right"] as ControlButtonQuad).Button2 = (report.Data[baseOffset + 4] & 32) == 32;
-                (State.Controls["quad_right"] as ControlButtonQuad).Button3 = (report.Data[baseOffset + 4] & 16) == 16;
+                (State.Controls["quad_right"] as ControlButtonQuad).ButtonN = (report.Data[baseOffset + 4] & 128) == 128;
+                (State.Controls["quad_right"] as ControlButtonQuad).ButtonE = (report.Data[baseOffset + 4] & 64) == 64;
+                (State.Controls["quad_right"] as ControlButtonQuad).ButtonS = (report.Data[baseOffset + 4] & 32) == 32;
+                (State.Controls["quad_right"] as ControlButtonQuad).ButtonW = (report.Data[baseOffset + 4] & 16) == 16;
 
                 switch ((report.Data[baseOffset + 4] & 0x0f))
                 {

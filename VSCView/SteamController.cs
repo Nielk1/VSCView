@@ -813,10 +813,10 @@ namespace VSCView
             //OldState = State; // shouldn't this be a clone?
             OldState = (ControllerState)State.Clone(); // shouldn't this be a clone?
 
-            (State.Controls["quad_right"] as ControlButtonQuad).Button2 = (RawState.ulButtons[0] & 128) == 128; // A - S SE
-            (State.Controls["quad_right"] as ControlButtonQuad).Button3 = (RawState.ulButtons[0] & 64) == 64;   // X - W SW
-            (State.Controls["quad_right"] as ControlButtonQuad).Button1 = (RawState.ulButtons[0] & 32) == 32;   // B - E NE
-            (State.Controls["quad_right"] as ControlButtonQuad).Button0 = (RawState.ulButtons[0] & 16) == 16;   // Y - N NW
+            (State.Controls["quad_right"] as ControlButtonQuad).ButtonS = (RawState.ulButtons[0] & 128) == 128; // A - S SE
+            (State.Controls["quad_right"] as ControlButtonQuad).ButtonW = (RawState.ulButtons[0] & 64) == 64;   // X - W SW
+            (State.Controls["quad_right"] as ControlButtonQuad).ButtonE = (RawState.ulButtons[0] & 32) == 32;   // B - E NE
+            (State.Controls["quad_right"] as ControlButtonQuad).ButtonN = (RawState.ulButtons[0] & 16) == 16;   // Y - N NW
             (State.Controls["bumpers"] as ControlButtonPair).Left = (RawState.ulButtons[0] & 8) == 8;
             (State.Controls["bumpers"] as ControlButtonPair).Right = (RawState.ulButtons[0] & 4) == 4;
             (State.Controls["triggers"] as ControlTriggerPair).L_Stage2 = (RawState.ulButtons[0] & 2) == 2;
