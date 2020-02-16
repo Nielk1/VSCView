@@ -17,7 +17,7 @@ The HID Library fork with crude edits you'll need to compile this project from s
   * Grey Minimal by [CriticalComposer](https://www.youtube.com/c/criticalcomposer)
   * Line Art by [Ishmobile](https://www.youtube.com/channel/UCTAPOuAcWv9JGdiQsVVSxkQ)
   * Silly/Cat Paws by Nielk1
-  * Fire Sale by Nielk1
+  * Fire Sale by Nielk1, [Twenty-Six Twelve](https://www.reddit.com/user/Twenty-Six_Twelve/)
   * White Cerberus by [8BitCerberus](https://github.com/8BitCerberus/vscview-themes)
 * ﻿Steam Controller Chell
   * Default by Nielk1
