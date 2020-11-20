@@ -1,10 +1,10 @@
-﻿using HidLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using VSCView.HidLibraryShim;
 
 namespace VSCView
 {
@@ -161,37 +161,49 @@ namespace VSCView
 
         public async void Identify()
         {
-            HidReport report;
+            byte[] report;
             int offset = 0;
             if (ConnectionType == EConnectionType.Bluetooth)
             {
-                report = new HidReport(78)
+                report = new byte[78]
                 {
-                    ReportId = 0x11,
-                    Data = new byte[] { 0xC0, 0x20, 0x05, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x0f, 0x0f }
+                    0x11, 0xC0, 0x20, 0x05, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00,
+                    0x00, 0x0f, 0x0f,
+
+                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                    0x00, 0x00, 0x00, 0x00, 0x00
                 };
                 offset = 2;
             }
             else
             {
-                report = new HidReport(32)
+                report = new byte[32]
                 {
-                    ReportId = 0x05,
-                    Data = new byte[] { 0x05, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x0f, 0x0f }
+                    0x05, 0x05, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x0f,
+                    0x0f,
+
+                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                    0x00,
                 };
             }
 
             if (_device.WriteReport(report))
             {
                 Thread.Sleep(250);
-                report.Data[offset + 0] = 0x01;
-                report.Data[offset + 3] = 0x00;
-                report.Data[offset + 4] = 0x00;
+                report[1 + offset + 0] = 0x01;
+                report[1 + offset + 3] = 0x00;
+                report[1 + offset + 4] = 0x00;
                 _device.WriteReport(report);
                 Thread.Sleep(2000);
-                report.Data[offset + 0] = 0x04;
-                report.Data[offset + 8] = 0x01;
-                report.Data[offset + 9] = 0x01;
+                report[1 + offset + 0] = 0x04;
+                report[1 + offset + 8] = 0x01;
+                report[1 + offset + 9] = 0x01;
                 _device.WriteReport(report);
             }
         }
@@ -255,8 +267,8 @@ namespace VSCView
 
                         string Serial = null;
 
-                        if (_device.Attributes.VendorId == VendorId
-                        && (_device.Attributes.ProductId == ProductIdWired || _device.Attributes.ProductId == ProductIdWiredV2 || _device.Attributes.ProductId == ProductIdDongle))
+                        if (_device.VendorId == VendorId
+                        && (_device.ProductId == ProductIdWired || _device.ProductId == ProductIdWiredV2 || _device.ProductId == ProductIdDongle))
                         {
                             try
                             {
@@ -269,14 +281,10 @@ namespace VSCView
                         }
                         if (string.IsNullOrWhiteSpace(Serial))
                         {
-                            byte[] SerialNumberBytes;
-                            if (_device.ReadSerialNumber(out SerialNumberBytes)) // DUALSHOCK®4 USB Wireless Adaptor
+                            string SerialNumber = _device.ReadSerialNumber(); // DUALSHOCK®4 USB Wireless Adaptor
+                            if (!string.IsNullOrWhiteSpace(SerialNumber))
                             {
-                                string SerialNumber = System.Text.Encoding.Unicode.GetString(SerialNumberBytes)?.Trim('\0');
-                                if (!string.IsNullOrWhiteSpace(SerialNumber))
-                                {
-                                    Serial = SerialNumber;
-                                }
+                                Serial = SerialNumber;
                             }
                         }
                         if (string.IsNullOrWhiteSpace(Serial))
@@ -288,7 +296,7 @@ namespace VSCView
                     {
                         string retVal = "Sony DUALSHOCK®4 Controller";
 
-                        switch (_device.Attributes.ProductId)
+                        switch (_device.ProductId)
                         {
                             case ProductIdWired:
                                 retVal = $"Sony DUALSHOCK®4 Controller V1";
@@ -300,8 +308,8 @@ namespace VSCView
 
                         string Serial = null;
 
-                        if (_device.Attributes.VendorId == VendorId
-                        && (_device.Attributes.ProductId == ProductIdWired || _device.Attributes.ProductId == ProductIdWiredV2 || _device.Attributes.ProductId == ProductIdDongle))
+                        if (_device.VendorId == VendorId
+                        && (_device.ProductId == ProductIdWired || _device.ProductId == ProductIdWiredV2 || _device.ProductId == ProductIdDongle))
                         {
                             try
                             {
@@ -313,14 +321,10 @@ namespace VSCView
                         }
                         if (string.IsNullOrWhiteSpace(Serial))
                         {
-                            byte[] SerialNumberBytes;
-                            if (_device.ReadSerialNumber(out SerialNumberBytes)) // DUALSHOCK®4 USB Wireless Adaptor
+                            string SerialNumber = _device.ReadSerialNumber(); // DUALSHOCK®4 USB Wireless Adaptor
+                            if (!string.IsNullOrWhiteSpace(SerialNumber))
                             {
-                                string SerialNumber = System.Text.Encoding.Unicode.GetString(SerialNumberBytes)?.Trim('\0');
-                                if (!string.IsNullOrWhiteSpace(SerialNumber))
-                                {
-                                    Serial = SerialNumber;
-                                }
+                                Serial = SerialNumber;
                             }
                         }
                         if (string.IsNullOrWhiteSpace(Serial))
@@ -332,7 +336,7 @@ namespace VSCView
         }
 
         bool DisconnectedBit = false;
-        private void OnReport(HidReport report)
+        private void OnReport(byte[] reportData, int reportID)
         {
             if (Initalized < 1) return;
 
@@ -346,22 +350,22 @@ namespace VSCView
                 if (ConnectionType == EConnectionType.Bluetooth)
                 {
                     baseOffset = 2;
-                    HasStateData = (report.Data[1] & 0x80) == 0x80;
+                    HasStateData = (reportData[1] & 0x80) == 0x80;
                 }
 
                 if (HasStateData)
                 {
-                    (State.Controls["stick_left"] as ControlStick).X = (report.Data[baseOffset + 0] - 128) / 128f;
-                    (State.Controls["stick_left"] as ControlStick).Y = (report.Data[baseOffset + 1] - 128) / 128f;
-                    (State.Controls["stick_right"] as ControlStick).X = (report.Data[baseOffset + 2] - 128) / 128f;
-                    (State.Controls["stick_right"] as ControlStick).Y = (report.Data[baseOffset + 3] - 128) / 128f;
+                    (State.Controls["stick_left"] as ControlStick).X = (reportData[baseOffset + 0] - 128) / 128f;
+                    (State.Controls["stick_left"] as ControlStick).Y = (reportData[baseOffset + 1] - 128) / 128f;
+                    (State.Controls["stick_right"] as ControlStick).X = (reportData[baseOffset + 2] - 128) / 128f;
+                    (State.Controls["stick_right"] as ControlStick).Y = (reportData[baseOffset + 3] - 128) / 128f;
 
-                    (State.Controls["quad_right"] as ControlButtonQuad).ButtonN = (report.Data[baseOffset + 4] & 128) == 128;
-                    (State.Controls["quad_right"] as ControlButtonQuad).ButtonE = (report.Data[baseOffset + 4] & 64) == 64;
-                    (State.Controls["quad_right"] as ControlButtonQuad).ButtonS = (report.Data[baseOffset + 4] & 32) == 32;
-                    (State.Controls["quad_right"] as ControlButtonQuad).ButtonW = (report.Data[baseOffset + 4] & 16) == 16;
+                    (State.Controls["quad_right"] as ControlButtonQuad).ButtonN = (reportData[baseOffset + 4] & 128) == 128;
+                    (State.Controls["quad_right"] as ControlButtonQuad).ButtonE = (reportData[baseOffset + 4] & 64) == 64;
+                    (State.Controls["quad_right"] as ControlButtonQuad).ButtonS = (reportData[baseOffset + 4] & 32) == 32;
+                    (State.Controls["quad_right"] as ControlButtonQuad).ButtonW = (reportData[baseOffset + 4] & 16) == 16;
 
-                    switch ((report.Data[baseOffset + 4] & 0x0f))
+                    switch ((reportData[baseOffset + 4] & 0x0f))
                     {
                         case 0: (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.North; break;
                         case 1: (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.NorthEast; break;
@@ -374,79 +378,79 @@ namespace VSCView
                         default: (State.Controls["quad_left"] as ControlDPad).Direction = EDPadDirection.None; break;
                     }
 
-                    (State.Controls["stick_right"] as ControlStick).Click = (report.Data[baseOffset + 5] & 128) == 128;
-                    (State.Controls["stick_left"] as ControlStick).Click = (report.Data[baseOffset + 5] & 64) == 64;
-                    (State.Controls["menu"] as ControlButtonPair).Right = (report.Data[baseOffset + 5] & 32) == 32;
-                    (State.Controls["menu"] as ControlButtonPair).Left = (report.Data[baseOffset + 5] & 16) == 16;
-                    (State.Controls["bumpers2"] as ControlButtonPair).Right = (report.Data[baseOffset + 5] & 8) == 8;
-                    (State.Controls["bumpers2"] as ControlButtonPair).Left = (report.Data[baseOffset + 5] & 4) == 4;
-                    (State.Controls["bumpers"] as ControlButtonPair).Right = (report.Data[baseOffset + 5] & 2) == 2;
-                    (State.Controls["bumpers"] as ControlButtonPair).Left = (report.Data[baseOffset + 5] & 1) == 1;
+                    (State.Controls["stick_right"] as ControlStick).Click = (reportData[baseOffset + 5] & 128) == 128;
+                    (State.Controls["stick_left"] as ControlStick).Click = (reportData[baseOffset + 5] & 64) == 64;
+                    (State.Controls["menu"] as ControlButtonPair).Right = (reportData[baseOffset + 5] & 32) == 32;
+                    (State.Controls["menu"] as ControlButtonPair).Left = (reportData[baseOffset + 5] & 16) == 16;
+                    (State.Controls["bumpers2"] as ControlButtonPair).Right = (reportData[baseOffset + 5] & 8) == 8;
+                    (State.Controls["bumpers2"] as ControlButtonPair).Left = (reportData[baseOffset + 5] & 4) == 4;
+                    (State.Controls["bumpers"] as ControlButtonPair).Right = (reportData[baseOffset + 5] & 2) == 2;
+                    (State.Controls["bumpers"] as ControlButtonPair).Left = (reportData[baseOffset + 5] & 1) == 1;
 
                     // counter
-                    // bld.Append((report.Data[baseOffset + 6] & 0xfc).ToString().PadLeft(3, '0'));
+                    // bld.Append((reportData[baseOffset + 6] & 0xfc).ToString().PadLeft(3, '0'));
 
-                    (State.Controls["home"] as ControlButton).Button0 = (report.Data[baseOffset + 6] & 0x1) == 0x1;
-                    (State.Controls["touch_center"] as ControlTouch).Click = (report.Data[baseOffset + 6] & 0x2) == 0x2;
-                    (State.Controls["triggers"] as ControlTriggerPair).L_Analog = (float)report.Data[baseOffset + 7] / byte.MaxValue;
-                    (State.Controls["triggers"] as ControlTriggerPair).R_Analog = (float)report.Data[baseOffset + 8] / byte.MaxValue;
+                    (State.Controls["home"] as ControlButton).Button0 = (reportData[baseOffset + 6] & 0x1) == 0x1;
+                    (State.Controls["touch_center"] as ControlTouch).Click = (reportData[baseOffset + 6] & 0x2) == 0x2;
+                    (State.Controls["triggers"] as ControlTriggerPair).L_Analog = (float)reportData[baseOffset + 7] / byte.MaxValue;
+                    (State.Controls["triggers"] as ControlTriggerPair).R_Analog = (float)reportData[baseOffset + 8] / byte.MaxValue;
 
                     // GyroTimestamp
-                    //bld.Append(BitConverter.ToUInt16(report.Data, baseOffset + 9).ToString().PadLeft(5));
+                    //bld.Append(BitConverter.ToUInt16(reportData, baseOffset + 9).ToString().PadLeft(5));
                     // FIX: (timestamp * 16) / 3
 
                     // Battery Power Level
-                    //bld.Append(report.Data[baseOffset + 11].ToString("X2") + "   ");
+                    //bld.Append(reportData[baseOffset + 11].ToString("X2") + "   ");
 
-                    (State.Controls["motion"] as ControlMotion).AngularVelocityX = BitConverter.ToInt16(report.Data, baseOffset + 12);
-                    (State.Controls["motion"] as ControlMotion).AngularVelocityZ = BitConverter.ToInt16(report.Data, baseOffset + 14);
-                    (State.Controls["motion"] as ControlMotion).AngularVelocityY = BitConverter.ToInt16(report.Data, baseOffset + 16);
-                    (State.Controls["motion"] as ControlMotion).AccelerometerX = BitConverter.ToInt16(report.Data, baseOffset + 18);
-                    (State.Controls["motion"] as ControlMotion).AccelerometerY = BitConverter.ToInt16(report.Data, baseOffset + 20);
-                    (State.Controls["motion"] as ControlMotion).AccelerometerZ = BitConverter.ToInt16(report.Data, baseOffset + 22);
-
-                    // ??
-                    // bld.Append(report.Data[baseOffset + 27].ToString("X2"));
-
-                    //State.Inputs.? = (report.Data[baseOffset + 29] & 128) == 128;
-                    //State.Inputs.Mic = (report.Data[baseOffset + 29] & 64) == 64;
-                    //State.Inputs.Headphone = (report.Data[baseOffset + 29] & 32) == 32;
-                    //State.Inputs.PowerCable = (report.Data[baseOffset + 29] * 16) == 16;
-
-                    //int bat = report.Data[baseOffset + 29] & 0x0f;
-                    //bool plugged = (report.Data[baseOffset + 29] & 0x10) == 0x10;
+                    (State.Controls["motion"] as ControlMotion).AngularVelocityX = BitConverter.ToInt16(reportData, baseOffset + 12);
+                    (State.Controls["motion"] as ControlMotion).AngularVelocityZ = BitConverter.ToInt16(reportData, baseOffset + 14);
+                    (State.Controls["motion"] as ControlMotion).AngularVelocityY = BitConverter.ToInt16(reportData, baseOffset + 16);
+                    (State.Controls["motion"] as ControlMotion).AccelerometerX = BitConverter.ToInt16(reportData, baseOffset + 18);
+                    (State.Controls["motion"] as ControlMotion).AccelerometerY = BitConverter.ToInt16(reportData, baseOffset + 20);
+                    (State.Controls["motion"] as ControlMotion).AccelerometerZ = BitConverter.ToInt16(reportData, baseOffset + 22);
 
                     // ??
-                    // bld.Append(report.Data[baseOffset + 30].ToString("X2"));
-                    // bld.Append(report.Data[baseOffset + 31].ToString("X2") + " ");
+                    // bld.Append(reportData[baseOffset + 27].ToString("X2"));
 
-                    bool DisconnectedFlag = (report.Data[baseOffset + 30] & 0x04) == 0x04;
+                    //State.Inputs.? = (reportData[baseOffset + 29] & 128) == 128;
+                    //State.Inputs.Mic = (reportData[baseOffset + 29] & 64) == 64;
+                    //State.Inputs.Headphone = (reportData[baseOffset + 29] & 32) == 32;
+                    //State.Inputs.PowerCable = (reportData[baseOffset + 29] * 16) == 16;
+
+                    //int bat = reportData[baseOffset + 29] & 0x0f;
+                    //bool plugged = (reportData[baseOffset + 29] & 0x10) == 0x10;
+
+                    // ??
+                    // bld.Append(reportData[baseOffset + 30].ToString("X2"));
+                    // bld.Append(reportData[baseOffset + 31].ToString("X2") + " ");
+
+                    bool DisconnectedFlag = (reportData[baseOffset + 30] & 0x04) == 0x04;
                     if (DisconnectedFlag != DisconnectedBit)
                     {
                         DisconnectedBit = DisconnectedFlag;
                         ControllerNameUpdated?.Invoke();
                     }
 
-                    int TouchDataCount = report.Data[baseOffset + 32];
+                    int TouchDataCount = reportData[baseOffset + 32];
 
                     for (int FingerCounter = 0; FingerCounter < TouchDataCount; FingerCounter++)
                     {
-                        byte touch_timestamp = report.Data[baseOffset + 33 + (FingerCounter * 9)]; // Touch Pad Counter
+                        byte touch_timestamp = reportData[baseOffset + 33 + (FingerCounter * 9)]; // Touch Pad Counter
                                                                                                    //DateTime tmp_now = DateTime.Now;
 
-                        bool Finger1 = (report.Data[baseOffset + 34 + (FingerCounter * 9)] & 0x80) != 0x80;
-                        byte Finger1Index = (byte)(report.Data[baseOffset + 34 + (FingerCounter * 9)] & 0x7f);
-                        int F1X = report.Data[baseOffset + 35 + (FingerCounter * 9)]
-                                               | ((report.Data[baseOffset + 36 + (FingerCounter * 9)] & 0xF) << 8);
-                        int F1Y = ((report.Data[baseOffset + 36 + (FingerCounter * 9)] & 0xF0) >> 4)
-                                                | (report.Data[baseOffset + 37 + (FingerCounter * 9)] << 4);
+                        bool Finger1 = (reportData[baseOffset + 34 + (FingerCounter * 9)] & 0x80) != 0x80;
+                        byte Finger1Index = (byte)(reportData[baseOffset + 34 + (FingerCounter * 9)] & 0x7f);
+                        int F1X = reportData[baseOffset + 35 + (FingerCounter * 9)]
+                                               | ((reportData[baseOffset + 36 + (FingerCounter * 9)] & 0xF) << 8);
+                        int F1Y = ((reportData[baseOffset + 36 + (FingerCounter * 9)] & 0xF0) >> 4)
+                                                | (reportData[baseOffset + 37 + (FingerCounter * 9)] << 4);
 
-                        bool Finger2 = (report.Data[baseOffset + 38 + (FingerCounter * 9)] & 0x80) != 0x80;
-                        byte Finger2Index = (byte)(report.Data[baseOffset + 38 + (FingerCounter * 9)] & 0x7f);
-                        int F2X = report.Data[baseOffset + 39 + (FingerCounter * 9)]
-                                               | ((report.Data[baseOffset + 40 + (FingerCounter * 9)] & 0xF) << 8);
-                        int F2Y = ((report.Data[baseOffset + 40 + (FingerCounter * 9)] & 0xF0) >> 4)
-                                                | (report.Data[baseOffset + 41 + (FingerCounter * 9)] << 4);
+                        bool Finger2 = (reportData[baseOffset + 38 + (FingerCounter * 9)] & 0x80) != 0x80;
+                        byte Finger2Index = (byte)(reportData[baseOffset + 38 + (FingerCounter * 9)] & 0x7f);
+                        int F2X = reportData[baseOffset + 39 + (FingerCounter * 9)]
+                                               | ((reportData[baseOffset + 40 + (FingerCounter * 9)] & 0xF) << 8);
+                        int F2Y = ((reportData[baseOffset + 40 + (FingerCounter * 9)] & 0xF0) >> 4)
+                                                | (reportData[baseOffset + 41 + (FingerCounter * 9)] << 4);
 
                         byte TimeDelta = touch_last_frame ? GetOverflowedDelta(last_touch_timestamp, touch_timestamp) : (byte)0;
 
@@ -534,7 +538,7 @@ namespace VSCView
                     string devicePath = _device.DevicePath.ToString();
 
                     EConnectionType ConType = EConnectionType.Unknown;
-                    switch (_device.Attributes.ProductId)
+                    switch (_device.ProductId)
                     {
                         case DS4Controller.ProductIdWired:
                         case DS4Controller.ProductIdWiredV2:

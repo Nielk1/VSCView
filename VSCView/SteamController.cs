@@ -1,10 +1,10 @@
-﻿using HidLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using VSCView.HidLibraryShim;
 
 namespace VSCView
 {
@@ -436,12 +436,12 @@ namespace VSCView
             return retVal;
         }
 
-        private void OnReport(HidReport report)
+        private void OnReport(byte[] reportData, int reportID)
         {
             if (Initalized < 2) return;
 
             // If we happen to receive any keyboard or mouse reports just skip them and keep reading
-            if (report.ReportId == k_nKeyboardReportNumber || report.ReportId == k_nMouseReportNumber)
+            if (reportID == k_nKeyboardReportNumber || reportID == k_nMouseReportNumber)
                 return;
 
             if (0 == Interlocked.Exchange(ref reportUsageLock, 1))
@@ -454,9 +454,9 @@ namespace VSCView
                     // report ID here is 3, do check what it is for the other connection types
                     case EConnectionType.Bluetooth:
                         {
-                            //Console.WriteLine($"Unknown Packet {report.Data.Length}\t{BitConverter.ToString(report.Data)}");
+                            //Console.WriteLine($"Unknown Packet {reportData.Length}\t{BitConverter.ToString(reportData)}");
 
-                            byte ucHeader = report.Data[0];
+                            byte ucHeader = reportData[0];
                             if ((ucHeader & k_nSegmentHasDataFlag) != k_nSegmentHasDataFlag)
                                 return; // steam itself actually asserts in this case
 
@@ -474,7 +474,7 @@ namespace VSCView
 
                             {
                                 int nLength = k_nMaxSegmentSize - 1;
-                                Array.Copy(report.Data, 1, m_rgubBuffer, m_unCurrentMsgIndex, nLength);
+                                Array.Copy(reportData, 1, m_rgubBuffer, m_unCurrentMsgIndex, nLength);
                                 m_unCurrentMsgIndex += nLength;
                                 ++m_unNextSegmentNumber;
                             }
@@ -594,11 +594,11 @@ namespace VSCView
                                                     pBuf += sizeof(Int16) + sizeof(Int16) + sizeof(Int16) + sizeof(Int16);
                                                 }
 
-                                                //Console.WriteLine($"Good Packet {report.ReportId}\t{BitConverter.ToString(m_rgubBuffer)}");
+                                                //Console.WriteLine($"Good Packet {reportID}\t{BitConverter.ToString(m_rgubBuffer)}");
                                             }
                                             catch
                                             {
-                                                //Console.WriteLine($"Error Packet {report.ReportId}\t{BitConverter.ToString(m_rgubBuffer)}");
+                                                //Console.WriteLine($"Error Packet {reportID}\t{BitConverter.ToString(m_rgubBuffer)}");
                                             }
 
                                             ProcessStateBytes();
@@ -607,7 +607,7 @@ namespace VSCView
                                     case EBLEPacketReportNums.BLEReportStatus:
                                         break;
                                     default:
-                                        Console.WriteLine($"Unknown Packet {report.ReportId}\t{BitConverter.ToString(m_rgubBuffer)}");
+                                        Console.WriteLine($"Unknown Packet {reportID}\t{BitConverter.ToString(m_rgubBuffer)}");
                                         break;
                                 }
 
@@ -617,10 +617,10 @@ namespace VSCView
                         break;
                     default:
                         {
-                            byte Unknown1 = report.Data[0]; // always 0x01?
-                            byte Unknown2 = report.Data[1]; // always 0x00?
-                            VSCEventType EventType = (VSCEventType)report.Data[2];
-                            //report.Data[3] // length
+                            byte Unknown1 = reportData[0]; // always 0x01?
+                            byte Unknown2 = reportData[1]; // always 0x00?
+                            VSCEventType EventType = (VSCEventType)reportData[2];
+                            //reportData[3] // length
 
                             switch (EventType)
                             {
@@ -629,9 +629,9 @@ namespace VSCView
                                 case VSCEventType.CONTROL_UPDATE:
                                     {
 
-                                        UInt32 PacketIndex = BitConverter.ToUInt32(report.Data, 4);
+                                        UInt32 PacketIndex = BitConverter.ToUInt32(reportData, 4);
 
-                                        Array.Copy(report.Data, 8 + 0, RawState.ulButtons, 0, 3);
+                                        Array.Copy(reportData, 8 + 0, RawState.ulButtons, 0, 3);
 
                                         bool LeftAnalogMultiplexMode = (RawState.ulButtons[2] & 128) == 128;
                                         bool LeftStickClick = (RawState.ulButtons[2] & 64) == 64;
@@ -643,15 +643,15 @@ namespace VSCView
                                         bool ThumbOrLeftPadPress = (RawState.ulButtons[2] & 2) == 2; // what is this even for?
                                         (State.Controls["grip"] as ControlButtonPair).Right = (RawState.ulButtons[2] & 1) == 1;
 
-                                        RawState.sTriggerL = report.Data[8 + 3];
-                                        RawState.sTriggerR = report.Data[8 + 4];
+                                        RawState.sTriggerL = reportData[8 + 3];
+                                        RawState.sTriggerR = reportData[8 + 4];
 
                                         if (LeftAnalogMultiplexMode)
                                         {
                                             if (LeftPadTouch)
                                             {
-                                                int X = BitConverter.ToInt16(report.Data, 8 + 8);
-                                                int Y = BitConverter.ToInt16(report.Data, 8 + 10);
+                                                int X = BitConverter.ToInt16(reportData, 8 + 8);
+                                                int Y = BitConverter.ToInt16(reportData, 8 + 10);
 
                                                 RotateXY(-PadAngle, ref X, ref Y);
 
@@ -662,16 +662,16 @@ namespace VSCView
                                             }
                                             else
                                             {
-                                                RawState.sLeftStickX = BitConverter.ToInt16(report.Data, 8 + 8);
-                                                RawState.sLeftStickY = BitConverter.ToInt16(report.Data, 8 + 10);
+                                                RawState.sLeftStickX = BitConverter.ToInt16(reportData, 8 + 8);
+                                                RawState.sLeftStickY = BitConverter.ToInt16(reportData, 8 + 10);
                                             }
                                         }
                                         else
                                         {
                                             if (LeftPadTouch)
                                             {
-                                                int X = BitConverter.ToInt16(report.Data, 8 + 8);
-                                                int Y = BitConverter.ToInt16(report.Data, 8 + 10);
+                                                int X = BitConverter.ToInt16(reportData, 8 + 8);
+                                                int Y = BitConverter.ToInt16(reportData, 8 + 10);
 
                                                 RotateXY(-PadAngle, ref X, ref Y);
 
@@ -684,8 +684,8 @@ namespace VSCView
                                                 RawState.sLeftPadX = 0;
                                                 RawState.sLeftPadY = 0;
 
-                                                RawState.sLeftStickX = BitConverter.ToInt16(report.Data, 8 + 8);
-                                                RawState.sLeftStickY = BitConverter.ToInt16(report.Data, 8 + 10);
+                                                RawState.sLeftStickX = BitConverter.ToInt16(reportData, 8 + 8);
+                                                RawState.sLeftStickY = BitConverter.ToInt16(reportData, 8 + 10);
                                             }
 
                                             RawState.LeftTouchChange = true;
@@ -695,8 +695,8 @@ namespace VSCView
 
                                         //if (RightPadTouch) // we're trying to fix the pad jumping to center by not sending new coords if the pad is not touched
                                         {
-                                            int X = BitConverter.ToInt16(report.Data, 8 + 12);
-                                            int Y = BitConverter.ToInt16(report.Data, 8 + 14);
+                                            int X = BitConverter.ToInt16(reportData, 8 + 12);
+                                            int Y = BitConverter.ToInt16(reportData, 8 + 14);
 
                                             RotateXY(PadAngle, ref X, ref Y);
 
@@ -706,16 +706,16 @@ namespace VSCView
 
                                         //RawState.RightTouchChange = true;
 
-                                        RawState.sAccelX = BitConverter.ToInt16(report.Data, 8 + 20);
-                                        RawState.sAccelY = BitConverter.ToInt16(report.Data, 8 + 22);
-                                        RawState.sAccelZ = BitConverter.ToInt16(report.Data, 8 + 24);
-                                        RawState.sGyroX = BitConverter.ToInt16(report.Data, 8 + 26);
-                                        RawState.sGyroY = BitConverter.ToInt16(report.Data, 8 + 28);
-                                        RawState.sGyroZ = BitConverter.ToInt16(report.Data, 8 + 30);
-                                        RawState.sGyroQuatW = BitConverter.ToInt16(report.Data, 8 + 32);
-                                        RawState.sGyroQuatX = BitConverter.ToInt16(report.Data, 8 + 34);
-                                        RawState.sGyroQuatY = BitConverter.ToInt16(report.Data, 8 + 36);
-                                        RawState.sGyroQuatZ = BitConverter.ToInt16(report.Data, 8 + 38);
+                                        RawState.sAccelX = BitConverter.ToInt16(reportData, 8 + 20);
+                                        RawState.sAccelY = BitConverter.ToInt16(reportData, 8 + 22);
+                                        RawState.sAccelZ = BitConverter.ToInt16(reportData, 8 + 24);
+                                        RawState.sGyroX = BitConverter.ToInt16(reportData, 8 + 26);
+                                        RawState.sGyroY = BitConverter.ToInt16(reportData, 8 + 28);
+                                        RawState.sGyroZ = BitConverter.ToInt16(reportData, 8 + 30);
+                                        RawState.sGyroQuatW = BitConverter.ToInt16(reportData, 8 + 32);
+                                        RawState.sGyroQuatX = BitConverter.ToInt16(reportData, 8 + 34);
+                                        RawState.sGyroQuatY = BitConverter.ToInt16(reportData, 8 + 36);
+                                        RawState.sGyroQuatZ = BitConverter.ToInt16(reportData, 8 + 38);
 
                                         ProcessStateBytes();
 
@@ -727,10 +727,10 @@ namespace VSCView
 
                                 case VSCEventType.CONNECTION_DETAIL:
                                     {
-                                        //report.Data[3] // 0x01?
+                                        //reportData[3] // 0x01?
 
                                         // Connection detail. 0x01 for disconnect, 0x02 for connect, 0x03 for pairing request.
-                                        ConnectionState ConnectionStateV = (ConnectionState)report.Data[4];
+                                        ConnectionState ConnectionStateV = (ConnectionState)reportData[4];
 
                                         switch(ConnectionStateV)
                                         {
@@ -749,21 +749,21 @@ namespace VSCView
 
                                 case VSCEventType.BATTERY_UPDATE:
                                     {
-                                        //report.Data[3] // 0x0B?
+                                        //reportData[3] // 0x0B?
 
-                                        UInt32 PacketIndex = BitConverter.ToUInt32(report.Data, 4);
+                                        UInt32 PacketIndex = BitConverter.ToUInt32(reportData, 4);
 
                                         // only works if controller is configured to send this data
 
                                         // millivolts
-                                        UInt16 BatteryVoltage = BitConverter.ToUInt16(report.Data, 8);
-                                        //BitConverter.ToUInt16(report.Data, 10); // UNKNOWN, stuck at 100
+                                        UInt16 BatteryVoltage = BitConverter.ToUInt16(reportData, 8);
+                                        //BitConverter.ToUInt16(reportData, 10); // UNKNOWN, stuck at 100
                                     }
                                     break;
 
                                 default:
                                     {
-                                        Console.WriteLine($"Unknown Packet Type {(int)EventType:D3} of length {report.Data.Length}\t{BitConverter.ToString(report.Data)}");
+                                        Console.WriteLine($"Unknown Packet Type {(int)EventType:D3} of length {reportData.Length}\t{BitConverter.ToString(reportData)}");
                                     }
                                     break;
                             }
@@ -971,7 +971,7 @@ namespace VSCView
 
                     EConnectionType ConType = EConnectionType.Unknown;
                     SteamController.EControllerType CtrlType = SteamController.EControllerType.ReleaseV1;
-                    switch (_device.Attributes.ProductId)
+                    switch (_device.ProductId)
                     {
                         case SteamController.ProductIdBT:
                             if (!devicePath.Contains("col03")) continue; // skip anything that isn't the controller's custom HID device
