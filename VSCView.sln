@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HidLibrary", "..\HidLibrary
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeFixer", "ThemeFixer\ThemeFixer.csproj", "{FB709B19-87C4-4A37-BCF2-975D24B76AF0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HidSharp", "Deps\HIDSharp\HidSharp\HidSharp.csproj", "{0DB86674-2A7B-4BDC-93C1-3F7DC771426C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deps", "Deps", "{47ACFC99-D687-416D-9008-DDF7CB513815}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +31,16 @@ Global
 		{FB709B19-87C4-4A37-BCF2-975D24B76AF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB709B19-87C4-4A37-BCF2-975D24B76AF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB709B19-87C4-4A37-BCF2-975D24B76AF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DB86674-2A7B-4BDC-93C1-3F7DC771426C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DB86674-2A7B-4BDC-93C1-3F7DC771426C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DB86674-2A7B-4BDC-93C1-3F7DC771426C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DB86674-2A7B-4BDC-93C1-3F7DC771426C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0DB86674-2A7B-4BDC-93C1-3F7DC771426C} = {47ACFC99-D687-416D-9008-DDF7CB513815}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DC3B117E-47DB-4553-8101-4ECBC70B1A48}

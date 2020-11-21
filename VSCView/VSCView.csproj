@@ -40,11 +40,8 @@
     <Reference Include="Flee.Net45, Version=1.0.0.0, Culture=neutral, PublicKeyToken=951a102ce2413032, processorArchitecture=MSIL">
       <HintPath>..\packages\Flee.1.2.2\lib\net45\Flee.Net45.dll</HintPath>
     </Reference>
-    <Reference Include="HidSharp, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HidSharp.2.1.0\lib\net35\HidSharp.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -497,6 +494,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Deps\HIDSharp\HidSharp\HidSharp.csproj">
+      <Project>{0db86674-2a7b-4bdc-93c1-3f7dc771426c}</Project>
+      <Name>HidSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ThemeFixer\ThemeFixer.csproj">
       <Project>{fb709b19-87c4-4a37-bcf2-975d24b76af0}</Project>
       <Name>ThemeFixer</Name>
