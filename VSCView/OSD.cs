@@ -526,7 +526,7 @@ namespace VSCView
                 }
                 catch(Exception ex)
                 {
-                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"\r\n{ex}");
+                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"");
                 }
             }
 
@@ -633,7 +633,7 @@ namespace VSCView
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to compile dynamic formula \"{CalcX}\"\r\n{ex}");
+                    Console.WriteLine($"Failed to compile dynamic formula \"{CalcX}\"");
                 }
             }
 
@@ -645,7 +645,7 @@ namespace VSCView
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to compile dynamic formula \"{CalcY}\"\r\n{ex}");
+                    Console.WriteLine($"Failed to compile dynamic formula \"{CalcY}\"");
                 }
             }
 
@@ -657,7 +657,7 @@ namespace VSCView
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to compile dynamic formula \"{CalcR}\"\r\n{ex}");
+                    Console.WriteLine($"Failed to compile dynamic formula \"{CalcR}\"");
                 }
             }
 
@@ -772,7 +772,7 @@ namespace VSCView
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"\r\n{ex}");
+                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"");
                 }
             }
 
@@ -949,7 +949,7 @@ namespace VSCView
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"\r\n{ex}");
+                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"");
                 }
                 try
                 {
@@ -957,7 +957,7 @@ namespace VSCView
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to compile dynamic formula \"{MinCalc}\"\r\n{ex}");
+                    Console.WriteLine($"Failed to compile dynamic formula \"{MinCalc}\"");
                 }
                 try
                 {
@@ -965,7 +965,7 @@ namespace VSCView
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to compile dynamic formula \"{MaxCalc}\"\r\n{ex}");
+                    Console.WriteLine($"Failed to compile dynamic formula \"{MaxCalc}\"");
                 }
             }
 
@@ -1133,7 +1133,7 @@ namespace VSCView
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"\r\n{ex}");
+                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"");
                 }
                 try
                 {
@@ -1141,7 +1141,7 @@ namespace VSCView
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"\r\n{ex}");
+                    Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"");
                 }
                 try
                 {
@@ -1149,7 +1149,7 @@ namespace VSCView
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to compile dynamic formula \"{MinCalc}\"\r\n{ex}");
+                    Console.WriteLine($"Failed to compile dynamic formula \"{MinCalc}\"");
                 }
                 try
                 {
@@ -1157,7 +1157,7 @@ namespace VSCView
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to compile dynamic formula \"{MaxCalc}\"\r\n{ex}");
+                    Console.WriteLine($"Failed to compile dynamic formula \"{MaxCalc}\"");
                 }
             }
 

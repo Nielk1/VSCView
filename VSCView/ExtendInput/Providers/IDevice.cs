@@ -11,5 +11,6 @@ namespace ExtendInput.Providers
         string DevicePath { get; }
         int ProductId { get; }
         int VendorId { get; }
+        string UniqueKey { get; }
     }
 }

@@ -107,6 +107,9 @@ namespace ExtendInput.Controller
         public string Serial { get; private set; }
 #endif
 
+        public IDevice DeviceHackRef => _device;
+
+
         ControllerState State = new ControllerState();
         ControllerState OldState = new ControllerState();
 
@@ -196,6 +199,8 @@ namespace ExtendInput.Controller
             Initalized = 0;
 
             ConnectedTime = DateTime.MinValue;
+
+            _device.ControllerNameUpdated += OnReport;
         }
 
         public void Initalize()
@@ -207,7 +212,7 @@ namespace ExtendInput.Controller
             //_attached = _device.IsConnected;
 
             Initalized = 2;
-            _device.ReadReport(OnReport);
+            _device.StartReading();
         }
 
         public void HalfInitalize()
@@ -249,6 +254,8 @@ namespace ExtendInput.Controller
             //_device.Removed -= DeviceRemovedHandler;
 
             //_device.MonitorDeviceEvents = false;
+
+            _device.StopReading();
 
             Initalized = 0;
             _device.CloseDevice();
@@ -774,7 +781,6 @@ namespace ExtendInput.Controller
                 OnStateUpdated(NewState);
                 Interlocked.Exchange(ref reportUsageLock, 0);
             }
-            _device.ReadReport(OnReport);
         }
 
         private void RotateXY(float padAngle, ref int x, ref int y, int cx = 0, int cy = 0)

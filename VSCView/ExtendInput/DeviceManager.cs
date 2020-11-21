@@ -14,6 +14,7 @@ namespace ExtendInput
         List<IDeviceProvider> DeviceProviders;
 
         public event ControllerChangeEventHandler ControllerAdded;
+        public event DeviceChangeEventHandler ControllerRemoved;
 
         public DeviceManager()
         {
@@ -74,6 +75,7 @@ namespace ExtendInput
             foreach (ICoreDeviceProvider deviceProvider in CoreDeviceProviders)
             {
                 deviceProvider.DeviceAdded += DeviceAdded;
+                deviceProvider.DeviceRemoved += DeviceRemoved;
             }
         }
 
@@ -90,6 +92,12 @@ namespace ExtendInput
             }
         }
 
+        private void DeviceRemoved(object sender, IDevice e)
+        {
+            DeviceChangeEventHandler threadSafeEventHandler = ControllerRemoved;
+            threadSafeEventHandler?.Invoke(this, e);
+        }
+
         public void ScanNow()
         {
             foreach (ICoreDeviceProvider provider in CoreDeviceProviders)
@@ -100,4 +108,5 @@ namespace ExtendInput
     }
 
     public delegate void ControllerChangeEventHandler(object sender, IController e);
+    public delegate void DeviceChangeEventHandler(object sender, IDevice e);
 }

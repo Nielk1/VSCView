@@ -76,6 +76,8 @@ namespace ExtendInput.Controller
 
         public EConnectionType ConnectionType { get; private set; }
 
+        public IDevice DeviceHackRef => _device;
+
         ControllerState State = new ControllerState();
         ControllerState OldState = new ControllerState();
 
@@ -109,6 +111,8 @@ namespace ExtendInput.Controller
             _device = device;
 
             Initalized = 0;
+
+            _device.ControllerNameUpdated += OnReport;
         }
 
         public void Initalize()
@@ -118,7 +122,7 @@ namespace ExtendInput.Controller
             HalfInitalize();
 
             Initalized = 2;
-            _device.ReadReport(OnReport);
+            _device.StartReading();
         }
 
         public void HalfInitalize()
@@ -141,7 +145,7 @@ namespace ExtendInput.Controller
 
             if (ConnectionType == EConnectionType.Dongle)
             {
-                _device.ReadReport(OnReport);
+                _device.StartReading();
             }
         }
 
@@ -153,6 +157,8 @@ namespace ExtendInput.Controller
             //_device.Removed -= DeviceRemovedHandler;
 
             //_device.MonitorDeviceEvents = false;
+
+            _device.StopReading();
 
             Initalized = 0;
             _device.CloseDevice();
@@ -471,7 +477,6 @@ namespace ExtendInput.Controller
 
                 if (ConnectionType == EConnectionType.Dongle && DisconnectedBit)
                     Thread.Sleep(1000); // if we're a dongle and we're not connected we might only be partially initalized, so slow roll our read
-                _device.ReadReport(OnReport);
             }
         }
 

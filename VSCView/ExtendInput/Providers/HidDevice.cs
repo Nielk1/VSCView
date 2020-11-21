@@ -120,39 +120,71 @@ namespace ExtendInput.Providers
             return internalDevice.GetSerialNumber();
         }
 
-        public void ReadReport(ReadReportCallback callback)
+        bool reading = false;
+        object readingLock = new object();
+        Thread readingThread = null;
+        public void StartReading()
         {
-            new Thread(() =>
+            lock (readingLock)
             {
-                try
+                if (ControllerNameUpdated == null)
+                    reading = false;
+
+                if (reading)
+                    return;
+
+                reading = true;
+
+                readingThread = new Thread(() =>
                 {
-                    HidSharp.HidStream _stream = GetStream();
-                    lock (_stream)
+                    while (reading)
                     {
-                        byte[] data = _stream.Read();
-                        callback.Invoke(data.Skip(1).ToArray(), data[0]);
+                        if (ControllerNameUpdated == null)
+                        {
+                            break;
+                        }
+
+                        try
+                        {
+                            HidSharp.HidStream _stream = GetStream();
+                            lock (_stream)
+                            {
+                                byte[] data = _stream.Read();
+
+                                DeviceReportEvent threadSafeEvent = ControllerNameUpdated;
+                                threadSafeEvent?.Invoke(data.Skip(1).ToArray(), data[0]);
+                            }
+                        }
+                        catch
+                        {
+                            reading = false;
+                        }
                     }
-                }
-                catch { }
-            }).Start();
+                    reading = false;
+                });
+                readingThread.Start();
+            }
         }
+
+        public void StopReading()
+        {
+            lock (readingLock)
+            {
+                reading = false;
+            }
+        }
+
+        public string UniqueKey => $"{this.GetType().UnderlyingSystemType.GUID} {this.DevicePath}";
 
         bool IEquatable<IDevice>.Equals(IDevice other)
         {
-            Type typeThis = this.GetType().UnderlyingSystemType;
-            Type typeOther = other.GetType().UnderlyingSystemType;
-
-            if (typeThis.FullName != typeOther.FullName)
-                return false;
-
-            if (this.DevicePath != other.DevicePath)
-                return false;
-
-            return true;
+            return this.UniqueKey == other.UniqueKey;
         }
 
-        public delegate void ReadReportCallback(byte[] report, int reportID);
+        public event DeviceReportEvent ControllerNameUpdated;
     }
+
+    public delegate void DeviceReportEvent(byte[] report, int reportID);
 
     public enum DeviceMode
     {

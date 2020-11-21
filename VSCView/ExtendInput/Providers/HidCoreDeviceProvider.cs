@@ -75,10 +75,10 @@ namespace ExtendInput.Providers
             ScanNow();
         }
 
-        public static IEnumerable<HidDevice> Enumerate(int vendorId, params int[] productIds)
+        /*public static IEnumerable<HidDevice> Enumerate(int vendorId, params int[] productIds)
         {
             return HidSharp.DeviceList.Local.GetHidDevices(vendorId).Where(dr => productIds.Contains(dr.ProductID)).Select(dr => new HidDevice(dr));
-        }
+        }*/
 
         /*public void X()
         {

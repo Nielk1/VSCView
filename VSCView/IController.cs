@@ -16,6 +16,8 @@ namespace VSCView
         event ControllerNameUpdateEvent ControllerNameUpdated;
 
         EConnectionType ConnectionType { get; }
+        IDevice DeviceHackRef { get; }
+
         void DeInitalize();
         ControllerState GetState();
         void Initalize();

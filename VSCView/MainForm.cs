@@ -1,4 +1,5 @@
 ﻿using ExtendInput;
+using ExtendInput.Providers;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
@@ -82,6 +83,16 @@ namespace VSCView
             }
 
             DeviceManager.ControllerAdded += DeviceManager_ControllerAdded;
+            DeviceManager.ControllerRemoved += DeviceManager_ControllerRemoved;
+        }
+
+        /// <summary>
+        /// We need the form loaded first before we can have controllers start to trigger insertion into the menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_Load(object sender, EventArgs e)
+        {
             LoadControllers(true);
         }
 
@@ -278,32 +289,54 @@ namespace VSCView
             DeviceManager.ScanNow();
         }
 
+        Dictionary<string, (IController, ToolStripItem)> ControllerMemoHack = new Dictionary<string, (IController, ToolStripItem)>();
         private void DeviceManager_ControllerAdded(object sender, IController controller)
         {
+            lock (ControllerMemoHack)
             {
-                ToolStripItem itm = tsmiController.DropDownItems.Add(controller.GetName(), null, LoadController);
-                IController c = controller;
-                controller.ControllerNameUpdated += () =>
+                this.Invoke((MethodInvoker)delegate
                 {
-                    try
+                    ToolStripItem itm = tsmiController.DropDownItems.Add(controller.GetName(), null, LoadController);
+                    IController c = controller;
+                    ControllerMemoHack[c.DeviceHackRef.UniqueKey] = (controller, itm);
+                    controller.ControllerNameUpdated += () =>
                     {
-                        if (this.Created && !this.Disposing && !this.IsDisposed)
-                            this.Invoke(new Action(() =>
-                            {
-                                itm.Text = c.GetName();
-                            }));
+                        try
+                        {
+                            if (this.Created && !this.Disposing && !this.IsDisposed)
+                                this.Invoke(new Action(() =>
+                                {
+                                    itm.Text = c.GetName();
+                                }));
+                        }
+                        catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
+                    };
+                    itm.Text = controller.GetName();
+
+                    itm.ImageScaling = ToolStripItemImageScaling.None;
+                    itm.Tag = controller;
+                    itm.Image = controller.GetIcon();
+
+                    // load the first controller in the list if it exists
+                    //if (firstload && i == 0 && Controllers[i] != null)
+                    //    LoadController(Controllers[i], null);
+                });
+            }
+        }
+
+        private void DeviceManager_ControllerRemoved(object sender, ExtendInput.Providers.IDevice e)
+        {
+            lock(ControllerMemoHack)
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    if (ControllerMemoHack.ContainsKey(e.UniqueKey))
+                    {
+                        ControllerMemoHack[e.UniqueKey].Item1.DeInitalize();
+                        tsmiController.DropDownItems.Remove(ControllerMemoHack[e.UniqueKey].Item2);
+                        ControllerMemoHack.Remove(e.UniqueKey);
                     }
-                    catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
-                };
-                itm.Text = controller.GetName();
-
-                itm.ImageScaling = ToolStripItemImageScaling.None;
-                itm.Tag = controller;
-                itm.Image = controller.GetIcon();
-
-                // load the first controller in the list if it exists
-                //if (firstload && i == 0 && Controllers[i] != null)
-                //    LoadController(Controllers[i], null);
+                });
             }
         }
 
