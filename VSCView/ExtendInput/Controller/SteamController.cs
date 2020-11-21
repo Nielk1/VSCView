@@ -25,6 +25,8 @@ namespace ExtendInput.Controller
         const float PadAngle = 0.261799f; // 15 deg in radians
 
 
+        public bool HasMotion => true;
+
         public bool SensorsEnabled;
         private HidDevice _device;
         int stateUsageLock = 0, reportUsageLock = 0;

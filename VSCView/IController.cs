@@ -17,6 +17,7 @@ namespace VSCView
 
         EConnectionType ConnectionType { get; }
         IDevice DeviceHackRef { get; }
+        bool HasMotion { get; }
 
         void DeInitalize();
         ControllerState GetState();

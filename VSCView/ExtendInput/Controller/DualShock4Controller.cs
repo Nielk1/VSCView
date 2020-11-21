@@ -33,6 +33,8 @@ namespace ExtendInput.Controller
 
         public event ControllerNameUpdateEvent ControllerNameUpdated;
 
+        public bool HasMotion => true;
+
         #region DATA STRUCTS
 
         public ControllerState GetState()

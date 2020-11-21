@@ -103,12 +103,6 @@ namespace ExtendInput.Providers
             IsOpen = false;
         }
 
-        public void ReconnectDevice()
-        {
-            CloseDevice();
-            OpenDevice();
-        }
-
         public void Dispose()
         {
             //if (MonitorDeviceEvents) MonitorDeviceEvents = false;

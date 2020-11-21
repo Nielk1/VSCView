@@ -46,6 +46,12 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.XInput.4.2.0\lib\net45\SharpDX.XInput.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -74,12 +80,16 @@
     </Compile>
     <Compile Include="ControllerState.cs" />
     <Compile Include="CustomFleeFunctions.cs" />
+    <Compile Include="ExtendInput\Controller\XInputController.cs" />
+    <Compile Include="ExtendInput\Controller\XInputDeviceProvider.cs" />
     <Compile Include="ExtendInput\DeviceManager.cs" />
     <Compile Include="ExtendInput\Providers\HidDevice.cs" />
     <Compile Include="ExtendInput\Providers\HidCoreDeviceProvider.cs" />
     <Compile Include="ExtendInput\Controller\DualShock4DeviceProvider.cs" />
     <Compile Include="ExtendInput\Controller\SteamControllerDeviceProvider.cs" />
     <Compile Include="ExtendInput\Providers\IDevice.cs" />
+    <Compile Include="ExtendInput\Providers\XInputCoreDeviceProvider.cs" />
+    <Compile Include="ExtendInput\Providers\XInputDevice.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

@@ -25,7 +25,6 @@ namespace VSCView
 
         ControllerData ControllerData;
         IController ActiveController;
-        List<IController> Controllers = new List<IController>();
         System.Threading.Timer ttimer;
 
         //List<IControllerFactory> Factory;
@@ -145,7 +144,8 @@ namespace VSCView
             if (ActiveController != null)
             {
                 state = ActiveController.GetState();
-                sensorData.Update(state);
+                if (ActiveController.HasMotion)
+                    sensorData.Update(state);
             }
 
             if (!this.IsDisposed && this.InvokeRequired && sensorData != null)
@@ -471,7 +471,7 @@ namespace VSCView
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             ttimer?.Change(Timeout.Infinite, Timeout.Infinite);
-            Controllers?.ForEach(dr => dr.DeInitalize());
+            ControllerMemoHack?.ToList()?.ForEach(dr => dr.Value.Item1.DeInitalize());
         }
 
         private void MinimizeToolStripMenuItem_Click(object sender, EventArgs e)
