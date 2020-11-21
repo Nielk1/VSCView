@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ExtendInput.Providers;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VSCView
 {
@@ -28,8 +24,8 @@ namespace VSCView
         Image GetIcon();
     }
 
-    public interface IControllerFactory
+    public interface IDeviceProvider
     {
-        IController[] GetControllers();
+        IController NewDevice(IDevice device);
     }
 }

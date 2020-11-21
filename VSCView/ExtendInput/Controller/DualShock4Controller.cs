@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using ExtendInput.Providers;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
-using VSCView.HidLibraryShim;
+using VSCView;
 
-namespace VSCView
+namespace ExtendInput.Controller
 {
-    public class DS4Controller : IController
+    public class DualShock4Controller : IController
     {
         public const int VendorId = 0x054C;
         public const int ProductIdDongle = 0x0BA0;
@@ -89,7 +88,7 @@ namespace VSCView
             StateUpdated?.Invoke(this, e);
         }
 
-        public DS4Controller(HidDevice device, EConnectionType ConnectionType = EConnectionType.Unknown)
+        public DualShock4Controller(HidDevice device, EConnectionType ConnectionType = EConnectionType.Unknown)
         {
             this.ConnectionType = ConnectionType;
 
@@ -492,12 +491,12 @@ namespace VSCView
 
             switch (ConnectionType)
             {
-                case EConnectionType.Dongle: g.DrawImage(Properties.Resources.icon_ds4_dongle, 0, 0, 16, 16); break;
-                case EConnectionType.USB: g.DrawImage(Properties.Resources.icon_usb, 0, 0, 16, 16); break;
-                case EConnectionType.Bluetooth: g.DrawImage(Properties.Resources.icon_bt, 0, 0, 16, 16); break;
+                case EConnectionType.Dongle: g.DrawImage(VSCView.Properties.Resources.icon_ds4_dongle, 0, 0, 16, 16); break;
+                case EConnectionType.USB: g.DrawImage(VSCView.Properties.Resources.icon_usb, 0, 0, 16, 16); break;
+                case EConnectionType.Bluetooth: g.DrawImage(VSCView.Properties.Resources.icon_bt, 0, 0, 16, 16); break;
             }
 
-            g.DrawImage(Properties.Resources.icon_ds4, 16 + 4, 0, 16, 16);
+            g.DrawImage(VSCView.Properties.Resources.icon_ds4, 16 + 4, 0, 16, 16);
 
             return Icon;
         }
@@ -520,49 +519,5 @@ namespace VSCView
                 Console.WriteLine("VSC Address Removed");
             }
         }*/
-    }
-
-    public class DS4ControllerFactory : IControllerFactory
-    {
-        public IController[] GetControllers()
-        {
-            List<HidDevice> _devices = HidDevices.Enumerate(DS4Controller.VendorId, DS4Controller.ProductIdDongle, DS4Controller.ProductIdWired, DS4Controller.ProductIdWiredV2).ToList();
-            List<DS4Controller> ControllerList = new List<DS4Controller>();
-            string bt_hid_id = @"00001124-0000-1000-8000-00805f9b34fb";
-
-            for (int i = 0; i < _devices.Count; i++)
-            {
-                if (_devices[i] != null)
-                {
-                    HidDevice _device = _devices[i];
-                    string devicePath = _device.DevicePath.ToString();
-
-                    EConnectionType ConType = EConnectionType.Unknown;
-                    switch (_device.ProductId)
-                    {
-                        case DS4Controller.ProductIdWired:
-                        case DS4Controller.ProductIdWiredV2:
-                            if (devicePath.Contains(bt_hid_id))
-                            {
-                                ConType = EConnectionType.Bluetooth;
-                            }
-                            else
-                            {
-                                ConType = EConnectionType.USB;
-                            }
-                            break;
-                        case DS4Controller.ProductIdDongle:
-                            ConType = EConnectionType.Dongle;
-                            break;
-                    }
-
-                    DS4Controller ctrl = new DS4Controller(_device, ConType);
-                    ctrl.HalfInitalize();
-                    ControllerList.Add(ctrl);
-                }
-            }
-
-            return ControllerList.OrderByDescending(dr => dr.ConnectionType).ThenBy(dr => dr.GetName()).ToArray();
-        }
     }
 }

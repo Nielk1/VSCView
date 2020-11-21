@@ -71,8 +71,12 @@
     </Compile>
     <Compile Include="ControllerState.cs" />
     <Compile Include="CustomFleeFunctions.cs" />
-    <Compile Include="HidLibraryShim\HidDevice.cs" />
-    <Compile Include="HidLibraryShim\HidDevices.cs" />
+    <Compile Include="ExtendInput\DeviceManager.cs" />
+    <Compile Include="ExtendInput\Providers\HidDevice.cs" />
+    <Compile Include="ExtendInput\Providers\HidCoreDeviceProvider.cs" />
+    <Compile Include="ExtendInput\Controller\DualShock4DeviceProvider.cs" />
+    <Compile Include="ExtendInput\Controller\SteamControllerDeviceProvider.cs" />
+    <Compile Include="ExtendInput\Providers\IDevice.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -84,8 +88,8 @@
     <Compile Include="SensorCollector.cs" />
     <Compile Include="SensorFusion.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="DS4Controller.cs" />
-    <Compile Include="SteamController.cs" />
+    <Compile Include="ExtendInput\Controller\DualShock4Controller.cs" />
+    <Compile Include="ExtendInput\Controller\SteamController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThemeDesc.cs" />
@@ -1165,5 +1169,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

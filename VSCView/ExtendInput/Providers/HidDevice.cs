@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace VSCView.HidLibraryShim
+namespace ExtendInput.Providers
 {
-    public class HidDevice
+    public class HidDevice : IDevice
     {
         public string DevicePath { get { return internalDevice.DevicePath; } }
         public int ProductId { get { return internalDevice.ProductID; } }
@@ -135,6 +135,21 @@ namespace VSCView.HidLibraryShim
                 catch { }
             }).Start();
         }
+
+        bool IEquatable<IDevice>.Equals(IDevice other)
+        {
+            Type typeThis = this.GetType().UnderlyingSystemType;
+            Type typeOther = other.GetType().UnderlyingSystemType;
+
+            if (typeThis.FullName != typeOther.FullName)
+                return false;
+
+            if (this.DevicePath != other.DevicePath)
+                return false;
+
+            return true;
+        }
+
         public delegate void ReadReportCallback(byte[] report, int reportID);
     }
 

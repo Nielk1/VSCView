@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ExtendInput.Providers;
+using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Threading;
-using VSCView.HidLibraryShim;
+using VSCView;
 
-namespace VSCView
+namespace ExtendInput.Controller
 {
     public class SteamController : IController
     {
@@ -913,16 +912,16 @@ namespace VSCView
 
             switch (ConnectionType)
             {
-                case EConnectionType.Dongle: g.DrawImage(Properties.Resources.icon_wireless, 0, 0, 16, 16); break;
-                case EConnectionType.USB: g.DrawImage(Properties.Resources.icon_usb, 0, 0, 16, 16); break;
-                case EConnectionType.Bluetooth: g.DrawImage(Properties.Resources.icon_bt, 0, 0, 16, 16); break;
+                case EConnectionType.Dongle: g.DrawImage(VSCView.Properties.Resources.icon_wireless, 0, 0, 16, 16); break;
+                case EConnectionType.USB: g.DrawImage(VSCView.Properties.Resources.icon_usb, 0, 0, 16, 16); break;
+                case EConnectionType.Bluetooth: g.DrawImage(VSCView.Properties.Resources.icon_bt, 0, 0, 16, 16); break;
             }
 
             switch(ControllerType)
             {
-                case EControllerType.ReleaseV1: g.DrawImage(Properties.Resources.icon_sc, 16 + 4, 0, 16, 16); break;
-                case EControllerType.ReleaseV2: g.DrawImage(Properties.Resources.icon_sc, 16 + 4, 0, 16, 16); break;
-                case EControllerType.Chell: g.DrawImage(Properties.Resources.icon_chell, 16 + 4, 0, 16, 16); break;
+                case EControllerType.ReleaseV1: g.DrawImage(VSCView.Properties.Resources.icon_sc, 16 + 4, 0, 16, 16); break;
+                case EControllerType.ReleaseV2: g.DrawImage(VSCView.Properties.Resources.icon_sc, 16 + 4, 0, 16, 16); break;
+                case EControllerType.Chell: g.DrawImage(VSCView.Properties.Resources.icon_chell, 16 + 4, 0, 16, 16); break;
             }
 
             return Icon;
@@ -946,58 +945,5 @@ namespace VSCView
                 Console.WriteLine("VSC Address Removed");
             }
         }*/
-    }
-
-    public class SteamControllerFactory : IControllerFactory
-    {
-        public IController[] GetControllers()
-        {
-            List<HidDevice> _devices = HidDevices.Enumerate(
-                SteamController.VendorId,
-                SteamController.ProductIdDongle,
-                SteamController.ProductIdWired,
-                SteamController.ProductIdBT,
-                SteamController.ProductIdChell
-            ).ToList();
-
-            List<SteamController> ControllerList = new List<SteamController>();
-
-            for (int i = 0; i < _devices.Count; i++)
-            {
-                if (_devices[i] != null)
-                {
-                    HidDevice _device = _devices[i];
-                    string devicePath = _device.DevicePath.ToString();
-
-                    EConnectionType ConType = EConnectionType.Unknown;
-                    SteamController.EControllerType CtrlType = SteamController.EControllerType.ReleaseV1;
-                    switch (_device.ProductId)
-                    {
-                        case SteamController.ProductIdBT:
-                            if (!devicePath.Contains("col03")) continue; // skip anything that isn't the controller's custom HID device
-                            ConType = EConnectionType.Bluetooth;
-                            break;
-                        case SteamController.ProductIdWired:
-                            if (!devicePath.Contains("mi_02")) continue; // skip anything that isn't the controller's custom HID device
-                            ConType = EConnectionType.USB;
-                            break;
-                        case SteamController.ProductIdDongle:
-                            if (devicePath.Contains("mi_00")) continue; // skip the dongle itself
-                            ConType = EConnectionType.Dongle;
-                            break;
-                        case SteamController.ProductIdChell:
-                            ConType = EConnectionType.USB;
-                            CtrlType = SteamController.EControllerType.Chell;
-                            break;
-                    }
-
-                    SteamController ctrl = new SteamController(_device, ConType, CtrlType);
-                    ctrl.HalfInitalize();
-                    ControllerList.Add(ctrl);
-                }
-            }
-
-            return ControllerList.OrderByDescending(dr => dr.ConnectionType).ThenBy(dr => dr.GetName()).ToArray();
-        }
     }
 }

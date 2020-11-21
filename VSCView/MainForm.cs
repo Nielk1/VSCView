@@ -1,11 +1,10 @@
-﻿using Microsoft.Win32;
+﻿using ExtendInput;
+using Microsoft.Win32;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -28,11 +27,13 @@ namespace VSCView
         List<IController> Controllers = new List<IController>();
         System.Threading.Timer ttimer;
 
-        List<IControllerFactory> Factory;
+        //List<IControllerFactory> Factory;
 
         UI ui;
 
         Settings settings;
+
+        DeviceManager DeviceManager;
 
         public MainForm()
         {
@@ -48,10 +49,7 @@ namespace VSCView
                 hIDGuardianWhitelistToolStripMenuItem.Checked = whitelistKey != null;
             }
 
-            Factory = new List<IControllerFactory>() {
-                new SteamControllerFactory(),
-                new DS4ControllerFactory(),
-            };
+            DeviceManager = new DeviceManager();
 
             ControllerData = new ControllerData();
             state = new ControllerState();
@@ -83,6 +81,7 @@ namespace VSCView
                 catch { }
             }
 
+            DeviceManager.ControllerAdded += DeviceManager_ControllerAdded;
             LoadControllers(true);
         }
 
@@ -244,16 +243,47 @@ namespace VSCView
 
         private void LoadControllers(bool firstload)
         {
-            tsmiController.DropDownItems.Clear();
-            Controllers.ForEach(dr => dr.DeInitalize());
-            Controllers.Clear();
-            Controllers.AddRange(Factory.SelectMany(dr => dr.GetControllers()));
+            //tsmiController.DropDownItems.Clear();
+            //Controllers.ForEach(dr => dr.DeInitalize());
+            //Controllers.Clear();
+            //Controllers.AddRange(Factory.SelectMany(dr => dr.GetControllers()));
 
-            for (int i = 0; i < Controllers.Count(); i++)
+            //for (int i = 0; i < Controllers.Count(); i++)
+            //{
+            //    ToolStripItem itm = tsmiController.DropDownItems.Add(Controllers[i].GetName(), null, LoadController);
+            //    IController c = Controllers[i];
+            //    Controllers[i].ControllerNameUpdated += () =>
+            //    {
+            //        try
+            //        {
+            //            if (this.Created && !this.Disposing && !this.IsDisposed)
+            //                this.Invoke(new Action(() =>
+            //                {
+            //                    itm.Text = c.GetName();
+            //                }));
+            //        }
+            //        catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
+            //    };
+            //    itm.Text = Controllers[i].GetName();
+
+            //    itm.ImageScaling = ToolStripItemImageScaling.None;
+            //    itm.Tag = Controllers[i];
+            //    itm.Image = Controllers[i].GetIcon();
+
+            //    // load the first controller in the list if it exists
+            //    if (firstload && i == 0 && Controllers[i] != null)
+            //        LoadController(Controllers[i], null);
+            //}
+
+            DeviceManager.ScanNow();
+        }
+
+        private void DeviceManager_ControllerAdded(object sender, IController controller)
+        {
             {
-                ToolStripItem itm = tsmiController.DropDownItems.Add(Controllers[i].GetName(), null, LoadController);
-                IController c = Controllers[i];
-                Controllers[i].ControllerNameUpdated += () =>
+                ToolStripItem itm = tsmiController.DropDownItems.Add(controller.GetName(), null, LoadController);
+                IController c = controller;
+                controller.ControllerNameUpdated += () =>
                 {
                     try
                     {
@@ -265,15 +295,15 @@ namespace VSCView
                     }
                     catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
                 };
-                itm.Text = Controllers[i].GetName();
+                itm.Text = controller.GetName();
 
                 itm.ImageScaling = ToolStripItemImageScaling.None;
-                itm.Tag = Controllers[i];
-                itm.Image = Controllers[i].GetIcon();
+                itm.Tag = controller;
+                itm.Image = controller.GetIcon();
 
                 // load the first controller in the list if it exists
-                if (firstload && i == 0 && Controllers[i] != null)
-                    LoadController(Controllers[i], null);
+                //if (firstload && i == 0 && Controllers[i] != null)
+                //    LoadController(Controllers[i], null);
             }
         }
 
