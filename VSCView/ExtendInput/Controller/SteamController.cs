@@ -318,7 +318,7 @@ namespace ExtendInput.Controller
 
         public bool PlayMelody(Melody melody)
         {
-            byte[] reportData = new byte[64];
+            byte[] reportData = new byte[65];
             reportData[1] = 0xB6; // 0xB6 = play melody
             reportData[2] = 0x04; // 0x04 = length of data to be written
             byte[] data = BitConverter.GetBytes((UInt32)melody);

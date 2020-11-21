@@ -48,6 +48,7 @@ namespace ExtendInput.Providers
         {
             try
             {
+                //int maxLen = internalDevice.GetMaxFeatureReportLength();
                 GetStream().SetFeature(data);
                 return true;
             }
