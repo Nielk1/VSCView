@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using VSCView;
 using ExtendInput.Controller;
 using ExtendInput.Providers;
+using VSCView;
 
 namespace ExtendInput
 {
@@ -47,6 +47,10 @@ namespace ExtendInput
                         catch { }
                     }
                 }
+            }
+
+            foreach (Type item in typeof(IDeviceProvider).GetTypeInfo().Assembly.GetTypes())
+            {
                 if (item.GetInterfaces().Contains(typeof(IDeviceProvider)))
                 {
                     ConstructorInfo[] cons = item.GetConstructors();

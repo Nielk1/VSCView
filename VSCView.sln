@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSCView", "VSCView\VSCView.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeFixer", "ThemeFixer\ThemeFixer.csproj", "{FB709B19-87C4-4A37-BCF2-975D24B76AF0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deps", "Deps", "{23183836-1727-4615-A599-9776C3EBA608}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendInput", "Deps\ExtendInput\ExtendInput\ExtendInput\ExtendInput.csproj", "{4D027481-A0EA-41F3-9284-7353E2103CA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{FB709B19-87C4-4A37-BCF2-975D24B76AF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB709B19-87C4-4A37-BCF2-975D24B76AF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB709B19-87C4-4A37-BCF2-975D24B76AF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D027481-A0EA-41F3-9284-7353E2103CA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D027481-A0EA-41F3-9284-7353E2103CA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D027481-A0EA-41F3-9284-7353E2103CA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D027481-A0EA-41F3-9284-7353E2103CA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4D027481-A0EA-41F3-9284-7353E2103CA6} = {23183836-1727-4615-A599-9776C3EBA608}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DC3B117E-47DB-4553-8101-4ECBC70B1A48}

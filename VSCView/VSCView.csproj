@@ -80,16 +80,13 @@
     </Compile>
     <Compile Include="ControllerState.cs" />
     <Compile Include="CustomFleeFunctions.cs" />
+    <Compile Include="ExtendInput\Controller\DualShock4Controller.cs" />
+    <Compile Include="ExtendInput\Controller\DualShock4DeviceProvider.cs" />
+    <Compile Include="ExtendInput\Controller\SteamController.cs" />
+    <Compile Include="ExtendInput\Controller\SteamControllerDeviceProvider.cs" />
     <Compile Include="ExtendInput\Controller\XInputController.cs" />
     <Compile Include="ExtendInput\Controller\XInputDeviceProvider.cs" />
     <Compile Include="ExtendInput\DeviceManager.cs" />
-    <Compile Include="ExtendInput\Providers\HidDevice.cs" />
-    <Compile Include="ExtendInput\Providers\HidCoreDeviceProvider.cs" />
-    <Compile Include="ExtendInput\Controller\DualShock4DeviceProvider.cs" />
-    <Compile Include="ExtendInput\Controller\SteamControllerDeviceProvider.cs" />
-    <Compile Include="ExtendInput\Providers\IDevice.cs" />
-    <Compile Include="ExtendInput\Providers\XInputCoreDeviceProvider.cs" />
-    <Compile Include="ExtendInput\Providers\XInputDevice.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -101,8 +98,6 @@
     <Compile Include="SensorCollector.cs" />
     <Compile Include="SensorFusion.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="ExtendInput\Controller\DualShock4Controller.cs" />
-    <Compile Include="ExtendInput\Controller\SteamController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThemeDesc.cs" />
@@ -510,6 +505,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Deps\ExtendInput\ExtendInput\ExtendInput\ExtendInput.csproj">
+      <Project>{4d027481-a0ea-41f3-9284-7353e2103ca6}</Project>
+      <Name>ExtendInput</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ThemeFixer\ThemeFixer.csproj">
       <Project>{fb709b19-87c4-4a37-bcf2-975d24b76af0}</Project>
       <Name>ThemeFixer</Name>
