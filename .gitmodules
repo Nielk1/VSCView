@@ -1,0 +1,3 @@
+[submodule "Deps/ExtendInput"]
+	path = Deps/ExtendInput
+	url = https://github.com/Nielk1/ExtendInput.git
