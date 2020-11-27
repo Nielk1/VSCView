@@ -20,7 +20,7 @@ namespace VSCView
         bool HasMotion { get; }
 
         void DeInitalize();
-        ExtendInput.ControllerState GetState();
+        ExtendInput.Controls.ControllerState GetState();
         void Initalize();
         void Identify();
         string GetName();

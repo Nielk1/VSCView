@@ -1,4 +1,5 @@
 ﻿using ExtendInput;
+using ExtendInput.Controls;
 using ExtendInput.Providers;
 using Microsoft.Win32;
 using Newtonsoft.Json;

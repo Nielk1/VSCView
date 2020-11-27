@@ -15,7 +15,7 @@ namespace VSCView.Controller
         private HidDevice _device;
         int stateUsageLock = 0, reportUsageLock = 0;
 
-        public ExtendInput.ControllerState GetState()
+        public ExtendInput.Controls.ControllerState GetState()
         {
             return _controller.GetState();
         }
@@ -28,9 +28,9 @@ namespace VSCView.Controller
         public IDevice DeviceHackRef => _controller.DeviceHackRef;
         
 
-        public delegate void StateUpdatedEventHandler(object sender, ExtendInput.ControllerState e);
+        public delegate void StateUpdatedEventHandler(object sender, ExtendInput.Controls.ControllerState e);
         public event StateUpdatedEventHandler StateUpdated;
-        protected virtual void OnStateUpdated(ExtendInput.ControllerState e)
+        protected virtual void OnStateUpdated(ExtendInput.Controls.ControllerState e)
         {
             StateUpdated?.Invoke(this, e);
         }

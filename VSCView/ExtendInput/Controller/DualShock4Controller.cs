@@ -15,7 +15,7 @@ namespace VSCView.Controller
 
         #region DATA STRUCTS
 
-        public ExtendInput.ControllerState GetState()
+        public ExtendInput.Controls.ControllerState GetState()
         {
             return _controller.GetState();
         }
@@ -24,9 +24,9 @@ namespace VSCView.Controller
         private ExtendInput.Controller.IController _controller;
         public IDevice DeviceHackRef => _controller.DeviceHackRef;
 
-        public delegate void StateUpdatedEventHandler(object sender, ExtendInput.ControllerState e);
+        public delegate void StateUpdatedEventHandler(object sender, ExtendInput.Controls.ControllerState e);
         public event StateUpdatedEventHandler StateUpdated;
-        protected virtual void OnStateUpdated(ExtendInput.ControllerState e)
+        protected virtual void OnStateUpdated(ExtendInput.Controls.ControllerState e)
         {
             StateUpdated?.Invoke(this, e);
         }

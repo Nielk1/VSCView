@@ -96,23 +96,23 @@ namespace VSCView
             Data = new SensorData();
         }
 
-        public SensorData Update(ExtendInput.ControllerState stateData)
+        public SensorData Update(ExtendInput.Controls.ControllerState stateData)
         {// atomic updates
             if (0 == Interlocked.Exchange(ref usingResource, 1))
             {
                 Data = new SensorData();
-                if (stateData.Controls["motion"] is ExtendInput.ControlMotion)
+                if (stateData.Controls["motion"] is ExtendInput.Controls.ControlMotion)
                 {
                     if (Smoothing)
                     {
-                        Data.qW = qwEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationW * 1.0f / 32768);
-                        Data.qX = qxEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationX * 1.0f / 32768);
-                        Data.qY = qyEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationY * 1.0f / 32768);
-                        Data.qZ = qzEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationZ * 1.0f / 32768);
+                        Data.qW = qwEMA.NextValue((stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).OrientationW * 1.0f / 32768);
+                        Data.qX = qxEMA.NextValue((stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).OrientationX * 1.0f / 32768);
+                        Data.qY = qyEMA.NextValue((stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).OrientationY * 1.0f / 32768);
+                        Data.qZ = qzEMA.NextValue((stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).OrientationZ * 1.0f / 32768);
 
-                        Data.gX = (int)gxEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).AngularVelocityX);
-                        Data.gY = (int)gyEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).AngularVelocityY);
-                        Data.gZ = (int)gzEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).AngularVelocityZ);
+                        Data.gX = (int)gxEMA.NextValue((stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).AngularVelocityX);
+                        Data.gY = (int)gyEMA.NextValue((stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).AngularVelocityY);
+                        Data.gZ = (int)gzEMA.NextValue((stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).AngularVelocityZ);
 
                         /*
                         Data.aX = (int)axEMA.NextValue(stateData.AccelerometerX);
@@ -122,14 +122,14 @@ namespace VSCView
                     }
                     else if (stateData != null)
                     {
-                        Data.qW = (stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationW * 1.0f / 32768;
-                        Data.qX = (stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationX * 1.0f / 32768;
-                        Data.qY = (stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationY * 1.0f / 32768;
-                        Data.qZ = (stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationZ * 1.0f / 32768;
+                        Data.qW = (stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).OrientationW * 1.0f / 32768;
+                        Data.qX = (stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).OrientationX * 1.0f / 32768;
+                        Data.qY = (stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).OrientationY * 1.0f / 32768;
+                        Data.qZ = (stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).OrientationZ * 1.0f / 32768;
 
-                        Data.gX = (stateData.Controls["motion"] as ExtendInput.ControlMotion).AngularVelocityX;
-                        Data.gY = (stateData.Controls["motion"] as ExtendInput.ControlMotion).AngularVelocityY;
-                        Data.gZ = (stateData.Controls["motion"] as ExtendInput.ControlMotion).AngularVelocityZ;
+                        Data.gX = (stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).AngularVelocityX;
+                        Data.gY = (stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).AngularVelocityY;
+                        Data.gZ = (stateData.Controls["motion"] as ExtendInput.Controls.ControlMotion).AngularVelocityZ;
 
                         /*
                         Data.aX = stateData.AccelerometerX;

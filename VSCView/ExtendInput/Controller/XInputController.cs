@@ -42,7 +42,7 @@ namespace VSCView.Controller
 
         #region DATA STRUCTS
 
-        public ExtendInput.ControllerState GetState()
+        public ExtendInput.Controls.ControllerState GetState()
         {
             return _controller.GetState();
         }
