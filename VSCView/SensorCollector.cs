@@ -96,85 +96,88 @@ namespace VSCView
             Data = new SensorData();
         }
 
-        public SensorData Update(ControllerState stateData)
+        public SensorData Update(ExtendInput.ControllerState stateData)
         {// atomic updates
             if (0 == Interlocked.Exchange(ref usingResource, 1))
             {
                 Data = new SensorData();
-                if (Smoothing)
+                if (stateData.Controls["motion"] is ExtendInput.ControlMotion)
                 {
-                    Data.qW = qwEMA.NextValue((stateData.Controls["motion"] as ControlMotion).OrientationW * 1.0f / 32768);
-                    Data.qX = qxEMA.NextValue((stateData.Controls["motion"] as ControlMotion).OrientationX * 1.0f / 32768);
-                    Data.qY = qyEMA.NextValue((stateData.Controls["motion"] as ControlMotion).OrientationY * 1.0f / 32768);
-                    Data.qZ = qzEMA.NextValue((stateData.Controls["motion"] as ControlMotion).OrientationZ * 1.0f / 32768);
+                    if (Smoothing)
+                    {
+                        Data.qW = qwEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationW * 1.0f / 32768);
+                        Data.qX = qxEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationX * 1.0f / 32768);
+                        Data.qY = qyEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationY * 1.0f / 32768);
+                        Data.qZ = qzEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationZ * 1.0f / 32768);
 
-                    Data.gX = (int)gxEMA.NextValue((stateData.Controls["motion"] as ControlMotion).AngularVelocityX);
-                    Data.gY = (int)gyEMA.NextValue((stateData.Controls["motion"] as ControlMotion).AngularVelocityY);
-                    Data.gZ = (int)gzEMA.NextValue((stateData.Controls["motion"] as ControlMotion).AngularVelocityZ);
+                        Data.gX = (int)gxEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).AngularVelocityX);
+                        Data.gY = (int)gyEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).AngularVelocityY);
+                        Data.gZ = (int)gzEMA.NextValue((stateData.Controls["motion"] as ExtendInput.ControlMotion).AngularVelocityZ);
 
+                        /*
+                        Data.aX = (int)axEMA.NextValue(stateData.AccelerometerX);
+                        Data.aY = (int)ayEMA.NextValue(stateData.AccelerometerY);
+                        Data.aZ = (int)azEMA.NextValue(stateData.AccelerometerZ);
+                        */
+                    }
+                    else if (stateData != null)
+                    {
+                        Data.qW = (stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationW * 1.0f / 32768;
+                        Data.qX = (stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationX * 1.0f / 32768;
+                        Data.qY = (stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationY * 1.0f / 32768;
+                        Data.qZ = (stateData.Controls["motion"] as ExtendInput.ControlMotion).OrientationZ * 1.0f / 32768;
+
+                        Data.gX = (stateData.Controls["motion"] as ExtendInput.ControlMotion).AngularVelocityX;
+                        Data.gY = (stateData.Controls["motion"] as ExtendInput.ControlMotion).AngularVelocityY;
+                        Data.gZ = (stateData.Controls["motion"] as ExtendInput.ControlMotion).AngularVelocityZ;
+
+                        /*
+                        Data.aX = stateData.AccelerometerX;
+                        Data.aY = stateData.AccelerometerY;
+                        Data.aZ = stateData.AccelerometerZ;
+                        */
+                    }
+
+                    Data.GyroTiltFactorX = (float)Data.gX * 0.0001f;
+                    Data.GyroTiltFactorY = (float)Data.gY * 0.0001f;
+                    Data.GyroTiltFactorZ = (float)Data.gZ * 0.0001f * -90;
+                    // sensitivity scale factor 4 -> radian/sec
+                    Data.calGyroX = Data.gX / 16.4f * deg2rad;
+                    Data.calGyroY = Data.gY / 16.4f * deg2rad;
+                    Data.calGyroZ = Data.gZ / 16.4f * deg2rad;
+                    // sensitivity scale factor 0 -> units/g
                     /*
-                    Data.aX = (int)axEMA.NextValue(stateData.AccelerometerX);
-                    Data.aY = (int)ayEMA.NextValue(stateData.AccelerometerY);
-                    Data.aZ = (int)azEMA.NextValue(stateData.AccelerometerZ);
+                    Data.calAccelX = Data.aX * 1.0f / 16384;
+                    Data.calAccelY = Data.aY * 1.0f / 16384;
+                    Data.calAccelZ = Data.aZ * 1.0f / 16384;
                     */
+
+                    // accumulate smoothed statistical data on normalized gyro sensor magnitude
+                    Data.NormGyroMag = (float)Math.Sqrt(
+                        Math.Abs(Data.calGyroX * Data.calGyroX) +
+                        Math.Abs(Data.calGyroY * Data.calGyroY) +
+                        Math.Abs(Data.calGyroZ * Data.calGyroZ)
+                    );
+                    normData.NextValue(Data.NormGyroMag);
+
+                    double[] eulAnglesYPR = ToEulerAngles(Data.qW, Data.qY, Data.qZ, Data.qX);
+                    Data.Yaw = eulAnglesYPR[0] * 2.0f / Math.PI;
+                    Data.Pitch = eulAnglesYPR[1] * 2.0f / Math.PI;
+                    Data.Roll = -(eulAnglesYPR[2] * 2.0f / Math.PI);
+                    if (double.IsNaN(Data.Yaw)) Data.Yaw = 0f;
+                    if (double.IsNaN(Data.Pitch)) Data.Pitch = 0f;
+                    if (double.IsNaN(Data.Roll)) Data.Roll = 0f;
+
+                    // auto-calibrate on the fly over several seconds when near idle
+                    calib.Calibrate(Data.Yaw, Data.Pitch, Data.Roll, Data.NormGyroMag);
+                    Data.Yaw += calib.OffsetY;
+                    Data.Pitch += calib.OffsetP;
+                    Data.Roll += calib.OffsetR;
+
+                    Data.QuatTiltFactorX = (float)((2 * Math.Abs(Mod((Data.Pitch - 1) * 0.5f, 2) - 1)) - 1);
+                    Data.QuatTiltFactorY = (float)((2 * Math.Abs(Mod((Data.Roll - 1) * 0.5f, 2) - 1)) - 1);
+                    Data.QuatTiltFactorZ = (float)(Data.Yaw * -90.0f);
                 }
-                else if (stateData != null)
-                {
-                    Data.qW = (stateData.Controls["motion"] as ControlMotion).OrientationW * 1.0f / 32768;
-                    Data.qX = (stateData.Controls["motion"] as ControlMotion).OrientationX * 1.0f / 32768;
-                    Data.qY = (stateData.Controls["motion"] as ControlMotion).OrientationY * 1.0f / 32768;
-                    Data.qZ = (stateData.Controls["motion"] as ControlMotion).OrientationZ * 1.0f / 32768;
-
-                    Data.gX = (stateData.Controls["motion"] as ControlMotion).AngularVelocityX;
-                    Data.gY = (stateData.Controls["motion"] as ControlMotion).AngularVelocityY;
-                    Data.gZ = (stateData.Controls["motion"] as ControlMotion).AngularVelocityZ;
-
-                    /*
-                    Data.aX = stateData.AccelerometerX;
-                    Data.aY = stateData.AccelerometerY;
-                    Data.aZ = stateData.AccelerometerZ;
-                    */
-                }
-
-                Data.GyroTiltFactorX = (float)Data.gX * 0.0001f;
-                Data.GyroTiltFactorY = (float)Data.gY * 0.0001f;
-                Data.GyroTiltFactorZ = (float)Data.gZ * 0.0001f * -90;
-                // sensitivity scale factor 4 -> radian/sec
-                Data.calGyroX = Data.gX / 16.4f * deg2rad;
-                Data.calGyroY = Data.gY / 16.4f * deg2rad;
-                Data.calGyroZ = Data.gZ / 16.4f * deg2rad;
-                // sensitivity scale factor 0 -> units/g
-                /*
-                Data.calAccelX = Data.aX * 1.0f / 16384;
-                Data.calAccelY = Data.aY * 1.0f / 16384;
-                Data.calAccelZ = Data.aZ * 1.0f / 16384;
-                */
-
-                // accumulate smoothed statistical data on normalized gyro sensor magnitude
-                Data.NormGyroMag = (float)Math.Sqrt(
-                    Math.Abs(Data.calGyroX * Data.calGyroX) +
-                    Math.Abs(Data.calGyroY * Data.calGyroY) +
-                    Math.Abs(Data.calGyroZ * Data.calGyroZ)
-                );
-                normData.NextValue(Data.NormGyroMag);
-
-                double[] eulAnglesYPR = ToEulerAngles(Data.qW, Data.qY, Data.qZ, Data.qX);
-                Data.Yaw = eulAnglesYPR[0] * 2.0f / Math.PI;
-                Data.Pitch = eulAnglesYPR[1] * 2.0f / Math.PI;
-                Data.Roll = -(eulAnglesYPR[2] * 2.0f / Math.PI);
-                if (double.IsNaN(Data.Yaw)) Data.Yaw = 0f;
-                if (double.IsNaN(Data.Pitch)) Data.Pitch = 0f;
-                if (double.IsNaN(Data.Roll)) Data.Roll = 0f;
-
-                // auto-calibrate on the fly over several seconds when near idle
-                calib.Calibrate(Data.Yaw, Data.Pitch, Data.Roll, Data.NormGyroMag);
-                Data.Yaw += calib.OffsetY;
-                Data.Pitch += calib.OffsetP;
-                Data.Roll += calib.OffsetR;
-
-                Data.QuatTiltFactorX = (float)((2 * Math.Abs(Mod((Data.Pitch - 1) * 0.5f, 2) - 1)) - 1);
-                Data.QuatTiltFactorY = (float)((2 * Math.Abs(Mod((Data.Roll - 1) * 0.5f, 2) - 1)) - 1);
-                Data.QuatTiltFactorZ = (float)(Data.Yaw * -90.0f);
 
                 Interlocked.Exchange(ref usingResource, 0);
             }

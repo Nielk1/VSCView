@@ -1,4 +1,5 @@
-﻿using Flee.PublicTypes;
+﻿using ExtendInput;
+using Flee.PublicTypes;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -149,7 +150,7 @@ namespace VSCView
             return ctrl.Value<T>(subkey);
         }
 
-        public ControllerState GetState()
+        public ExtendInput.ControllerState GetState()
         {
             if (ActiveController == null) return null;
             return ActiveController.GetState();

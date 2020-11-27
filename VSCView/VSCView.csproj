@@ -78,14 +78,10 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControllerState.cs" />
     <Compile Include="CustomFleeFunctions.cs" />
     <Compile Include="ExtendInput\Controller\DualShock4Controller.cs" />
-    <Compile Include="ExtendInput\Controller\DualShock4DeviceProvider.cs" />
     <Compile Include="ExtendInput\Controller\SteamController.cs" />
-    <Compile Include="ExtendInput\Controller\SteamControllerDeviceProvider.cs" />
     <Compile Include="ExtendInput\Controller\XInputController.cs" />
-    <Compile Include="ExtendInput\Controller\XInputDeviceProvider.cs" />
     <Compile Include="ExtendInput\DeviceManager.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="MainForm.cs">

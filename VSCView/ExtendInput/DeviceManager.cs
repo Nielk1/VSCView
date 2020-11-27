@@ -2,101 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using ExtendInput.Controller;
-using ExtendInput.Providers;
-using VSCView;
+using VSCView.Controller;
 
-namespace ExtendInput
+namespace VSCView
 {
     public class DeviceManager
     {
-        List<ICoreDeviceProvider> CoreDeviceProviders;
-        List<IDeviceProvider> DeviceProviders;
+        private ExtendInput.DeviceManager deviceManager;
 
         public event ControllerChangeEventHandler ControllerAdded;
         public event DeviceChangeEventHandler ControllerRemoved;
 
         public DeviceManager()
         {
-            CoreDeviceProviders = new List<ICoreDeviceProvider>();
-            DeviceProviders = new List<IDeviceProvider>();
-
-            foreach (Type item in typeof(ICoreDeviceProvider).GetTypeInfo().Assembly.GetTypes())
-            {
-                //if (!item.IsClass) continue;
-                if (item.GetInterfaces().Contains(typeof(ICoreDeviceProvider)))
-                {
-                    ConstructorInfo[] cons = item.GetConstructors();
-                    foreach (ConstructorInfo con in cons)
-                    {
-                        try
-                        {
-                            ParameterInfo[] @params = con.GetParameters();
-                            object[] paramList = new object[@params.Length];
-                            // don't worry about paramaters for now
-                            //for (int i = 0; i < @params.Length; i++)
-                            //{
-                            //    paramList[i] = ServiceProvider.GetService(@params[i].ParameterType);
-                            //}
-
-                            ICoreDeviceProvider plugin = (ICoreDeviceProvider)Activator.CreateInstance(item, paramList);
-                            CoreDeviceProviders.Add(plugin);
-
-                            break;
-                        }
-                        catch { }
-                    }
-                }
-            }
-
-            foreach (Type item in typeof(IDeviceProvider).GetTypeInfo().Assembly.GetTypes())
-            {
-                if (item.GetInterfaces().Contains(typeof(IDeviceProvider)))
-                {
-                    ConstructorInfo[] cons = item.GetConstructors();
-                    foreach (ConstructorInfo con in cons)
-                    {
-                        try
-                        {
-                            ParameterInfo[] @params = con.GetParameters();
-                            object[] paramList = new object[@params.Length];
-                            // don't worry about paramaters for now
-                            //for (int i = 0; i < @params.Length; i++)
-                            //{
-                            //    paramList[i] = ServiceProvider.GetService(@params[i].ParameterType);
-                            //}
-
-                            IDeviceProvider plugin = (IDeviceProvider)Activator.CreateInstance(item, paramList);
-                            DeviceProviders.Add(plugin);
-
-                            break;
-                        }
-                        catch { }
-                    }
-                }
-            }
-
-            foreach (ICoreDeviceProvider deviceProvider in CoreDeviceProviders)
-            {
-                deviceProvider.DeviceAdded += DeviceAdded;
-                deviceProvider.DeviceRemoved += DeviceRemoved;
-            }
+            deviceManager = new ExtendInput.DeviceManager();
+            deviceManager.ControllerAdded += OnControllerAdded;
+            deviceManager.ControllerRemoved += OnControllerRemoved;
         }
 
-        private void DeviceAdded(object sender, IDevice e)
+        private void OnControllerAdded(object sender, ExtendInput.Controller.IController e)
         {
-            foreach (IDeviceProvider factory in DeviceProviders)
-            {
-                IController d = factory.NewDevice(e);
-                if(d != null)
-                {
-                    ControllerChangeEventHandler threadSafeEventHandler = ControllerAdded;
-                    threadSafeEventHandler?.Invoke(this, d);
-                }
-            }
+            IController d = null;
+            if (e is ExtendInput.Controller.SteamController)
+                d = new SteamController(e as ExtendInput.Controller.SteamController);
+            if (e is ExtendInput.Controller.DualShock4Controller)
+                d = new DualShock4Controller(e as ExtendInput.Controller.DualShock4Controller);
+            if (e is ExtendInput.Controller.XInputController)
+                d = new XInputController(e as ExtendInput.Controller.XInputController);
+            //if (d == null)
+            //    d = new GenericController(e);
+
+            ControllerChangeEventHandler threadSafeEventHandler = ControllerAdded;
+            threadSafeEventHandler?.Invoke(this, d);
         }
 
-        private void DeviceRemoved(object sender, IDevice e)
+        private void OnControllerRemoved(object sender, ExtendInput.Providers.IDevice e)
         {
             DeviceChangeEventHandler threadSafeEventHandler = ControllerRemoved;
             threadSafeEventHandler?.Invoke(this, e);
@@ -104,13 +44,10 @@ namespace ExtendInput
 
         public void ScanNow()
         {
-            foreach (ICoreDeviceProvider provider in CoreDeviceProviders)
-            {
-                provider.ScanNow();
-            }
+            deviceManager.ScanNow();
         }
     }
 
     public delegate void ControllerChangeEventHandler(object sender, IController e);
-    public delegate void DeviceChangeEventHandler(object sender, IDevice e);
+    public delegate void DeviceChangeEventHandler(object sender, ExtendInput.Providers.IDevice e);
 }
