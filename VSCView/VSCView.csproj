@@ -79,11 +79,11 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomFleeFunctions.cs" />
-    <Compile Include="ExtendInput\Controller\DualShock4Controller.cs" />
-    <Compile Include="ExtendInput\Controller\SteamController.cs" />
-    <Compile Include="ExtendInput\Controller\XInputController.cs" />
-    <Compile Include="ExtendInput\DeviceManager.cs" />
-    <Compile Include="IController.cs" />
+    <Compile Include="Controller\DualShock4Controller.cs" />
+    <Compile Include="Controller\SteamController.cs" />
+    <Compile Include="Controller\XInputController.cs" />
+    <Compile Include="DeviceManager.cs" />
+    <Compile Include="Controller\IController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

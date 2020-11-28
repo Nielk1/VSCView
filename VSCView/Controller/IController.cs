@@ -1,7 +1,7 @@
 ﻿using ExtendInput.Providers;
 using System.Drawing;
 
-namespace VSCView
+namespace VSCView.Controller
 {
     /*public enum EConnectionType
     {
