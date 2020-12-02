@@ -28,10 +28,15 @@ namespace ThemeFixer
         {
             if ((version ?? 0) == 0)
             {
-                children?.ForEach(dr => dr.Update());
+                children?.ForEach(dr => dr.Update(version ?? 0));
                 version = 1;
             }
 
+            //if ((version ?? 0) == 1)
+            //{
+            //    children?.ForEach(dr => dr.Update(1);
+            //    version = 2;
+            //}
         }
     }
 
@@ -142,134 +147,146 @@ namespace ThemeFixer
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public List<UI_Item> children { get; set; }
 
-        public void Update()
+        public void Update(int version)
         {
-            if (scaleFactorX.HasValue) scaleFactorX *= Int16.MaxValue;
-            if (scaleFactorY.HasValue) scaleFactorY *= Int16.MaxValue;
-            if (min != null)
+            switch (version)
             {
-                try
-                {
-                    min = (float.Parse(min) / byte.MaxValue).ToString(CultureInfo.InvariantCulture);
-                }
-                catch { }
-            }
-            if (max != null)
-            {
-                try
-                {
-                    max = (float.Parse(max) / byte.MaxValue).ToString(CultureInfo.InvariantCulture);
-                }
-                catch { }
-            }
-
-            // remove rotation from trailpads as we unrotate the raw data now.
-            // also note that 30 deg was wrong, the correct value is actually 15 deg.
-
-            if (rot.HasValue)
-            {
-                bool AnyChildIsTrailpad = type == "trailpad";
-                if (!AnyChildIsTrailpad)
-                {
-                    Queue<UI_Item> TrailpadDive = new Queue<UI_Item>();
-                    children?.ForEach(dr => TrailpadDive.Enqueue(dr));
-                    while (TrailpadDive.Count > 0)
+                case 0:
                     {
-                        UI_Item tmp = TrailpadDive.Dequeue();
-                        if (tmp.type == "trailpad")
+                        if (scaleFactorX.HasValue) scaleFactorX *= Int16.MaxValue;
+                        if (scaleFactorY.HasValue) scaleFactorY *= Int16.MaxValue;
+                        if (min != null)
                         {
-                            AnyChildIsTrailpad = true;
-                            break;
+                            try
+                            {
+                                min = (float.Parse(min) / byte.MaxValue).ToString(CultureInfo.InvariantCulture);
+                            }
+                            catch { }
                         }
-                        children?.ForEach(dr => TrailpadDive.Enqueue(dr));
+                        if (max != null)
+                        {
+                            try
+                            {
+                                max = (float.Parse(max) / byte.MaxValue).ToString(CultureInfo.InvariantCulture);
+                            }
+                            catch { }
+                        }
+
+                        // remove rotation from trailpads as we unrotate the raw data now.
+                        // also note that 30 deg was wrong, the correct value is actually 15 deg.
+
+                        if (rot.HasValue)
+                        {
+                            bool AnyChildIsTrailpad = type == "trailpad";
+                            if (!AnyChildIsTrailpad)
+                            {
+                                Queue<UI_Item> TrailpadDive = new Queue<UI_Item>();
+                                children?.ForEach(dr => TrailpadDive.Enqueue(dr));
+                                while (TrailpadDive.Count > 0)
+                                {
+                                    UI_Item tmp = TrailpadDive.Dequeue();
+                                    if (tmp.type == "trailpad")
+                                    {
+                                        AnyChildIsTrailpad = true;
+                                        break;
+                                    }
+                                    children?.ForEach(dr => TrailpadDive.Enqueue(dr));
+                                }
+                            }
+
+                            if (AnyChildIsTrailpad)
+                            {
+                                if (rot.HasValue && rot.Value == 15)
+                                    rot = null;
+                                if (rot.HasValue && rot.Value == -15)
+                                    rot = null;
+                            }
+                        }
+
+                        if (type == "pbar")
+                            center = true; // old behavior is the new centered behavior
+
+                        if (type == "showhide" || type == "trailpad")
+                        {
+                            if (!string.IsNullOrWhiteSpace(inputName))
+                            {
+                                if (string.IsNullOrWhiteSpace(calc))
+                                {
+                                    if (invert.HasValue && invert.Value)
+                                    {
+                                        calc = @"not tobool(" + inputName + ")";
+                                    }
+                                    else
+                                    {
+                                        calc = inputName;
+                                    }
+                                }
+                                inputName = null;
+                                invert = null;
+                            }
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(inputName))
+                        {
+                            inputName = FixDigitalInputName(inputName);
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(calc))
+                        {
+                            input = string.Join(" AND ", calc
+                                .Split(new string[] { "&&" }, StringSplitOptions.None)
+                                .Select(raw =>
+                                {
+                                    string trimed = raw.Trim();
+                                    bool invert = trimed.StartsWith("!");
+                                    trimed = trimed.TrimStart('!');
+                                    return (invert ? "NOT " : string.Empty) + FixDigitalInputName(trimed);
+                                }));
+                            calc = null;
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(axisName))
+                        {
+                            axisName = FixAnalogInputName(axisName);
+                        }
+                        if (!string.IsNullOrWhiteSpace(axisNameX))
+                        {
+                            axisNameX = FixAnalogInputName(axisNameX);
+                            inputX = axisNameX;
+                            if (scaleFactorX.HasValue)
+                                inputX += " * " + scaleFactorX.Value.ToString(CultureInfo.InvariantCulture);
+                            axisNameX = null;
+                            scaleFactorX = null;
+                        }
+                        if (!string.IsNullOrWhiteSpace(axisNameY))
+                        {
+                            axisNameY = FixAnalogInputName(axisNameY);
+                            inputY = axisNameY;
+                            if (scaleFactorY.HasValue)
+                                inputY += " * " + scaleFactorY.Value.ToString(CultureInfo.InvariantCulture);
+                            axisNameY = null;
+                            scaleFactorY = null;
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(axisName))
+                        {
+                            axisName = FixAnalogInputName(axisName);
+                            input = axisName;
+                            //if (scaleFactor.HasValue)
+                            //    input += " * " + scaleFactor.Value;
+                            axisName = null;
+                            //scaleFactor = null;
+                        }
+
+                        children?.ForEach(dr => dr.Update(version));
                     }
-                }
-
-                if (AnyChildIsTrailpad)
-                {
-                    if (rot.HasValue && rot.Value == 15)
-                        rot = null;
-                    if (rot.HasValue && rot.Value == -15)
-                        rot = null;
-                }
-            }
-
-            if (type == "pbar")
-                center = true; // old behavior is the new centered behavior
-
-            if (type == "showhide" || type == "trailpad")
-            {
-                if (!string.IsNullOrWhiteSpace(inputName))
-                {
-                    if (string.IsNullOrWhiteSpace(calc))
+                    break;
+                case 1:
                     {
-                        if (invert.HasValue && invert.Value)
-                        {
-                            calc = @"not tobool(" + inputName + ")";
-                        }
-                        else
-                        {
-                            calc = inputName;
-                        }
+
                     }
-                    inputName = null;
-                    invert = null;
-                }
+                    break;
             }
-
-            if (!string.IsNullOrWhiteSpace(inputName))
-            {
-                inputName = FixDigitalInputName(inputName);
-            }
-
-            if (!string.IsNullOrWhiteSpace(calc))
-            {
-                input = string.Join(" AND ", calc
-                    .Split(new string[] { "&&" }, StringSplitOptions.None)
-                    .Select(raw =>
-                    {
-                        string trimed = raw.Trim();
-                        bool invert = trimed.StartsWith("!");
-                        trimed = trimed.TrimStart('!');
-                        return (invert ? "NOT " : string.Empty) + FixDigitalInputName(trimed);
-                    }));
-                calc = null;
-            }
-
-            if (!string.IsNullOrWhiteSpace(axisName))
-            {
-                axisName = FixAnalogInputName(axisName);
-            }
-            if (!string.IsNullOrWhiteSpace(axisNameX))
-            {
-                axisNameX = FixAnalogInputName(axisNameX);
-                inputX = axisNameX;
-                if (scaleFactorX.HasValue)
-                    inputX += " * " + scaleFactorX.Value.ToString(CultureInfo.InvariantCulture);
-                axisNameX = null;
-                scaleFactorX = null;
-            }
-            if (!string.IsNullOrWhiteSpace(axisNameY))
-            {
-                axisNameY = FixAnalogInputName(axisNameY);
-                inputY = axisNameY;
-                if (scaleFactorY.HasValue)
-                    inputY += " * " + scaleFactorY.Value.ToString(CultureInfo.InvariantCulture);
-                axisNameY = null;
-                scaleFactorY = null;
-            }
-
-            if (!string.IsNullOrWhiteSpace(axisName))
-            {
-                axisName = FixAnalogInputName(axisName);
-                input = axisName;
-                //if (scaleFactor.HasValue)
-                //    input += " * " + scaleFactor.Value;
-                axisName = null;
-                //scaleFactor = null;
-            }
-
-            children?.ForEach(dr => dr.Update());
         }
 
         private string FixDigitalInputName(string inputName)
