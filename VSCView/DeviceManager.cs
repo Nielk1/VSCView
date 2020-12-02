@@ -36,7 +36,7 @@ namespace VSCView
             threadSafeEventHandler?.Invoke(this, d);
         }
 
-        private void OnControllerRemoved(object sender, ExtendInput.Providers.IDevice e)
+        private void OnControllerRemoved(object sender, ExtendInput.DeviceProvider.IDevice e)
         {
             DeviceChangeEventHandler threadSafeEventHandler = ControllerRemoved;
             threadSafeEventHandler?.Invoke(this, e);
@@ -49,5 +49,5 @@ namespace VSCView
     }
 
     public delegate void ControllerChangeEventHandler(object sender, IController e);
-    public delegate void DeviceChangeEventHandler(object sender, ExtendInput.Providers.IDevice e);
+    public delegate void DeviceChangeEventHandler(object sender, ExtendInput.DeviceProvider.IDevice e);
 }

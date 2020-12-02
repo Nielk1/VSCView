@@ -1,6 +1,6 @@
 ﻿using ExtendInput;
 using ExtendInput.Controls;
-using ExtendInput.Providers;
+using ExtendInput.DeviceProvider;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
@@ -326,7 +326,7 @@ namespace VSCView
             }
         }
 
-        private void DeviceManager_ControllerRemoved(object sender, ExtendInput.Providers.IDevice e)
+        private void DeviceManager_ControllerRemoved(object sender, ExtendInput.DeviceProvider.IDevice e)
         {
             lock(ControllerMemoHack)
             {
