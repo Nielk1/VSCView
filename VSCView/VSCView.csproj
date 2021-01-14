@@ -163,6 +163,12 @@
     <None Include="themes\dualshock4\default\theme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="themes\steamcontroller\glass\nogyro.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\steamcontroller\glass\theme.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="themes\steamcontroller\greyminimal\accel.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -658,6 +664,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\steamcontroller\default\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\glass\base.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\glass\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\steamcontroller\glass\stick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\steamcontroller\greyminimal\base.png">
