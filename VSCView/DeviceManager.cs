@@ -27,6 +27,8 @@ namespace VSCView
                 d = new SteamController(e as ExtendInput.Controller.SteamController);
             if (e is ExtendInput.Controller.DualShock4Controller)
                 d = new DualShock4Controller(e as ExtendInput.Controller.DualShock4Controller);
+            if (e is ExtendInput.Controller.DualSenseController)
+                d = new DualSenseController(e as ExtendInput.Controller.DualSenseController);
             if (e is ExtendInput.Controller.XInputController)
                 d = new XInputController(e as ExtendInput.Controller.XInputController);
             //if (d == null)
