@@ -110,19 +110,22 @@
     <None Include="themes\dualshock4\default\nogyro_v2.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="themes\dualshock4\dmc5\all_v1.json">
+    <None Include="themes\dualshock4\al2009man\dmc5\all_v1.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="themes\dualshock4\dmc5\all_v2.json">
+    <None Include="themes\dualshock4\al2009man\dmc5\debug.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="themes\dualshock4\dmc5\nogyro_v2.json">
+    <None Include="themes\dualshock4\al2009man\dmc5\all_v2.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="themes\dualshock4\dmc5\nogyro_v1.json">
+    <None Include="themes\dualshock4\al2009man\dmc5\nogyro_v2.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="themes\dualshock4\dmc5\theme.json">
+    <None Include="themes\dualshock4\al2009man\dmc5\nogyro_v1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="themes\dualshock4\al2009man\dmc5\theme.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="themes\steamcontrollerchell\default\all.json">
@@ -577,6 +580,12 @@
     <None Include="Resources\icon_chell.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="themes\dualshock4\al2009man\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\dualshock4\al2009man\name.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="themes\dualshock4\default\DS4-Touchpad-Cick.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -664,76 +673,76 @@
     <Content Include="themes\dualshock4\default\ps4_gyro-accel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_ right_triggers.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_ right_triggers.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_analog_press.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_analog_press.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_circle.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_circle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_cross.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_cross.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_dpad_down.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_dpad_down.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_dpad_left.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_dpad_left.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_dpad_right.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_dpad_right.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_dpad_up.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_dpad_up.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_gyro-acel.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_gyro-acel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_gyro_down.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_gyro_down.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_gyro_left.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_gyro_left.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_gyro_right.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_gyro_right.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_gyro_up.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_gyro_up.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_home_button.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_home_button.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_left_bumpers.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_left_bumpers.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_left_triggers.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_left_triggers.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_padheat.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_padheat.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_right_bumpers.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_right_bumpers.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_share-option.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_share-option.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_square.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_square.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_touchpad.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_touchpad.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_touchpad_touch.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_touchpad_touch.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\dmc5_triangle.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\dmc5_triangle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="themes\dualshock4\dmc5\icon.png">
+    <Content Include="themes\dualshock4\al2009man\dmc5\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="themes\dualshock4\icon.png">

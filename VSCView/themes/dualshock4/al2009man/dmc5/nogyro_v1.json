@@ -1,7 +1,7 @@
 {
-  "name": "All (DS4 V2)",
+  "name": "No Gyro (DS4 V1)",
   "width": 1207,
-  "height": 793,
+  "height": 660,
   "version": 1,
   "children": [
     {
@@ -15,7 +15,7 @@
           "width": 319.0,
           "height": 70.0,
           "center": true,
-          "inputY": "triggers:l:analog * 7",
+          "inputY": "triggers:l:analog * 15",
           "children": [
             {
               "type": "image",
@@ -50,7 +50,7 @@
           "width": 73.0,
           "height": 38.0,
           "center": true,
-          "inputY": "triggers:r:analog * 7",
+          "inputY": "triggers:r:analog * 15",
           "children": [
             {
               "type": "image",
@@ -82,7 +82,7 @@
     },
     {
       "type": "image",
-      "image": "\\dualshock4\\default\\DS4_V2_base.png",
+      "image": "\\dualshock4\\default\\DS4_V1_base.png",
       "x": 602.0,
       "y": 324.0,
       "width": 1114.0,
@@ -402,7 +402,7 @@
               "width": 36.0,
               "height": 36.0,
               "input": "touch_center:0:touch OR touch_left:0:touch",
-              "inputX": "(touch_center:0:x * 184) + touch_left:0:touch * (touch_left:0:x * 184 - 184)",
+              "inputX": "(touch_center:0:x * 180) + touch_left:0:touch * (touch_left:0:x * 180 - 180)",
               "inputY": "(touch_center:0:y + touch_left:0:y) * 77",
               "length": 30,
               "children": [
@@ -451,25 +451,6 @@
                   ]
                 }
               ]
-            }
-          ]
-        },
-        {
-          "x": 0.0,
-          "y": 0.0,
-          "children": [
-            {
-              "type": "basic3d1",
-              "image": "dmc5_gyro-acel.png",
-              "x": 0.0,
-              "y": 323.0,
-              "width": 259.0,
-              "height": 171.0,
-              "mode": "accel",
-              "shadowl": "dmc5_gyro_up.png",
-              "shadowr": "dmc5_gyro_right.png",
-              "shadowu": "dmc5_gyro_left.png",
-              "shadowd": "dmc5_gyro_down.png"
             }
           ]
         }

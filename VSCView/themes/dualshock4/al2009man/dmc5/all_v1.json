@@ -1,7 +1,7 @@
 {
-  "name": "No Gyro (DS4 V1)",
+  "name": "All (DS4 V1)",
   "width": 1207,
-  "height": 660,
+  "height": 793,
   "version": 1,
   "children": [
     {
@@ -15,7 +15,7 @@
           "width": 319.0,
           "height": 70.0,
           "center": true,
-          "inputY": "triggers:l:analog * 7",
+          "inputY": "triggers:l:analog * 15",
           "children": [
             {
               "type": "image",
@@ -24,7 +24,9 @@
               "y": 0.0,
               "width": 139.0,
               "height": 70.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             },
             {
               "type": "showhide",
@@ -37,7 +39,9 @@
                   "y": 0.0,
                   "width": 154.0,
                   "height": 101.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             }
@@ -50,7 +54,7 @@
           "width": 73.0,
           "height": 38.0,
           "center": true,
-          "inputY": "triggers:r:analog * 7",
+          "inputY": "triggers:r:analog * 15",
           "children": [
             {
               "type": "image",
@@ -59,7 +63,9 @@
               "y": 0.0,
               "width": 140.0,
               "height": 70.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             },
             {
               "type": "showhide",
@@ -72,7 +78,9 @@
                   "y": 0.0,
                   "width": 154.0,
                   "height": 101.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             }
@@ -88,6 +96,8 @@
       "width": 1114.0,
       "height": 594.0,
       "center": true,
+      "winform.smoothing": "Default",
+      "winform.interpolation": "High",
       "children": [
         {
           "x": 0.0,
@@ -104,7 +114,9 @@
                   "y": 73.0,
                   "width": 101.0,
                   "height": 95.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -119,7 +131,9 @@
                   "y": 7.0,
                   "width": 100.0,
                   "height": 94.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -134,7 +148,9 @@
                   "y": 5.4,
                   "width": 101.0,
                   "height": 95.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -149,7 +165,9 @@
                   "y": -63.0,
                   "width": 101.0,
                   "height": 93.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             }
@@ -170,7 +188,9 @@
                   "y": 51.0,
                   "width": 90.0,
                   "height": 102.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -185,7 +205,9 @@
                   "y": 8.0,
                   "width": 101.0,
                   "height": 90.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -200,7 +222,9 @@
                   "y": 6.0,
                   "width": 104.0,
                   "height": 89.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -215,7 +239,9 @@
                   "y": -38.0,
                   "width": 90.0,
                   "height": 98.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             }
@@ -236,7 +262,9 @@
                   "y": 119.0,
                   "width": 72.0,
                   "height": 53.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -251,7 +279,9 @@
                   "y": -91.0,
                   "width": 62.0,
                   "height": 92.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -266,7 +296,9 @@
                   "y": -90.0,
                   "width": 62.0,
                   "height": 92.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             }
@@ -287,7 +319,9 @@
                   "y": -207.0,
                   "width": 177.0,
                   "height": 95.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -302,7 +336,9 @@
                   "y": -207.0,
                   "width": 177.0,
                   "height": 95.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             }
@@ -319,7 +355,9 @@
               "y": 135.0,
               "width": 175.0,
               "height": 158.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             }
           ]
         },
@@ -337,7 +375,9 @@
               "y": 0.0,
               "width": 121.0,
               "height": 108.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             }
           ]
         },
@@ -352,7 +392,9 @@
               "y": 135.0,
               "width": 175.0,
               "height": 158.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             }
           ]
         },
@@ -370,7 +412,9 @@
               "y": 0.0,
               "width": 121.0,
               "height": 108.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             }
           ]
         },
@@ -385,7 +429,9 @@
               "y": -75.0,
               "width": 387.0,
               "height": 242.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             }
           ]
         },
@@ -402,7 +448,7 @@
               "width": 36.0,
               "height": 36.0,
               "input": "touch_center:0:touch OR touch_left:0:touch",
-              "inputX": "(touch_center:0:x * 184) + touch_left:0:touch * (touch_left:0:x * 184 - 184)",
+              "inputX": "(touch_center:0:x * 180) + touch_left:0:touch * (touch_left:0:x * 180 - 180)",
               "inputY": "(touch_center:0:y + touch_left:0:y) * 77",
               "length": 30,
               "children": [
@@ -417,7 +463,9 @@
                       "y": 0.0,
                       "width": 50.0,
                       "height": 50.0,
-                      "center": true
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
                     }
                   ]
                 }
@@ -446,11 +494,32 @@
                       "y": 0.0,
                       "width": 50.0,
                       "height": 50.0,
-                      "center": true
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
                     }
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "basic3d1",
+              "image": "dmc5_gyro-acel.png",
+              "x": 0.0,
+              "y": 323.0,
+              "width": 259.0,
+              "height": 171.0,
+              "mode": "accel",
+              "shadowl": "dmc5_gyro_up.png",
+              "shadowr": "dmc5_gyro_right.png",
+              "shadowu": "dmc5_gyro_left.png",
+              "shadowd": "dmc5_gyro_down.png"
             }
           ]
         }

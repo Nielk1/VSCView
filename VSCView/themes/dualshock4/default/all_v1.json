@@ -15,7 +15,7 @@
           "width": 319.0,
           "height": 70.0,
           "center": true,
-          "inputY": "triggers:l:analog * 7",
+          "inputY": "triggers:l:analog * 15",
           "children": [
             {
               "type": "image",
@@ -24,7 +24,10 @@
               "y": 0.0,
               "width": 139.0,
               "height": 70.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
+
             },
             {
               "type": "showhide",
@@ -37,7 +40,9 @@
                   "y": 0.0,
                   "width": 137.0,
                   "height": 78.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             }
@@ -50,7 +55,7 @@
           "width": 73.0,
           "height": 38.0,
           "center": true,
-          "inputY": "triggers:r:analog * 7",
+          "inputY": "triggers:r:analog * 15",
           "children": [
             {
               "type": "image",
@@ -59,7 +64,9 @@
               "y": 0.0,
               "width": 140.0,
               "height": 70.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             },
             {
               "type": "showhide",
@@ -72,7 +79,9 @@
                   "y": 0.0,
                   "width": 140.0,
                   "height": 80.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             }
@@ -88,6 +97,8 @@
       "width": 1114.0,
       "height": 594.0,
       "center": true,
+      "winform.smoothing": "Default",
+      "winform.interpolation": "High",
       "children": [
         {
           "x": 0.0,
@@ -104,7 +115,9 @@
                   "y": 76.0,
                   "width": 77.0,
                   "height": 70.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -119,7 +132,9 @@
                   "y": 7.0,
                   "width": 77.0,
                   "height": 70.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -134,7 +149,9 @@
                   "y": 6.0,
                   "width": 77.0,
                   "height": 70.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -149,7 +166,9 @@
                   "y": -62.0,
                   "width": 77.0,
                   "height": 70.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             }
@@ -170,7 +189,9 @@
                   "y": 53.0,
                   "width": 66.0,
                   "height": 76.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -185,7 +206,9 @@
                   "y": 8.0,
                   "width": 81.0,
                   "height": 63.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -200,7 +223,9 @@
                   "y": 9.0,
                   "width": 81.0,
                   "height": 63.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -215,7 +240,9 @@
                   "y": -40.0,
                   "width": 66.0,
                   "height": 72.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             }
@@ -236,7 +263,9 @@
                   "y": 120.0,
                   "width": 63.0,
                   "height": 44.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -251,7 +280,9 @@
                   "y": -94.0,
                   "width": 40.0,
                   "height": 64.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -266,7 +297,9 @@
                   "y": -94.0,
                   "width": 40.0,
                   "height": 64.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             }
@@ -287,7 +320,9 @@
                   "y": -207.0,
                   "width": 146.0,
                   "height": 73.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             },
@@ -302,7 +337,9 @@
                   "y": -207.0,
                   "width": 146.0,
                   "height": 73.0,
-                  "center": true
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
                 }
               ]
             }
@@ -319,7 +356,9 @@
               "y": 135.0,
               "width": 149.0,
               "height": 130.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             }
           ]
         },
@@ -337,7 +376,9 @@
               "y": 0.0,
               "width": 121.0,
               "height": 108.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             }
           ]
         },
@@ -352,7 +393,9 @@
               "y": 135.0,
               "width": 149.0,
               "height": 130.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             }
           ]
         },
@@ -370,7 +413,9 @@
               "y": 0.0,
               "width": 121.0,
               "height": 108.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             }
           ]
         },
@@ -385,13 +430,15 @@
               "y": -75.0,
               "width": 374.0,
               "height": 225.0,
-              "center": true
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
             }
           ]
         },
         {
           "x": 0.0,
-          "y": -46.0,
+          "y": -43.0,
           "rot": 0.0,
           "children": [
             {
@@ -402,9 +449,9 @@
               "width": 36.0,
               "height": 36.0,
               "input": "touch_center:0:touch OR touch_left:0:touch",
-              "inputX": "(touch_center:0:x * 184) + touch_left:0:touch * (touch_left:0:x * 184 - 184)",
-              "inputY": "(touch_center:0:y + touch_left:0:y) * 77",
-              "length": 30,
+              "inputX": "(touch_center:0:x * 180) + touch_left:0:touch * (touch_left:0:x * 180 - 180)",
+              "inputY": "(touch_center:0:y + touch_left:0:y) * 76",
+              "length": 76,
               "children": [
                 {
                   "type": "showhide",
@@ -417,7 +464,9 @@
                       "y": 0.0,
                       "width": 50.0,
                       "height": 50.0,
-                      "center": true
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
                     }
                   ]
                 }
@@ -431,9 +480,9 @@
               "width": 36.0,
               "height": 36.0,
               "input": "touch_center:1:touch OR touch_right:0:touch",
-              "inputX": "(touch_center:1:x * 184) + touch_right:0:touch * (touch_right:0:x * 184 + 184)",
-              "inputY": "(touch_center:1:y + touch_right:0:y) * 77",
-              "length": 30,
+              "inputX": "(touch_center:1:x * 180) + touch_right:0:touch * (touch_right:0:x * 180 + 180)",
+              "inputY": "(touch_center:1:y + touch_right:0:y) * 76",
+              "length": 76,
               "children": [
                 {
                   "type": "showhide",
@@ -446,7 +495,9 @@
                       "y": 0.0,
                       "width": 50.0,
                       "height": 50.0,
-                      "center": true
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
                     }
                   ]
                 }
