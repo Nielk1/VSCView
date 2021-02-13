@@ -72,6 +72,11 @@ namespace VSCView
             return default(bool);
         }
 
+        public static long UnixTimeMs()
+        {
+            return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        }
+
         /*public static T IIf<T>(bool condition, T t, T f) { if (condition) return t; return f; }
         public static int IIf(bool condition, int t, int f) { if (condition) return t; return f; }
         public static float IIf(bool condition, float t, float f) { if (condition) return t; return f; }
