@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ExtendInput.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using VSCView.Controller;
 
 namespace VSCView
 {
@@ -20,22 +20,10 @@ namespace VSCView
             deviceManager.ControllerRemoved += OnControllerRemoved;
         }
 
-        private void OnControllerAdded(object sender, ExtendInput.Controller.IController e)
+        private void OnControllerAdded(object sender, IController e)
         {
-            IController d = null;
-            if (e is ExtendInput.Controller.SteamController)
-                d = new SteamController(e as ExtendInput.Controller.SteamController);
-            if (e is ExtendInput.Controller.DualShock4Controller)
-                d = new DualShock4Controller(e as ExtendInput.Controller.DualShock4Controller);
-            if (e is ExtendInput.Controller.DualSenseController)
-                d = new DualSenseController(e as ExtendInput.Controller.DualSenseController);
-            if (e is ExtendInput.Controller.XInputController)
-                d = new XInputController(e as ExtendInput.Controller.XInputController);
-            //if (d == null)
-            //    d = new GenericController(e);
-
             ControllerChangeEventHandler threadSafeEventHandler = ControllerAdded;
-            threadSafeEventHandler?.Invoke(this, d);
+            threadSafeEventHandler?.Invoke(this, e);
         }
 
         private void OnControllerRemoved(object sender, ExtendInput.DeviceProvider.IDevice e)

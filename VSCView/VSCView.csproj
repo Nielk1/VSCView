@@ -78,13 +78,8 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controller\DualSenseController.cs" />
     <Compile Include="CustomFleeFunctions.cs" />
-    <Compile Include="Controller\DualShock4Controller.cs" />
-    <Compile Include="Controller\SteamController.cs" />
-    <Compile Include="Controller\XInputController.cs" />
     <Compile Include="DeviceManager.cs" />
-    <Compile Include="Controller\IController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -13,7 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
-using VSCView.Controller;
+using ExtendInput.Controller;
 
 namespace VSCView
 {

@@ -1,4 +1,5 @@
 ﻿using ExtendInput;
+using ExtendInput.Controller;
 using ExtendInput.Controls;
 using ExtendInput.DeviceProvider;
 using Microsoft.Win32;
@@ -13,7 +14,6 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VSCView.Controller;
 
 namespace VSCView
 {
@@ -317,7 +317,66 @@ namespace VSCView
 
                     itm.ImageScaling = ToolStripItemImageScaling.None;
                     itm.Tag = controller;
-                    itm.Image = controller.GetIcon();
+
+                    {
+                        Image ConnectionImg = null;
+                        Image ControllerImg = null;
+                        if (controller.ConnectionTypeCode != null)
+                            foreach (string conType in controller.ConnectionTypeCode)
+                            {
+                                if (conType == "USB_WIRE")
+                                {
+                                    ConnectionImg = VSCView.Properties.Resources.icon_usb;
+                                    break;
+                                }
+                                if (conType == "BT")
+                                {
+                                    ConnectionImg = VSCView.Properties.Resources.icon_bt;
+                                    break;
+                                }
+                                if (conType == "DS4_DONGLE")
+                                {
+                                    ConnectionImg = VSCView.Properties.Resources.icon_ds4_dongle;
+                                    break;
+                                }
+                                if (conType == "SC_DONGLE")
+                                {
+                                    ConnectionImg = VSCView.Properties.Resources.icon_wireless;
+                                    break;
+                                }
+                            }
+
+                        if (controller.ControllerTypeCode != null)
+                            foreach (string conType in controller.ControllerTypeCode)
+                            {
+                                if (conType == "DS4")
+                                {
+                                    ControllerImg = VSCView.Properties.Resources.icon_ds4;
+                                    break;
+                                }
+                                if (conType == "SC")
+                                {
+                                    ControllerImg = VSCView.Properties.Resources.icon_sc;
+                                    break;
+                                }
+                                if (conType == "SC_CHELL")
+                                {
+                                    ControllerImg = VSCView.Properties.Resources.icon_chell;
+                                    break;
+                                }
+                            }
+
+                        if (ConnectionImg != null || ControllerImg != null)
+                        {
+                            Image Icon = new Bitmap(32 + 4, 16);
+                            Graphics g = Graphics.FromImage(Icon);
+                            if (ConnectionImg != null)
+                                g.DrawImage(ConnectionImg, 0, 0, 16, 16);
+                            if (ControllerImg != null)
+                                g.DrawImage(ControllerImg, 16 + 4, 0, 16, 16);
+                            itm.Image = Icon;
+                        }
+                    }
 
                     // load the first controller in the list if it exists
                     //if (firstload && i == 0 && Controllers[i] != null)
