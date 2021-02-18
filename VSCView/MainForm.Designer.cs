@@ -46,6 +46,7 @@
             this.lblHint1 = new System.Windows.Forms.Label();
             this.lblHint2 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.tsmiManualControllers = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             this.toolStripSeparator1,
             this.tsmiReloadThemes,
             this.tsmiReloadControllers,
+            this.tsmiManualControllers,
             this.toolStripSeparator2,
             this.hIDGuardianWhitelistToolStripMenuItem,
             this.tsmiSetBackgroundColor,
@@ -67,7 +69,7 @@
             this.minimizeToolStripMenuItem,
             this.tsmiExit});
             this.cmsMain.Name = "cmsMain";
-            this.cmsMain.Size = new System.Drawing.Size(195, 242);
+            this.cmsMain.Size = new System.Drawing.Size(195, 286);
             // 
             // tsmiTheme
             // 
@@ -175,6 +177,12 @@
             // 
             this.colorDialog1.Color = System.Drawing.Color.Lime;
             // 
+            // tsmiManualControllers
+            // 
+            this.tsmiManualControllers.Name = "tsmiManualControllers";
+            this.tsmiManualControllers.Size = new System.Drawing.Size(194, 22);
+            this.tsmiManualControllers.Text = "Manual Controllers";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,5 +224,6 @@
         private System.Windows.Forms.ToolStripMenuItem minimizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hIDGuardianWhitelistToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiResetWindowSize;
+        private System.Windows.Forms.ToolStripMenuItem tsmiManualControllers;
     }
 }

@@ -85,6 +85,28 @@ namespace VSCView
 
             DeviceManager.ControllerAdded += DeviceManager_ControllerAdded;
             DeviceManager.ControllerRemoved += DeviceManager_ControllerRemoved;
+
+            foreach(IDeviceProvider provider in DeviceManager.GetManualDeviceProviders())
+            {
+                ToolStripItem itm = tsmiManualControllers.DropDownItems.Add(provider.ToString(), null, LoadManualDevice);
+                itm.Tag = provider;
+            }
+        }
+
+        private void LoadManualDevice(object sender, EventArgs e)
+        {
+            IDeviceProvider Provider = null;
+            // differentiate between context selection and startup
+            if (sender is ToolStripItem)
+            {
+                ToolStripItem item = (ToolStripItem)sender;
+                Provider = (IDeviceProvider)item.Tag;
+            }
+
+            if (Provider == null)
+                return;
+
+            Provider.ManualTrigger();
         }
 
         /// <summary>
@@ -256,38 +278,6 @@ namespace VSCView
 
         private void LoadControllers(bool firstload)
         {
-            //tsmiController.DropDownItems.Clear();
-            //Controllers.ForEach(dr => dr.DeInitalize());
-            //Controllers.Clear();
-            //Controllers.AddRange(Factory.SelectMany(dr => dr.GetControllers()));
-
-            //for (int i = 0; i < Controllers.Count(); i++)
-            //{
-            //    ToolStripItem itm = tsmiController.DropDownItems.Add(Controllers[i].GetName(), null, LoadController);
-            //    IController c = Controllers[i];
-            //    Controllers[i].ControllerNameUpdated += () =>
-            //    {
-            //        try
-            //        {
-            //            if (this.Created && !this.Disposing && !this.IsDisposed)
-            //                this.Invoke(new Action(() =>
-            //                {
-            //                    itm.Text = c.GetName();
-            //                }));
-            //        }
-            //        catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
-            //    };
-            //    itm.Text = Controllers[i].GetName();
-
-            //    itm.ImageScaling = ToolStripItemImageScaling.None;
-            //    itm.Tag = Controllers[i];
-            //    itm.Image = Controllers[i].GetIcon();
-
-            //    // load the first controller in the list if it exists
-            //    if (firstload && i == 0 && Controllers[i] != null)
-            //        LoadController(Controllers[i], null);
-            //}
-
             DeviceManager.ScanNow();
         }
 

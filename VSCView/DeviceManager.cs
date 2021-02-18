@@ -1,4 +1,5 @@
 ﻿using ExtendInput.Controller;
+using ExtendInput.DeviceProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,11 @@ namespace VSCView
         public void ScanNow()
         {
             deviceManager.ScanNow();
+        }
+
+        public List<IDeviceProvider> GetManualDeviceProviders()
+        {
+            return deviceManager.GetManualDeviceProviders();
         }
     }
 
