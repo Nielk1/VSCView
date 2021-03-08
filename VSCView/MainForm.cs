@@ -291,7 +291,7 @@ namespace VSCView
                     ToolStripItem itm = tsmiController.DropDownItems.Add(controller.GetName(), null, LoadController);
                     IController c = controller;
                     ControllerMemoHack[c.DeviceHackRef.UniqueKey] = (controller, itm);
-                    controller.ControllerNameUpdated += () =>
+                    controller.ControllerMetadataUpdate += () =>
                     {
                         try
                         {
@@ -398,6 +398,7 @@ namespace VSCView
                     if (ControllerMemoHack.ContainsKey(e.UniqueKey))
                     {
                         ControllerMemoHack[e.UniqueKey].Item1.DeInitalize();
+                        ControllerMemoHack[e.UniqueKey].Item1.Dispose();
                         tsmiController.DropDownItems.Remove(ControllerMemoHack[e.UniqueKey].Item2);
                         ControllerMemoHack.Remove(e.UniqueKey);
                     }
@@ -536,7 +537,11 @@ namespace VSCView
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             ttimer?.Change(Timeout.Infinite, Timeout.Infinite);
-            ControllerMemoHack?.ToList()?.ForEach(dr => dr.Value.Item1.DeInitalize());
+            ControllerMemoHack?.ToList()?.ForEach(dr =>
+            {
+                dr.Value.Item1.DeInitalize();
+                dr.Value.Item1.Dispose();
+            });
         }
 
         private void MinimizeToolStripMenuItem_Click(object sender, EventArgs e)
