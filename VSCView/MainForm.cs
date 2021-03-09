@@ -288,7 +288,7 @@ namespace VSCView
             {
                 this.Invoke((MethodInvoker)delegate
                 {
-                    ToolStripItem itm = tsmiController.DropDownItems.Add(controller.Name, null, LoadController);
+                    ToolStripItem itm = tsmiController.DropDownItems.Add(controller.NameDetail, null, LoadController);
                     IController c = controller;
                     ControllerMemoHack[c.DeviceHackRef.UniqueKey] = (controller, itm);
                     controller.ControllerMetadataUpdate += () =>
@@ -298,13 +298,13 @@ namespace VSCView
                             if (this.Created && !this.Disposing && !this.IsDisposed)
                                 this.Invoke(new Action(() =>
                                 {
-                                    itm.Text = c.Name;
+                                    itm.Text = c.NameDetail;
                                     UpdateIcon(itm);
                                 }));
                         }
                         catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
                     };
-                    itm.Text = controller.Name;
+                    itm.Text = controller.NameDetail;
 
                     itm.ImageScaling = ToolStripItemImageScaling.None;
                     itm.Tag = controller;
