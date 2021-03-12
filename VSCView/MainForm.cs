@@ -288,7 +288,8 @@ namespace VSCView
             {
                 this.Invoke((MethodInvoker)delegate
                 {
-                    ToolStripItem itm = tsmiController.DropDownItems.Add(controller.NameDetail, null, LoadController);
+                    ToolStripMenuItem itm = new ToolStripMenuItem(controller.NameDetail, null, LoadController);
+                    tsmiController.DropDownItems.Add(itm);
                     IController c = controller;
                     ControllerMemoHack[c.DeviceHackRef.UniqueKey] = (controller, itm);
                     controller.ControllerMetadataUpdate += () =>
@@ -300,6 +301,7 @@ namespace VSCView
                                 {
                                     itm.Text = c.NameDetail;
                                     UpdateIcon(itm);
+                                    UpdateAlternateControllers(itm);
                                 }));
                         }
                         catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
@@ -310,6 +312,7 @@ namespace VSCView
                     itm.Tag = controller;
 
                     UpdateIcon(itm);
+                    UpdateAlternateControllers(itm);
 
                     // load the first controller in the list if it exists
                     //if (firstload && i == 0 && Controllers[i] != null)
@@ -387,6 +390,34 @@ namespace VSCView
             }
 
             oldIcon?.Dispose();
+        }
+
+        private void UpdateAlternateControllers(ToolStripMenuItem itm)
+        {
+            IController controller = (IController)itm.Tag;
+
+            itm.DropDownItems.Clear();
+            if(controller.HasSelectableAlternatives)
+            {
+                foreach(var kv in controller.Alternates)
+                {
+                    itm.DropDownItems.Add(kv.Value, null, SetActiveAlternateController).Tag = new Tuple<IController, string>(controller, kv.Key);
+                }
+            }
+        }
+
+        private void SetActiveAlternateController(object sender, EventArgs e)
+        {
+            // differentiate between context selection and startup
+            if (sender is ToolStripItem)
+            {
+                ToolStripItem item = (ToolStripItem)sender;
+                Tuple<IController, string> ctl = (Tuple<IController, string>)item.Tag;
+                new Thread(() =>
+                {
+                    ctl.Item1.SetActiveAlternateController(ctl.Item2);
+                }).Start();
+            }
         }
 
         private void DeviceManager_ControllerRemoved(object sender, ExtendInput.DeviceProvider.IDevice e)
