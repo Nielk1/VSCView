@@ -36,8 +36,9 @@ namespace VSCView
         Settings settings;
 
         DeviceManager DeviceManager;
+        int instanceNumber = 0;
 
-        public MainForm()
+        public MainForm(int instanceNumber = 0)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None; // no borders
@@ -57,6 +58,13 @@ namespace VSCView
             state = new ControllerState();
             // 5s lookback for smoothing
             sensorData = new SensorCollector(5, true);
+
+            this.instanceNumber = instanceNumber;
+
+            if (this.instanceNumber > 0)
+            {
+                this.Text = $"{this.Text} #{(instanceNumber + 1)}";
+            }
 
             LoadThemes();
             LoadSettings();
@@ -187,6 +195,10 @@ namespace VSCView
 
         private void LoadSettings()
         {
+            string filename = "settings.json";
+            if (instanceNumber > 0)
+                filename = $"settings.{instanceNumber}.json";
+
             if (!File.Exists("settings.json")) File.Create("settings.json").Close();
             settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json")) ?? new Settings();
         }
