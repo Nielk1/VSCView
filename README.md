@@ -5,15 +5,15 @@ The HID Library fork with crude edits you'll need to compile this project from s
 
 ## Themes
 * ﻿DualShock 4
-  * Default by Nielk1
+  * Default by Nielk1 
 * ﻿Steam Controller
   * Default by Nielk1
   * ahNOMinal 2 by [ahMEmon](https://www.twitch.tv/ahmemon)
   * Buh-Lack by [ahMEmon](https://www.twitch.tv/ahmemon)
   * Docteur Controller by [Docteur Controller](https://www.youtube.com/channel/UC1GoAgop-6tbftsU4qtpSOQ)
-  * Black Stencil by [ExistentialEgg](https://www.youtube.com/user/ExistentialEgg)
-  * Outline 2018 by [ExistentialEgg](https://www.youtube.com/user/ExistentialEgg)
-  * Outline 2019 by [ExistentialEgg](https://www.youtube.com/user/ExistentialEgg)
+  * Black Stencil by [RambleTan](https://www.youtube.com/channel/UCYI8ifruvIqVtAY3joqlpfw)
+  * Outline 2018 by [RambleTan](https://www.youtube.com/channel/UCYI8ifruvIqVtAY3joqlpfw)
+  * Outline 2019 by [RambleTan](https://www.youtube.com/channel/UCYI8ifruvIqVtAY3joqlpfw)
   * Grey Minimal by [CriticalComposer](https://www.youtube.com/c/criticalcomposer)
   * Line Art by [Ishmobile](https://www.youtube.com/channel/UCTAPOuAcWv9JGdiQsVVSxkQ)
   * Silly/Cat Paws by Nielk1
@@ -164,15 +164,15 @@ The HID Library fork with crude edits you'll need to compile this project from s
   * `l:stage2` - Stage2 0/1 left trigger
   * `r:stage2` - Stage2 0/1 right trigger
 * ControlDPad
-  * `n` - North button pressed 0/1
-  * `s` - South button pressed 0/1
-  * `e` - East button pressed 0/1
-  * `w` - West button pressed 0/1
+  * `s` - South button `(D-Pad Down)` pressed 0/1 
+  * `e` - East button `(D-Pad Right)` pressed 0/1 
+  * `w` - West button `(D-Pad Left)` pressed 0/1
+  * `n` - North button `(D-Pad Up)` pressed 0/1
 * ControlButtonQuad
-  * `n` - North button pressed 0/1
-  * `s` - South button pressed 0/1
-  * `e` - East button pressed 0/1
-  * `w` - West button pressed 0/1
+  * `s` - South button `(A for Steam Controller, ⨉ for PlayStation Controllers)` pressed 0/1
+  * `e` - East button `(B for Steam Controller, ○ for PlayStation Controllers)` pressed 0/1
+  * `w` - West button `(X for Steam Controller, □ for PlayStation Controllers)` pressed 0/1
+  * `n` - North button `(Y for Steam Controller, △ for PlayStation Controllers)` pressed 0/1
 * ControlButtonGrid (supports various sizes)
   * `width` - configured width of button grid
   * `height` - configured height of button grid
