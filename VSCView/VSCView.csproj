@@ -478,9 +478,6 @@
     <None Include="Resources\icon_usb.png" />
     <None Include="Resources\icon_wireless.png" />
     <None Include="Resources\icon_bt.png" />
-    <None Include="licenses\HidLibrary.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="licenses\Newtonsoft.Json.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
