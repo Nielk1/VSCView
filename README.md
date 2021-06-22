@@ -1,11 +1,11 @@
 # VSCView
-OSD for Steam Controller
+OSD for Steam Controller & Sony DualShock 4 Controller.
 
 The HID Library fork with crude edits you'll need to compile this project from source: https://github.com/Nielk1/HidLibrary
 
 ## Themes
 * ﻿DualShock 4
-  * Default by Nielk1 
+  * Default by Nielk1
 * ﻿Steam Controller
   * Default by Nielk1
   * ahNOMinal 2 by [ahMEmon](https://www.twitch.tv/ahmemon)
@@ -117,7 +117,7 @@ The HID Library fork with crude edits you'll need to compile this project from s
 	  * "gyro"
 
 ## Controller Parts
-* ﻿DualShock 4
+* ﻿DualShock 4 Controller
   * `"quad_left"` = ControlDPad()
   * `"quad_right"` = ControlButtonQuad()
   * `"bumpers"` = ControlButtonPair()
@@ -178,8 +178,8 @@ The HID Library fork with crude edits you'll need to compile this project from s
   * `height` - configured height of button grid
   * `0:1` - button x=0,y=1 pressed 0/1
 * ControlButtonPair
-  * `l` - Left button pressed 0/1
-  * `r` - Right button pressed 0/1
+  * `l` - Left button `(Back for Steam Controller, SHARE for PlayStation Controllers)` pressed 0/1
+  * `r` - Right button `(Start for Steam Controller, OPTIONS for PlayStation Controllers)` pressed 0/1
 * ControlButton
   * *noting* - Button pressed 0/1
 * ControlStick
