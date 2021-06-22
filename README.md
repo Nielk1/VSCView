@@ -1,5 +1,5 @@
 # VSCView
-OSD for Steam Controller & Sony DualShock 4 Controller.
+OSD for Valve Steam Controller & Sony DualShock 4 Controller.
 
 The HID Library fork with crude edits you'll need to compile this project from source: https://github.com/Nielk1/HidLibrary
 
