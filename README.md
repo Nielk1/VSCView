@@ -1,5 +1,5 @@
 # VSCView
-OSD for Valve Steam Controller & Sony DualShock 4 Controller.
+OSD for Valve Steam Controller & Sony PlayStation Controller.
 
 ## Themes
 * ﻿Sony DualSense
@@ -120,6 +120,19 @@ OSD for Valve Steam Controller & Sony DualShock 4 Controller.
 	  * "gyro"
 
 ## Controller Parts
+* ﻿DualSense Controller
+  * `"quad_left"` = ControlDPad()
+  * `"quad_right"` = ControlButtonQuad()
+  * `"bumpers"` = ControlButtonPair()
+  * `"bumpers2"` = ControlButtonPair()
+  * `"triggers"` = ControlTriggerPair(HasStage2: false)
+  * `"menu"` = ControlButtonPair()
+  * `"home"` = ControlButton()
+  * `"mute"` = ControlButton()
+  * `"stick_left"` = ControlStick(HasClick: true)
+  * `"stick_right"` = ControlStick(HasClick: true)
+  * `"touch_center"` = ControlTouch(TouchCount: 2, HasClick: true)
+  * `"motion"` = ControlMotion()
 * ﻿DualShock 4 Controller
   * `"quad_left"` = ControlDPad()
   * `"quad_right"` = ControlButtonQuad()
@@ -181,10 +194,11 @@ OSD for Valve Steam Controller & Sony DualShock 4 Controller.
   * `height` - configured height of button grid
   * `0:1` - button x=0,y=1 pressed 0/1
 * ControlButtonPair
-  * `l` - Left button `(Back for Steam Controller, SHARE for PlayStation Controllers)` pressed 0/1
+  * `l` - Left button `(Back for Steam Controller, SHARE/CREATE for PlayStation Controllers)` pressed 0/1
   * `r` - Right button `(Start for Steam Controller, OPTIONS for PlayStation Controllers)` pressed 0/1
 * ControlButton
-  * *nothing* - Button pressed 0/1
+  * `home` - Home button `(Guide Button for Steam Controller, Home button for PlayStation Controllers)` pressed 0/1
+  * `mute` - Mute button `(Sony DualSense Controller-only)` pressed 0/1
 * ControlStick
   * `x` - -1.0 to 1.0 value
   * `y` - -1.0 to 1.0 value
