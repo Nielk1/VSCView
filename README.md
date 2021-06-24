@@ -1,5 +1,5 @@
 # VSCView
-OSD for Valve Steam Controller & Sony PlayStation Controller.
+OSD for Valve Steam Controller & Sony PlayStation Controllers (DualShock 4 and DualSense Controller).
 
 ## Themes
 * ﻿Sony DualSense
