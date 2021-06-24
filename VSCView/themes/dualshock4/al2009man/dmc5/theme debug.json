@@ -1,5 +1,5 @@
 {
-  "name": "All (DS4 V1)",
+  "name": "Theme Debug",
   "width": 1207,
   "height": 793,
   "version": 1,
@@ -15,7 +15,7 @@
           "width": 319.0,
           "height": 70.0,
           "center": true,
-          "inputY": "triggers:l:analog * 15",
+          "inputY": "(Math.Sin(UnixTimeMs() / 300.0) / 2 + 0.5) * 15",
           "children": [
             {
               "type": "image",
@@ -30,7 +30,7 @@
             },
             {
               "type": "showhide",
-              "input": "triggers:l:stage2 OR bumpers2:l",
+              //"input": "(Math.Sin(UnixTimeMs() / 300.0) / 2 + 0.5) > 0.1",
               "children": [
                 {
                   "type": "image",
@@ -54,7 +54,7 @@
           "width": 73.0,
           "height": 38.0,
           "center": true,
-          "inputY": "triggers:r:analog * 15",
+          "inputY": "(Math.Cos(UnixTimeMs() / 300.0) / 2 + 0.5) * 15",
           "children": [
             {
               "type": "image",
@@ -69,7 +69,7 @@
             },
             {
               "type": "showhide",
-              "input": "triggers:r:stage2 OR bumpers2:r",
+              //"input": "(Math.Cos(UnixTimeMs() / 300.0) / 2 + 0.5) > 0.1",
               "children": [
                 {
                   "type": "image",
@@ -90,7 +90,7 @@
     },
     {
       "type": "image",
-      "image": "\\dualshock4\\default\\DS4_V1_base.png",
+      "image": "\\dualshock4\\default\\DS4_V2_base.png",
       "x": 602.0,
       "y": 324.0,
       "width": 1114.0,
@@ -447,14 +447,14 @@
               "y": 0.0,
               "width": 36.0,
               "height": 36.0,
-              "input": "touch_center:0:touch OR touch_left:0:touch",
-              "inputX": "(touch_center:0:x * 180) + touch_left:0:touch * (touch_left:0:x * 90 - 90)",
-              "inputY": "(touch_center:0:y + touch_left:0:y) * 77",
+              "input": "1",
+              "inputX": "Math.Sin(UnixTimeMs() / 300.0) * 180",
+              "inputY": "Math.Cos(UnixTimeMs() / 300.0) * 77",
               "length": 30,
               "children": [
                 {
                   "type": "showhide",
-                  "input": "touch_center:0:touch OR touch_left:0:touch",
+                  "input": "1",
                   "children": [
                     {
                       "type": "image",
@@ -478,14 +478,14 @@
               "y": 0.0,
               "width": 36.0,
               "height": 36.0,
-              "input": "touch_center:1:touch OR touch_right:0:touch",
-              "inputX": "(touch_center:1:x * 180) + touch_right:0:touch * (touch_right:0:x * 90 + 90)",
-              "inputY": "(touch_center:1:y + touch_right:0:y) * 77",
+              "input": "1",
+              "inputX": "Math.Min(Math.Max(Math.Sin(UnixTimeMs() / 300.0 + Math.PI) * 1.5, -1), 1) * 180.0",
+              "inputY": "Math.Min(Math.Max(Math.Cos(UnixTimeMs() / 300.0 + Math.PI) * 1.5, -1), 1) * 77.0",
               "length": 76,
               "children": [
                 {
                   "type": "showhide",
-                  "input": "touch_center:1:touch OR touch_right:0:touch",
+                  "input": "1",
                   "children": [
                     {
                       "type": "image",
