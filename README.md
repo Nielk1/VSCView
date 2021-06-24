@@ -4,19 +4,24 @@ OSD for Valve Steam Controller & Sony DualShock 4 Controller.
 The HID Library fork with crude edits you'll need to compile this project from source: https://github.com/Nielk1/HidLibrary
 
 ## Themes
-* ﻿DualShock 4
-  * Default by Nielk1
+* ﻿Sony DualSense
+  * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+* ﻿﻿Sony DualShock 4
+  * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+  * Devil May Cry 5 Controller Overlay [Al. Lopez (AL2009man)](https://github.com/AL2009man)
 * ﻿Steam Controller
   * Default by Nielk1
   * ahNOMinal 2 by [ahMEmon](https://www.twitch.tv/ahmemon)
   * Buh-Lack by [ahMEmon](https://www.twitch.tv/ahmemon)
   * Docteur Controller by [Docteur Controller](https://www.youtube.com/channel/UC1GoAgop-6tbftsU4qtpSOQ)
+  * Devieus Glass by [Devieus](https://www.youtube.com/user/Devieus)
+  * Grey Minimal by [CriticalComposer](https://www.youtube.com/c/criticalcomposer)
+  * Line Art by [Ishmobile](https://www.youtube.com/channel/UCTAPOuAcWv9JGdiQsVVSxkQ)
+  * Line Art Invert by Sora Firestone & [Ishmobile](https://www.youtube.com/channel/UCTAPOuAcWv9JGdiQsVVSxkQ)
+  * Silly/Cat Paws by Nielk1
   * Black Stencil by [RambleTan](https://www.youtube.com/channel/UCYI8ifruvIqVtAY3joqlpfw)
   * Outline 2018 by [RambleTan](https://www.youtube.com/channel/UCYI8ifruvIqVtAY3joqlpfw)
   * Outline 2019 by [RambleTan](https://www.youtube.com/channel/UCYI8ifruvIqVtAY3joqlpfw)
-  * Grey Minimal by [CriticalComposer](https://www.youtube.com/c/criticalcomposer)
-  * Line Art by [Ishmobile](https://www.youtube.com/channel/UCTAPOuAcWv9JGdiQsVVSxkQ)
-  * Silly/Cat Paws by Nielk1
   * Fire Sale by Nielk1, [Twenty-Six Twelve](https://www.reddit.com/user/Twenty-Six_Twelve/)
   * White Cerberus by [8BitCerberus](https://github.com/8BitCerberus/vscview-themes)
 * ﻿Steam Controller Chell
@@ -181,7 +186,7 @@ The HID Library fork with crude edits you'll need to compile this project from s
   * `l` - Left button `(Back for Steam Controller, SHARE for PlayStation Controllers)` pressed 0/1
   * `r` - Right button `(Start for Steam Controller, OPTIONS for PlayStation Controllers)` pressed 0/1
 * ControlButton
-  * *noting* - Button pressed 0/1
+  * *nothing* - Button pressed 0/1
 * ControlStick
   * `x` - -1.0 to 1.0 value
   * `y` - -1.0 to 1.0 value
