@@ -128,9 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Nielk1_eyes_128.png" />
-    <None Include="Resources\icon_usb.png" />
-    <None Include="Resources\icon_wireless.png" />
-    <None Include="Resources\icon_bt.png" />
     <None Include="licenses\Newtonsoft.Json.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -147,14 +144,6 @@
       <Project>{fb709b19-87c4-4a37-bcf2-975d24b76af0}</Project>
       <Name>ThemeFixer</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon_chell.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon_ds4.png" />
-    <None Include="Resources\icon_sc.png" />
-    <None Include="Resources\icon_ds4_dongle.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
