@@ -81,6 +81,7 @@
     </Compile>
     <Compile Include="CustomFleeFunctions.cs" />
     <Compile Include="DeviceManager.cs" />
+    <Compile Include="IconImageManager.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +160,9 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>RMDIR "$(ProjectDir)$(OutDir)themes" /S /Q
-XCOPY /E "$(ProjectDir)themes" "$(ProjectDir)$(OutDir)themes\"</PostBuildEvent>
+XCOPY /E "$(ProjectDir)themes" "$(ProjectDir)$(OutDir)themes\"
+
+RMDIR "$(ProjectDir)$(OutDir)icons" /S /Q
+XCOPY /E "$(ProjectDir)icons" "$(ProjectDir)$(OutDir)icons\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

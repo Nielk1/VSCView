@@ -19,6 +19,11 @@ namespace VSCView
 {
     public partial class MainForm : Form
     {
+        const int CONTROLLER_CTRICON_WIDTH = 32 + 16;
+        const int CONTROLLER_CONICON_WIDTH = 16;
+        const int CONTROLLER_ALLICON_HEIGHT = 32;
+        const int CONTROLLER_ICON_GAP = 4;
+
         public static ControllerState state;
         public static SensorCollector sensorData;
         public static int frameTime = (int)(1000 / 60); // 16ms interval => ~62fps
@@ -38,6 +43,8 @@ namespace VSCView
         DeviceManager DeviceManager;
         int instanceNumber = 0;
 
+        IconImageManager IconManager;
+
         public MainForm(int instanceNumber = 0)
         {
             InitializeComponent();
@@ -52,6 +59,7 @@ namespace VSCView
                 hIDGuardianWhitelistToolStripMenuItem.Checked = whitelistKey != null;
             }
 
+            IconManager = new IconImageManager();
             DeviceManager = new DeviceManager();
 
             ControllerData = new ControllerData();
@@ -300,7 +308,14 @@ namespace VSCView
             {
                 this.Invoke((MethodInvoker)delegate
                 {
-                    ToolStripMenuItem itm = new ToolStripMenuItem(controller.NameDetail, null, LoadController);
+                    string NiceName = controller.Name;
+                    {
+                        string[] ExtraNameBits = controller.NameDetails;
+                        if (ExtraNameBits != null)
+                            foreach (string ExtraNameBit in ExtraNameBits)
+                                NiceName += "\r\n" + ExtraNameBit;
+                    }
+                    ToolStripMenuItem itm = new ToolStripMenuItem(NiceName, null, LoadController);
                     tsmiController.DropDownItems.Add(itm);
                     IController c = controller;
                     ControllerMemoHack[c.DeviceHackRef.UniqueKey] = (controller, itm);
@@ -311,14 +326,21 @@ namespace VSCView
                             if (this.Created && !this.Disposing && !this.IsDisposed)
                                 this.Invoke(new Action(() =>
                                 {
-                                    itm.Text = c.NameDetail;
+                                    string NiceName_ = controller.Name;
+                                    {
+                                        string[] ExtraNameBits = controller.NameDetails;
+                                        if (ExtraNameBits != null)
+                                            foreach (string ExtraNameBit in ExtraNameBits)
+                                                NiceName_ += "\r\n" + ExtraNameBit;
+                                    }
+                                    itm.Text = NiceName_;
                                     UpdateIcon(itm);
                                     UpdateAlternateControllers(itm);
                                 }));
                         }
                         catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
                     };
-                    itm.Text = controller.NameDetail;
+                    itm.Text = NiceName;
 
                     itm.ImageScaling = ToolStripItemImageScaling.None;
                     itm.Tag = controller;
@@ -344,24 +366,10 @@ namespace VSCView
                 if (controller.ConnectionTypeCode != null)
                     foreach (string conType in controller.ConnectionTypeCode)
                     {
-                        if (conType == "USB_WIRE")
+                        Image connectionIcon = IconManager.GetImage(conType);
+                        if (connectionIcon != null)
                         {
-                            ConnectionImg = VSCView.Properties.Resources.icon_usb;
-                            break;
-                        }
-                        if (conType == "BT")
-                        {
-                            ConnectionImg = VSCView.Properties.Resources.icon_bt;
-                            break;
-                        }
-                        if (conType == "DS4_DONGLE")
-                        {
-                            ConnectionImg = VSCView.Properties.Resources.icon_ds4_dongle;
-                            break;
-                        }
-                        if (conType == "SC_DONGLE")
-                        {
-                            ConnectionImg = VSCView.Properties.Resources.icon_wireless;
+                            ConnectionImg = connectionIcon;
                             break;
                         }
                     }
@@ -369,36 +377,59 @@ namespace VSCView
                 if (controller.ControllerTypeCode != null)
                     foreach (string conType in controller.ControllerTypeCode)
                     {
-                        if (conType == "DS4")
+                        Image controllerIcon = IconManager.GetImage(conType);
+                        if(controllerIcon != null)
                         {
-                            ControllerImg = VSCView.Properties.Resources.icon_ds4;
-                            break;
-                        }
-                        if (conType == "SC")
-                        {
-                            ControllerImg = VSCView.Properties.Resources.icon_sc;
-                            break;
-                        }
-                        if (conType == "SC_CHELL")
-                        {
-                            ControllerImg = VSCView.Properties.Resources.icon_chell;
+                            ControllerImg = controllerIcon;
                             break;
                         }
                     }
 
                 if (ConnectionImg != null || ControllerImg != null)
                 {
-                    Image Icon = new Bitmap(32 + 4, 16);
+                    Image Icon = new Bitmap(CONTROLLER_CONICON_WIDTH + CONTROLLER_ICON_GAP + CONTROLLER_CTRICON_WIDTH, CONTROLLER_ALLICON_HEIGHT);
                     Graphics g = Graphics.FromImage(Icon);
                     if (ConnectionImg != null)
-                        g.DrawImage(ConnectionImg, 0, 0, 16, 16);
+                    {
+                        Size TargetSize = ConnectionImg.Size;
+                        float ratio = 1.0f;
+                        if (TargetSize.Width > CONTROLLER_CONICON_WIDTH)
+                        {
+                            ratio = (1.0f * CONTROLLER_CONICON_WIDTH / TargetSize.Width);
+                        }
+                        if (TargetSize.Height > CONTROLLER_ALLICON_HEIGHT)
+                        {
+                            float ratio2 = (1.0f * CONTROLLER_ALLICON_HEIGHT / TargetSize.Height);
+                            if (ratio2 < ratio)
+                                ratio = ratio2;
+                        }
+                        TargetSize = new Size((int)(TargetSize.Width * ratio), (int)(TargetSize.Height * ratio));
+
+                        g.DrawImage(ConnectionImg, ((CONTROLLER_CONICON_WIDTH - TargetSize.Width) / 2f), (CONTROLLER_ALLICON_HEIGHT - TargetSize.Height) / 2f, TargetSize.Width, TargetSize.Height);
+                    }
                     if (ControllerImg != null)
-                        g.DrawImage(ControllerImg, 16 + 4, 0, 16, 16);
+                    {
+                        Size TargetSize = ControllerImg.Size;
+                        float ratio = 1.0f;
+                        if (TargetSize.Width > CONTROLLER_CTRICON_WIDTH)
+                        {
+                            ratio = (1.0f * CONTROLLER_CTRICON_WIDTH / TargetSize.Width);
+                        }
+                        if (TargetSize.Height > CONTROLLER_ALLICON_HEIGHT)
+                        {
+                            float ratio2 = (1.0f * CONTROLLER_ALLICON_HEIGHT / TargetSize.Height);
+                            if (ratio2 < ratio)
+                                ratio = ratio2;
+                        }
+                        TargetSize = new Size((int)(TargetSize.Width * ratio), (int)(TargetSize.Height * ratio));
+
+                        g.DrawImage(ControllerImg, 16 + CONTROLLER_ICON_GAP + ((CONTROLLER_CTRICON_WIDTH - TargetSize.Width) / 2f), (CONTROLLER_ALLICON_HEIGHT - TargetSize.Height) / 2f, TargetSize.Width, TargetSize.Height);
+                    }
                     itm.Image = Icon;
                 }
 
-                ConnectionImg?.Dispose();
-                ControllerImg?.Dispose();
+                //ConnectionImg?.Dispose();
+                //ControllerImg?.Dispose();
             }
 
             oldIcon?.Dispose();
