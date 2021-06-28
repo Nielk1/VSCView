@@ -12,8 +12,8 @@
           "type": "slider",
           "x": 252.0,
           "y": 55.0,
-          "width": 319.0,
-          "height": 70.0,
+          "width": 0.0,
+          "height": 0.0,
           "center": true,
           "inputY": "triggers:l:analog * 15",
           "children": [
@@ -51,9 +51,9 @@
         {
           "type": "slider",
           "x": 898.0,
-          "y": 55.0,
-          "width": 73.0,
-          "height": 38.0,
+          "y": 56.0,
+          "width": 0.0,
+          "height": 0.0,
           "center": true,
           "inputY": "triggers:r:analog * 15",
           "children": [
