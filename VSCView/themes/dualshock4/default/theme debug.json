@@ -27,7 +27,6 @@
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
-
             },
             {
               "type": "showhide",
