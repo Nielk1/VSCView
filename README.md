@@ -180,22 +180,26 @@ OSD for Valve Steam Controller & Sony PlayStation Controllers (DualShock 4 and D
   * `l:stage2` - Stage2 0/1 left trigger
   * `r:stage2` - Stage2 0/1 right trigger
 * ControlDPad
-  * `s` - South button `(D-Pad Down)` pressed 0/1 
-  * `e` - East button `(D-Pad Right)` pressed 0/1 
-  * `w` - West button `(D-Pad Left)` pressed 0/1
-  * `n` - North button `(D-Pad Up)` pressed 0/1
+  * `quad_left:s` - South button `(D-Pad Down)` pressed 0/1 
+  * `quad_left:e` - East button `(D-Pad Right)` pressed 0/1 
+  * `quad_left:w` - West button `(D-Pad Left)` pressed 0/1
+  * `quad_left:n` - North button `(D-Pad Up)` pressed 0/1
 * ControlButtonQuad
-  * `s` - South button `(A for Steam Controller, ⨉ for PlayStation Controllers)` pressed 0/1
-  * `e` - East button `(B for Steam Controller, ○ for PlayStation Controllers)` pressed 0/1
-  * `w` - West button `(X for Steam Controller, □ for PlayStation Controllers)` pressed 0/1
-  * `n` - North button `(Y for Steam Controller, △ for PlayStation Controllers)` pressed 0/1
+  * `quad_right:s` - South button `(A for Steam Controller, ⨉ for PlayStation Controllers)` pressed 0/1
+  * `quad_right:e` - East button `(B for Steam Controller, ○ for PlayStation Controllers)` pressed 0/1
+  * `quad_right:w` - West button `(X for Steam Controller, □ for PlayStation Controllers)` pressed 0/1
+  * `quad_right:n` - North button `(Y for Steam Controller, △ for PlayStation Controllers)` pressed 0/1
 * ControlButtonGrid (supports various sizes)
   * `width` - configured width of button grid
   * `height` - configured height of button grid
   * `0:1` - button x=0,y=1 pressed 0/1
 * ControlButtonPair
-  * `l` - Left button `(Back for Steam Controller, SHARE/CREATE for PlayStation Controllers)` pressed 0/1
-  * `r` - Right button `(Start for Steam Controller, OPTIONS for PlayStation Controllers)` pressed 0/1
+  * `bumpers:l`- Left bumper button `(L1 for PlayStation Controllers)` pressed 0/1
+  * `bumpers:r`- Right bumper button `(R1 for PlayStation Controllers)` pressed 0/1
+  * `menu:l` - Left menu button `(Select for Steam Controller, SHARE/CREATE for PlayStation Controllers)` pressed 0/1
+  * `menu:r` - Right menu button `(Start for Steam Controller, OPTIONS for PlayStation Controllers)` pressed 0/1
+  * `grip:l` - P1 paddle button `(Left Grip for Steam Controller)` pressed 0/1
+  * `grip:r` - P2 paddle button `(Right Grip for Steam Controller)` pressed 0/1
 * ControlButton
   * `home` - Home button `(Guide Button for Steam Controller, Home button for PlayStation Controllers)` pressed 0/1
   * `mute` - Mute button `(Sony DualSense Controller-only)` pressed 0/1
