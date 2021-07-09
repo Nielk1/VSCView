@@ -15,7 +15,7 @@
           "width": 0.0,
           "height": 0.0,
           "center": true,
-          "inputY": "triggers:l:analog * 6",
+          "inputY": "triggers:l:analog * 5",
           "children": [
             {
               "type": "image",
@@ -54,7 +54,7 @@
           "width": 0.0,
           "height": 0.0,
           "center": true,
-          "inputY": "triggers:r:analog * 6",
+          "inputY": "triggers:r:analog * 5",
           "children": [
             {
               "type": "image",
