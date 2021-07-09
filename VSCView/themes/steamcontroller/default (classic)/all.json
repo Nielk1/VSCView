@@ -1,12 +1,12 @@
 {
-  "name": "Cat Paws",
+  "name": "All",
   "width": 629,
-  "height": 605,
+  "height": 774,
   "version": 1,
   "children": [
     {
       "type": "image",
-      "image": "\\steamcontroller\\default (classic)\\base.png",
+      "image": "base.png",
       "x": 314.5,
       "y": 302.5,
       "width": 629.0,
@@ -23,7 +23,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-face.png",
+                  "image": "btn-face.png",
                   "x": 0.0,
                   "y": 35.0,
                   "width": 36.0,
@@ -38,7 +38,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-face.png",
+                  "image": "btn-face.png",
                   "x": 35.0,
                   "y": 0.0,
                   "width": 36.0,
@@ -53,7 +53,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-face.png",
+                  "image": "btn-face.png",
                   "x": -35.0,
                   "y": 0.0,
                   "width": 36.0,
@@ -68,7 +68,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-face.png",
+                  "image": "btn-face.png",
                   "x": 0.0,
                   "y": -35.0,
                   "width": 36.0,
@@ -85,7 +85,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default (classic)\\btn-stick.png",
+              "image": "btn-stick.png",
               "x": -73.0,
               "y": 67.0,
               "width": 105.0,
@@ -103,7 +103,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default (classic)\\stick.png",
+              "image": "stick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 69.0,
@@ -122,7 +122,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-home.png",
+                  "image": "btn-home.png",
                   "x": 0.0,
                   "y": -8.0,
                   "width": 51.0,
@@ -137,7 +137,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-sub.png",
+                  "image": "btn-sub.png",
                   "x": 52.0,
                   "y": 0.0,
                   "width": 38.0,
@@ -152,7 +152,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-sub.png",
+                  "image": "btn-sub.png",
                   "x": -52.0,
                   "y": 0.0,
                   "width": 38.0,
@@ -173,7 +173,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-trigger.png",
+                  "image": "btn-trigger.png",
                   "x": -75.0,
                   "y": 0.0,
                   "width": 50.0,
@@ -188,7 +188,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-trigger.png",
+                  "image": "btn-trigger.png",
                   "x": -163.0,
                   "y": 48.0,
                   "width": 50.0,
@@ -203,7 +203,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-trigger.png",
+                  "image": "btn-trigger.png",
                   "x": -163.0,
                   "y": -28.0,
                   "width": 50.0,
@@ -218,7 +218,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-trigger.png",
+                  "image": "btn-trigger.png",
                   "x": 75.0,
                   "y": 0.0,
                   "width": 50.0,
@@ -233,7 +233,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-trigger.png",
+                  "image": "btn-trigger.png",
                   "x": 163.0,
                   "y": 48.0,
                   "width": 50.0,
@@ -248,7 +248,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-trigger.png",
+                  "image": "btn-trigger.png",
                   "x": 163.0,
                   "y": -28.0,
                   "width": 50.0,
@@ -260,74 +260,100 @@
           ]
         },
         {
+          "type": "showhide",
+          "input": "touch_right:click",
           "children": [
             {
-              "type": "showhide",
-              "input": "touch_right:click",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-haptic.png",
-                  "x": 171.0,
-                  "y": -23.0,
-                  "width": 156.0,
-                  "height": 160.0,
-                  "center": true
-                }
-              ]
-            },
-            {
+              "type": "image",
+              "image": "btn-haptic.png",
               "x": 171.0,
               "y": -23.0,
+              "width": 156.0,
+              "height": 160.0,
+              "center": true
+            }
+          ]
+        },
+        {
+          "x": 171.0,
+          "y": -23.0,
+          "children": [
+            {
+              "type": "trailpad",
+              "image": "padheat.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 36.0,
+              "height": 36.0,
+              "input": "touch_right:0:touch",
+              "inputX": "touch_right:0:x * 72",
+              "inputY": "touch_right:0:y * 72",
+              "length": 30,
               "children": [
                 {
-                  "type": "trailpad",
-                  "image": "\\steamcontroller\\default (classic)\\padheat.png",
-                  "x": 0.0,
-                  "y": 0.0,
-                  "width": 72.0,
-                  "height": 72.0,
+                  "type": "showhide",
                   "input": "touch_right:0:touch",
-                  "inputX": "touch_right:0:x * 55",
-                  "inputY": "touch_right:0:y * 55",
-                  "length": 30
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "btn-face.png",
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 36.0,
+                      "height": 36.0,
+                      "center": true
+                    }
+                  ]
                 }
               ]
             }
           ]
         },
         {
+          "type": "showhide",
+          "input": "touch_left:click",
           "children": [
             {
-              "type": "showhide",
-              "input": "touch_left:click",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-haptic.png",
-                  "x": -171.0,
-                  "y": -23.0,
-                  "width": 156.0,
-                  "height": 160.0,
-                  "center": true
-                }
-              ]
-            },
-            {
+              "type": "image",
+              "image": "btn-haptic.png",
               "x": -171.0,
               "y": -23.0,
+              "width": 156.0,
+              "height": 160.0,
+              "center": true
+            }
+          ]
+        },
+        {
+          "x": -171.0,
+          "y": -23.0,
+          "children": [
+            {
+              "type": "trailpad",
+              "image": "padheat.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 36.0,
+              "height": 36.0,
+              "input": "touch_left:0:touch",
+              "inputX": "touch_left:0:x * 72",
+              "inputY": "touch_left:0:y * 72",
+              "length": 30,
               "children": [
                 {
-                  "type": "trailpad",
-                  "image": "\\steamcontroller\\default (classic)\\padheat.png",
-                  "x": 0.0,
-                  "y": 0.0,
-                  "width": 72.0,
-                  "height": 72.0,
+                  "type": "showhide",
                   "input": "touch_left:0:touch",
-                  "inputX": "touch_left:0:x * 55",
-                  "inputY": "touch_left:0:y * 55",
-                  "length": 30
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "btn-face.png",
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 36.0,
+                      "height": 36.0,
+                      "center": true
+                    }
+                  ]
                 }
               ]
             }
@@ -346,8 +372,8 @@
               "center": true,
               "input": "triggers:l:analog",
               "direction": "right",
-              "min": "0.0",
-              "max": "1.0",
+              "min": "0",
+              "max": "1",
               "foreground": "ff00d2f8",
               "background": "ff007894"
             },
@@ -360,72 +386,42 @@
               "center": true,
               "input": "triggers:r:analog",
               "direction": "left",
-              "min": "0.0",
-              "max": "1.0",
+              "min": "0",
+              "max": "1",
               "foreground": "ff00d2f8",
               "background": "ff007894"
             }
           ]
-        }
-      ]
-    },
-    {
-      "x": 314.5,
-      "y": 302.5,
-      "children": [
-        {
-          "type": "slider",
-          "x": -80.0,
-          "y": 60.0,
-          "center": true,
-          "inputX": "(stick_left:x * 16) + (touch_left:0:touch * -90) + (touch_left:0:x * 55)",
-          "inputY": "(stick_left:y * 16) + (touch_left:0:touch * -90) + (touch_left:0:y * 55)",
-          "children": [
-            {
-              "type": "slider",
-              "x": 0.0,
-              "y": 0.0,
-              "center": true,
-              "inputR": "-25 + 0.1 * ((stick_left:x * 16) + (touch_left:0:touch * -90) + (touch_left:0:x * 55))",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "paw.png",
-                  "x": 30.0,
-                  "y": -30.0,
-                  "width": -381.0,
-                  "height": 457.0,
-                  "center": false
-                }
-              ]
-            }
-          ]
         },
         {
-          "type": "slider",
-          "x": 70.0,
-          "y": 50.0,
-          "center": true,
-          "inputX": "(((quad_right:e * 15) + (quad_right:w * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:0:touch * 100) + (touch_right:0:x * 55) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:0:touch * -25)",
-          "inputY": "(((quad_right:s * 15) + (quad_right:n * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:0:touch * -80) + (touch_right:0:y * 55) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:0:touch * 25)",
+          "x": 0.0,
+          "y": 370.0,
           "children": [
             {
-              "type": "slider",
-              "x": 0.0,
+              "type": "basic3d1",
+              "image": "gyro.png",
+              "x": 165.0,
               "y": 0.0,
-              "center": true,
-              "inputR": "25 + 0.1 * ((((quad_right:e * 15) + (quad_right:w * -15)) / max(1,quad_right:n + quad_right:e + quad_right:s + quad_right:w)) + (touch_right:0:touch * 100) + (touch_right:0:x * 55) + (max(quad_right:n, quad_right:e, quad_right:s, quad_right:w) * touch_right:0:touch * -25))",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "paw.png",
-                  "x": -30.0,
-                  "y": -30.0,
-                  "width": 381.0,
-                  "height": 457.0,
-                  "center": false
-                }
-              ]
+              "width": 103.0,
+              "height": 77.0,
+              "mode": "accel",
+              "shadowl": "gyro_l.png",
+              "shadowr": "gyro_r.png",
+              "shadowu": "gyro_u.png",
+              "shadowd": "gyro_d.png"
+            },
+            {
+              "type": "basic3d1",
+              "image": "gyro.png",
+              "x": -165.0,
+              "y": 0.0,
+              "width": 103.0,
+              "height": 77.0,
+              "mode": "gyro",
+              "shadowl": "gyro_l.png",
+              "shadowr": "gyro_r.png",
+              "shadowu": "gyro_u.png",
+              "shadowd": "gyro_d.png"
             }
           ]
         }
