@@ -1,7 +1,7 @@
 {
-  "name": "No Gyro",
+  "name": "Accel",
   "width": 995,
-  "height": 720,
+  "height": 763,
   "version": 1,
   "children": [
     {
@@ -452,6 +452,25 @@
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "basic3d1",
+              "image": "SC_Gyro-Accel.png",
+              "x": 0.0,
+              "y": 270.0,
+              "width": 232.0,
+              "height": 163.0,
+              "mode": "accel",
+              "shadowl": "gyro_left.png",
+              "shadowr": "gyro_right.png",
+              "shadowu": "gyro_up.png",
+              "shadowd": "gyro_down.png"
             }
           ]
         }
