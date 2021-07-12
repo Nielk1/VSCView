@@ -6,7 +6,7 @@ OSD for Valve Steam Controller & Sony PlayStation Controllers (DualShock 4 and D
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
 * ﻿﻿Sony DualShock 4
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
-  * Devil May Cry 5 [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+  * Devil May Cry 5 by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
 * ﻿Steam Controller
   * Default by Nielk1
   * ahNOMinal 2 by [ahMEmon](https://www.twitch.tv/ahmemon)
