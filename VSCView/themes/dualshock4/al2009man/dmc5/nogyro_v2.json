@@ -27,7 +27,7 @@
               "height": 70.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             },
             {
               "type": "showhide",
@@ -66,7 +66,7 @@
               "height": 70.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             },
             {
               "type": "showhide",
@@ -98,7 +98,7 @@
       "height": 582.0,
       "center": true,
       "winform.smoothing": "Default",
-      "winform.interpolation": "High",
+      "winform.interpolation": "Low",
       "children": [
         {
           "x": 0.0,
@@ -378,7 +378,7 @@
               "height": 109.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             }
           ]
         },
@@ -415,7 +415,7 @@
               "height": 109.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             }
           ]
         },
