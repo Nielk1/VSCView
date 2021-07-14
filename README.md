@@ -6,7 +6,7 @@ OSD for Valve Steam Controller & Sony PlayStation Controllers (DualShock 4 and D
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
 * ﻿﻿Sony DualShock 4
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
-  * Devil May Cry 5 Controller Overlay [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+  * Devil May Cry 5 by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
 * ﻿Steam Controller
   * Default by Nielk1
   * ahNOMinal 2 by [ahMEmon](https://www.twitch.tv/ahmemon)
@@ -194,8 +194,12 @@ OSD for Valve Steam Controller & Sony PlayStation Controllers (DualShock 4 and D
   * `height` - configured height of button grid
   * `0:1` - button x=0,y=1 pressed 0/1
 * ControlButtonPair
-  * `l` - Left button `(Back for Steam Controller, SHARE/CREATE for PlayStation Controllers)` pressed 0/1
-  * `r` - Right button `(Start for Steam Controller, OPTIONS for PlayStation Controllers)` pressed 0/1
+  * `bumpers:l`- Left bumper button `(L1 for PlayStation Controllers)` pressed 0/1
+  * `bumpers:r`- Right bumper button `(R1 for PlayStation Controllers)` pressed 0/1
+  * `menu:l` - Select button `(SHARE/CREATE for PlayStation Controllers)` pressed 0/1
+  * `menu:r` - Start button `(OPTIONS for PlayStation Controllers)` pressed 0/1
+  * `grip:l` - P1 paddle button `(Left Grip for Steam Controller)` pressed 0/1
+  * `grip:r` - P2 paddle button `(Right Grip for Steam Controller)` pressed 0/1
 * ControlButton
   * `home` - Home button `(Guide Button for Steam Controller, Home button for PlayStation Controllers)` pressed 0/1
   * `mute` - Mute button `(Sony DualSense Controller-only)` pressed 0/1

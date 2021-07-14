@@ -11,7 +11,7 @@
         {
           "type": "slider",
           "x": 230.0,
-          "y": 85.0,
+          "y": 83.0,
           "width": 319.0,
           "height": 70.0,
           "center": true,
@@ -27,7 +27,6 @@
               "center": true,
 			  "winform.smoothing": "Default",
               "winform.interpolation": "High"
-
             },
             {
               "type": "showhide",
@@ -50,8 +49,8 @@
         },
         {
           "type": "slider",
-          "x": 916.0,
-          "y": 85.0,
+          "x": 917.0,
+          "y": 86.0,
           "width": 73.0,
           "height": 38.0,
           "center": true,
@@ -381,8 +380,8 @@
         },
         {
           "type": "slider",
-          "x": -177.0,
-          "y": 147.3,
+          "x": -178.0,
+          "y": 147.0,
           "inputX": "stick_left:x * 16",
           "inputY": "stick_left:y * 14",
           "children": [
@@ -418,8 +417,8 @@
         },
         {
           "type": "slider",
-          "x": 177.0,
-          "y": 147.3,
+          "x": 178.0,
+          "y": 148.0,
           "inputX": "stick_right:x * 16",
           "inputY": "stick_right:y * 14",
           "children": [

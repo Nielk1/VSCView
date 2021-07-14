@@ -1,7 +1,7 @@
 {
   "name": "All (DS4 V1)",
-  "width": 1207,
-  "height": 793,
+  "width": 1150,
+  "height": 780,
   "version": 1,
   "children": [
     {
@@ -10,10 +10,10 @@
       "children": [
         {
           "type": "slider",
-          "x": 273.0,
-          "y": 63.0,
-          "width": 319.0,
-          "height": 70.0,
+          "x": 252.0,
+          "y": 55.0,
+          "width": 0.0,
+          "height": 0.0,
           "center": true,
           "inputY": "triggers:l:analog * 15",
           "children": [
@@ -22,7 +22,7 @@
               "image": "\\dualshock4\\default\\DS4_L2.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 139.0,
+              "width": 123.0,
               "height": 70.0,
               "center": true,
               "winform.smoothing": "Default",
@@ -35,10 +35,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_left_triggers.png",
-                  "x": 2.0,
-                  "y": 0.0,
-                  "width": 154.0,
-                  "height": 101.0,
+                  "x": 0.0,
+                  "y": -3.0,
+                  "width": 152.0,
+                  "height": 100.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -49,10 +49,10 @@
         },
         {
           "type": "slider",
-          "x": 933.0,
-          "y": 63.0,
-          "width": 73.0,
-          "height": 38.0,
+          "x": 898.0,
+          "y": 56.0,
+          "width": 0.0,
+          "height": 0.0,
           "center": true,
           "inputY": "triggers:r:analog * 15",
           "children": [
@@ -61,7 +61,7 @@
               "image": "\\dualshock4\\default\\DS4_R2.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 140.0,
+              "width": 123.0,
               "height": 70.0,
               "center": true,
               "winform.smoothing": "Default",
@@ -74,10 +74,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_ right_triggers.png",
-                  "x": -2.0,
-                  "y": 0.0,
-                  "width": 154.0,
-                  "height": 101.0,
+                  "x": 0.0,
+                  "y": -3.0,
+                  "width": 152.0,
+                  "height": 100.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -91,10 +91,10 @@
     {
       "type": "image",
       "image": "\\dualshock4\\default\\DS4_V1_base.png",
-      "x": 602.0,
-      "y": 324.0,
-      "width": 1114.0,
-      "height": 594.0,
+      "x": 574.0,
+      "y": 311.0,
+      "width": 1091.0,
+      "height": 582.0,
       "center": true,
       "winform.smoothing": "Default",
       "winform.interpolation": "High",
@@ -110,10 +110,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_cross.png",
-                  "x": 335.0,
-                  "y": 73.0,
-                  "width": 101.0,
-                  "height": 95.0,
+                  "x": 328.0,
+                  "y": 71.0,
+                  "width": 99.0,
+                  "height": 94.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -127,10 +127,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_circle.png",
-                  "x": 415.0,
-                  "y": 7.0,
-                  "width": 100.0,
-                  "height": 94.0,
+                  "x": 407.0,
+                  "y": 6.0,
+                  "width": 99.0,
+                  "height": 93.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -144,10 +144,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_square.png",
-                  "x": 256.7,
-                  "y": 5.4,
-                  "width": 101.0,
-                  "height": 95.0,
+                  "x": 251.0,
+                  "y": 5.0,
+                  "width": 100.0,
+                  "height": 94.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -161,10 +161,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_triangle.png",
-                  "x": 335.0,
-                  "y": -63.0,
-                  "width": 101.0,
-                  "height": 93.0,
+                  "x": 328.0,
+                  "y": -62.0,
+                  "width": 99.0,
+                  "height": 92.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -184,10 +184,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_dpad_down.png",
-                  "x": -334.0,
-                  "y": 51.0,
-                  "width": 90.0,
-                  "height": 102.0,
+                  "x": -327.0,
+                  "y": 49.0,
+                  "width": 89.0,
+                  "height": 101.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -201,10 +201,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_dpad_right.png",
-                  "x": -281.0,
-                  "y": 8.0,
-                  "width": 101.0,
-                  "height": 90.0,
+                  "x": -275.0,
+                  "y": 7.0,
+                  "width": 100.0,
+                  "height": 89.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -218,10 +218,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_dpad_left.png",
-                  "x": -387.0,
+                  "x": -379.0,
                   "y": 6.0,
-                  "width": 104.0,
-                  "height": 89.0,
+                  "width": 103.0,
+                  "height": 88.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -235,10 +235,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_dpad_up.png",
-                  "x": -335.0,
-                  "y": -38.0,
-                  "width": 90.0,
-                  "height": 98.0,
+                  "x": -328.0,
+                  "y": -39.0,
+                  "width": 89.0,
+                  "height": 97.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -259,7 +259,7 @@
                   "type": "image",
                   "image": "dmc5_home_button.png",
                   "x": 0.0,
-                  "y": 119.0,
+                  "y": 116.0,
                   "width": 72.0,
                   "height": 53.0,
                   "center": true,
@@ -275,10 +275,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_share-option.png",
-                  "x": 220.0,
-                  "y": -91.0,
-                  "width": 62.0,
-                  "height": 92.0,
+                  "x": 215.0,
+                  "y": -90.0,
+                  "width": 61.0,
+                  "height": 91.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -292,9 +292,9 @@
                 {
                   "type": "image",
                   "image": "dmc5_share-option.png",
-                  "x": -220.0,
-                  "y": -90.0,
-                  "width": 62.0,
+                  "x": -215.0,
+                  "y": -89.0,
+                  "width": 61.0,
                   "height": 92.0,
                   "center": true,
                   "winform.smoothing": "Default",
@@ -315,10 +315,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_left_bumpers.png",
-                  "x": -333.0,
-                  "y": -207.0,
-                  "width": 177.0,
-                  "height": 95.0,
+                  "x": -328.0,
+                  "y": -203.0,
+                  "width": 175.0,
+                  "height": 94.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -332,10 +332,10 @@
                 {
                   "type": "image",
                   "image": "dmc5_right_bumpers.png",
-                  "x": 334.0,
-                  "y": -207.0,
-                  "width": 177.0,
-                  "height": 95.0,
+                  "x": 327.0,
+                  "y": -203.0,
+                  "width": 175.0,
+                  "height": 94.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -351,10 +351,10 @@
             {
               "type": "image",
               "image": "dmc5_analog_press.png",
-              "x": -171.0,
-              "y": 135.0,
-              "width": 175.0,
-              "height": 158.0,
+              "x": -169.0,
+              "y": 134.0,
+              "width": 172.0,
+              "height": 155.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
@@ -363,8 +363,8 @@
         },
         {
           "type": "slider",
-          "x": -171.0,
-          "y": 136.3,
+          "x": -168.0,
+          "y": 135.0,
           "inputX": "stick_left:x * 16",
           "inputY": "stick_left:y * 14",
           "children": [
@@ -373,8 +373,8 @@
               "image": "\\dualshock4\\default\\DS4_LeftAnalogStick.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 121.0,
-              "height": 108.0,
+              "width": 123.0,
+              "height": 109.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
@@ -388,10 +388,10 @@
             {
               "type": "image",
               "image": "dmc5_analog_press.png",
-              "x": 173.0,
-              "y": 135.0,
-              "width": 175.0,
-              "height": 158.0,
+              "x": 169.0,
+              "y": 134.0,
+              "width": 171.0,
+              "height": 154.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
@@ -400,8 +400,8 @@
         },
         {
           "type": "slider",
-          "x": 171.0,
-          "y": 136.3,
+          "x": 169.0,
+          "y": 135.0,
           "inputX": "stick_right:x * 16",
           "inputY": "stick_right:y * 14",
           "children": [
@@ -410,8 +410,8 @@
               "image": "\\dualshock4\\default\\DS4_RightAnalogStick.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 121.0,
-              "height": 108.0,
+              "width": 123.0,
+              "height": 109.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
@@ -426,9 +426,9 @@
               "type": "image",
               "image": "dmc5_touchpad.png",
               "x": 0.0,
-              "y": -75.0,
-              "width": 387.0,
-              "height": 242.0,
+              "y": -77.0,
+              "width": 379.0,
+              "height": 238.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
@@ -437,7 +437,7 @@
         },
         {
           "x": 0.0,
-          "y": -46.0,
+          "y": -43.0,
           "rot": 0.0,
           "children": [
             {
@@ -445,8 +445,8 @@
               "image": "dmc5_padheat.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 36.0,
-              "height": 36.0,
+              "width": 30.0,
+              "height": 30.0,
               "input": "touch_center:0:touch OR touch_left:0:touch",
               "inputX": "(touch_center:0:x * 180) + touch_left:0:touch * (touch_left:0:x * 90 - 90)",
               "inputY": "(touch_center:0:y + touch_left:0:y) * 77",
@@ -476,8 +476,8 @@
               "image": "dmc5_padheat.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 36.0,
-              "height": 36.0,
+              "width": 30.0,
+              "height": 30.0,
               "input": "touch_center:1:touch OR touch_right:0:touch",
               "inputX": "(touch_center:1:x * 180) + touch_right:0:touch * (touch_right:0:x * 90 + 90)",
               "inputY": "(touch_center:1:y + touch_right:0:y) * 77",
