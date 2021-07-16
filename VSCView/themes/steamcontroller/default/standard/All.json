@@ -376,8 +376,8 @@
               "width": 30.0,
               "height": 30.0,
               "input": "touch_left:0:touch",
-              "inputX": "touch_left:0:x * 110",
-              "inputY": "touch_left:0:y * 110",
+              "inputX": "touch_left:0:x * 107",
+              "inputY": "touch_left:0:y * 107",
               "length": 30,
               "children": [
                 {
@@ -430,8 +430,8 @@
               "width": 30.0,
               "height": 30.0,
               "input": "touch_right:0:touch",
-              "inputX": "touch_right:0:x * 110",
-              "inputY": "touch_right:0:y * 110",
+              "inputX": "touch_right:0:x * 107",
+              "inputY": "touch_right:0:y * 107",
               "length": 30,
               "children": [
                 {
