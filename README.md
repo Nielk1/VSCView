@@ -4,6 +4,9 @@ OSD for Valve Steam Controller & Sony PlayStation Controllers (DualShock 4 and D
 ## Themes
 * ﻿Sony DualSense
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+    - White/Black
+	- Midnight Black 
+    - Cosmic Red
 * ﻿Sony DualShock 4
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
   * Devil May Cry 5 by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
