@@ -4,15 +4,20 @@ OSD for Valve Steam Controller & Sony PlayStation Controllers (DualShock 4 and D
 ## Themes
 * ﻿Sony DualSense
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
-* ﻿﻿Sony DualShock 4
+    - White/Black
+	- Midnight Black 
+    - Cosmic Red
+* ﻿Sony DualShock 4
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
   * Devil May Cry 5 by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
-* ﻿Steam Controller
-  * Default by Nielk1
+* ﻿Valve Steam Controller
+  * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+  * Default (Classic) by Nielk1
   * ahNOMinal 2 by [ahMEmon](https://www.twitch.tv/ahmemon)
   * Buh-Lack by [ahMEmon](https://www.twitch.tv/ahmemon)
   * Docteur Controller by [Docteur Controller](https://www.youtube.com/channel/UC1GoAgop-6tbftsU4qtpSOQ)
   * Devieus Glass by [Devieus](https://www.youtube.com/user/Devieus)
+  * Diagnostic by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
   * Grey Minimal by [CriticalComposer](https://www.youtube.com/c/criticalcomposer)
   * Line Art by [Ishmobile](https://www.youtube.com/channel/UCTAPOuAcWv9JGdiQsVVSxkQ)
   * Line Art Invert by Sora Firestone & [Ishmobile](https://www.youtube.com/channel/UCTAPOuAcWv9JGdiQsVVSxkQ)
@@ -22,7 +27,7 @@ OSD for Valve Steam Controller & Sony PlayStation Controllers (DualShock 4 and D
   * Outline 2019 by [RambleTan](https://www.youtube.com/channel/UCYI8ifruvIqVtAY3joqlpfw)
   * Fire Sale by Nielk1, [Twenty-Six Twelve](https://www.reddit.com/user/Twenty-Six_Twelve/)
   * White Cerberus by [8BitCerberus](https://github.com/8BitCerberus/vscview-themes)
-* ﻿Steam Controller Chell
+* ﻿Valve Steam Controller Chell
   * Default by Nielk1
 
 ## Element Properties

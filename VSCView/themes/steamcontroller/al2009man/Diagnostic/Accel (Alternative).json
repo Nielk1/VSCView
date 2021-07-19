@@ -1,0 +1,514 @@
+{
+  "name": "Accel (Alternative)",
+  "width": 995,
+  "height": 720,
+  "version": 1,
+  "children": [
+    {
+      "x": 0.0,
+      "y": 0.0,
+      "children": [
+        {
+          "type": "slider",
+          "x": 218.0,
+          "y": 32.0,
+          "width": 0.0,
+          "height": 0.0,
+          "center": true,
+          "inputY": "triggers:l:analog * 5",
+          "children": [
+            {
+              "type": "image",
+              "image": "SC_Diagnostic_LeftTriggerSoftPull.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 123.0,
+              "height": 37.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "Low"
+            },
+            {
+              "type": "showhide",
+              "input": "triggers:l:stage2",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png",
+                  "x": 14.0,
+                  "y": -16.0,
+                  "width": 42.0,
+                  "height": 42.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": 777.0,
+          "y": 33.0,
+          "width": 0.0,
+          "height": 0.0,
+          "center": true,
+          "inputY": "triggers:r:analog * 5",
+          "children": [
+            {
+              "type": "image",
+              "image": "SC_Diagnostic_RightTriggerSoftPull.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 123.0,
+              "height": 37.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "Low"
+            },
+            {
+              "type": "showhide",
+              "input": "triggers:r:stage2",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png",
+                  "x": -16.0,
+                  "y": -16.0,
+                  "width": 50.0,
+                  "height": 50.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "image": "SC_Diagnostic_Base_AlternativeWithGyro.png",
+      "x": 497.0,
+      "y": 358.0,
+      "width": 966.0,
+      "height": 691.0,
+      "center": true,
+      "winform.smoothing": "Default",
+      "winform.interpolation": "Low",
+      "children": [
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "quad_right:s",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png",
+                  "x": 113.0,
+                  "y": 57.0,
+                  "width": 53.0,
+                  "height": 58.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:e",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png",
+                  "x": 168.0,
+                  "y": 3.0,
+                  "width": 53.0,
+                  "height": 58.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:w",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png",
+                  "x": 60.0,
+                  "y": 3.0,
+                  "width": 53.0,
+                  "height": 58.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:n",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png",
+                  "x": 113.0,
+                  "y": -51.0,
+                  "width": 53.0,
+                  "height": 58.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "home",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png",
+                  "x": 0.0,
+                  "y": -152.0,
+                  "width": 70.0,
+                  "height": 70.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "menu:r",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png",
+                  "x": 79.0,
+                  "y": -140.0,
+                  "width": 58.0,
+                  "height": 59.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "menu:l",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png",
+                  "x": -80.0,
+                  "y": -140.0,
+                  "width": 58.0,
+                  "height": 59.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "bumpers:l",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png",
+                  "x": -216.0,
+                  "y": -322.0,
+                  "width": 40.0,
+                  "height": 40.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "bumpers:r",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png",
+                  "x": 216.0,
+                  "y": -322.0,
+                  "width": 40.0,
+                  "height": 40.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "grip:l",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_LeftGrip_Button.png",
+                  "x": -282.0,
+                  "y": 131.0,
+                  "width": 121.0,
+                  "height": 215.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "grip:r",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_RightGrip_Button.png",
+                  "x": 281.0,
+                  "y": 133.0,
+                  "width": 121.0,
+                  "height": 215.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "grip:l", // Glyph Button
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png", // Glyph Button
+                  "x": -282.0,
+                  "y": 131.0,
+                  "width": 75.0,
+                  "height": 75.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "grip:r",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png", // Glyph Button
+                  "x": 281.0,
+                  "y": 133.0,
+                  "width": 75.0,
+                  "height": 75.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": -110.0,
+          "y": 5.0,
+          "inputX": "stick_left:x * 12",
+          "inputY": "stick_left:y * 13",
+          "children": [
+            {
+              "type": "showhide",
+              "input": "stick_left:click",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_Diagnostic_ActiveButton.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 62.0,
+                  "height": 62.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "image",
+              "image": "SC_Diagnostic_AnalogStickOutline.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 81.0,
+              "height": 81.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "Low"
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "input": "touch_left:click",
+          "children": [
+            {
+              "type": "image",
+              "image": "SC_Diagnostic_ActiveButton.png",
+              "x": -263.0,
+              "y": -137.0,
+              "width": 62.0,
+              "height": 62.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "Low"
+            }
+          ]
+        },
+        {
+          "x": -264.0,
+          "y": -138.0,
+          "children": [
+            {
+              "type": "slider",
+              "image": "padheat.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 30.0,
+              "height": 30.0,
+              "input": "touch_left:0:touch",
+              "inputX": "touch_left:0:x * 85",
+              "inputY": "touch_left:0:y * 85",
+              "length": 30,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "touch_left:0:touch",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "SC_Diagnostic_ActiveButton.png",
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 62.0,
+                      "height": 62.0,
+                      "center": true,
+                      "winform.smoothing": "None",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "input": "touch_right:click",
+          "children": [
+            {
+              "type": "image",
+              "image": "SC_Diagnostic_ActiveButton.png",
+              "x": 262.0,
+              "y": -137.0,
+              "width": 62.0,
+              "height": 62.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "Low"
+            }
+          ]
+        },
+        {
+          "x": 263.0,
+          "y": -138.0,
+          "children": [
+            {
+              "type": "slider",
+              "image": "padheat.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 30.0,
+              "height": 30.0,
+              "input": "touch_right:0:touch",
+              "inputX": "touch_right:0:x * 85",
+              "inputY": "touch_right:0:y * 85",
+              "length": 30,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "touch_right:0:touch",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "SC_Diagnostic_ActiveButton.png",
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 62.0,
+                      "height": 62.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "basic3d1",
+              "image": "SC_Diagnostic_Gyro.png",
+              "x": 0.7,
+              "y": 248.0,
+              "width": 104.0,
+              "height": 101.0,
+              "mode": "accel",
+              "shadowl": "SC_Diagnostic_Gyro.png",
+              "shadowr": "SC_Diagnostic_Gyro.png",
+              "shadowu": "SC_Diagnostic_Gyro.png",
+              "shadowd": "SC_Diagnostic_Gyro.png"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
