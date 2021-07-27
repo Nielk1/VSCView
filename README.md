@@ -233,6 +233,7 @@ OSD for Valve Steam Controller & Sony PlayStation Controllers (DualShock 4 and D
 * `max(params float[])` - Return maximum number
 * `min(params float[])` - Return minimum number
 * `tobool(object)` - Convert almost anything to a bool, null implies false, needed in some cases because all variables are numbers by default
+* `if(bool, object, object)` - If first paramater is true, return 2nd, else 3rd
 * `math.function()` - any function from [.net's math library](https://docs.microsoft.com/en-us/dotnet/api/system.math?view=netframework-4.6.2)
 
 ## Examples

@@ -72,6 +72,13 @@ namespace VSCView
             return default(bool);
         }
 
+        public static object If(bool v, object a, object b)
+        {
+            if (v)
+                return a;
+            return b;
+        }
+
         public static long UnixTimeMs()
         {
             return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
