@@ -4,7 +4,6 @@
   "height": 622,
   "version": 1,
   "children": [
-
     {
       "x": 0.0,
       "y": 0.0,
@@ -37,9 +36,9 @@
                   "type": "image",
                   "image": "dmc5_left_triggers.png",
                   "x": 0.0,
-                  "y": -3.0,
-                  "width": 152.0,
-                  "height": 100.0,
+                  "y": -2.0,
+                  "width": 154.0,
+                  "height": 101.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -76,9 +75,9 @@
                   "type": "image",
                   "image": "dmc5_ right_triggers.png",
                   "x": 0.0,
-                  "y": -3.0,
-                  "width": 152.0,
-                  "height": 100.0,
+                  "y": -2.0,
+                  "width": 154.0,
+                  "height": 101.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -365,9 +364,9 @@
         {
           "type": "slider",
           "x": -168.0,
-          "y": 135.0,
-          "inputX": "stick_left:x * 16",
-          "inputY": "stick_left:y * 14",
+          "y": 153.0,
+          "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.4, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.4, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
           "children": [
             {
               "type": "image",
@@ -379,6 +378,32 @@
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": -168.0,
+          "y": 153.0,
+          "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.4, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.4, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "children": [
+            {
+              "type": "showhide",
+              "input": "(Math.Abs(stick_left:x) > 0.3) or (Math.Abs(stick_left:y) > 0.3)",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "dmc5_analog_stick.png", //Active Analog Input
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 154.0,
+                  "height": 140.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
+                }
+              ]
             }
           ]
         },
@@ -401,10 +426,10 @@
         },
         {
           "type": "slider",
-          "x": 169.0,
-          "y": 135.0,
-          "inputX": "stick_right:x * 16",
-          "inputY": "stick_right:y * 14",
+          "x": 168.0,
+          "y": 153.0,
+          "inputX": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.4, Math.Sin(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputY": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.4, Math.Cos(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
           "children": [
             {
               "type": "image",
@@ -416,6 +441,32 @@
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": 168.0,
+          "y": 153.0,
+          "inputX": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.4, Math.Sin(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputY": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.4, Math.Cos(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "children": [
+            {
+              "type": "showhide",
+              "input": "(Math.Abs(stick_right:x) > 0.3) or (Math.Abs(stick_right:y) > 0.3)",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "dmc5_analog_stick.png", //Active Analog Input
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 154.0,
+                  "height": 140.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
+                }
+              ]
             }
           ]
         },
