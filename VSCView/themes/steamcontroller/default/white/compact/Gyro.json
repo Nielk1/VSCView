@@ -6,7 +6,7 @@
   "children": [
     {
       "type": "image",
-      "image": "SC_base_compact.png",
+      "image": "SC_white_base_compact.png",
       "x": 470.0,
       "y": 385.0,
       "width": 913.0,
@@ -25,14 +25,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\standard\\SC_Face_Button.png",
-                  "x": 107.0,
-                  "y": 104.0,
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Face_Button.png",
+                  "x": 107.3,
+                  "y": 103.9,
                   "width": 52.0,
                   "height": 52.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -42,14 +42,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\standard\\SC_Face_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Face_Button.png",
                   "x": 159.0,
-                  "y": 52.0,
+                  "y": 53.0,
                   "width": 52.0,
                   "height": 52.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -59,14 +59,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\standard\\SC_Face_Button.png",
-                  "x": 57.0,
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Face_Button.png",
+                  "x": 56.6,
                   "y": 53.0,
                   "width": 52.0,
                   "height": 52.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -76,14 +76,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\standard\\SC_Face_Button.png",
-                  "x": 107.0,
-                  "y": 1.0,
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Face_Button.png",
+                  "x": 107.3,
+                  "y": 2.0,
                   "width": 52.0,
                   "height": 52.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -99,14 +99,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\standard\\SC_Guide_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Guide_Button.png",
                   "x": 1.0,
                   "y": -94.0,
                   "width": 69.0,
                   "height": 70.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -116,14 +116,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\standard\\SC_Start-Select_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Start-Select_Button.png",
                   "x": 75.0,
                   "y": -83.0,
                   "width": 58.0,
                   "height": 33.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -133,14 +133,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\standard\\SC_Start-Select_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Start-Select_Button.png",
                   "x": -75.0,
                   "y": -83.0,
                   "width": 58.0,
                   "height": 33.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -156,14 +156,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\standard\\SC_LeftBumper-Active.png",
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_LeftBumper-Active.png",
                   "x": -251.0,
-                  "y": -245.0,
+                  "y": -244.6,
                   "width": 175.0,
                   "height": 33.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -173,14 +173,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\standard\\SC_RightBumper-Active.png",
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_RightBumper-Active.png",
                   "x": 251.0,
-                  "y": -245.0,
+                  "y": -244.6,
                   "width": 176.0,
                   "height": 33.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -196,14 +196,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_GlyphPress.png", // Glyph Button
+                  "image": "\\steamcontroller\\default\\black\\compact\\SC_GlyphPress.png", // Glyph Button
                   "x": -176.0,
                   "y": -304.0,
                   "width": 61.0,
                   "height": 62.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -213,14 +213,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_GlyphPress.png", // Glyph Button
+                  "image": "\\steamcontroller\\default\\black\\compact\\SC_GlyphPress.png", // Glyph Button
                   "x": 176.0,
                   "y": -304.0,
                   "width": 61.0,
                   "height": 62.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -236,14 +236,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_GlyphPress.png", // Glyph Button
+                  "image": "\\steamcontroller\\default\\black\\compact\\SC_GlyphPress.png", // Glyph Button
                   "x": -280.0,
                   "y": -327.0,
                   "width": 76.0,
                   "height": 76.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -253,14 +253,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_GlyphPress.png", // Glyph Button
+                  "image": "\\steamcontroller\\default\\black\\compact\\SC_GlyphPress.png", // Glyph Button
                   "x": 281.0,
                   "y": -327.0,
                   "width": 76.0,
                   "height": 76.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -276,14 +276,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_GlyphPress.png", // Glyph Button
+                  "image": "\\steamcontroller\\default\\black\\compact\\SC_GlyphPress.png", // Glyph Button
                   "x": -267.0,
                   "y": 175.0,
                   "width": 91.0,
                   "height": 91.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -293,14 +293,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_GlyphPress.png", // Glyph Button
+                  "image": "\\steamcontroller\\default\\black\\compact\\SC_GlyphPress.png", // Glyph Button
                   "x": 267.0,
                   "y": 177.0,
                   "width": 91.0,
                   "height": 91.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -312,14 +312,14 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default\\standard\\SC_AnalogStick_Click.png",
+              "image": "\\steamcontroller\\default\\black\\standard\\SC_AnalogStick_Click.png",
               "x": -103.0,
               "y": 56.0,
               "width": 117.0,
               "height": 117.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             }
           ]
         },
@@ -332,14 +332,14 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default\\standard\\SC_AnalogStick.png",
+              "image": "\\steamcontroller\\default\\black\\standard\\SC_AnalogStick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 107.0,
               "height": 108.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             }
           ]
         },
@@ -349,14 +349,14 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default\\standard\\SC_LeftTrackpad_Click.png",
+              "image": "\\steamcontroller\\default\\black\\standard\\SC_LeftTrackpad_Click.png",
               "x": -249.0,
               "y": -81.0,
               "width": 248.0,
               "height": 243.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             }
           ]
         },
@@ -366,7 +366,7 @@
           "children": [
             {
               "type": "trailpad",
-              "image": "\\steamcontroller\\default\\standard\\padheat.png",
+              "image": "\\steamcontroller\\default\\black\\standard\\padheat.png",
               "x": 0.0,
               "y": 0.0,
               "width": 26.0,
@@ -382,7 +382,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\steamcontroller\\default\\standard\\SC_Touchpad_Touch.png",
+                      "image": "\\steamcontroller\\default\\black\\standard\\SC_Touchpad_Touch.png",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 50.0,
@@ -403,14 +403,14 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default\\standard\\SC_RightTrackpad_Click.png",
+              "image": "\\steamcontroller\\default\\black\\standard\\SC_RightTrackpad_Click.png",
               "x": 249.0,
               "y": -80.0,
               "width": 235.0,
               "height": 230.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             }
           ]
         },
@@ -420,7 +420,7 @@
           "children": [
             {
               "type": "trailpad",
-              "image": "\\steamcontroller\\default\\standard\\padheat.png",
+              "image": "\\steamcontroller\\default\\black\\standard\\padheat.png",
               "x": 0.0,
               "y": 0.0,
               "width": 26.0,
@@ -436,14 +436,14 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\steamcontroller\\default\\standard\\SC_Touchpad_Touch.png",
+                      "image": "\\steamcontroller\\default\\black\\standard\\SC_Touchpad_Touch.png",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 50.0,
                       "height": 50.0,
                       "center": true,
                       "winform.smoothing": "Default",
-                      "winform.interpolation": "High"
+                      "winform.interpolation": "Low"
                     }
                   ]
                 }
@@ -491,16 +491,16 @@
           "children": [
             {
               "type": "basic3d1",
-              "image": "\\steamcontroller\\default\\standard\\SC_Gyro-Accel.png",
+              "image": "\\steamcontroller\\default\\black\\standard\\SC_Gyro-Accel.png",
               "x": 0.0,
               "y": 315.0,
               "width": 215.0,
               "height": 151.0,
               "mode": "gyro",
-              "shadowl": "\\steamcontroller\\default\\standard\\gyro_left.png",
-              "shadowr": "\\steamcontroller\\default\\standard\\gyro_right.png",
-              "shadowu": "\\steamcontroller\\default\\standard\\gyro_up.png",
-              "shadowd": "\\steamcontroller\\default\\standard\\gyro_down.png"
+              "shadowl": "\\steamcontroller\\default\\black\\standard\\gyro_left.png",
+              "shadowr": "\\steamcontroller\\default\\black\\standard\\gyro_right.png",
+              "shadowu": "\\steamcontroller\\default\\black\\standard\\gyro_up.png",
+              "shadowd": "\\steamcontroller\\default\\black\\standard\\gyro_down.png"
             }
           ]
         }

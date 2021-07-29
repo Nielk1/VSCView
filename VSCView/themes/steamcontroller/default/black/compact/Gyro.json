@@ -1,100 +1,16 @@
 {
-  "name": "Gyro (Alternative)",
-  "width": 995,
-  "height": 720,
+  "name": "Gyro",
+  "width": 940,
+  "height": 810,
   "version": 1,
   "children": [
     {
-      "x": 0.0,
-      "y": 0.0,
-      "children": [
-        {
-          "type": "slider",
-          "x": 218.0,
-          "y": 32.0,
-          "width": 0.0,
-          "height": 0.0,
-          "center": true,
-          "inputY": "triggers:l:analog * 5",
-          "children": [
-            {
-              "type": "image",
-              "image": "SC_Diagnostic_LeftTriggerSoftPull.png",
-              "x": 0.0,
-              "y": 0.0,
-              "width": 123.0,
-              "height": 37.0,
-              "center": true,
-              "winform.smoothing": "Default",
-              "winform.interpolation": "Low"
-            },
-            {
-              "type": "showhide",
-              "input": "triggers:l:stage2",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png",
-                  "x": 14.0,
-                  "y": -16.0,
-                  "width": 42.0,
-                  "height": 42.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "Low"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "slider",
-          "x": 777.0,
-          "y": 33.0,
-          "width": 0.0,
-          "height": 0.0,
-          "center": true,
-          "inputY": "triggers:r:analog * 5",
-          "children": [
-            {
-              "type": "image",
-              "image": "SC_Diagnostic_RightTriggerSoftPull.png",
-              "x": 0.0,
-              "y": 0.0,
-              "width": 123.0,
-              "height": 37.0,
-              "center": true,
-              "winform.smoothing": "Default",
-              "winform.interpolation": "Low"
-            },
-            {
-              "type": "showhide",
-              "input": "triggers:r:stage2",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png",
-                  "x": -16.0,
-                  "y": -16.0,
-                  "width": 50.0,
-                  "height": 50.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "Low"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
       "type": "image",
-      "image": "SC_Diagnostic_Base_AlternativeWithGyro.png",
-      "x": 497.0,
-      "y": 358.0,
-      "width": 966.0,
-      "height": 691.0,
+      "image": "SC_base_compact.png",
+      "x": 470.0,
+      "y": 385.0,
+      "width": 913.0,
+      "height": 754.0,
       "center": true,
       "winform.smoothing": "Default",
       "winform.interpolation": "High",
@@ -109,11 +25,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png",
-                  "x": 113.0,
-                  "y": 57.0,
-                  "width": 53.0,
-                  "height": 58.0,
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Face_Button.png",
+                  "x": 107.0,
+                  "y": 104.0,
+                  "width": 52.0,
+                  "height": 52.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -126,11 +42,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png",
-                  "x": 168.0,
-                  "y": 3.0,
-                  "width": 53.0,
-                  "height": 58.0,
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Face_Button.png",
+                  "x": 159.0,
+                  "y": 52.0,
+                  "width": 52.0,
+                  "height": 52.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -143,11 +59,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png",
-                  "x": 60.0,
-                  "y": 3.0,
-                  "width": 53.0,
-                  "height": 58.0,
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Face_Button.png",
+                  "x": 57.0,
+                  "y": 53.0,
+                  "width": 52.0,
+                  "height": 52.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -160,11 +76,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png",
-                  "x": 113.0,
-                  "y": -51.0,
-                  "width": 53.0,
-                  "height": 58.0,
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Face_Button.png",
+                  "x": 107.0,
+                  "y": 1.0,
+                  "width": 52.0,
+                  "height": 52.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -183,10 +99,10 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png",
-                  "x": 0.0,
-                  "y": -152.0,
-                  "width": 70.0,
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Guide_Button.png",
+                  "x": 1.0,
+                  "y": -94.0,
+                  "width": 69.0,
                   "height": 70.0,
                   "center": true,
                   "winform.smoothing": "Default",
@@ -200,11 +116,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png",
-                  "x": 79.0,
-                  "y": -140.0,
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Start-Select_Button.png",
+                  "x": 75.0,
+                  "y": -83.0,
                   "width": 58.0,
-                  "height": 59.0,
+                  "height": 33.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -217,11 +133,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png",
-                  "x": -80.0,
-                  "y": -140.0,
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Start-Select_Button.png",
+                  "x": -75.0,
+                  "y": -83.0,
                   "width": 58.0,
-                  "height": 59.0,
+                  "height": 33.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -240,11 +156,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png",
-                  "x": -216.0,
-                  "y": -322.0,
-                  "width": 40.0,
-                  "height": 40.0,
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_LeftBumper-Active.png",
+                  "x": -251.0,
+                  "y": -245.0,
+                  "width": 175.0,
+                  "height": 33.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -257,11 +173,91 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png",
-                  "x": 216.0,
-                  "y": -322.0,
-                  "width": 40.0,
-                  "height": 40.0,
+                  "image": "\\steamcontroller\\default\\black\\standard\\SC_RightBumper-Active.png",
+                  "x": 251.0,
+                  "y": -245.0,
+                  "width": 176.0,
+                  "height": 33.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "bumpers:l",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_GlyphPress.png", // Glyph Button
+                  "x": -176.0,
+                  "y": -304.0,
+                  "width": 61.0,
+                  "height": 62.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "bumpers:r",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_GlyphPress.png", // Glyph Button
+                  "x": 176.0,
+                  "y": -304.0,
+                  "width": 61.0,
+                  "height": 62.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "triggers:l:stage2",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_GlyphPress.png", // Glyph Button
+                  "x": -280.0,
+                  "y": -327.0,
+                  "width": 76.0,
+                  "height": 76.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "triggers:r:stage2",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "SC_GlyphPress.png", // Glyph Button
+                  "x": 281.0,
+                  "y": -327.0,
+                  "width": 76.0,
+                  "height": 76.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -280,11 +276,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_Diagnostic_LeftGrip_Button.png",
-                  "x": -282.0,
-                  "y": 131.0,
-                  "width": 121.0,
-                  "height": 215.0,
+                  "image": "SC_GlyphPress.png", // Glyph Button
+                  "x": -267.0,
+                  "y": 175.0,
+                  "width": 91.0,
+                  "height": 91.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -297,45 +293,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "SC_Diagnostic_RightGrip_Button.png",
-                  "x": 281.0,
-                  "y": 133.0,
-                  "width": 121.0,
-                  "height": 215.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "Low"
-                }
-              ]
-            },
-            {
-              "type": "showhide",
-              "input": "grip:l", // Glyph Button
-              "children": [
-                {
-                  "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png", // Glyph Button
-                  "x": -282.0,
-                  "y": 131.0,
-                  "width": 75.0,
-                  "height": 75.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "Low"
-                }
-              ]
-            },
-            {
-              "type": "showhide",
-              "input": "grip:r",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png", // Glyph Button
-                  "x": 281.0,
-                  "y": 133.0,
-                  "width": 75.0,
-                  "height": 75.0,
+                  "image": "SC_GlyphPress.png", // Glyph Button
+                  "x": 267.0,
+                  "y": 177.0,
+                  "width": 91.0,
+                  "height": 91.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -345,36 +307,36 @@
           ]
         },
         {
-          "type": "slider",
-          "x": -110.0,
-          "y": 5.0,
-          "inputX": "stick_left:x * 12",
-          "inputY": "stick_left:y * 13",
+          "type": "showhide",
+          "input": "stick_left:click",
           "children": [
             {
-              "type": "showhide",
-              "input": "stick_left:click",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "SC_Diagnostic_ActiveButton.png",
-                  "x": 0.0,
-                  "y": 0.0,
-                  "width": 62.0,
-                  "height": 62.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "Low"
-                }
-              ]
-            },
+              "type": "image",
+              "image": "\\steamcontroller\\default\\black\\standard\\SC_AnalogStick_Click.png",
+              "x": -103.0,
+              "y": 56.0,
+              "width": 117.0,
+              "height": 117.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "Low"
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": -105.0,
+          "y": 55.0,
+          "inputX": "stick_left:x * 16",
+          "inputY": "stick_left:y * 16",
+          "children": [
             {
               "type": "image",
-              "image": "SC_Diagnostic_AnalogStickOutline.png",
+              "image": "\\steamcontroller\\default\\black\\standard\\SC_AnalogStick.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 81.0,
-              "height": 81.0,
+              "width": 107.0,
+              "height": 108.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
@@ -387,11 +349,11 @@
           "children": [
             {
               "type": "image",
-              "image": "SC_Diagnostic_ActiveButton.png",
-              "x": -263.0,
-              "y": -137.0,
-              "width": 62.0,
-              "height": 62.0,
+              "image": "\\steamcontroller\\default\\black\\standard\\SC_LeftTrackpad_Click.png",
+              "x": -249.0,
+              "y": -81.0,
+              "width": 248.0,
+              "height": 243.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
@@ -399,19 +361,19 @@
           ]
         },
         {
-          "x": -264.0,
-          "y": -138.0,
+          "x": -249.0,
+          "y": -81.0,
           "children": [
             {
-              "type": "slider",
-              "image": "padheat.png",
+              "type": "trailpad",
+              "image": "\\steamcontroller\\default\\black\\standard\\padheat.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 30.0,
-              "height": 30.0,
+              "width": 26.0,
+              "height": 26.0,
               "input": "touch_left:0:touch",
-              "inputX": "touch_left:0:x * 85",
-              "inputY": "touch_left:0:y * 85",
+              "inputX": "touch_left:0:x * 107",
+              "inputY": "touch_left:0:y * 107",
               "length": 30,
               "children": [
                 {
@@ -420,11 +382,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "SC_Diagnostic_ActiveButton.png",
+                      "image": "\\steamcontroller\\default\\black\\standard\\SC_Touchpad_Touch.png",
                       "x": 0.0,
                       "y": 0.0,
-                      "width": 62.0,
-                      "height": 62.0,
+                      "width": 50.0,
+                      "height": 50.0,
                       "center": true,
                       "winform.smoothing": "None",
                       "winform.interpolation": "Low"
@@ -441,11 +403,11 @@
           "children": [
             {
               "type": "image",
-              "image": "SC_Diagnostic_ActiveButton.png",
-              "x": 262.0,
-              "y": -137.0,
-              "width": 62.0,
-              "height": 62.0,
+              "image": "\\steamcontroller\\default\\black\\standard\\SC_RightTrackpad_Click.png",
+              "x": 249.0,
+              "y": -80.0,
+              "width": 235.0,
+              "height": 230.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
@@ -453,20 +415,20 @@
           ]
         },
         {
-          "x": 263.0,
-          "y": -138.0,
+          "x": 249.0,
+          "y": -80.0,
           "children": [
             {
-              "type": "slider",
-              "image": "padheat.png",
+              "type": "trailpad",
+              "image": "\\steamcontroller\\default\\black\\standard\\padheat.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 30.0,
-              "height": 30.0,
+              "width": 26.0,
+              "height": 26.0,
               "input": "touch_right:0:touch",
-              "inputX": "touch_right:0:x * 85",
-              "inputY": "touch_right:0:y * 85",
-              "length": 30,
+              "inputX": "touch_right:0:x * 107",
+              "inputY": "touch_right:0:y * 107",
+              "length": 28,
               "children": [
                 {
                   "type": "showhide",
@@ -474,11 +436,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "SC_Diagnostic_ActiveButton.png",
+                      "image": "\\steamcontroller\\default\\black\\standard\\SC_Touchpad_Touch.png",
                       "x": 0.0,
                       "y": 0.0,
-                      "width": 62.0,
-                      "height": 62.0,
+                      "width": 50.0,
+                      "height": 50.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -494,17 +456,51 @@
           "y": 0.0,
           "children": [
             {
+              "type": "pbar",
+              "x": -355.0,
+              "y": -318.0,
+              "width": 18.0,
+              "height": 117.0,
+              "center": true,
+              "input": "triggers:l:analog",
+              "direction": "up",
+              "min": "0",
+              "max": "1",
+              "foreground": "ff00d2f8",
+              "background": "ff007894"
+            },
+            {
+              "type": "pbar",
+              "x": 355.0,
+              "y": -318.0,
+              "width": 18.0,
+              "height": 117.0,
+              "center": true,
+              "input": "triggers:r:analog",
+              "direction": "up",
+              "min": "0",
+              "max": "1",
+              "foreground": "ff00d2f8",
+              "background": "ff007894"
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
               "type": "basic3d1",
-              "image": "SC_Diagnostic_Gyro.png",
-              "x": 0.7,
-              "y": 248.0,
-              "width": 104.0,
-              "height": 101.0,
+              "image": "\\steamcontroller\\default\\black\\standard\\SC_Gyro-Accel.png",
+              "x": 0.0,
+              "y": 315.0,
+              "width": 215.0,
+              "height": 151.0,
               "mode": "gyro",
-              "shadowl": "SC_Diagnostic_Gyro.png",
-              "shadowr": "SC_Diagnostic_Gyro.png",
-              "shadowu": "SC_Diagnostic_Gyro.png",
-              "shadowd": "SC_Diagnostic_Gyro.png"
+              "shadowl": "\\steamcontroller\\default\\black\\standard\\gyro_left.png",
+              "shadowr": "\\steamcontroller\\default\\black\\standard\\gyro_right.png",
+              "shadowu": "\\steamcontroller\\default\\black\\standard\\gyro_up.png",
+              "shadowd": "\\steamcontroller\\default\\black\\standard\\gyro_down.png"
             }
           ]
         }

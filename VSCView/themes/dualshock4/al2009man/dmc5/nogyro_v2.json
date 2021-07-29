@@ -97,7 +97,7 @@
       "height": 582.0,
       "center": true,
       "winform.smoothing": "Default",
-      "winform.interpolation": "Low",
+      "winform.interpolation": "High",
       "children": [
         {
           "x": 0.0,
