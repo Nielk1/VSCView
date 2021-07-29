@@ -15,7 +15,7 @@
           "width": 319.0,
           "height": 70.0,
           "center": true,
-          "inputY": "(Math.Sin(UnixTimeMs() / 300.0) / 2 + 0.5) * 15",
+          "inputY": "(Math.Sin(UnixTimeMs() / 300.0) / 2 + 0.5) * 7",
           "children": [
             {
               "type": "image",
@@ -54,7 +54,7 @@
           "width": 73.0,
           "height": 38.0,
           "center": true,
-          "inputY": "(Math.Cos(UnixTimeMs() / 300.0) / 2 + 0.5) * 15",
+          "inputY": "(Math.Cos(UnixTimeMs() / 300.0) / 2 + 0.5) * 7",
           "children": [
             {
               "type": "image",
@@ -382,8 +382,9 @@
           "type": "slider",
           "x": -178.0,
           "y": 147.0,
-          "inputX": "stick_left:x * 16",
-          "inputY": "stick_left:y * 14",
+          "input": "1",
+          "inputX": "Math.Sin(UnixTimeMs() / -300.0) * 16",
+          "inputY": "Math.Cos(UnixTimeMs() / -300.0) * 14",
           "children": [
             {
               "type": "image",
@@ -419,8 +420,9 @@
           "type": "slider",
           "x": 178.0,
           "y": 148.0,
-          "inputX": "stick_right:x * 16",
-          "inputY": "stick_right:y * 14",
+          "input": "1",
+          "inputX": "Math.Sin(UnixTimeMs() / 300.0) * 16",
+          "inputY": "Math.Cos(UnixTimeMs() / 300.0) * 14",
           "children": [
             {
               "type": "image",
