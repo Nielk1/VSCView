@@ -4,14 +4,16 @@ On-screen Controller Overlay for Valve Steam Controller & Sony PlayStation Contr
 ## Themes
 * ﻿Sony DualSense
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
-    - White/Black
-	- Midnight Black 
-    - Cosmic Red
+    - Color: White/Black
+    - Color: Midnight Black 
+    - Color: Cosmic Red
 * ﻿Sony DualShock 4
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
   * Devil May Cry 5 by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
 * ﻿Valve Steam Controller
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+    - Color: Black
+    - Color: White
   * Default (Classic) by Nielk1
   * ahNOMinal 2 by [ahMEmon](https://www.twitch.tv/ahmemon)
   * Buh-Lack by [ahMEmon](https://www.twitch.tv/ahmemon)
