@@ -364,10 +364,10 @@
         {
           "type": "slider",
           "x": -168.0,
-          "y": 135.0,
+          "y": 153.0,
           "input": "1",
           "inputX": "Math.Sin(UnixTimeMs() / -300.0) * 16",
-          "inputY": "Math.Cos(UnixTimeMs() / -300.0) * 14",
+          "inputY": "Math.Cos(UnixTimeMs() / -300.0) * 16",
           "children": [
             {
               "type": "image",
@@ -401,11 +401,11 @@
         },
         {
           "type": "slider",
-          "x": 169.0,
-          "y": 135.0,
+          "x": 168.0,
+          "y": 153.0,
           "input": "1",
           "inputX": "Math.Sin(UnixTimeMs() / 300.0) * 16",
-          "inputY": "Math.Cos(UnixTimeMs() / 300.0) * 14",
+          "inputY": "Math.Cos(UnixTimeMs() / 300.0) * 16",
           "children": [
             {
               "type": "image",

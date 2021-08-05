@@ -366,7 +366,7 @@
           "x": -168.0,
           "y": 135.0,
           "inputX": "stick_left:x * 16",
-          "inputY": "stick_left:y * 14",
+          "inputY": "stick_left:y * 16",
           "children": [
             {
               "type": "image",
@@ -400,10 +400,10 @@
         },
         {
           "type": "slider",
-          "x": 169.0,
-          "y": 135.0,
+          "x": 168.0,
+          "y": 153.0,
           "inputX": "stick_right:x * 16",
-          "inputY": "stick_right:y * 14",
+          "inputY": "stick_right:y * 16",
           "children": [
             {
               "type": "image",
