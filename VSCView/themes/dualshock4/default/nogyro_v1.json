@@ -364,7 +364,7 @@
         {
           "type": "slider",
           "x": -168.0,
-          "y": 135.0,
+          "y": 153.0,
           "inputX": "stick_left:x * 16",
           "inputY": "stick_left:y * 16",
           "children": [
