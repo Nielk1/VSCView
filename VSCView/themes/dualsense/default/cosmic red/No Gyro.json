@@ -10,10 +10,10 @@
       "children": [
         {
           "type": "slider",
-          "x": 230.0,
-          "y": 83.0,
-          "width": 319.0,
-          "height": 70.0,
+          "x": 229.9,
+          "y": 89.5,
+          "width": 0.0,
+          "height": 0.0,
           "center": true,
           "inputY": "triggers:l:analog * 7",
           "children": [
@@ -22,8 +22,8 @@
               "image": "\\dualsense\\default\\white\\DualSense_L2.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 152.0,
-              "height": 108.0,
+              "width": 149.0,
+              "height": 113.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
@@ -36,12 +36,12 @@
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_L2-Active.png",
                   "x": 0.0,
-                  "y": -4.0,
-                  "width": 149.0,
+                  "y": -3.0,
+                  "width": 150.0,
                   "height": 113.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -49,10 +49,10 @@
         },
         {
           "type": "slider",
-          "x": 917.0,
-          "y": 86.0,
-          "width": 73.0,
-          "height": 38.0,
+          "x": 919.1,
+          "y": 87.3,
+          "width": 0.0,
+          "height": 0.0,
           "center": true,
           "inputY": "triggers:r:analog * 7",
           "children": [
@@ -62,7 +62,7 @@
               "x": 0.0,
               "y": 0.0,
               "width": 150.0,
-              "height": 115.0,
+              "height": 111.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
@@ -75,12 +75,12 @@
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_R2-Active.png",
                   "x": 0.0,
-                  "y": -4.0,
+                  "y": -2.0,
                   "width": 150.0,
-                  "height": 115.0,
+                  "height": 113.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -92,9 +92,9 @@
       "type": "image",
       "image": "DualSense_base_red.png",
       "x": 574.0,
-      "y": 333.0,
+      "y": 335.0,
       "width": 1091.0,
-      "height": 613.0,
+      "height": 607.0,
       "center": true,
       "winform.smoothing": "Default",
       "winform.interpolation": "High",
@@ -110,13 +110,13 @@
                 {
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_Cross.png",
-                  "x": 348.0,
+                  "x": 350.0,
                   "y": 84.0,
                   "width": 83.0,
                   "height": 71.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -127,13 +127,13 @@
                 {
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_Circle.png",
-                  "x": 433.0,
+                  "x": 434.0,
                   "y": 14.0,
                   "width": 82.0,
                   "height": 78.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -144,13 +144,13 @@
                 {
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_Square.png",
-                  "x": 268.0,
-                  "y": 18.0,
+                  "x": 270.0,
+                  "y": 17.0,
                   "width": 82.0,
                   "height": 74.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -161,13 +161,13 @@
                 {
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_Triangle.png",
-                  "x": 353.0,
-                  "y": -54.0,
+                  "x": 354.0,
+                  "y": -53.0,
                   "width": 83.0,
                   "height": 78.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -185,12 +185,12 @@
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_D-PAD_Down.png",
                   "x": -352.0,
-                  "y": 61.0,
+                  "y": 60.0,
                   "width": 69.0,
                   "height": 77.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -207,7 +207,7 @@
                   "height": 65.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -218,13 +218,13 @@
                 {
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_D-PAD_Left.png",
-                  "x": -407.0,
+                  "x": -406.0,
                   "y": 16.0,
                   "width": 85.0,
                   "height": 65.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -236,12 +236,12 @@
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_D-PAD_Up.png",
                   "x": -352.0,
-                  "y": -29.0,
+                  "y": -28.0,
                   "width": 69.0,
                   "height": 80.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -258,13 +258,13 @@
                 {
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_Home_Button.png",
-                  "x": 0.0,
-                  "y": 125.0,
+                  "x": 2.0,
+                  "y": 124.0,
                   "width": 72.0,
                   "height": 40.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -275,13 +275,13 @@
                 {
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_Mute_Button.png",
-                  "x": 2.0,
-                  "y": 169.0,
+                  "x": 3.0,
+                  "y": 168.0,
                   "width": 56.0,
                   "height": 12.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -292,13 +292,13 @@
                 {
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_Option_Button.png",
-                  "x": 265.0,
-                  "y": -91.0,
+                  "x": 267.0,
+                  "y": -90.0,
                   "width": 41.0,
                   "height": 55.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -309,13 +309,13 @@
                 {
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_Create_Button.png",
-                  "x": -266.0,
-                  "y": -91.0,
+                  "x": -267.0,
+                  "y": -90.0,
                   "width": 39.0,
                   "height": 53.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -332,13 +332,13 @@
                 {
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_L1-Active.png",
-                  "x": -350.0,
+                  "x": -351.0,
                   "y": -197.0,
                   "width": 164.0,
                   "height": 97.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -349,13 +349,13 @@
                 {
                   "type": "image",
                   "image": "\\dualsense\\default\\white\\DualSense_R1-Active.png",
-                  "x": 350.0,
+                  "x": 351.0,
                   "y": -197.0,
                   "width": 164.0,
                   "height": 97.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -374,16 +374,16 @@
               "height": 127.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             }
           ]
         },
         {
           "type": "slider",
-          "x": -178.0,
-          "y": 147.0,
+          "x": -179.0,
+          "y": 169.0,
           "inputX": "stick_left:x * 16",
-          "inputY": "stick_left:y * 14",
+          "inputY": "stick_left:y * 16",
           "children": [
             {
               "type": "image",
@@ -391,7 +391,7 @@
               "x": 0.0,
               "y": 0.0,
               "width": 129.0,
-              "height": 113.0,
+              "height": 109.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
@@ -405,22 +405,22 @@
             {
               "type": "image",
               "image": "\\dualsense\\default\\white\\DualSense_AnalogStick_Click.png",
-              "x": 178.0,
-              "y": 147.0,
+              "x": 180.0,
+              "y": 145.0,
               "width": 146.0,
               "height": 127.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             }
           ]
         },
         {
           "type": "slider",
-          "x": 178.0,
-          "y": 148.0,
+          "x": 180.0,
+          "y": 170.0,
           "inputX": "stick_right:x * 16",
-          "inputY": "stick_right:y * 14",
+          "inputY": "stick_right:y * 16",
           "children": [
             {
               "type": "image",
@@ -428,7 +428,7 @@
               "x": 0.0,
               "y": 0.0,
               "width": 130.0,
-              "height": 112.0,
+              "height": 110.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
@@ -443,12 +443,12 @@
               "type": "image",
               "image": "\\dualsense\\default\\white\\DualSense_Touchpad-Click.png",
               "x": 0.0,
-              "y": -71.0,
+              "y": -70.0,
               "width": 459.0,
               "height": 236.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             }
           ]
         },
@@ -482,7 +482,8 @@
                       "height": 50.0,
                       "center": true,
                       "winform.smoothing": "Default",
-                      "winform.interpolation": "High"
+                      "winform.interpolation": "Low"
+
                     }
                   ]
                 }
@@ -513,7 +514,7 @@
                       "height": 50.0,
                       "center": true,
                       "winform.smoothing": "Default",
-                      "winform.interpolation": "High"
+                      "winform.interpolation": "Low"
                     }
                   ]
                 }
