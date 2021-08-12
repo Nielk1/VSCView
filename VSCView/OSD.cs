@@ -358,6 +358,8 @@ namespace VSCView
 
         protected void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
         {
+            if (data?.ActiveController == null)
+                return;
             MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
             object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
             e.VariableValue = Convert.ChangeType(retVal, e.VariableType);
@@ -370,6 +372,8 @@ namespace VSCView
 
         protected void variables_ResolveVariableTypeNumeric(object sender, ResolveVariableTypeEventArgs e)
         {
+            if (data?.ActiveController == null)
+                return;
             e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
             if (e.VariableType == typeof(bool))
                 e.VariableType = typeof(int);
@@ -527,7 +531,7 @@ namespace VSCView
                     //calcFunc = BooleanContext.CompileDynamic(Calc.Replace(":", "__colon__"));
                     calcFunc = NumericContext.CompileDynamic(Calc.Replace(":", "__colon__"));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine($"Failed to compile dynamic formula \"{Calc}\"");
                 }

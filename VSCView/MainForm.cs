@@ -88,7 +88,7 @@ namespace VSCView
             }
             if (!string.IsNullOrWhiteSpace(settings.Theme) && File.Exists(settings.Theme))
             {
-                LoadTheme(settings.Theme, false); // we'll just let this task spool off on its own and pray
+                LoadTheme(settings.Theme, true); // we'll just let this task spool off on its own and pray
             }
             if (!string.IsNullOrWhiteSpace(settings.Background))
             {
@@ -319,7 +319,7 @@ namespace VSCView
                     tsmiController.DropDownItems.Add(itm);
                     IController c = controller;
                     ControllerMemoHack[c.DeviceHackRef.UniqueKey] = (controller, itm);
-                    controller.ControllerMetadataUpdate += () =>
+                    controller.ControllerMetadataUpdate += (IController ctrl) =>
                     {
                         try
                         {
@@ -509,10 +509,10 @@ namespace VSCView
         {
             ToolStripItem item = (ToolStripItem)sender;
 
-            await LoadTheme((string)item.Tag);
+            await LoadTheme((string)item.Tag, false);
         }
 
-        private async Task LoadTheme(string path, bool recordLast = true)
+        private async Task LoadTheme(string path, bool initialLoad = false)
         {
             string skinJson = File.ReadAllText(path);
 
@@ -529,7 +529,7 @@ namespace VSCView
                 this.Height = ui.Height;
             }
 
-            if (recordLast)
+            if (!initialLoad)
             {
                 settings.Theme = path;
                 SaveSettings();
