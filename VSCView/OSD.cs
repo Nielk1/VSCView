@@ -359,7 +359,10 @@ namespace VSCView
         protected void variables_ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
         {
             if (data?.ActiveController == null)
+            {
+                e.VariableValue = 0;
                 return;
+            }
             MethodInfo method = data.GetType().GetMethod("GetControlValue").MakeGenericMethod(new Type[] { e.VariableType });
             object retVal = method.Invoke(data, new object[] { e.VariableName.Replace("__colon__", ":") });
             e.VariableValue = Convert.ChangeType(retVal, e.VariableType);
@@ -373,7 +376,10 @@ namespace VSCView
         protected void variables_ResolveVariableTypeNumeric(object sender, ResolveVariableTypeEventArgs e)
         {
             if (data?.ActiveController == null)
+            {
+                e.VariableType = typeof(int);
                 return;
+            }
             e.VariableType = data.GetControlType(e.VariableName.Replace("__colon__", ":"));
             if (e.VariableType == typeof(bool))
                 e.VariableType = typeof(int);
