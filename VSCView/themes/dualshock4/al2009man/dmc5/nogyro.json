@@ -390,7 +390,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "(Math.Abs(stick_left:x) > 0.5) or (Math.Abs(stick_left:y) > 0.5)",
+              "input": "Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.5",
               "children": [
                 {
                   "type": "image",
@@ -453,7 +453,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "(Math.Abs(stick_right:x) > 0.5) or (Math.Abs(stick_right:y) > 0.5)",
+              "input": "Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.5",
               "children": [
                 {
                   "type": "image",
