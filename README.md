@@ -10,6 +10,7 @@ On-screen Controller Overlay for Valve Steam Controller & Sony PlayStation Contr
 * ﻿Sony DualShock 4
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
   * Devil May Cry 5 by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+  * PlayStation 20th Anniversary by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
 * ﻿Valve Steam Controller
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
     - Color: Black

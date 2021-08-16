@@ -365,8 +365,8 @@
           "type": "slider",
           "x": -168.0,
           "y": 153.0,
-          "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.4, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
-          "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.4, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.5, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.5, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
           "children": [
             {
               "type": "image",
@@ -385,12 +385,12 @@
           "type": "slider",
           "x": -168.0,
           "y": 153.0,
-          "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.4, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
-          "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.4, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.5, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.5, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
           "children": [
             {
               "type": "showhide",
-              "input": "(Math.Abs(stick_left:x) > 0.3) or (Math.Abs(stick_left:y) > 0.3)",
+              "input": "(Math.Abs(stick_left:x) > 0.5) or (Math.Abs(stick_left:y) > 0.5)",
               "children": [
                 {
                   "type": "image",
@@ -428,8 +428,8 @@
           "type": "slider",
           "x": 168.0,
           "y": 153.0,
-          "inputX": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.4, Math.Sin(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
-          "inputY": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.4, Math.Cos(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputX": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.5, Math.Sin(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputY": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.5, Math.Cos(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
           "children": [
             {
               "type": "image",
@@ -448,12 +448,12 @@
           "type": "slider",
           "x": 168.0,
           "y": 153.0,
-          "inputX": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.4, Math.Sin(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
-          "inputY": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.4, Math.Cos(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputX": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.5, Math.Sin(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputY": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.5, Math.Cos(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
           "children": [
             {
               "type": "showhide",
-              "input": "(Math.Abs(stick_right:x) > 0.3) or (Math.Abs(stick_right:y) > 0.3)",
+              "input": "(Math.Abs(stick_right:x) > 0.5) or (Math.Abs(stick_right:y) > 0.5)",
               "children": [
                 {
                   "type": "image",
