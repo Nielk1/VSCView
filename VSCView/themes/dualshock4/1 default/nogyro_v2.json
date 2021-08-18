@@ -1,5 +1,5 @@
 {
-  "name": "No Gyro",
+  "name": "No Gyro (DS4 V2)",
   "width": 1150,
   "height": 622,
   "version": 1,
@@ -19,7 +19,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\dualshock4\\default\\DS4_L2.png",
+              "image": "DS4_V2_L2.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,
@@ -34,14 +34,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_left_triggers.png",
+                  "image": "DS4_L2-Active.png",
                   "x": 0.0,
-                  "y": -2.0,
-                  "width": 154.0,
-                  "height": 101.0,
+                  "y": 0.0,
+                  "width": 137.0,
+                  "height": 78.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -58,7 +58,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\dualshock4\\default\\DS4_R2.png",
+              "image": "DS4_V2_R2.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,
@@ -73,14 +73,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_ right_triggers.png",
+                  "image": "DS4_R2-Active.png",
                   "x": 0.0,
-                  "y": -2.0,
-                  "width": 154.0,
-                  "height": 101.0,
+                  "y": 0.0,
+                  "width": 140.0,
+                  "height": 80.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -90,11 +90,11 @@
     },
     {
       "type": "image",
-      "image": "DS4_dmc5_base.png",
+      "image": "DS4_V2_base.png",
       "x": 574.0,
       "y": 311.0,
       "width": 1091.0,
-      "height": 582.0,
+      "height": 583.0,
       "center": true,
       "winform.smoothing": "Default",
       "winform.interpolation": "High",
@@ -109,14 +109,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_cross.png",
-                  "x": 328.0,
-                  "y": 71.0,
-                  "width": 99.0,
-                  "height": 94.0,
+                  "image": "DS4_Face_Button.png",
+                  "x": 329.0,
+                  "y": 76.0,
+                  "width": 73.0,
+                  "height": 67.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -126,14 +126,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_circle.png",
-                  "x": 407.0,
-                  "y": 6.0,
-                  "width": 99.0,
-                  "height": 93.0,
+                  "image": "DS4_Face_Button.png",
+                  "x": 406.0,
+                  "y": 9.0,
+                  "width": 73.0,
+                  "height": 67.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -143,14 +143,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_square.png",
+                  "image": "DS4_Face_Button.png",
                   "x": 251.0,
-                  "y": 5.0,
-                  "width": 100.0,
-                  "height": 94.0,
+                  "y": 8.0,
+                  "width": 73.0,
+                  "height": 67.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -160,14 +160,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_triangle.png",
+                  "image": "DS4_Face_Button.png",
                   "x": 328.0,
-                  "y": -62.0,
-                  "width": 99.0,
-                  "height": 92.0,
+                  "y": -59.0,
+                  "width": 73.0,
+                  "height": 67.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -183,14 +183,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_dpad_down.png",
-                  "x": -327.0,
-                  "y": 49.0,
-                  "width": 89.0,
-                  "height": 101.0,
+                  "image": "DS4_D-PAD_Down.png",
+                  "x": -328.0,
+                  "y": 53.0,
+                  "width": 66.0,
+                  "height": 77.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -200,14 +200,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_dpad_right.png",
-                  "x": -275.0,
-                  "y": 7.0,
-                  "width": 100.0,
-                  "height": 89.0,
+                  "image": "DS4_D-PAD_Right.png",
+                  "x": -278.0,
+                  "y": 10.0,
+                  "width": 81.0,
+                  "height": 62.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -217,14 +217,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_dpad_left.png",
+                  "image": "DS4_D-PAD_Left.png",
                   "x": -379.0,
-                  "y": 6.0,
-                  "width": 103.0,
-                  "height": 88.0,
+                  "y": 9.0,
+                  "width": 81.0,
+                  "height": 63.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -234,14 +234,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_dpad_up.png",
+                  "image": "DS4_D-PAD_Up.png",
                   "x": -328.0,
-                  "y": -39.0,
-                  "width": 89.0,
-                  "height": 97.0,
+                  "y": -36.0,
+                  "width": 66.0,
+                  "height": 72.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -257,14 +257,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_home_button.png",
+                  "image": "DS4_Home_Button.png",
                   "x": 0.0,
-                  "y": 116.0,
-                  "width": 72.0,
-                  "height": 53.0,
+                  "y": 118.0,
+                  "width": 65.0,
+                  "height": 45.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -274,14 +274,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_share-option.png",
-                  "x": 215.0,
+                  "image": "DS4_OptionsShare_Button.png",
+                  "x": 216.0,
                   "y": -90.0,
-                  "width": 61.0,
-                  "height": 91.0,
+                  "width": 39.0,
+                  "height": 63.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -291,14 +291,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_share-option.png",
-                  "x": -215.0,
-                  "y": -89.0,
-                  "width": 61.0,
-                  "height": 92.0,
+                  "image": "DS4_OptionsShare_Button.png",
+                  "x": -217.0,
+                  "y": -90.0,
+                  "width": 39.0,
+                  "height": 63.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -314,14 +314,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_left_bumpers.png",
-                  "x": -328.0,
-                  "y": -203.0,
-                  "width": 175.0,
-                  "height": 94.0,
+                  "image": "DS4_L1-Active.png",
+                  "x": -326.0,
+                  "y": -202.0,
+                  "width": 148.0,
+                  "height": 74.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             },
@@ -331,14 +331,14 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_right_bumpers.png",
-                  "x": 327.0,
-                  "y": -203.0,
-                  "width": 175.0,
-                  "height": 94.0,
+                  "image": "DS4_R1-Active.png",
+                  "x": 326.0,
+                  "y": -202.0,
+                  "width": 148.0,
+                  "height": 73.0,
                   "center": true,
                   "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
+                  "winform.interpolation": "Low"
                 }
               ]
             }
@@ -350,31 +350,11 @@
           "children": [
             {
               "type": "image",
-              "image": "dmc5_analog_press.png",
+              "image": "DS4_AnalogStick_Click.png",
               "x": -169.0,
               "y": 134.0,
-              "width": 172.0,
-              "height": 155.0,
-              "center": true,
-              "winform.smoothing": "Default",
-              "winform.interpolation": "High"
-            }
-          ]
-        },
-        {
-          "type": "slider",
-          "x": -168.0,
-          "y": 153.0,
-          "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.5, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
-          "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.5, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
-          "children": [
-            {
-              "type": "image",
-              "image": "\\dualshock4\\default\\DS4_LeftAnalogStick.png",
-              "x": 0.0,
-              "y": 0.0,
-              "width": 123.0,
-              "height": 109.0,
+              "width": 145.0,
+              "height": 128.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
@@ -385,25 +365,19 @@
           "type": "slider",
           "x": -168.0,
           "y": 153.0,
-          "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.5, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
-          "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.5, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputX": "stick_left:x * 16",
+          "inputY": "stick_left:y * 16",
           "children": [
             {
-              "type": "showhide",
-              "input": "(Math.Abs(stick_left:x) > 0.5) or (Math.Abs(stick_left:y) > 0.5)",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "dmc5_analog_stick.png", //Active Analog Input
-                  "x": 0.0,
-                  "y": 0.0,
-                  "width": 154.0,
-                  "height": 140.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
-                }
-              ]
+              "type": "image",
+              "image": "DS4_V2_LeftAnalogStick.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 123.0,
+              "height": 109.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "Low"
             }
           ]
         },
@@ -413,14 +387,14 @@
           "children": [
             {
               "type": "image",
-              "image": "dmc5_analog_press.png",
+              "image": "DS4_AnalogStick_Click.png",
               "x": 169.0,
               "y": 134.0,
-              "width": 171.0,
-              "height": 154.0,
+              "width": 145.0,
+              "height": 128.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             }
           ]
         },
@@ -428,12 +402,12 @@
           "type": "slider",
           "x": 168.0,
           "y": 153.0,
-          "inputX": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.5, Math.Sin(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
-          "inputY": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.5, Math.Cos(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+          "inputX": "stick_right:x * 16",
+          "inputY": "stick_right:y * 16",
           "children": [
             {
               "type": "image",
-              "image": "\\dualshock4\\default\\DS4_RightAnalogStick.png",
+              "image": "DS4_V2_RightAnalogStick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,
@@ -445,45 +419,19 @@
           ]
         },
         {
-          "type": "slider",
-          "x": 168.0,
-          "y": 153.0,
-          "inputX": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.5, Math.Sin(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
-          "inputY": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.5, Math.Cos(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
-          "children": [
-            {
-              "type": "showhide",
-              "input": "(Math.Abs(stick_right:x) > 0.5) or (Math.Abs(stick_right:y) > 0.5)",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "dmc5_analog_stick.png", //Active Analog Input
-                  "x": 0.0,
-                  "y": 0.0,
-                  "width": 154.0,
-                  "height": 140.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
-                }
-              ]
-            }
-          ]
-        },
-        {
           "type": "showhide",
           "input": "touch_center:click OR touch_right:click",
           "children": [
             {
               "type": "image",
-              "image": "dmc5_touchpad.png",
-              "x": 0.0,
-              "y": -77.0,
-              "width": 379.0,
-              "height": 238.0,
+              "image": "DS4-Touchpad-Cick.png",
+              "x": -0.0,
+              "y": -72.0,
+              "width": 359.0,
+              "height": 215.0,
               "center": true,
               "winform.smoothing": "Default",
-              "winform.interpolation": "High"
+              "winform.interpolation": "Low"
             }
           ]
         },
@@ -494,7 +442,7 @@
           "children": [
             {
               "type": "trailpad",
-              "image": "dmc5_padheat.png",
+              "image": "padheat.png",
               "x": 0.0,
               "y": 0.0,
               "width": 30.0,
@@ -502,7 +450,7 @@
               "input": "touch_center:0:touch OR touch_left:0:touch",
               "inputX": "(touch_center:0:x * 180) + touch_left:0:touch * (touch_left:0:x * 90 - 90)",
               "inputY": "(touch_center:0:y + touch_left:0:y) * 76",
-              "length": 30,
+              "length": 76,
               "children": [
                 {
                   "type": "showhide",
@@ -510,14 +458,14 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_touchpad_touch.png",
+                      "image": "DS4_Touchpad_Touch.png",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 50.0,
                       "height": 50.0,
                       "center": true,
                       "winform.smoothing": "Default",
-                      "winform.interpolation": "High"
+                      "winform.interpolation": "Low"
                     }
                   ]
                 }
@@ -525,7 +473,7 @@
             },
             {
               "type": "trailpad",
-              "image": "dmc5_padheat.png",
+              "image": "padheat.png",
               "x": 0.0,
               "y": 0.0,
               "width": 30.0,
@@ -541,14 +489,14 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_touchpad_touch.png",
+                      "image": "DS4_Touchpad_Touch.png",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 50.0,
                       "height": 50.0,
                       "center": true,
                       "winform.smoothing": "Default",
-                      "winform.interpolation": "High"
+                      "winform.interpolation": "Low",
                     }
                   ]
                 }

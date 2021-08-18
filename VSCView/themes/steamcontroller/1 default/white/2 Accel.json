@@ -1,7 +1,7 @@
 {
-  "name": "All",
-  "width": 1150,
-  "height": 780,
+  "name": "Accel",
+  "width": 995,
+  "height": 763,
   "version": 1,
   "children": [
     {
@@ -10,35 +10,35 @@
       "children": [
         {
           "type": "slider",
-          "x": 252.0,
-          "y": 55.0,
+          "x": 218.0,
+          "y": 32.0,
           "width": 0.0,
           "height": 0.0,
           "center": true,
-          "inputY": "triggers:l:analog * 15",
+          "inputY": "triggers:l:analog * 5",
           "children": [
             {
               "type": "image",
-              "image": "\\dualshock4\\default\\DS4_L2.png",
+              "image": "\\steamcontroller\\default\\black\\SC_LeftTriggerSoftPull.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,
-              "height": 70.0,
+              "height": 37.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
             },
             {
               "type": "showhide",
-              "input": "triggers:l:stage2 OR bumpers2:l",
+              "input": "triggers:l:stage2",
               "children": [
                 {
                   "type": "image",
-                  "image": "DS4_Anniversary_L2-Active.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_LeftTrigger-FullPull-Active.png",
                   "x": 0.0,
-                  "y": 0.0,
-                  "width": 131.0,
-                  "height": 78.0,
+                  "y": -3.0,
+                  "width": 122.0,
+                  "height": 34.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -49,35 +49,35 @@
         },
         {
           "type": "slider",
-          "x": 898.0,
-          "y": 56.0,
+          "x": 777.0,
+          "y": 33.0,
           "width": 0.0,
           "height": 0.0,
           "center": true,
-          "inputY": "triggers:r:analog * 15",
+          "inputY": "triggers:r:analog * 5",
           "children": [
             {
               "type": "image",
-              "image": "\\dualshock4\\default\\DS4_R2.png",
+              "image": "\\steamcontroller\\default\\black\\SC_RightTriggerSoftPull.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,
-              "height": 70.0,
+              "height": 37.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
             },
             {
               "type": "showhide",
-              "input": "triggers:r:stage2 OR bumpers2:r",
+              "input": "triggers:r:stage2",
               "children": [
                 {
                   "type": "image",
-                  "image": "DS4_Anniversary_R2-Active.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_RightTrigger-FullPull-Active.png",
                   "x": 0.0,
-                  "y": 0.0,
-                  "width": 131.0,
-                  "height": 79.0,
+                  "y": -3.0,
+                  "width": 122.0,
+                  "height": 34.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -90,11 +90,11 @@
     },
     {
       "type": "image",
-      "image": "DS4_anniversary_base.png",
-      "x": 575.0,
-      "y": 311.0,
-      "width": 1091.0,
-      "height": 583.0,
+      "image": "SC_white_base.png",
+      "x": 497.0,
+      "y": 358.0,
+      "width": 966.0,
+      "height": 691.0,
       "center": true,
       "winform.smoothing": "Default",
       "winform.interpolation": "High",
@@ -109,11 +109,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DS4_Anniversary_Cross_Button.png",
-                  "x": 329.0,
-                  "y": 74.0,
-                  "width": 78.0,
-                  "height": 72.0,
+                  "image": "\\steamcontroller\\default\\black\\SC_Face_Button.png",
+                  "x": 113.8,
+                  "y": 56.5,
+                  "width": 55.0,
+                  "height": 56.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -126,11 +126,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DS4_Anniversary_Circle_Button.png",
-                  "x": 407.0,
-                  "y": 7.0,
-                  "width": 78.0,
-                  "height": 72.0,
+                  "image": "\\steamcontroller\\default\\black\\SC_Face_Button.png",
+                  "x": 168.0,
+                  "y": 2.8,
+                  "width": 55.0,
+                  "height": 56.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -143,11 +143,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DS4_Anniversary_Square_Button.png",
-                  "x": 252.0,
-                  "y": 6.0,
-                  "width": 78.0,
-                  "height": 72.0,
+                  "image": "\\steamcontroller\\default\\black\\SC_Face_Button.png",
+                  "x": 60.2,
+                  "y": 2.8,
+                  "width": 55.0,
+                  "height": 56.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -160,85 +160,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DS4_Anniversary_Triangle_Button.png",
-                  "x": 329.0,
-                  "y": -61.0,
-                  "width": 78.0,
-                  "height": 72.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "Low"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "x": 0.0,
-          "y": 0.0,
-          "children": [
-            {
-              "type": "showhide",
-              "input": "quad_left:s",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "DS4_Anniversary_D-PAD_Down.png",
-                  "x": -328.0,
-                  "y": 53.0,
-                  "width": 72.0,
-                  "height": 85.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "Low"
-                }
-              ]
-            },
-            {
-              "type": "showhide",
-              "input": "quad_left:e",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "DS4_Anniversary_D-PAD_Right.png",
-                  "x": -276.0,
-                  "y": 8.0,
-                  "width": 88.0,
-                  "height": 72.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "Low"
-                }
-              ]
-            },
-            {
-              "type": "showhide",
-              "input": "quad_left:w",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "DS4_Anniversary_D-PAD_Left.png",
-                  "x": -379.0,
-                  "y": 7.0,
-                  "width": 87.0,
-                  "height": 71.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "Low"
-                }
-              ]
-            },
-            {
-              "type": "showhide",
-              "input": "quad_left:n",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "DS4_Anniversary_D-PAD_Up.png",
-                  "x": -328.0,
-                  "y": -38.0,
-                  "width": 72.0,
-                  "height": 81.0,
+                  "image": "\\steamcontroller\\default\\black\\SC_Face_Button.png",
+                  "x": 113.7,
+                  "y": -51.2,
+                  "width": 55.0,
+                  "height": 56.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -257,11 +183,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DS4_Anniversary_Home_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_Guide_Button.png",
                   "x": 0.0,
-                  "y": 118.0,
-                  "width": 63.0,
-                  "height": 46.0,
+                  "y": -152.0,
+                  "width": 74.0,
+                  "height": 74.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -274,11 +200,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DS4_Anniversary_Options_Button.png",
-                  "x": 216.0,
-                  "y": -90.0,
-                  "width": 47.0,
-                  "height": 76.0,
+                  "image": "\\steamcontroller\\default\\black\\SC_Start-Select_Button.png",
+                  "x": 79.0,
+                  "y": -140.0,
+                  "width": 63.0,
+                  "height": 36.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -291,11 +217,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DS4_Anniversary_Share_Button.png",
-                  "x": -216.0,
-                  "y": -90.0,
-                  "width": 47.0,
-                  "height": 76.0,
+                  "image": "\\steamcontroller\\default\\black\\SC_Start-Select_Button.png",
+                  "x": -80.0,
+                  "y": -140.0,
+                  "width": 63.0,
+                  "height": 36.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -314,11 +240,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DS4_Anniversary_L1-Active.png",
-                  "x": -326.0,
-                  "y": -201.0,
-                  "width": 150.0,
-                  "height": 79.0,
+                  "image": "\\steamcontroller\\default\\black\\SC_LeftBumper-Active.png",
+                  "x": -266.0,
+                  "y": -312.0,
+                  "width": 185.0,
+                  "height": 35.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -331,11 +257,51 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DS4_Anniversary_R1-Active.png",
-                  "x": 327.0,
-                  "y": -200.0,
-                  "width": 150.0,
-                  "height": 80.0,
+                  "image": "\\steamcontroller\\default\\black\\SC_RightBumper-Active.png",
+                  "x": 265.0,
+                  "y": -312.0,
+                  "width": 186.0,
+                  "height": 35.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "grip:l",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\steamcontroller\\default\\black\\SC_LeftGrip_Button.png",
+                  "x": -282.0,
+                  "y": 131.0,
+                  "width": 121.0,
+                  "height": 215.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "grip:r",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\steamcontroller\\default\\black\\SC_RightGrip_Button.png",
+                  "x": 281.0,
+                  "y": 133.0,
+                  "width": 121.0,
+                  "height": 215.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -350,11 +316,11 @@
           "children": [
             {
               "type": "image",
-              "image": "Anniversary_LeftAnalogStick_Click.png",
-              "x": -169.0,
-              "y": 134.0,
-              "width": 150.0,
-              "height": 134.0,
+              "image": "\\steamcontroller\\default\\black\\SC_AnalogStick_Click.png",
+              "x": -109.0,
+              "y": 7.0,
+              "width": 124.0,
+              "height": 124.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
@@ -363,18 +329,18 @@
         },
         {
           "type": "slider",
-          "x": -168.0,
-          "y": 153.0,
+          "x": -110.0,
+          "y": 6.0,
           "inputX": "stick_left:x * 16",
           "inputY": "stick_left:y * 16",
           "children": [
             {
               "type": "image",
-              "image": "\\dualshock4\\default\\DS4_LeftAnalogStick.png",
+              "image": "\\steamcontroller\\default\\black\\SC_AnalogStick.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 123.0,
-              "height": 109.0,
+              "width": 114.0,
+              "height": 114.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
@@ -383,15 +349,15 @@
         },
         {
           "type": "showhide",
-          "input": "stick_right:click",
+          "input": "touch_left:click",
           "children": [
             {
               "type": "image",
-              "image": "Anniversary_RightAnalogStick_Click.png",
-              "x": 169.0,
-              "y": 134.0,
-              "width": 150.0,
-              "height": 134.0,
+              "image": "\\steamcontroller\\default\\black\\SC_LeftTrackpad_Click.png",
+              "x": -263.0,
+              "y": -137.0,
+              "width": 248.0,
+              "height": 243.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
@@ -399,97 +365,82 @@
           ]
         },
         {
-          "type": "slider",
-          "x": 168.0,
-          "y": 153.0,
-          "inputX": "stick_right:x * 16",
-          "inputY": "stick_right:y * 16",
-          "children": [
-            {
-              "type": "image",
-              "image": "\\dualshock4\\default\\DS4_RightAnalogStick.png",
-              "x": 0.0,
-              "y": 0.0,
-              "width": 123.0,
-              "height": 109.0,
-              "center": true,
-              "winform.smoothing": "Default",
-              "winform.interpolation": "Low"
-            }
-          ]
-        },
-        {
-          "type": "showhide",
-          "input": "touch_center:click OR touch_right:click",
-          "children": [
-            {
-              "type": "image",
-              "image": "DS4_Anniversary_Touchpad-Cick.png",
-              "x": 0.0,
-              "y": -72.0,
-              "width": 364.0,
-              "height": 222.0,
-              "center": true,
-              "winform.smoothing": "Default",
-              "winform.interpolation": "Low"
-            }
-          ]
-        },
-        {
-          "x": 0.0,
-          "y": -43.0,
-          "rot": 0.0,
+          "x": -264.0,
+          "y": -138.0,
           "children": [
             {
               "type": "trailpad",
-              "image": "DS4_Anniversary_Padheat.png",
+              "image": "\\steamcontroller\\default\\black\\padheat.png",
               "x": 0.0,
               "y": 0.0,
               "width": 30.0,
               "height": 30.0,
-              "input": "touch_center:0:touch OR touch_left:0:touch",
-              "inputX": "(touch_center:0:x * 180) + touch_left:0:touch * (touch_left:0:x * 90 - 90)",
-              "inputY": "(touch_center:0:y + touch_left:0:y) * 76",
-              "length": 76,
+              "input": "touch_left:0:touch",
+              "inputX": "touch_left:0:x * 107",
+              "inputY": "touch_left:0:y * 107",
+              "length": 30,
               "children": [
                 {
                   "type": "showhide",
-                  "input": "touch_center:0:touch OR touch_left:0:touch",
+                  "input": "touch_left:0:touch",
                   "children": [
                     {
                       "type": "image",
-                      "image": "DS4_Anniversary_Touchpad-Touch.png",
+                      "image": "\\steamcontroller\\default\\black\\SC_Touchpad_Touch.png",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 50.0,
                       "height": 50.0,
                       "center": true,
-                      "winform.smoothing": "Default",
+                      "winform.smoothing": "None",
                       "winform.interpolation": "Low"
                     }
                   ]
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "input": "touch_right:click",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\steamcontroller\\default\\black\\SC_RightTrackpad_Click.png",
+              "x": 262.0,
+              "y": -137.0,
+              "width": 249.0,
+              "height": 244.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "Low"
+            }
+          ]
+        },
+        {
+          "x": 263.0,
+          "y": -138.0,
+          "children": [
             {
               "type": "trailpad",
-              "image": "DS4_Anniversary_Padheat.png",
+              "image": "\\steamcontroller\\default\\black\\padheat.png",
               "x": 0.0,
               "y": 0.0,
               "width": 30.0,
               "height": 30.0,
-              "input": "touch_center:1:touch OR touch_right:0:touch",
-              "inputX": "(touch_center:1:x * 180) + touch_right:0:touch * (touch_right:0:x * 90 + 90)",
-              "inputY": "(touch_center:1:y + touch_right:0:y) * 76",
-              "length": 76,
+              "input": "touch_right:0:touch",
+              "inputX": "touch_right:0:x * 107",
+              "inputY": "touch_right:0:y * 107",
+              "length": 30,
               "children": [
                 {
                   "type": "showhide",
-                  "input": "touch_center:1:touch OR touch_right:0:touch",
+                  "input": "touch_right:0:touch",
                   "children": [
                     {
                       "type": "image",
-                      "image": "DS4_Anniversary_Touchpad-Touch.png",
+                      "image": "\\steamcontroller\\default\\black\\SC_Touchpad_Touch.png",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 50.0,
@@ -510,16 +461,16 @@
           "children": [
             {
               "type": "basic3d1",
-              "image": "Anniversary_Gyro-Accel.png",
+              "image": "\\steamcontroller\\default\\black\\SC_Gyro-Accel.png",
               "x": 0.0,
-              "y": 323.0,
-              "width": 253.0,
-              "height": 174.0,
+              "y": 270.0,
+              "width": 232.0,
+              "height": 163.0,
               "mode": "accel",
-              "shadowl": "gyro_anniversary_left.png",
-              "shadowr": "gyro_anniversary_right.png",
-              "shadowu": "gyro_anniversary_up.png",
-              "shadowd": "gyro_anniversary_down.png"
+              "shadowl": "\\steamcontroller\\default\\black\\gyro_left.png",
+              "shadowr": "\\steamcontroller\\default\\black\\gyro_right.png",
+              "shadowu": "\\steamcontroller\\default\\black\\gyro_up.png",
+              "shadowd": "\\steamcontroller\\default\\black\\gyro_down.png"
             }
           ]
         }
