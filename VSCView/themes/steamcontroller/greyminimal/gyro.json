@@ -85,7 +85,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default (classic)\\btn-stick.png",
+              "image": "\\steamcontroller\\classic\\btn-stick.png",
               "x": -71.0,
               "y": 81.0,
               "width": 105.0,
@@ -122,7 +122,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-home.png",
+                  "image": "\\steamcontroller\\classic\\btn-home.png",
                   "x": 1.0,
                   "y": -8.0,
                   "width": 51.0,
@@ -137,7 +137,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-sub.png",
+                  "image": "\\steamcontroller\\classic\\btn-sub.png",
                   "x": 53.0,
                   "y": 2.0,
                   "width": 38.0,
@@ -152,7 +152,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default (classic)\\btn-sub.png",
+                  "image": "\\steamcontroller\\classic\\btn-sub.png",
                   "x": -51.0,
                   "y": 1.0,
                   "width": 38.0,
@@ -407,10 +407,10 @@
               "width": 103.0,
               "height": 77.0,
               "mode": "gyro",
-              "shadowl": "\\steamcontroller\\default (classic)\\gyro_l.png",
-              "shadowr": "\\steamcontroller\\default (classic)\\gyro_r.png",
-              "shadowu": "\\steamcontroller\\default (classic)\\gyro_u.png",
-              "shadowd": "\\steamcontroller\\default (classic)\\gyro_d.png"
+              "shadowl": "\\steamcontroller\\classic\\gyro_l.png",
+              "shadowr": "\\steamcontroller\\classic\\gyro_r.png",
+              "shadowu": "\\steamcontroller\\classic\\gyro_u.png",
+              "shadowd": "\\steamcontroller\\classic\\gyro_d.png"
             }
           ]
         }

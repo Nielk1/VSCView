@@ -405,10 +405,10 @@
               "width": 103.0,
               "height": 77.0,
               "mode": "accel",
-              "shadowl": "\\steamcontroller\\default (classic)\\gyro_l.png",
-              "shadowr": "\\steamcontroller\\default (classic)\\gyro_r.png",
-              "shadowu": "\\steamcontroller\\default (classic)\\gyro_u.png",
-              "shadowd": "\\steamcontroller\\default (classic)\\gyro_d.png"
+              "shadowl": "\\steamcontroller\\classic\\gyro_l.png",
+              "shadowr": "\\steamcontroller\\classic\\gyro_r.png",
+              "shadowu": "\\steamcontroller\\classic\\gyro_u.png",
+              "shadowd": "\\steamcontroller\\classic\\gyro_d.png"
             },
             {
               "type": "basic3d1",
@@ -418,10 +418,10 @@
               "width": 103.0,
               "height": 77.0,
               "mode": "gyro",
-              "shadowl": "\\steamcontroller\\default (classic)\\gyro_l.png",
-              "shadowr": "\\steamcontroller\\default (classic)\\gyro_r.png",
-              "shadowu": "\\steamcontroller\\default (classic)\\gyro_u.png",
-              "shadowd": "\\steamcontroller\\default (classic)\\gyro_d.png"
+              "shadowl": "\\steamcontroller\\classic\\gyro_l.png",
+              "shadowr": "\\steamcontroller\\classic\\gyro_r.png",
+              "shadowu": "\\steamcontroller\\classic\\gyro_u.png",
+              "shadowd": "\\steamcontroller\\classic\\gyro_d.png"
             }
           ]
         }

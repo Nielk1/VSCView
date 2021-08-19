@@ -15,16 +15,16 @@ On-screen Controller Overlay for Valve Steam Controller & Sony PlayStation Contr
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
     - Color: Black
     - Color: White
-  * Default (Classic) by Nielk1
   * ahNOMinal 2 by [ahMEmon](https://www.twitch.tv/ahmemon)
   * Buh-Lack by [ahMEmon](https://www.twitch.tv/ahmemon)
+  * Classic by Nielk1
   * Docteur Controller by [Docteur Controller](https://www.youtube.com/channel/UC1GoAgop-6tbftsU4qtpSOQ)
   * Devieus Glass by [Devieus](https://www.youtube.com/user/Devieus)
   * Diagnostic by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
   * Grey Minimal by [CriticalComposer](https://www.youtube.com/c/criticalcomposer)
   * Line Art by [Ishmobile](https://www.youtube.com/channel/UCTAPOuAcWv9JGdiQsVVSxkQ)
   * Line Art Invert by Sora Firestone & [Ishmobile](https://www.youtube.com/channel/UCTAPOuAcWv9JGdiQsVVSxkQ)
-  * Silly/Cat Paws by Nielk1
+  * Cat Paws by Nielk1
   * Black Stencil by [RambleTan](https://www.youtube.com/channel/UCYI8ifruvIqVtAY3joqlpfw)
   * Outline 2018 by [RambleTan](https://www.youtube.com/channel/UCYI8ifruvIqVtAY3joqlpfw)
   * Outline 2019 by [RambleTan](https://www.youtube.com/channel/UCYI8ifruvIqVtAY3joqlpfw)
