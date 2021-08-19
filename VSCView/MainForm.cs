@@ -220,7 +220,10 @@ namespace VSCView
             ThemeMenuItems.Clear();
 
             if (!Directory.Exists("themes")) Directory.CreateDirectory("themes");
-            string[] themeParents = Directory.GetFiles("themes", "theme.json", SearchOption.AllDirectories);
+            IEnumerable<string> themeParents = Directory.EnumerateFiles("themes", "theme.json", SearchOption.AllDirectories)
+                                                        .OrderBy(dr => dr.Split(new char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries).Skip(1).FirstOrDefault())
+                                                        .ThenBy(dr => (dr.Split(new char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries).Skip(2).FirstOrDefault()?.ToLowerInvariant() ?? string.Empty) == "default" ? 0 : 1)
+                                                        .ThenBy(dr => dr);
             themeParents = themeParents.Select(dr => Path.GetDirectoryName(dr)).Distinct().ToArray();
 
             foreach (string themeParent in themeParents)
@@ -271,7 +274,7 @@ namespace VSCView
                 }
                 parentMenuItem.DropDownItems.Add(itmTop);
 
-                string[] themeFiles = Directory.GetFiles(themeParent, "*.json", SearchOption.TopDirectoryOnly);
+                IEnumerable<string> themeFiles = Directory.EnumerateFiles(themeParent, "*.json", SearchOption.TopDirectoryOnly);
                 foreach (string themeFile in themeFiles)
                 {
                     string ThemeFileName = Path.GetFileNameWithoutExtension(themeFile);
