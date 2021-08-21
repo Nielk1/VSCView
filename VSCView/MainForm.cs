@@ -19,10 +19,10 @@ namespace VSCView
 {
     public partial class MainForm : Form
     {
-        const int CONTROLLER_CTRICON_WIDTH = 32 + 16;
-        const int CONTROLLER_CONICON_WIDTH = 16;
-        const int CONTROLLER_ALLICON_HEIGHT = 32;
-        const int CONTROLLER_ICON_GAP = 4;
+        const int CONTROLLER_CTRICON_WIDTH = 48;//32 + 16;
+        const int CONTROLLER_CONICON_WIDTH = 24;//16;
+        const int CONTROLLER_ALLICON_HEIGHT = 32;//32;
+        const int CONTROLLER_ICON_GAP = 8;//4;
 
         public static ControllerState state;
         public static SensorCollector sensorData;
@@ -408,6 +408,7 @@ namespace VSCView
                         }
                         TargetSize = new Size((int)(TargetSize.Width * ratio), (int)(TargetSize.Height * ratio));
 
+                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                         g.DrawImage(ConnectionImg, ((CONTROLLER_CONICON_WIDTH - TargetSize.Width) / 2f), (CONTROLLER_ALLICON_HEIGHT - TargetSize.Height) / 2f, TargetSize.Width, TargetSize.Height);
                     }
                     if (ControllerImg != null)
