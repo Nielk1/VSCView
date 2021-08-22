@@ -105,7 +105,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "quad_right:s",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -122,7 +122,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:e",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -139,7 +139,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:w",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -156,7 +156,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:n",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -179,7 +179,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "quad_left:s",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -196,7 +196,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_left:e",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -213,7 +213,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_left:w",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -230,7 +230,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_left:n",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -253,7 +253,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "home",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -270,7 +270,7 @@
             },
             {
               "type": "showhide",
-              "input": "mute",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -287,7 +287,7 @@
             },
             {
               "type": "showhide",
-              "input": "menu:r",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -304,7 +304,7 @@
             },
             {
               "type": "showhide",
-              "input": "menu:l",
+              "input": "1",
               "children": [
                 {
                   "type": "image",

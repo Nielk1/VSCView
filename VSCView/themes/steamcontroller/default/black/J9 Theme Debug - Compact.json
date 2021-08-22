@@ -21,7 +21,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "quad_right:s",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -38,7 +38,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:e",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -55,7 +55,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:w",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -72,7 +72,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:n",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -95,7 +95,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "home",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -112,7 +112,7 @@
             },
             {
               "type": "showhide",
-              "input": "menu:r",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -129,7 +129,7 @@
             },
             {
               "type": "showhide",
-              "input": "menu:l",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -192,7 +192,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "bumpers:l",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -209,7 +209,7 @@
             },
             {
               "type": "showhide",
-              "input": "bumpers:r",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -232,7 +232,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "triggers:l:stage2",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -249,7 +249,7 @@
             },
             {
               "type": "showhide",
-              "input": "triggers:r:stage2",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -272,7 +272,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "grip:l",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -289,7 +289,7 @@
             },
             {
               "type": "showhide",
-              "input": "grip:r",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -327,8 +327,8 @@
           "type": "slider",
           "x": -105.0,
           "y": 55.0,
-          "inputX": "stick_left:x * 16",
-          "inputY": "stick_left:y * 16",
+          "inputX": "Math.Sin(UnixTimeMs() / -300.0) * 16",
+          "inputY": "Math.Cos(UnixTimeMs() / 300.0) * 16",
           "children": [
             {
               "type": "image",

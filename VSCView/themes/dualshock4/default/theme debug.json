@@ -91,7 +91,7 @@
     {
       "type": "image",
       "image": "DS4_V2_base.png",
-      "x": 574.0,
+      "x": 575.0,
       "y": 311.0,
       "width": 1091.0,
       "height": 583.0,
@@ -105,13 +105,13 @@
           "children": [
             {
               "type": "showhide",
-              "input": "quad_right:s",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
                   "image": "DS4_Face_Button.png",
                   "x": 329.0,
-                  "y": 76.0,
+                  "y": 74.0,
                   "width": 73.0,
                   "height": 67.0,
                   "center": true,
@@ -122,13 +122,13 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:e",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
                   "image": "DS4_Face_Button.png",
                   "x": 406.0,
-                  "y": 9.0,
+                  "y": 6.0,
                   "width": 73.0,
                   "height": 67.0,
                   "center": true,
@@ -139,13 +139,13 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:w",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
                   "image": "DS4_Face_Button.png",
                   "x": 251.0,
-                  "y": 8.0,
+                  "y": 6.0,
                   "width": 73.0,
                   "height": 67.0,
                   "center": true,
@@ -156,13 +156,13 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:n",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
                   "image": "DS4_Face_Button.png",
                   "x": 328.0,
-                  "y": -59.0,
+                  "y": -62.0,
                   "width": 73.0,
                   "height": 67.0,
                   "center": true,
@@ -179,13 +179,13 @@
           "children": [
             {
               "type": "showhide",
-              "input": "quad_left:s",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
                   "image": "DS4_D-PAD_Down.png",
                   "x": -328.0,
-                  "y": 53.0,
+                  "y": 52.0,
                   "width": 66.0,
                   "height": 77.0,
                   "center": true,
@@ -196,13 +196,13 @@
             },
             {
               "type": "showhide",
-              "input": "quad_left:e",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
                   "image": "DS4_D-PAD_Right.png",
                   "x": -278.0,
-                  "y": 10.0,
+                  "y": 8.0,
                   "width": 81.0,
                   "height": 62.0,
                   "center": true,
@@ -213,13 +213,13 @@
             },
             {
               "type": "showhide",
-              "input": "quad_left:w",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
                   "image": "DS4_D-PAD_Left.png",
                   "x": -379.0,
-                  "y": 9.0,
+                  "y": 7.0,
                   "width": 81.0,
                   "height": 63.0,
                   "center": true,
@@ -230,13 +230,13 @@
             },
             {
               "type": "showhide",
-              "input": "quad_left:n",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
                   "image": "DS4_D-PAD_Up.png",
                   "x": -328.0,
-                  "y": -36.0,
+                  "y": -38.0,
                   "width": 66.0,
                   "height": 72.0,
                   "center": true,
@@ -253,7 +253,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "home",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -270,13 +270,13 @@
             },
             {
               "type": "showhide",
-              "input": "menu:r",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
                   "image": "DS4_OptionsShare_Button.png",
                   "x": 216.0,
-                  "y": -90.0,
+                  "y": -92.0,
                   "width": 39.0,
                   "height": 63.0,
                   "center": true,
@@ -287,13 +287,13 @@
             },
             {
               "type": "showhide",
-              "input": "menu:l",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
                   "image": "DS4_OptionsShare_Button.png",
                   "x": -217.0,
-                  "y": -90.0,
+                  "y": -92.0,
                   "width": 39.0,
                   "height": 63.0,
                   "center": true,
@@ -316,7 +316,7 @@
                   "type": "image",
                   "image": "DS4_L1-Active.png",
                   "x": -326.0,
-                  "y": -202.0,
+                  "y": -203.0,
                   "width": 148.0,
                   "height": 74.0,
                   "center": true,
@@ -333,7 +333,7 @@
                   "type": "image",
                   "image": "DS4_R1-Active.png",
                   "x": 326.0,
-                  "y": -202.0,
+                  "y": -203.0,
                   "width": 148.0,
                   "height": 73.0,
                   "center": true,
