@@ -102,11 +102,11 @@ namespace VSCView
             DeviceManager.ControllerAdded += DeviceManager_ControllerAdded;
             DeviceManager.ControllerRemoved += DeviceManager_ControllerRemoved;
 
-            foreach(IDeviceProvider provider in DeviceManager.GetManualDeviceProviders())
-            {
-                ToolStripItem itm = tsmiManualControllers.DropDownItems.Add(provider.ToString(), null, LoadManualDevice);
-                itm.Tag = provider;
-            }
+//            foreach(IDeviceProvider provider in DeviceManager.GetManualDeviceProviders())
+//            {
+//                ToolStripItem itm = tsmiManualControllers.DropDownItems.Add(provider.ToString(), null, LoadManualDevice);
+//                itm.Tag = provider;
+//            }
         }
 
         private void LoadManualDevice(object sender, EventArgs e)
