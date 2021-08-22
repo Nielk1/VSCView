@@ -1,7 +1,7 @@
 {
-  "name": "No Gyro",
+  "name": "All",
   "width": 1150,
-  "height": 669,
+  "height": 850,
   "version": 1,
   "children": [
     {
@@ -30,7 +30,7 @@
             },
             {
               "type": "showhide",
-              "input": "triggers:l:stage2 OR bumpers2:l",
+              "input": "triggers:l:stage2 OR If(triggers:l:analog > 0, 1, 0)",
               "children": [
                 {
                   "type": "image",
@@ -69,7 +69,7 @@
             },
             {
               "type": "showhide",
-              "input": "triggers:r:stage2 OR bumpers2:r",
+              "input": "triggers:r:stage2 OR If(triggers:r:analog > 0, 1, 0)",
               "children": [
                 {
                   "type": "image",
@@ -90,7 +90,7 @@
     },
     {
       "type": "image",
-      "image": "DualSense_base_black.png",
+      "image": "DualSense_base_red.png",
       "x": 574.0,
       "y": 335.0,
       "width": 1091.0,
@@ -519,6 +519,25 @@
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "basic3d1",
+              "image": "\\dualsense\\default\\white\\DualSense_Gyro-Accel.png",
+              "x": 0.0,
+              "y": 362.0,
+              "width": 259.0,
+              "height": 170.0,
+              "mode": "accel",
+              "shadowl": "\\dualsense\\default\\white\\gyro_left.png",
+              "shadowr": "\\dualsense\\default\\white\\gyro_right.png",
+              "shadowu": "\\dualsense\\default\\white\\gyro_up.png",
+              "shadowd": "\\dualsense\\default\\white\\gyro_down.png"
             }
           ]
         }
