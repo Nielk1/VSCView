@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("VSCView")]
-[assembly: AssemblyDescription("This application allows the viewing of raw Steam Controller input for use in on screen displays for videos and streams.")]
+[assembly: AssemblyDescription("This application allows the viewing of raw input from the Steam Controller and various other controllers for use in on screen displays for videos and streams.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Nielk1")]
 [assembly: AssemblyProduct("VSCView")]
-[assembly: AssemblyCopyright("John Klein © 2020")]
+[assembly: AssemblyCopyright("John Klein © 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.4.0.0")]
-[assembly: AssemblyFileVersion("0.4.0.0")]
+[assembly: AssemblyVersion("0.5.0.0")]
+[assembly: AssemblyFileVersion("0.5.0.0")]
