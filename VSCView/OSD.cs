@@ -1210,7 +1210,7 @@ namespace VSCView
         public override void Paint(Graphics graphics)
         {
             Matrix preserve = graphics.Transform;
-            if (!DrawFromCenter) // these draw centered by default
+            if (!DrawFromCenter) // these draw centered by default so we have to compensate
                 graphics.TranslateTransform(Width / 2, Height / 2);
 
             //float Analog = string.IsNullOrWhiteSpace(AxisName) ? 0 : (data.GetAnalogControl(AxisName));
