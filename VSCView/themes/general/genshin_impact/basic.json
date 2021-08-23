@@ -1,0 +1,479 @@
+{
+  "name": "Basic",
+  "width": 1050,
+  "height": 600,
+  "version": 1,
+  "children": [
+    {
+      "x": 500.0,
+      "y": 0.0,
+      "children": [
+        {
+          "type": "image",
+          "image": "stick-ring.png",
+          "x": -250.0,
+          "y": 150.0,
+          "width": 195.0,
+          "height": 195.0,
+          "center": true,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "stick_left:click",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "stick-click.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 195.0,
+                  "height": 195.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "slider",
+              "x": 0.0,
+              "y": 0.0,
+              "inputX": "stick_left:x * 75",
+              "inputY": "stick_left:y * 75",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "stick-slider.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 98.0,
+                  "height": 98.0,
+                  "center": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "image": "stick-ring.png",
+          "x": 250.0,
+          "y": 150.0,
+          "width": 195.0,
+          "height": 195.0,
+          "center": true,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "stick_right:click",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "stick-click.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 195.0,
+                  "height": 195.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "slider",
+              "x": 0.0,
+              "y": 0.0,
+              "inputX": "stick_right:x * 75",
+              "inputY": "stick_right:y * 75",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "stick-slider.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 98.0,
+                  "height": 98.0,
+                  "center": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "image": "touch-pad.png",
+          "x": -250.0,
+          "y": 400.0,
+          "width": 218.0,
+          "height": 218.0,
+          "center": true,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "touch_left:click",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "touch-click.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 218.0,
+                  "height": 218.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "trailpad",
+                  "image": "padheat.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 30.0,
+                  "height": 30.0,
+                  "input": "touch_left:0:touch",
+                  "inputX": "touch_left:0:x * 93",
+                  "inputY": "touch_left:0:y * 93",
+                  "length": 30,
+                  "children": [
+                    {
+                      "type": "showhide",
+                      "input": "touch_left:0:touch",
+                      "children": [
+                        {
+                          "type": "image",
+                          "image": "touch-spot.png",
+                          "x": 0.0,
+                          "y": 0.0,
+                          "width": 35.0,
+                          "height": 35.0,
+                          "center": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "image": "touch-pad.png",
+          "x": 250.0,
+          "y": 400.0,
+          "width": 218.0,
+          "height": 218.0,
+          "center": true,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "touch_right:click",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "touch-click.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 218.0,
+                  "height": 218.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "trailpad",
+                  "image": "padheat.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 30.0,
+                  "height": 30.0,
+                  "input": "touch_right:0:touch",
+                  "inputX": "touch_right:0:x * 93",
+                  "inputY": "touch_right:0:y * 93",
+                  "length": 30,
+                  "children": [
+                    {
+                      "type": "showhide",
+                      "input": "touch_right:0:touch",
+                      "children": [
+                        {
+                          "type": "image",
+                          "image": "touch-spot.png",
+                          "x": 0.0,
+                          "y": 0.0,
+                          "width": 35.0,
+                          "height": 35.0,
+                          "center": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "image": "quad.png",
+          "x": 450.0,
+          "y": 150.0,
+          "width": 107.0,
+          "height": 77.0,
+          "center": true,
+          "children": [
+            {
+              "x": 0,
+              "y": 0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "quad_right:n",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "quad-n.png",
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 107.0,
+                      "height": 77.0,
+                      "center": true
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_right:s",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "quad-s.png",
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 107.0,
+                      "height": 77.0,
+                      "center": true
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_right:e",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "quad-e.png",
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 107.0,
+                      "height": 77.0,
+                      "center": true
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_right:w",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "quad-w.png",
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 107.0,
+                      "height": 77.0,
+                      "center": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "image": "button-lb.png",
+          "x": -60.0,
+          "y": 330.0,
+          "width": 50.0,
+          "height": 50.0,
+          "center": true,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "bumpers:l",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "button-active.png",
+                  "x": -1.0,
+                  "y": 0.0,
+                  "width": 52.0,
+                  "height": 52.0,
+                  "center": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "image": "button-lt.png",
+          "x": -60.0,
+          "y": 400.0,
+          "width": 50.0,
+          "height": 50.0,
+          "center": true,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "triggers:l:stage2 or if(triggers:l:analog > 0.99, 1, 0)",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "button-active.png",
+                  "x": -1.0,
+                  "y": 0.0,
+                  "width": 52.0,
+                  "height": 52.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "ppie",
+              "input": "triggers:l:analog",
+			  "ang":-90,
+              "image": "stick-click.png",
+              "x": -1.0,
+              "y": -0.5,
+              "width": 63.0,
+              "height": 63.0,
+			  "center": true
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "image": "button-lg.png",
+          "x": -60.0,
+          "y": 470.0,
+          "width": 50.0,
+          "height": 50.0,
+          "center": true,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "grip:l",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "button-active.png",
+                  "x": -1.0,
+                  "y": 0.0,
+                  "width": 52.0,
+                  "height": 52.0,
+                  "center": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "image": "button-rb.png",
+          "x": 60.0,
+          "y": 330.0,
+          "width": 50.0,
+          "height": 50.0,
+          "center": true,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "bumpers:r",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "button-active.png",
+                  "x": -1.0,
+                  "y": 0.0,
+                  "width": 52.0,
+                  "height": 52.0,
+                  "center": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "image": "button-rt.png",
+          "x": 60.0,
+          "y": 400.0,
+          "width": 50.0,
+          "height": 50.0,
+          "center": true,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "triggers:r:stage2 or if(triggers:r:analog > 0.99, 1, 0)",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "button-active.png",
+                  "x": -1.0,
+                  "y": 0.0,
+                  "width": 52.0,
+                  "height": 52.0,
+                  "center": true
+                }
+              ]
+            },
+            {
+              "type": "ppie",
+              "input": "triggers:r:analog",
+			  "ang":"triggers:r:analog*-360-90",
+              "image": "stick-click.png",
+              "x": -1.0,
+              "y": -0.5,
+              "width": 63.0,
+              "height": 63.0,
+			  "center": true
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "image": "button-rg.png",
+          "x": 60.0,
+          "y": 470.0,
+          "width": 50.0,
+          "height": 50.0,
+          "center": true,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "grip:r",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "button-active.png",
+                  "x": -1.0,
+                  "y": 0.0,
+                  "width": 52.0,
+                  "height": 52.0,
+                  "center": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
