@@ -1,5 +1,5 @@
 # VSCView
-On-screen Controller Overlay for Valve Steam Controller & Sony PlayStation Controllers (DualShock 4 and DualSense Controller).
+On-screen Controller Overlay for various controllers such as Valve Steam Controller & Sony PlayStation Controllers (DualShock 4 and DualSense Controller).
 
 ## Themes
 * ﻿Sony DualSense
@@ -32,6 +32,8 @@ On-screen Controller Overlay for Valve Steam Controller & Sony PlayStation Contr
   * White Cerberus by [8BitCerberus](https://github.com/8BitCerberus/vscview-themes)
 * ﻿Valve Steam Controller Chell
   * Default by Nielk1
+* ﻿General
+  * Genshin Impact by Nielk1
 
 ## Element Properties
 * *root*

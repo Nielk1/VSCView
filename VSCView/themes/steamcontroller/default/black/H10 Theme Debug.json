@@ -105,7 +105,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "quad_right:s",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -122,7 +122,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:e",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -139,7 +139,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:w",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -156,7 +156,7 @@
             },
             {
               "type": "showhide",
-              "input": "quad_right:n",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -179,7 +179,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "home",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -196,7 +196,7 @@
             },
             {
               "type": "showhide",
-              "input": "menu:r",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -213,7 +213,7 @@
             },
             {
               "type": "showhide",
-              "input": "menu:l",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -276,7 +276,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "grip:l",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
@@ -293,7 +293,7 @@
             },
             {
               "type": "showhide",
-              "input": "grip:r",
+              "input": "1",
               "children": [
                 {
                   "type": "image",
