@@ -35,6 +35,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiReloadThemes = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiReloadControllers = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiManualControllers = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.hIDGuardianWhitelistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSetBackgroundColor = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +47,6 @@
             this.lblHint1 = new System.Windows.Forms.Label();
             this.lblHint2 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.tsmiManualControllers = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,6 +101,13 @@
             this.tsmiReloadControllers.Size = new System.Drawing.Size(194, 22);
             this.tsmiReloadControllers.Text = "Reload Controllers";
             this.tsmiReloadControllers.Click += new System.EventHandler(this.tsmiReloadControllers_Click);
+            // 
+            // tsmiManualControllers
+            // 
+            this.tsmiManualControllers.Enabled = false;
+            this.tsmiManualControllers.Name = "tsmiManualControllers";
+            this.tsmiManualControllers.Size = new System.Drawing.Size(194, 22);
+            this.tsmiManualControllers.Text = "Manual Controllers";
             // 
             // toolStripSeparator2
             // 
@@ -176,12 +183,6 @@
             // colorDialog1
             // 
             this.colorDialog1.Color = System.Drawing.Color.Lime;
-            // 
-            // tsmiManualControllers
-            // 
-            this.tsmiManualControllers.Name = "tsmiManualControllers";
-            this.tsmiManualControllers.Size = new System.Drawing.Size(194, 22);
-            this.tsmiManualControllers.Text = "Manual Controllers";
             // 
             // MainForm
             // 
