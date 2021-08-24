@@ -19,7 +19,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default\\black\\standard\\SC_LeftTriggerSoftPull.png",
+              "image": "\\steamcontroller\\default\\black\\SC_LeftTriggerSoftPull.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,
@@ -34,7 +34,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_LeftTrigger-FullPull-Active.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_LeftTrigger-FullPull-Active.png",
                   "x": 0.0,
                   "y": -3.0,
                   "width": 122.0,
@@ -58,7 +58,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default\\black\\standard\\SC_RightTriggerSoftPull.png",
+              "image": "\\steamcontroller\\default\\black\\SC_RightTriggerSoftPull.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,
@@ -73,7 +73,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_RightTrigger-FullPull-Active.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_RightTrigger-FullPull-Active.png",
                   "x": 0.0,
                   "y": -3.0,
                   "width": 122.0,
@@ -109,7 +109,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Face_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_Face_Button.png",
                   "x": 113.8,
                   "y": 56.5,
                   "width": 55.0,
@@ -126,7 +126,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Face_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_Face_Button.png",
                   "x": 168.0,
                   "y": 2.8,
                   "width": 55.0,
@@ -143,7 +143,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Face_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_Face_Button.png",
                   "x": 60.2,
                   "y": 2.8,
                   "width": 55.0,
@@ -160,7 +160,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Face_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_Face_Button.png",
                   "x": 113.7,
                   "y": -51.2,
                   "width": 55.0,
@@ -183,7 +183,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Guide_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_Guide_Button.png",
                   "x": 0.0,
                   "y": -152.0,
                   "width": 74.0,
@@ -200,7 +200,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Start-Select_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_Start-Select_Button.png",
                   "x": 79.0,
                   "y": -140.0,
                   "width": 63.0,
@@ -217,7 +217,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_Start-Select_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_Start-Select_Button.png",
                   "x": -80.0,
                   "y": -140.0,
                   "width": 63.0,
@@ -240,7 +240,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_LeftBumper-Active.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_LeftBumper-Active.png",
                   "x": -266.0,
                   "y": -312.0,
                   "width": 185.0,
@@ -257,7 +257,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_RightBumper-Active.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_RightBumper-Active.png",
                   "x": 265.0,
                   "y": -312.0,
                   "width": 186.0,
@@ -280,7 +280,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_LeftGrip_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_LeftGrip_Button.png",
                   "x": -282.0,
                   "y": 131.0,
                   "width": 121.0,
@@ -297,7 +297,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "\\steamcontroller\\default\\black\\standard\\SC_RightGrip_Button.png",
+                  "image": "\\steamcontroller\\default\\black\\SC_RightGrip_Button.png",
                   "x": 281.0,
                   "y": 133.0,
                   "width": 121.0,
@@ -316,7 +316,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default\\black\\standard\\SC_AnalogStick_Click.png",
+              "image": "\\steamcontroller\\default\\black\\SC_AnalogStick_Click.png",
               "x": -109.0,
               "y": 7.0,
               "width": 124.0,
@@ -336,7 +336,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default\\black\\standard\\SC_AnalogStick.png",
+              "image": "\\steamcontroller\\default\\black\\SC_AnalogStick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 114.0,
@@ -353,7 +353,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default\\black\\standard\\SC_LeftTrackpad_Click.png",
+              "image": "\\steamcontroller\\default\\black\\SC_LeftTrackpad_Click.png",
               "x": -263.0,
               "y": -137.0,
               "width": 248.0,
@@ -370,7 +370,7 @@
           "children": [
             {
               "type": "trailpad",
-              "image": "\\steamcontroller\\default\\black\\standard\\padheat.png",
+              "image": "\\steamcontroller\\default\\black\\padheat.png",
               "x": 0.0,
               "y": 0.0,
               "width": 30.0,
@@ -386,7 +386,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\steamcontroller\\default\\black\\standard\\SC_Touchpad_Touch.png",
+                      "image": "\\steamcontroller\\default\\black\\SC_Touchpad_Touch.png",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 50.0,
@@ -407,7 +407,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\steamcontroller\\default\\black\\standard\\SC_RightTrackpad_Click.png",
+              "image": "\\steamcontroller\\default\\black\\SC_RightTrackpad_Click.png",
               "x": 262.0,
               "y": -137.0,
               "width": 249.0,
@@ -424,7 +424,7 @@
           "children": [
             {
               "type": "trailpad",
-              "image": "\\steamcontroller\\default\\black\\standard\\padheat.png",
+              "image": "\\steamcontroller\\default\\black\\padheat.png",
               "x": 0.0,
               "y": 0.0,
               "width": 30.0,
@@ -440,7 +440,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\steamcontroller\\default\\black\\standard\\SC_Touchpad_Touch.png",
+                      "image": "\\steamcontroller\\default\\black\\SC_Touchpad_Touch.png",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 50.0,
