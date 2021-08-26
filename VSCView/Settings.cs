@@ -15,5 +15,9 @@ namespace VSCView
         public int? Width { get; set; }
         public int? Height { get; set; }
         public bool AutoSelectOnlyController { get; set; }
+
+
+
+        public bool HackScMotionOn { get; set; }
     }
 }

@@ -508,6 +508,8 @@ namespace VSCView
                 ActiveController = (IController)sender;
 
             ControllerData.SetController(ActiveController);
+            if (ActiveController is SteamController)
+                (ActiveController as SteamController).EnableMotion = settings.HackScMotionOn;
             ActiveController.Initalize();
 
             new Thread(() =>
@@ -545,18 +547,20 @@ namespace VSCView
                 }
             }
 
-            if (FirstActiveController == null)
-                return;
-
             if (FirstActiveController == ActiveController)
                 return;
 
             ActiveController?.DeInitalize();
             ActiveController = null;
 
+            if (FirstActiveController == null)
+                return;
+
             ActiveController = FirstActiveController;
 
             ControllerData.SetController(ActiveController);
+            if (ActiveController is SteamController)
+                (ActiveController as SteamController).EnableMotion = settings.HackScMotionOn;
             ActiveController.Initalize();
 
             if (FirstControllerActivation)
@@ -741,6 +745,13 @@ namespace VSCView
             settings.AutoSelectOnlyController = tsmiAutoSelectOnlyController.Checked;
             SaveSettings();
             AutoLoadController();
+        }
+
+        private void tsmiHackSCMotion_Click(object sender, EventArgs e)
+        {
+            tsmiHackSCMotion.Checked = !tsmiHackSCMotion.Checked;
+            settings.HackScMotionOn = tsmiHackSCMotion.Checked;
+            SaveSettings();
         }
     }
 
