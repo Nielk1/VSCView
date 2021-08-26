@@ -28,6 +28,8 @@ namespace VSCView
         public static SensorCollector sensorData;
         public static int frameTime = (int)(1000 / 60); // 16ms interval => ~62fps
 
+        private bool FirstControllerActivation = true;
+
         Dictionary<string, ToolStripMenuItem> ThemeMenuItems = new Dictionary<string, ToolStripMenuItem>();
 
         ControllerData ControllerData;
@@ -98,6 +100,7 @@ namespace VSCView
                 }
                 catch { }
             }
+            tsmiAutoSelectOnlyController.Checked = settings.AutoSelectOnlyController;
 
             DeviceManager.ControllerAdded += DeviceManager_ControllerAdded;
             DeviceManager.ControllerRemoved += DeviceManager_ControllerRemoved;
@@ -339,6 +342,7 @@ namespace VSCView
                                     itm.Text = NiceName_;
                                     UpdateIcon(itm);
                                     UpdateAlternateControllers(itm);
+                                    AutoLoadController();
                                 }));
                         }
                         catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
@@ -356,6 +360,7 @@ namespace VSCView
                     //    LoadController(Controllers[i], null);
                 });
             }
+            AutoLoadController();
         }
 
         private void UpdateIcon(ToolStripItem itm)
@@ -475,13 +480,17 @@ namespace VSCView
                 {
                     if (ControllerMemoHack.ContainsKey(e.UniqueKey))
                     {
-                        ControllerMemoHack[e.UniqueKey].Item1.DeInitalize();
-                        ControllerMemoHack[e.UniqueKey].Item1.Dispose();
+                        IController RemovedController = ControllerMemoHack[e.UniqueKey].Item1;
+                        RemovedController.DeInitalize();
+                        RemovedController.Dispose();
                         tsmiController.DropDownItems.Remove(ControllerMemoHack[e.UniqueKey].Item2);
                         ControllerMemoHack.Remove(e.UniqueKey);
+                        if (ActiveController == RemovedController)
+                            ActiveController = null;
                     }
                 });
             }
+            AutoLoadController();
         }
 
         private void LoadController(object sender, EventArgs e)
@@ -507,6 +516,57 @@ namespace VSCView
             }).Start();
 
             ui?.InitalizeController();
+        }
+
+        private void AutoLoadController()
+        {
+            if (!settings.AutoSelectOnlyController)
+                return;
+
+            if (ActiveController != null)
+            {
+                if (ActiveController.IsPresent)
+                    return;
+            }
+
+            IController FirstActiveController = null;
+            foreach (ToolStripItem item in tsmiController.DropDownItems)
+            {
+                IController CandidateController = (IController)item.Tag;
+                if (CandidateController.IsPresent)
+                {
+                    if (FirstActiveController != null)
+                    {
+                        // we found a 2nd present controller, so just give up
+                        FirstActiveController = null;
+                        break;
+                    }
+                    FirstActiveController = CandidateController;
+                }
+            }
+
+            if (FirstActiveController == null)
+                return;
+
+            if (FirstActiveController == ActiveController)
+                return;
+
+            ActiveController?.DeInitalize();
+            ActiveController = null;
+
+            ActiveController = FirstActiveController;
+
+            ControllerData.SetController(ActiveController);
+            ActiveController.Initalize();
+
+            if (FirstControllerActivation)
+                new Thread(() =>
+                {
+                    ActiveController.Identify();
+                }).Start();
+
+            ui?.InitalizeController();
+            FirstControllerActivation = false;
         }
 
         private async void LoadTheme(object sender, EventArgs e)
@@ -672,6 +732,13 @@ namespace VSCView
                     settings.Width = null;
                     settings.Height = null;
                 }
+            SaveSettings();
+        }
+
+        private void tsmiAutoSelectOnlyController_Click(object sender, EventArgs e)
+        {
+            tsmiAutoSelectOnlyController.Checked = !tsmiAutoSelectOnlyController.Checked;
+            settings.AutoSelectOnlyController = tsmiAutoSelectOnlyController.Checked;
             SaveSettings();
         }
     }

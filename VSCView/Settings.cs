@@ -14,5 +14,6 @@ namespace VSCView
         public bool CustomSize { get; set; }
         public int? Width { get; set; }
         public int? Height { get; set; }
+        public bool AutoSelectOnlyController { get; set; }
     }
 }
