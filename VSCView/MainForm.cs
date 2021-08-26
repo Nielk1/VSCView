@@ -740,6 +740,7 @@ namespace VSCView
             tsmiAutoSelectOnlyController.Checked = !tsmiAutoSelectOnlyController.Checked;
             settings.AutoSelectOnlyController = tsmiAutoSelectOnlyController.Checked;
             SaveSettings();
+            AutoLoadController();
         }
     }
 
