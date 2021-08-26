@@ -332,7 +332,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "triggers:l:stage2 or if(triggers:l:analog > 0.99, 1, 0)",
+              "input": "triggers:l:stage2",
               "children": [
                 {
                   "type": "image",
@@ -421,7 +421,7 @@
           "children": [
             {
               "type": "showhide",
-              "input": "triggers:r:stage2 or if(triggers:r:analog > 0.99, 1, 0)",
+              "input": "triggers:r:stage2",
               "children": [
                 {
                   "type": "image",
