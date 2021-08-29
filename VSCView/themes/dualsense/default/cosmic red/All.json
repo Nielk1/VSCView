@@ -15,7 +15,7 @@
           "width": 0.0,
           "height": 0.0,
           "center": true,
-          "inputY": "triggers:l:analog * 7",
+          "inputY": "triggers:l:analog * 14",
           "children": [
             {
               "type": "image",

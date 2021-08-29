@@ -15,7 +15,7 @@
           "width": 0.0,
           "height": 0.0,
           "center": true,
-          "inputY": "(Math.Sin(UnixTimeMs() / 300.0) / 2 + 0.5) * 7",
+          "inputY": "(Math.Sin(UnixTimeMs() / 300.0) / 2 + 0.5) * 14",
           "children": [
             {
               "type": "image",
@@ -54,7 +54,7 @@
           "width": 0.0,
           "height": 0.0,
           "center": true,
-          "inputY": "(Math.Cos(UnixTimeMs() / 300.0) / 2 + 0.5) * 7",
+          "inputY": "(Math.Cos(UnixTimeMs() / 300.0) / 2 + 0.5) * 14",
           "children": [
             {
               "type": "image",

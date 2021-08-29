@@ -32,6 +32,8 @@ On-screen Controller Overlay for various controllers such as Valve Steam Control
   * White Cerberus by [8BitCerberus](https://github.com/8BitCerberus/vscview-themes)
 * ﻿Valve Steam Controller Chell
   * Default by Nielk1
+* Microsoft Xbox Wireless Controller
+  * Xbox Controller - Theme Prototype by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
 * ﻿General
   * Genshin Impact by Nielk1
 
