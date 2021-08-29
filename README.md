@@ -1,5 +1,5 @@
 # VSCView
-On-screen Controller Overlay for Steam Controller and various other controllers..
+On-screen Controller Overlay for Steam Controller and various other controllers.
 
 ## Themes
 * ﻿Sony DualSense
