@@ -1,7 +1,7 @@
-  {
-  "name": "No Gyro",
-  "width": 1150,
-  "height": 669,
+{
+  "name": "Xbox One S Controller",
+  "width": 1095,
+  "height": 677,
   "version": 1,
   "children": [
     {
@@ -10,20 +10,20 @@
       "children": [
         {
           "type": "slider",
-          "x": 229.9,
-          "y": 89.5,
+          "x": 216.9,
+          "y": 77.0,
           "width": 0.0,
           "height": 0.0,
           "center": true,
-          "inputY": "triggers:l:analog * 14",
+          "inputY": "triggers:l:analog * 18",
           "children": [
             {
               "type": "image",
-              "image": "DualSense_L2.png",
+              "image": "Xbox_LeftTrigger.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 149.0,
-              "height": 113.0,
+              "width": 143.0,
+              "height": 131.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
@@ -34,11 +34,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_L2-Active.png",
+                  "image": "Xbox_LeftTrigger_Active.png",
                   "x": 0.0,
-                  "y": -3.0,
-                  "width": 150.0,
-                  "height": 113.0,
+                  "y": -2.0,
+                  "width": 143.0,
+                  "height": 131.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -49,20 +49,20 @@
         },
         {
           "type": "slider",
-          "x": 919.1,
-          "y": 87.3,
+          "x": 878.0,
+          "y": 76.0,
           "width": 0.0,
           "height": 0.0,
           "center": true,
-          "inputY": "triggers:r:analog * 14",
+          "inputY": "triggers:r:analog * 18",
           "children": [
             {
               "type": "image",
-              "image": "DualSense_R2.png",
+              "image": "Xbox_RightTrigger.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 150.0,
-              "height": 111.0,
+              "width": 145.0,
+              "height": 132.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
@@ -73,11 +73,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_R2-Active.png",
+                  "image": "Xbox_RightTrigger_Active.png",
                   "x": 0.0,
                   "y": -2.0,
-                  "width": 150.0,
-                  "height": 113.0,
+                  "width": 145.0,
+                  "height": 133.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -90,11 +90,11 @@
     },
     {
       "type": "image",
-      "image": "DualSense_base.png",
-      "x": 574.0,
-      "y": 335.0,
-      "width": 1091.0,
-      "height": 607.0,
+      "image": "XB1_S_base.png",
+      "x": 547.0,
+      "y": 340.0,
+      "width": 1063.0,
+      "height": 658.0,
       "center": true,
       "winform.smoothing": "Default",
       "winform.interpolation": "High",
@@ -109,11 +109,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Cross.png",
-                  "x": 350.0,
-                  "y": 84.0,
-                  "width": 83.0,
-                  "height": 71.0,
+                  "image": "Xbox_A_Button.png",
+                  "x": 298.0,
+                  "y": 75.0,
+                  "width": 81.0,
+                  "height": 75.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -126,11 +126,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Circle.png",
-                  "x": 434.0,
-                  "y": 14.0,
-                  "width": 82.0,
-                  "height": 78.0,
+                  "image": "Xbox_B_Button.png",
+                  "x": 382.0,
+                  "y": 2.0,
+                  "width": 81.0,
+                  "height": 76.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -143,11 +143,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Square.png",
-                  "x": 270.0,
-                  "y": 17.0,
-                  "width": 82.0,
-                  "height": 74.0,
+                  "image": "Xbox_X_Button.png",
+                  "x": 221.0,
+                  "y": 10.0,
+                  "width": 83.0,
+                  "height": 77.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -160,11 +160,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Triangle.png",
-                  "x": 354.0,
-                  "y": -53.0,
-                  "width": 83.0,
-                  "height": 78.0,
+                  "image": "Xbox_Y_Button.png",
+                  "x": 307.0,
+                  "y": -62.0,
+                  "width": 85.0,
+                  "height": 79.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -183,11 +183,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_D-PAD_Down.png",
-                  "x": -352.0,
-                  "y": 60.0,
-                  "width": 69.0,
-                  "height": 77.0,
+                  "image": "Xbox_D-PAD_Down.png",
+                  "x": -150.0,
+                  "y": 186.0,
+                  "width": 61.0,
+                  "height": 95.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -200,11 +200,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_D-PAD_Right.png",
-                  "x": -298.0,
-                  "y": 16.0,
-                  "width": 85.0,
-                  "height": 65.0,
+                  "image": "Xbox_D-PAD_Right.png",
+                  "x": -125.0,
+                  "y": 166.0,
+                  "width": 116.0,
+                  "height": 58.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -217,11 +217,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_D-PAD_Left.png",
-                  "x": -406.0,
-                  "y": 16.0,
-                  "width": 85.0,
-                  "height": 65.0,
+                  "image": "Xbox_D-PAD_Left.png",
+                  "x": -177.0,
+                  "y": 166.0,
+                  "width": 116.0,
+                  "height": 58.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -234,11 +234,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_D-PAD_Up.png",
-                  "x": -352.0,
-                  "y": -28.0,
-                  "width": 69.0,
-                  "height": 80.0,
+                  "image": "Xbox_D-PAD_Up.png",
+                  "x": -152.0,
+                  "y": 144.0,
+                  "width": 64.0,
+                  "height": 92.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -257,28 +257,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Home_Button.png",
-                  "x": 2.0,
-                  "y": 124.0,
-                  "width": 72.0,
-                  "height": 40.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "Low"
-                }
-              ]
-            },
-            {
-              "type": "showhide",
-              "input": "mute",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "DualSense_Mute_Button.png",
-                  "x": 3.0,
-                  "y": 168.0,
-                  "width": 56.0,
-                  "height": 12.0,
+                  "image": "Xbox_HomeButton.png",
+                  "x": 0.0,
+                  "y": -99.0,
+                  "width": 90.0,
+                  "height": 85.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -291,11 +274,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Option_Button.png",
-                  "x": 267.0,
-                  "y": -90.0,
-                  "width": 41.0,
-                  "height": 55.0,
+                  "image": "Xbox_MenuButton.png",
+                  "x": 85.0,
+                  "y": 12.0,
+                  "width": 54.0,
+                  "height": 49.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -308,11 +291,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Create_Button.png",
-                  "x": -267.0,
-                  "y": -90.0,
-                  "width": 39.0,
-                  "height": 53.0,
+                  "image": "Xbox_ViewButton.png",
+                  "x": -86.0,
+                  "y": 12.0,
+                  "width": 53.0,
+                  "height": 48.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -331,11 +314,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_L1-Active.png",
-                  "x": -351.0,
+                  "image": "Xbox_LeftBumper-Active.png",
+                  "x": -290.0,
                   "y": -197.0,
-                  "width": 164.0,
-                  "height": 97.0,
+                  "width": 262.0,
+                  "height": 100.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -348,11 +331,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_R1-Active.png",
-                  "x": 351.0,
+                  "image": "Xbox_RightBumper-Active.png",
+                  "x": 291.0,
                   "y": -197.0,
-                  "width": 164.0,
-                  "height": 97.0,
+                  "width": 261.0,
+                  "height": 100.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -367,11 +350,11 @@
           "children": [
             {
               "type": "image",
-              "image": "DualSense_AnalogStick_Click.png",
-              "x": -177.0,
-              "y": 145.0,
-              "width": 146.0,
-              "height": 127.0,
+              "image": "Xbox_LeftStick_Click.png",
+              "x": -292.0,
+              "y": 6.0,
+              "width": 147.0,
+              "height": 139.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
@@ -380,18 +363,18 @@
         },
         {
           "type": "slider",
-          "x": -179.0,
-          "y": 169.0,
+          "x": -294.0,
+          "y": 24.0,
           "inputX": "stick_left:x * 16",
           "inputY": "stick_left:y * 16",
           "children": [
             {
               "type": "image",
-              "image": "DualSense_LeftAnalogStick.png",
+              "image": "Xbox_LeftStick.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 129.0,
-              "height": 109.0,
+              "width": 127.0,
+              "height": 125.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
@@ -404,11 +387,11 @@
           "children": [
             {
               "type": "image",
-              "image": "DualSense_AnalogStick_Click.png",
-              "x": 180.0,
-              "y": 145.0,
-              "width": 146.0,
-              "height": 127.0,
+              "image": "Xbox_RightStick_Click.png",
+              "x": 146.0,
+              "y": 168.0,
+              "width": 147.0,
+              "height": 138.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "Low"
@@ -417,108 +400,21 @@
         },
         {
           "type": "slider",
-          "x": 180.0,
-          "y": 170.0,
+          "x": 147.0,
+          "y": 185.0,
           "inputX": "stick_right:x * 16",
           "inputY": "stick_right:y * 16",
           "children": [
             {
               "type": "image",
-              "image": "DualSense_RightAnalogStick.png",
+              "image": "Xbox_RightStick.png",
               "x": 0.0,
               "y": 0.0,
-              "width": 130.0,
-              "height": 110.0,
+              "width": 127.0,
+              "height": 120.0,
               "center": true,
               "winform.smoothing": "Default",
               "winform.interpolation": "High"
-            }
-          ]
-        },
-        {
-          "type": "showhide",
-          "input": "touch_center:click OR touch_right:click",
-          "children": [
-            {
-              "type": "image",
-              "image": "DualSense_Touchpad-Click.png",
-              "x": 0.0,
-              "y": -71.0,
-              "width": 459.0,
-              "height": 236.0,
-              "center": true,
-              "winform.smoothing": "Default",
-              "winform.interpolation": "Low"
-            }
-          ]
-        },
-        {
-          "x": 0.0,
-          "y": -43.0,
-          "rot": 0.0,
-          "children": [
-            {
-              "type": "trailpad",
-              "image": "padheat.png",
-              "x": 0.0,
-              "y": 0.0,
-              "width": 30.0,
-              "height": 30.0,
-              "input": "touch_center:0:touch OR touch_left:0:touch",
-              "inputX": "(touch_center:0:x * 180) + touch_left:0:touch * (touch_left:0:x * 90 - 90)",
-              "inputY": "(touch_center:0:y + touch_left:0:y) * 76",
-              "length": 76,
-              "children": [
-                {
-                  "type": "showhide",
-                  "input": "touch_center:0:touch",
-                  "children": [
-                    {
-                      "type": "image",
-                      "image": "DualSense_Touchpad_Touch.png",
-                      "x": 0.0,
-                      "y": 0.0,
-                      "width": 50.0,
-                      "height": 50.0,
-                      "center": true,
-                      "winform.smoothing": "Default",
-                      "winform.interpolation": "Low"
-
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "trailpad",
-              "image": "padheat.png",
-              "x": 0.0,
-              "y": 0.0,
-              "width": 30.0,
-              "height": 30.0,
-              "input": "touch_center:1:touch OR touch_right:0:touch",
-              "inputX": "(touch_center:1:x * 180) + touch_right:0:touch * (touch_right:0:x * 90 + 90)",
-              "inputY": "(touch_center:1:y + touch_right:0:y) * 76",
-              "length": 76,
-              "children": [
-                {
-                  "type": "showhide",
-                  "input": "touch_center:1:touch",
-                  "children": [
-                    {
-                      "type": "image",
-                      "image": "DualSense_Touchpad_Touch.png",
-                      "x": 0.0,
-                      "y": 0.0,
-                      "width": 50.0,
-                      "height": 50.0,
-                      "center": true,
-                      "winform.smoothing": "Default",
-                      "winform.interpolation": "Low"
-                    }
-                  ]
-                }
-              ]
             }
           ]
         }
