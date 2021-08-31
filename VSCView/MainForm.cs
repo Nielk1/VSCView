@@ -527,16 +527,18 @@ namespace VSCView
 
             if (ActiveController != null)
             {
-                if (ActiveController.IsPresent)
+                if (ActiveController.IsReady && ActiveController.IsPresent)
                     return;
             }
 
             IController FirstActiveController = null;
+            bool FoundAnyController = false;
             foreach (ToolStripItem item in tsmiController.DropDownItems)
             {
                 IController CandidateController = (IController)item.Tag;
-                if (CandidateController.IsPresent)
+                if (CandidateController.IsReady && CandidateController.IsPresent && !CandidateController.IsVirtual)
                 {
+                    FoundAnyController = true;
                     if (FirstActiveController != null)
                     {
                         // we found a 2nd present controller, so just give up
@@ -544,6 +546,26 @@ namespace VSCView
                         break;
                     }
                     FirstActiveController = CandidateController;
+                }
+            }
+
+            // failed to find a single controller when ignoring virtual so search again allowing virtuals
+            if (!FoundAnyController)
+            {
+                foreach (ToolStripItem item in tsmiController.DropDownItems)
+                {
+                    IController CandidateController = (IController)item.Tag;
+                    if (CandidateController.IsReady && CandidateController.IsPresent)
+                    {
+                        FoundAnyController = true;
+                        if (FirstActiveController != null)
+                        {
+                            // we found a 2nd present controller, so just give up
+                            FirstActiveController = null;
+                            break;
+                        }
+                        FirstActiveController = CandidateController;
+                    }
                 }
             }
 
