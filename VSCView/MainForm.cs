@@ -76,6 +76,8 @@ namespace VSCView
                 this.Text = $"{this.Text} #{(instanceNumber + 1)}";
             }
 
+            //tsmiManualControllers.DropDown.AutoClose = false;
+
             LoadThemes();
             LoadSettings();
             if (File.Exists("ctrl.last"))
@@ -105,11 +107,14 @@ namespace VSCView
             DeviceManager.ControllerAdded += DeviceManager_ControllerAdded;
             DeviceManager.ControllerRemoved += DeviceManager_ControllerRemoved;
 
-//            foreach(IDeviceProvider provider in DeviceManager.GetManualDeviceProviders())
-//            {
-//                ToolStripItem itm = tsmiManualControllers.DropDownItems.Add(provider.ToString(), null, LoadManualDevice);
-//                itm.Tag = provider;
-//            }
+            foreach(IDeviceProvider provider in DeviceManager.GetManualDeviceProviders())
+            {
+                string Name = (Attribute.GetCustomAttribute(provider.GetType(), typeof(DeviceProviderAttribute)) as DeviceProviderAttribute)?.TypeString;
+                ToolStripMenuItem itm = new ToolStripMenuItem(Name ?? provider.ToString(), null, LoadManualDevice);
+                //itm.DropDown.AutoClose = false;
+                itm.Tag = new ManualSelectionMetadata() { ParentMenuItem = itm, Provider = provider, DontClose = true, };
+                tsmiManualControllers.DropDownItems.Add(itm);
+            }
         }
 
         private void LoadManualDevice(object sender, EventArgs e)
@@ -118,14 +123,67 @@ namespace VSCView
             // differentiate between context selection and startup
             if (sender is ToolStripItem)
             {
-                ToolStripItem item = (ToolStripItem)sender;
-                Provider = (IDeviceProvider)item.Tag;
+                ToolStripMenuItem item = (ToolStripMenuItem)sender;
+                (item.OwnerItem as ToolStripMenuItem).ShowDropDown();
+                item.DropDownItems.Clear();
+                ManualSelectionMetadata tag = (sender as ToolStripItem)?.Tag as ManualSelectionMetadata;
+                if (tag != null)
+                {
+                    if (tag.Tag != null)
+                    {
+                        // we have a tag, which means we are some step of the manual selection system's menu
+                        IDeviceManualTriggerContext context = tag.Provider.ManualTrigger(tag.Tag);
+                        if ((context?.Options?.Count ?? 0) > 0)
+                        {
+                            foreach (DeviceManualTriggerContextOption option in context.Options)
+                            {
+                                ToolStripMenuItem itm = new ToolStripMenuItem(option.Name, null, LoadManualDevice);
+                                itm.Tag = new ManualSelectionMetadata() { ParentMenuItem = tag.ParentMenuItem, Provider = tag.Provider, DontClose = false, Tag = option };
+                                //itm.DropDown.AutoClose = false;
+                                itm.MouseEnter += ManualControllerMenuItm_MouseEnter;
+                                itm.MouseLeave += ManualControllerMenuItm_MouseLeave;
+                                item.DropDownItems.Add(itm);
+                            }
+                            item.DropDown.Visible = true;
+                        }
+                        else
+                        {
+                            (tag.ParentMenuItem as ToolStripMenuItem).DropDown.Close();
+                            (tag.ParentMenuItem as ToolStripMenuItem).DropDownItems.Clear();
+                        }
+                    }
+                    else
+                    {
+                        // we have no context so ask the manual trigger for some options to add to the menu
+                        IDeviceManualTriggerContext context = tag.Provider.ManualTrigger(null);
+                        if ((context?.Options?.Count ?? 0) > 0)
+                        {
+                            foreach (DeviceManualTriggerContextOption option in context.Options)
+                            {
+                                ToolStripMenuItem itm = new ToolStripMenuItem(option.Name, null, LoadManualDevice);
+                                itm.Tag = new ManualSelectionMetadata() { ParentMenuItem = tag.ParentMenuItem, Provider = tag.Provider, DontClose = false, Tag = option };
+                                //itm.DropDown.AutoClose = false;
+                                item.DropDownItems.Add(itm);
+                            }
+                            item.DropDown.Visible = true;
+                        }
+                    }
+                }
             }
+        }
 
-            if (Provider == null)
-                return;
+        private void ManualControllerMenuItm_MouseEnter(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tmp = ((sender as ToolStripMenuItem).OwnerItem as ToolStripMenuItem);
+            if (tmp != null)
+                tmp.DropDown.AutoClose = false;
+        }
 
-            Provider.ManualTrigger();
+        private void ManualControllerMenuItm_MouseLeave(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tmp = ((sender as ToolStripMenuItem).OwnerItem as ToolStripMenuItem);
+            if (tmp != null)
+                tmp.DropDown.AutoClose = true;
         }
 
         /// <summary>
@@ -808,5 +866,13 @@ namespace VSCView
         {
             return TimeEndPeriod((uint)delay);
         }
+    }
+
+    class ManualSelectionMetadata
+    {
+        public ToolStripItem ParentMenuItem { get; internal set; }
+        public IDeviceProvider Provider { get; internal set; }
+        public bool DontClose { get; internal set; }
+        public DeviceManualTriggerContextOption Tag { get; internal set; }
     }
 }

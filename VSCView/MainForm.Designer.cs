@@ -37,6 +37,7 @@
             this.tsmiReloadControllers = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiManualControllers = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAutoSelectOnlyController = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHackSCMotion = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.hIDGuardianWhitelistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSetBackgroundColor = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +49,6 @@
             this.lblHint1 = new System.Windows.Forms.Label();
             this.lblHint2 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.tsmiHackSCMotion = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,7 +108,6 @@
             // 
             // tsmiManualControllers
             // 
-            this.tsmiManualControllers.Enabled = false;
             this.tsmiManualControllers.Name = "tsmiManualControllers";
             this.tsmiManualControllers.Size = new System.Drawing.Size(218, 22);
             this.tsmiManualControllers.Text = "Manual Controllers";
@@ -119,6 +118,13 @@
             this.tsmiAutoSelectOnlyController.Size = new System.Drawing.Size(218, 22);
             this.tsmiAutoSelectOnlyController.Text = "Auto Select Only Controller";
             this.tsmiAutoSelectOnlyController.Click += new System.EventHandler(this.tsmiAutoSelectOnlyController_Click);
+            // 
+            // tsmiHackSCMotion
+            // 
+            this.tsmiHackSCMotion.Name = "tsmiHackSCMotion";
+            this.tsmiHackSCMotion.Size = new System.Drawing.Size(218, 22);
+            this.tsmiHackSCMotion.Text = "Force SC Motion On";
+            this.tsmiHackSCMotion.Click += new System.EventHandler(this.tsmiHackSCMotion_Click);
             // 
             // toolStripSeparator2
             // 
@@ -194,13 +200,6 @@
             // colorDialog1
             // 
             this.colorDialog1.Color = System.Drawing.Color.Lime;
-            // 
-            // tsmiHackSCMotion
-            // 
-            this.tsmiHackSCMotion.Name = "tsmiHackSCMotion";
-            this.tsmiHackSCMotion.Size = new System.Drawing.Size(218, 22);
-            this.tsmiHackSCMotion.Text = "Force SC Motion On";
-            this.tsmiHackSCMotion.Click += new System.EventHandler(this.tsmiHackSCMotion_Click);
             // 
             // MainForm
             // 
