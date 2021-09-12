@@ -1,5 +1,5 @@
 {
-  "name": "Black",
+  "name": "White",
   "width": 1095,
   "height": 677,
   "version": 1,
@@ -90,7 +90,7 @@
     },
     {
       "type": "image",
-      "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\XB1_S_base.png",
+      "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\XB1_S_base_white.png",
       "x": 547.0,
       "y": 340.0,
       "width": 1063.0,

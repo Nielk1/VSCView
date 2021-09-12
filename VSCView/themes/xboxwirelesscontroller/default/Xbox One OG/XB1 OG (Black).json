@@ -19,7 +19,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\black\\XB1_LeftTrigger.png",
+              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\XB1_LeftTrigger.png",
               "x": 0.0,
               "y": 0.0,
               "width": 143.0,
@@ -58,7 +58,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\black\\XB1_RightTrigger.png",
+              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\XB1_RightTrigger.png",
               "x": 0.0,
               "y": 0.0,
               "width": 145.0,
@@ -90,7 +90,7 @@
     },
     {
       "type": "image",
-      "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\black\\XB1_OG_base.png",
+      "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\XB1_OG_base.png",
       "x": 547.0,
       "y": 340.0,
       "width": 1063.0,
@@ -370,7 +370,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\black\\XB1_LeftStick.png",
+              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\XB1_LeftStick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 127.0,
@@ -407,7 +407,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\black\\XB1_RightStick.png",
+              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\XB1_RightStick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 127.0,
