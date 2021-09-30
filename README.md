@@ -34,6 +34,10 @@ On-screen Controller Overlay for Steam Controller and various other controllers.
   * White Cerberus by [8BitCerberus](https://github.com/8BitCerberus/vscview-themes)
 * ﻿Valve Steam Controller Chell
   * Default by Nielk1
+* ﻿Microsoft Xbox 360 Controller
+  * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+    - Color: Black 
+    - Color: White
 * ﻿Microsoft Xbox Wireless Controller
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
     - Xbox One Controller
