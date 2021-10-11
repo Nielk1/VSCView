@@ -1,0 +1,424 @@
+{
+  "name": "Red",
+  "width": 1095,
+  "height": 677,
+  "version": 1,
+  "children": [
+    {
+      "x": 0.0,
+      "y": 0.0,
+      "children": [
+        {
+          "type": "slider",
+          "x": 216.9,
+          "y": 77.0,
+          "width": 0.0,
+          "height": 0.0,
+          "center": true,
+          "inputY": "triggers:l:analog * 18",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\XB1_LeftTrigger_Red.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 143.0,
+              "height": 131.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
+            },
+            {
+              "type": "showhide",
+              "input": "triggers:l:stage2 OR If(triggers:l:analog > 0, 1, 0)",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_LeftTrigger_Active.png",
+                  "x": 0.0,
+                  "y": -2.0,
+                  "width": 143.0,
+                  "height": 131.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": 878.0,
+          "y": 76.0,
+          "width": 0.0,
+          "height": 0.0,
+          "center": true,
+          "inputY": "triggers:r:analog * 18",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\XB1_RightTrigger_Red.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 145.0,
+              "height": 132.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
+            },
+            {
+              "type": "showhide",
+              "input": "triggers:r:stage2 OR If(triggers:r:analog > 0, 1, 0)",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_RightTrigger_Active.png",
+                  "x": 0.0,
+                  "y": -2.0,
+                  "width": 145.0,
+                  "height": 133.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\XB1_S_base_red.png",
+      "x": 547.0,
+      "y": 340.0,
+      "width": 1063.0,
+      "height": 658.0,
+      "center": true,
+      "winform.smoothing": "Default",
+      "winform.interpolation": "High",
+      "children": [
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "quad_right:s",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_A_Button.png",
+                  "x": 298.0,
+                  "y": 75.0,
+                  "width": 81.0,
+                  "height": 75.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:e",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_B_Button.png",
+                  "x": 382.0,
+                  "y": 2.0,
+                  "width": 81.0,
+                  "height": 76.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:w",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_X_Button.png",
+                  "x": 221.0,
+                  "y": 10.0,
+                  "width": 83.0,
+                  "height": 77.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:n",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_Y_Button.png",
+                  "x": 307.0,
+                  "y": -62.0,
+                  "width": 85.0,
+                  "height": 79.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "quad_left:s",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_D-PAD_Down.png",
+                  "x": -150.0,
+                  "y": 199.0,
+                  "width": 66.0,
+                  "height": 71.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_left:e",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_D-PAD_Right.png",
+                  "x": -110.0,
+                  "y": 167.0,
+                  "width": 84.0,
+                  "height": 60.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_left:w",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_D-PAD_Left.png",
+                  "x": -192.0,
+                  "y": 166.0,
+                  "width": 86.0,
+                  "height": 60.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_left:n",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_D-PAD_Up.png",
+                  "x": -153.0,
+                  "y": 132.0,
+                  "width": 67.0,
+                  "height": 68.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "home",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_HomeButton.png",
+                  "x": 0.0,
+                  "y": -99.0,
+                  "width": 90.0,
+                  "height": 85.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "menu:r",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_MenuButton.png",
+                  "x": 85.0,
+                  "y": 12.0,
+                  "width": 54.0,
+                  "height": 49.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "menu:l",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_ViewButton.png",
+                  "x": -86.0,
+                  "y": 12.0,
+                  "width": 53.0,
+                  "height": 48.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "bumpers:l",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_LeftBumper_Active.png",
+                  "x": -290.0,
+                  "y": -197.0,
+                  "width": 262.0,
+                  "height": 100.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "bumpers:r",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_RightBumper_Active.png",
+                  "x": 291.0,
+                  "y": -197.0,
+                  "width": 261.0,
+                  "height": 100.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "input": "stick_left:click",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_LeftStick_Click.png",
+              "x": -292.0,
+              "y": 6.0,
+              "width": 147.0,
+              "height": 139.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "Low"
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": -294.0,
+          "y": 24.0,
+          "inputX": "stick_left:x * 16",
+          "inputY": "stick_left:y * 16",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\XB1_LeftStick_Red.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 127.0,
+              "height": 125.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "input": "stick_right:click",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\xboxoneactivebuttons\\XB1_RightStick_Click.png",
+              "x": 146.0,
+              "y": 168.0,
+              "width": 147.0,
+              "height": 138.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "Low"
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": 147.0,
+          "y": 185.0,
+          "inputX": "stick_right:x * 16",
+          "inputY": "stick_right:y * 16",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\xboxwirelesscontroller\\default\\ThemeAssets\\color\\XB1_RightStick_Red.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 127.0,
+              "height": 120.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
