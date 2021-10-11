@@ -1,0 +1,424 @@
+{
+  "name": "White",
+  "width": 1095,
+  "height": 690,
+  "version": 1,
+  "children": [
+    {
+      "x": 0.0,
+      "y": 0.0,
+      "children": [
+        {
+          "type": "slider",
+          "x": 254.0,
+          "y": 64.0,
+          "width": 0.0,
+          "height": 0.0,
+          "center": true,
+          "inputY": "triggers:l:analog * 18",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\xbox360controller\\default\\ThemeAssets\\color\\XB360_LeftTrigger.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 97.0,
+              "height": 102.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
+            },
+            {
+              "type": "showhide",
+              "input": "triggers:l:stage2 OR If(triggers:l:analog > 0, 1, 0)",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_LeftTrigger_Active.png",
+                  "x": 0.0,
+                  "y": -2.0,
+                  "width": 97.0,
+                  "height": 102.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": 864.0,
+          "y": 64.0,
+          "width": 0.0,
+          "height": 0.0,
+          "center": true,
+          "inputY": "triggers:r:analog * 18",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\xbox360controller\\default\\ThemeAssets\\color\\XB360_RightTrigger.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 95.0,
+              "height": 102.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
+            },
+            {
+              "type": "showhide",
+              "input": "triggers:r:stage2 OR If(triggers:r:analog > 0, 1, 0)",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_RightTrigger_Active.png",
+                  "x": 0.0,
+                  "y": -2.0,
+                  "width": 96.0,
+                  "height": 102.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "image": "\\xbox360controller\\default\\ThemeAssets\\color\\XB360_base.png",
+      "x": 549.0,
+      "y": 345.0,
+      "width": 1072.0,
+      "height": 664.0,
+      "center": true,
+      "winform.smoothing": "Default",
+      "winform.interpolation": "High",
+      "children": [
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "quad_right:s",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_A_Button.png",
+                  "x": 324.0,
+                  "y": 71.0,
+                  "width": 89.0,
+                  "height": 73.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:e",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_B_Button.png",
+                  "x": 416.0,
+                  "y": -4.0,
+                  "width": 86.0,
+                  "height": 80.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:w",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_X_Button.png",
+                  "x": 242.0,
+                  "y": 1.0,
+                  "width": 88.0,
+                  "height": 77.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_right:n",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_Y_Button.png",
+                  "x": 334.0,
+                  "y": -73.0,
+                  "width": 87.0,
+                  "height": 81.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "quad_left:s",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_D-PAD_Down.png",
+                  "x": -163.0,
+                  "y": 207.0,
+                  "width": 76.0,
+                  "height": 80.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_left:e",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_D-PAD_Right.png",
+                  "x": -118.0,
+                  "y": 170.0,
+                  "width": 95.0,
+                  "height": 75.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_left:w",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_D-PAD_Left.png",
+                  "x": -208.0,
+                  "y": 170.0,
+                  "width": 95.0,
+                  "height": 76.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "quad_left:n",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_D-PAD_Up.png",
+                  "x": -163.0,
+                  "y": 132.0,
+                  "width": 76.0,
+                  "height": 81.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "home",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_GuideButton.png",
+                  "x": 1.0,
+                  "y": 4.0,
+                  "width": 119.0,
+                  "height": 98.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "menu:r",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_StartButton.png",
+                  "x": 119.0,
+                  "y": 6.0,
+                  "width": 63.0,
+                  "height": 44.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "menu:l",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_BackButton.png",
+                  "x": -118.0,
+                  "y": 6.0,
+                  "width": 62.0,
+                  "height": 44.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "children": [
+            {
+              "type": "showhide",
+              "input": "bumpers:l",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_LeftBumper_Active.png",
+                  "x": -332.0,
+                  "y": -193.0,
+                  "width": 214.0,
+                  "height": 97.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "bumpers:r",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_RightBumper_Active.png",
+                  "x": 344.0,
+                  "y": -195.0,
+                  "width": 195.0,
+                  "height": 97.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "input": "stick_left:click",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_LeftStick_Click.png",
+              "x": -325.0,
+              "y": 14.0,
+              "width": 164.0,
+              "height": 137.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "Low"
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": -331.0,
+          "y": 37.0,
+          "inputX": "stick_left:x * 16",
+          "inputY": "stick_left:y * 16",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\xbox360controller\\default\\ThemeAssets\\color\\XB360_LeftStick.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 148.0,
+              "height": 129.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
+            }
+          ]
+        },
+        {
+          "type": "showhide",
+          "input": "stick_right:click",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\xbox360controller\\default\\ThemeAssets\\xbox360activebuttons\\XB360_RightStick_Click.png",
+              "x": 154.0,
+              "y": 171.0,
+              "width": 162.0,
+              "height": 134.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "Low"
+            }
+          ]
+        },
+        {
+          "type": "slider",
+          "x": 155.0,
+          "y": 200.0,
+          "inputX": "stick_right:x * 16",
+          "inputY": "stick_right:y * 16",
+          "children": [
+            {
+              "type": "image",
+              "image": "\\xbox360controller\\default\\ThemeAssets\\color\\XB360_RightStick.png",
+              "x": 0.0,
+              "y": 0.0,
+              "width": 147.0,
+              "height": 124.0,
+              "center": true,
+              "winform.smoothing": "Default",
+              "winform.interpolation": "High"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
