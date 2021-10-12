@@ -283,10 +283,25 @@ namespace ThemeFixer
                     break;
                 case 1:
                     {
-                        if (!string.IsNullOrWhiteSpace(calc))
+                        if (!string.IsNullOrWhiteSpace(input))
                         {
-                            calc = calc.Replace("quad_right", "cluster_right");
-                            calc = calc.Replace("quad_left", "cluster_left");
+                            input = input.Replace("quad_right", "cluster_right");
+                            input = input.Replace("quad_left", "cluster_left");
+                        }
+                        if (!string.IsNullOrWhiteSpace(inputX))
+                        {
+                            inputX = inputX.Replace("quad_right", "cluster_right");
+                            inputX = inputX.Replace("quad_left", "cluster_left");
+                        }
+                        if (!string.IsNullOrWhiteSpace(inputY))
+                        {
+                            inputY = inputY.Replace("quad_right", "cluster_right");
+                            inputY = inputY.Replace("quad_left", "cluster_left");
+                        }
+                        if (!string.IsNullOrWhiteSpace(inputR))
+                        {
+                            inputR = inputR.Replace("quad_right", "cluster_right");
+                            inputR = inputR.Replace("quad_left", "cluster_left");
                         }
 
                         children?.ForEach(dr => dr.Update(version));
