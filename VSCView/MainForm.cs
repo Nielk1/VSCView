@@ -387,21 +387,24 @@ namespace VSCView
                     {
                         try
                         {
-                            if (this.Created && !this.Disposing && !this.IsDisposed)
-                                this.Invoke(new Action(() =>
-                                {
-                                    string NiceName_ = controller.Name;
+                            lock (itm)
+                            {
+                                if (this.Created && !this.Disposing && !this.IsDisposed)
+                                    this.Invoke(new Action(() =>
                                     {
-                                        string[] ExtraNameBits = controller.NameDetails;
-                                        if (ExtraNameBits != null)
-                                            foreach (string ExtraNameBit in ExtraNameBits)
-                                                NiceName_ += "\r\n" + ExtraNameBit;
-                                    }
-                                    itm.Text = NiceName_;
-                                    UpdateIcon(itm);
-                                    UpdateAlternateControllers(itm);
-                                    AutoLoadController();
-                                }));
+                                        string NiceName_ = controller.Name;
+                                        {
+                                            string[] ExtraNameBits = controller.NameDetails;
+                                            if (ExtraNameBits != null)
+                                                foreach (string ExtraNameBit in ExtraNameBits)
+                                                    NiceName_ += "\r\n" + ExtraNameBit;
+                                        }
+                                        itm.Text = NiceName_;
+                                        UpdateIcon(itm);
+                                        UpdateAlternateControllers(itm);
+                                        AutoLoadController();
+                                    }));
+                            }
                         }
                         catch (ObjectDisposedException e) { /* eat the Disposed exception when exiting */ }
                     };
@@ -451,7 +454,7 @@ namespace VSCView
                         }
                     }
 
-                if (ConnectionImg != null || ControllerImg != null)
+                //if (ConnectionImg != null || ControllerImg != null)
                 {
                     Image Icon = new Bitmap(CONTROLLER_CONICON_WIDTH + CONTROLLER_ICON_GAP + CONTROLLER_CTRICON_WIDTH, CONTROLLER_ALLICON_HEIGHT);
                     Graphics g = Graphics.FromImage(Icon);

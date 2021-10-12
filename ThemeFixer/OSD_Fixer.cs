@@ -32,11 +32,11 @@ namespace ThemeFixer
                 version = 1;
             }
 
-            //if ((version ?? 0) == 1)
-            //{
-            //    children?.ForEach(dr => dr.Update(1);
-            //    version = 2;
-            //}
+            if ((version ?? 0) == 1)
+            {
+                children?.ForEach(dr => dr.Update(1));
+                version = 2;
+            }
         }
     }
 
@@ -283,7 +283,13 @@ namespace ThemeFixer
                     break;
                 case 1:
                     {
+                        if (!string.IsNullOrWhiteSpace(calc))
+                        {
+                            calc = calc.Replace("quad_right", "cluster_right");
+                            calc = calc.Replace("quad_left", "cluster_left");
+                        }
 
+                        children?.ForEach(dr => dr.Update(version));
                     }
                     break;
             }
