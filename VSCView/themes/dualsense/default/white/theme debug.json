@@ -485,7 +485,6 @@
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
-
                     }
                   ]
                 }
@@ -533,8 +532,8 @@
               "image": "DualSense_Gyro-Accel.png",
               "x": 0.0,
               "y": 362.0,
-              "width": 259.0,
-              "height": 170.0,
+              "width": 260.0,
+              "height": 174.0,
               "mode": "accel",
               "shadowl": "gyro_left.png",
               "shadowr": "gyro_right.png",
