@@ -186,8 +186,8 @@
                   "image": "NSwitchPro_D-PAD_Down.png",
                   "x": -142.0,
                   "y": 41.0,
-                  "width": 55.0,
-                  "height": 73.0,
+                  "width": 58.0,
+                  "height": 75.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -202,9 +202,9 @@
                   "type": "image",
                   "image": "NSwitchPro_D-PAD_Right.png",
                   "x": -108.0,
-                  "y": 7.0,
-                  "width": 71.0,
-                  "height": 54.0,
+                  "y": 6.0,
+                  "width": 73.0,
+                  "height": 56.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -218,10 +218,10 @@
                 {
                   "type": "image",
                   "image": "NSwitchPro_D-PAD_Left.png",
-                  "x": -176.0,
-                  "y": 7.0,
-                  "width": 71.0,
-                  "height": 54.0,
+                  "x": -177.0,
+                  "y": 6.0,
+                  "width": 73.0,
+                  "height": 56.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -235,10 +235,10 @@
                 {
                   "type": "image",
                   "image": "NSwitchPro_D-PAD_Up.png",
-                  "x": -143.0,
-                  "y": -29.0,
-                  "width": 55.0,
-                  "height": 74.0,
+                  "x": -142.0,
+                  "y": -31.0,
+                  "width": 58.0,
+                  "height": 77.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
