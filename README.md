@@ -40,6 +40,7 @@ On-screen Controller Overlay for Steam Controller and various other controllers.
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
     - Color: Black 
     - Color: White
+  * Wikimedia by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
 * ﻿Microsoft Xbox Wireless Controller
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
     - Xbox One Controller
