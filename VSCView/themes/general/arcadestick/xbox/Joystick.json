@@ -1,0 +1,218 @@
+{
+  "name": "Joystick",
+  "width": 1122,
+  "height": 443,
+  "version": 1,
+  "children": [
+    {
+      "x": 0.0,
+      "y": 0.0,
+      "children": [
+        {
+          "type": "image",
+          "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Xbox.png",
+          "x": 560.0,
+          "y": 221.0,
+          "width": 1047.0,
+          "height": 395.0,
+          "center": true,
+          "winform.smoothing": "Default",
+          "winform.interpolation": "High",
+          "children": [
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "quad_right:s",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "x": -75.0,
+                      "y": 121.0,
+                      "width": 157.0,
+                      "height": 154.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_right:e",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "x": 79.0,
+                      "y": 60.0,
+                      "width": 157.0,
+                      "height": 154.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_right:w",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "x": -43.0,
+                      "y": -56.0,
+                      "width": 157.0,
+                      "height": 154.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_right:n",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "x": 111.0,
+                      "y": -120.0,
+                      "width": 157.0,
+                      "height": 154.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "triggers:l:stage2 OR If(triggers:l:analog > 0, 1, 0)",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "x": 414.0,
+                      "y": 61.0,
+                      "width": 157.0,
+                      "height": 154.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "triggers:r:stage2 OR If(triggers:r:analog > 0, 1, 0)",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "x": 247.0,
+                      "y": 60.0,
+                      "width": 157.0,
+                      "height": 154.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "bumpers:l",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "x": 446.0,
+                      "y": -120.0,
+                      "width": 157.0,
+                      "height": 154.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "bumpers:r",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "x": 278.0,
+                      "y": -120.0,
+                      "width": 157.0,
+                      "height": 154.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "x": -345.0,
+              "y": -11.0,
+              "children": [
+                {
+                  "type": "trailpad",
+                  "image": "\\general\\arcadestick\\ThemeAssets\\padheat.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 30.0,
+                  "height": 30.0,
+                  "input": "stick_left:y",
+                  "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.3, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 115, 0)",
+                  "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.3, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 115, 0)",
+                  "length": 23,
+                  "children": [
+                    {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "children": [
+                        {
+                          "type": "image",
+                          "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Joystick.png",
+                          "x": 0.0,
+                          "y": 0.0,
+                          "width": 80.0,
+                          "height": 77.0,
+                          "center": true,
+                          "winform.smoothing": "Default",
+                          "winform.interpolation": "High"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
