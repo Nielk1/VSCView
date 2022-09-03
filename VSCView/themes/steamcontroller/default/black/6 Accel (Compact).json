@@ -428,7 +428,7 @@
               "input": "touch_right:0:touch",
               "inputX": "touch_right:0:x * 107",
               "inputY": "touch_right:0:y * 107",
-              "length": 28,
+              "length": 30,
               "children": [
                 {
                   "type": "showhide",

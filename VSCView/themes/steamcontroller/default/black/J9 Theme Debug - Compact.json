@@ -374,7 +374,7 @@
               "input": "1",
               "inputX": "Math.Sin(UnixTimeMs() / -300.0) * 107",
               "inputY": "Math.Cos(UnixTimeMs() / -300.0) * 107",
-              "length": 28,
+              "length": 30,
               "children": [
                 {
                   "input": "1",
@@ -427,7 +427,7 @@
               "input": "1",
               "inputX": "Math.Sin(UnixTimeMs() / 300.0) * 107",
               "inputY": "Math.Cos(UnixTimeMs() / 300.0) * 107",
-              "length": 28,
+              "length": 30,
               "children": [
                 {
                   "input": "1",
