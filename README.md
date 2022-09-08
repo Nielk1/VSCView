@@ -4,9 +4,12 @@ On-screen Controller Overlay for Steam Controller and various other controllers.
 ## Themes
 * ﻿Sony DualSense
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
-    - Color: White/Black
-    - Color: Midnight Black 
     - Color: Cosmic Red
+    - Color: Galactic Purple
+    - Color: Midnight Black 
+    - Color: Nova Pink
+    - Color: Starlight Blue
+    - Color: White
 * ﻿Sony DualShock 4
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
   * Devil May Cry 5 by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
