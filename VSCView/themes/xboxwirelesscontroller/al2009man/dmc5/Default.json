@@ -1,7 +1,7 @@
 {
-  "name": "No Gyro",
-  "width": 1150,
-  "height": 622,
+  "name": "Default",
+  "width": 1095,
+  "height": 685,
   "version": 1,
   "children": [
     {
@@ -10,11 +10,11 @@
       "children": [
         {
           "type": "image",
-          "image": "DS4_dmc5_base.png",
-          "x": 574.0,
-          "y": 311.0,
-          "width": 1091.0,
-          "height": 582.0,
+          "image": "dmc5_xbxox_base.png",
+          "x": 547.0,
+          "y": 342.0,
+          "width": 1051.0,
+          "height": 647.0,
           "center": true,
           "winform.smoothing": "Default",
           "winform.interpolation": "High",
@@ -29,11 +29,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_cross.png",
-                      "x": 329.0,
-                      "y": 71.0,
+                      "image": "dmc5_xbox_a.png",
+                      "x": 294.0,
+                      "y": 79.0,
                       "width": 100.0,
-                      "height": 93.0,
+                      "height": 96.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -46,11 +46,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_circle.png",
-                      "x": 408.0,
-                      "y": 5.0,
-                      "width": 100.0,
-                      "height": 91.0,
+                      "image": "dmc5_xbox_b.png",
+                      "x": 379.0,
+                      "y": 8.0,
+                      "width": 98.0,
+                      "height": 96.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -63,11 +63,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_square.png",
-                      "x": 250.0,
-                      "y": 4.0,
+                      "image": "dmc5_xbox_x.png",
+                      "x": 219.0,
+                      "y": 17.0,
                       "width": 99.0,
-                      "height": 91.0,
+                      "height": 96.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -80,11 +80,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_triangle.png",
-                      "x": 328.0,
-                      "y": -62.0,
-                      "width": 98.0,
-                      "height": 92.0,
+                      "image": "dmc5_xbox_y.png",
+                      "x": 306.0,
+                      "y": -55.0,
+                      "width": 99.0,
+                      "height": 96.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -103,11 +103,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_dpad_down.png",
-                      "x": -329.0,
-                      "y": 52.0,
-                      "width": 89.0,
-                      "height": 98.0,
+                      "image": "dmc5_xbox_dpad_down.png",
+                      "x": -145.0,
+                      "y": 218.0,
+                      "width": 81.0,
+                      "height": 68.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -120,11 +120,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_dpad_right.png",
-                      "x": -275.0,
-                      "y": 7.0,
-                      "width": 100.0,
-                      "height": 89.0,
+                      "image": "dmc5_xbox_dpad_right.png",
+                      "x": -85.0,
+                      "y": 167.0,
+                      "width": 74.0,
+                      "height": 81.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -137,11 +137,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_dpad_left.png",
-                      "x": -378.0,
-                      "y": 8.0,
-                      "width": 102.0,
-                      "height": 87.0,
+                      "image": "dmc5_xbox_dpad_left.png",
+                      "x": -204.0,
+                      "y": 167.0,
+                      "width": 73.0,
+                      "height": 81.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -154,11 +154,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_dpad_up.png",
-                      "x": -329.0,
-                      "y": -39.0,
-                      "width": 89.0,
-                      "height": 96.0,
+                      "image": "dmc5_xbox_dpad_up.png",
+                      "x": -145.0,
+                      "y": 113.0,
+                      "width": 81.0,
+                      "height": 71.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -177,11 +177,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_circle_bar.png",
+                      "image": "dmc5_xbox_circle_bar.png",
                       "x": 0.0,
-                      "y": 117.0,
-                      "width": 72.0,
-                      "height": 51.0,
+                      "y": -104.0,
+                      "width": 112.0,
+                      "height": 110.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -194,11 +194,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_options-share_button.png",
-                      "x": 215.0,
-                      "y": -91.0,
-                      "width": 61.0,
-                      "height": 92.0,
+                      "image": "dmc5_xbox_menu.png",
+                      "x": 86.0,
+                      "y": 20.0,
+                      "width": 72.0,
+                      "height": 65.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -211,11 +211,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_options-share_button.png",
-                      "x": -215.0,
-                      "y": -91.0,
-                      "width": 61.0,
-                      "height": 92.0,
+                      "image": "dmc5_xbox_view.png",
+                      "x": -84.0,
+                      "y": 21.0,
+                      "width": 71.0,
+                      "height": 65.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -234,11 +234,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_left_trigger.png",
-                      "x": -322.0,
-                      "y": -258.0,
-                      "width": 152.0,
-                      "height": 98.0,
+                      "image": "dmc5_xbox_left_triggers.png",
+                      "x": -327.0,
+                      "y": -259.0,
+                      "width": 166.0,
+                      "height": 147.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -251,11 +251,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_right_trigger.png",
-                      "x": 322.0,
+                      "image": "dmc5_xbox_right_triggers.png",
+                      "x": 330.0,
                       "y": -258.0,
-                      "width": 152.0,
-                      "height": 99.0,
+                      "width": 165.0,
+                      "height": 147.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -274,11 +274,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_left_bumper.png",
-                      "x": -328.0,
-                      "y": -201.0,
-                      "width": 174.0,
-                      "height": 90.0,
+                      "image": "dmc5_xbox_left_bumper.png",
+                      "x": -268.0,
+                      "y": -181.0,
+                      "width": 312.0,
+                      "height": 134.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -291,11 +291,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_right_bumper.png",
-                      "x": 328.0,
-                      "y": -201.0,
-                      "width": 174.0,
-                      "height": 90.0,
+                      "image": "dmc5_xbox_right_bumper.png",
+                      "x": 275.0,
+                      "y": -180.0,
+                      "width": 312.0,
+                      "height": 134.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -310,11 +310,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_ps4_circle_bar.png",
-                  "x": -168.0,
-                  "y": 132.0,
-                  "width": 164.0,
-                  "height": 147.0,
+                  "image": "dmc5_xbox_circle_bar.png",
+                  "x": -296.0,
+                  "y": 19.0,
+                  "width": 221.0,
+                  "height": 200.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -323,18 +323,18 @@
             },
             {
               "type": "slider",
-              "x": -168.0,
-              "y": 153.0,
+              "x": -303.0,
+              "y": 43.0,
               "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.3, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
               "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.3, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
               "children": [
                 {
                   "type": "image",
-                  "image": "\\dualshock4\\default\\DS4_LeftAnalogStick.png",
+                  "image": "dmc5_xbox_left_joystick.png",
                   "x": 0.0,
                   "y": 0.0,
-                  "width": 123.0,
-                  "height": 109.0,
+                  "width": 129.0,
+                  "height": 117.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -343,8 +343,8 @@
             },
             {
               "type": "slider",
-              "x": -168.0,
-              "y": 153.0,
+              "x": -303.0,
+              "y": 43.0,
               "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.0, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
               "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.0, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
               "children": [
@@ -354,11 +354,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_analog_stick_active.png", //Active Analog Input
+                      "image": "dmc5_xbox_analog_stick_active.png", //Active Analog Input
                       "x": 0.0,
                       "y": 0.0,
-                      "width": 153.0,
-                      "height": 137.0,
+                      "width": 155.0,
+                      "height": 141.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
@@ -373,11 +373,11 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "dmc5_ps4_circle_bar.png",
-                  "x": 168.0,
-                  "y": 132.0,
-                  "width": 164.0,
-                  "height": 147.0,
+                  "image": "dmc5_xbox_circle_bar.png",
+                  "x": 149.0,
+                  "y": 164.0,
+                  "width": 244.0,
+                  "height": 204.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "High"
@@ -386,18 +386,18 @@
             },
             {
               "type": "slider",
-              "x": 168.0,
-              "y": 153.0,
+              "x": 154.0,
+              "y": 195.0,
               "inputX": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.3, Math.Sin(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
               "inputY": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.3, Math.Cos(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
               "children": [
                 {
                   "type": "image",
-                  "image": "\\dualshock4\\default\\DS4_RightAnalogStick.png",
+                  "image": "dmc5_xbox_right_joystick.png",
                   "x": 0.0,
                   "y": 0.0,
-                  "width": 123.0,
-                  "height": 109.0,
+                  "width": 128.0,
+                  "height": 116.0,
                   "center": true,
                   "winform.smoothing": "Default",
                   "winform.interpolation": "Low"
@@ -406,8 +406,8 @@
             },
             {
               "type": "slider",
-              "x": 168.0,
-              "y": 153.0,
+              "x": 154.0,
+              "y": 195.0,
               "inputX": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.0, Math.Sin(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
               "inputY": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.0, Math.Cos(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
               "children": [
@@ -417,100 +417,14 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "dmc5_ps4_analog_stick_active.png", //Active Analog Input
+                      "image": "dmc5_xbox_analog_stick_active.png", //Active Analog Input
                       "x": 0.0,
                       "y": 0.0,
-                      "width": 153.0,
-                      "height": 137.0,
+                      "width": 155.0,
+                      "height": 141.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "High"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "showhide",
-              "input": "touch_center:click OR touch_right:click",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "dmc5_ps4_touchpad.png",
-                  "x": 0.0,
-                  "y": -77.0,
-                  "width": 379.0,
-                  "height": 238.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
-                }
-              ]
-            },
-            {
-              "x": 0.0,
-              "y": -43.0,
-              "rot": 0.0,
-              "children": [
-                {
-                  "type": "trailpad",
-                  "image": "dmc5_padheat.png",
-                  "x": 0.0,
-                  "y": 0.0,
-                  "width": 30.0,
-                  "height": 30.0,
-                  "input": "touch_center:0:touch OR touch_left:0:touch",
-                  "inputX": "(touch_center:0:x * 180) + touch_left:0:touch * (touch_left:0:x * 90 - 90)",
-                  "inputY": "(touch_center:0:y + touch_left:0:y) * 76",
-                  "length": 30,
-                  "children": [
-                    {
-                      "type": "showhide",
-                      "input": "touch_center:0:touch OR touch_left:0:touch",
-                      "children": [
-                        {
-                          "type": "image",
-                          "image": "DMC5_touchpad_touch.png",
-                          "x": 0.0,
-                          "y": 0.0,
-                          "width": 52.0,
-                          "height": 50.0,
-                          "center": true,
-                          "winform.smoothing": "Default",
-                          "winform.interpolation": "High"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "trailpad",
-                  "image": "dmc5_padheat.png",
-                  "x": 0.0,
-                  "y": 0.0,
-                  "width": 30.0,
-                  "height": 30.0,
-                  "input": "touch_center:1:touch OR touch_right:0:touch",
-                  "inputX": "(touch_center:1:x * 180) + touch_right:0:touch * (touch_right:0:x * 90 + 90)",
-                  "inputY": "(touch_center:1:y + touch_right:0:y) * 76",
-                  "length": 30,
-                  "children": [
-                    {
-                      "type": "showhide",
-                      "input": "touch_center:1:touch OR touch_right:0:touch",
-                      "children": [
-                        {
-                          "type": "image",
-                          "image": "DMC5_touchpad_touch.png",
-                          "x": 0.0,
-                          "y": 0.0,
-                          "width": 52.0,
-                          "height": 50.0,
-                          "center": true,
-                          "winform.smoothing": "Default",
-                          "winform.interpolation": "High"
-                        }
-                      ]
                     }
                   ]
                 }

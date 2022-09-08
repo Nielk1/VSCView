@@ -57,3 +57,4 @@ On-screen Controller Overlay for Steam Controller and various other controllers.
       * Color: Pulse Red
       * Color: Electric Volt
       * Color: Robot White
+  * Devil May Cry 5 by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
