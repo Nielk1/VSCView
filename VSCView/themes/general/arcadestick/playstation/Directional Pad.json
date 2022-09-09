@@ -1,5 +1,5 @@
 {
-  "name": "WASD",
+  "name": "Directional Pad",
   "width": 1122,
   "height": 443,
   "version": 1,
@@ -10,7 +10,7 @@
       "children": [
         {
           "type": "image",
-          "image": "\\general\\arcadestick\\ThemeAssets\\InputMethod\\Arcade-StickWASD_Xbox.png",
+          "image": "\\general\\arcadestick\\ThemeAssets\\InputMethod\\Arcade-Stick-DPAD_PlayStation.png",
           "x": 560.0,
           "y": 221.0,
           "width": 1047.0,
@@ -143,11 +143,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_WASD-Press.png",
-                      "x": -345.0,
-                      "y": 8.5,
-                      "width": 102.0,
-                      "height": 107.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\ArcadeStick_D-PAD_Down.png",
+                      "x": -346.0,
+                      "y": 74.0,
+                      "width": 117.0,
+                      "height": 182.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -160,11 +160,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_WASD-Press.png",
-                      "x": -235.0,
-                      "y": 8.5,
-                      "width": 102.0,
-                      "height": 107.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\ArcadeStick_D-PAD_Right.png",
+                      "x": -262.0,
+                      "y": -8.0,
+                      "width": 186.0,
+                      "height": 116.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -177,11 +177,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_WASD-Press.png",
-                      "x": -455.0,
-                      "y": 8.5,
-                      "width": 102.0,
-                      "height": 107.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\ArcadeStick_D-PAD_Left.png",
+                      "x": -428.0,
+                      "y": -8.0,
+                      "width": 186.0,
+                      "height": 116.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -194,11 +194,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_WASD-Press.png",
-                      "x": -345.0,
-                      "y": -107.7,
-                      "width": 102.0,
-                      "height": 107.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\ArcadeStick_D-PAD_Up.png",
+                      "x": -346.0,
+                      "y": -91.0,
+                      "width": 117.0,
+                      "height": 188.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"

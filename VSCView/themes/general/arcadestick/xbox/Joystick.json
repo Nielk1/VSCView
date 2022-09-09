@@ -10,7 +10,7 @@
       "children": [
         {
           "type": "image",
-          "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Xbox.png",
+          "image": "\\general\\arcadestick\\ThemeAssets\\InputMethod\\Arcade-Stick_Xbox.png",
           "x": 560.0,
           "y": 221.0,
           "width": 1047.0,
@@ -29,7 +29,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
                       "x": -75.0,
                       "y": 121.0,
                       "width": 157.0,
@@ -46,7 +46,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
                       "x": 79.0,
                       "y": 60.0,
                       "width": 157.0,
@@ -63,7 +63,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
                       "x": -43.0,
                       "y": -56.0,
                       "width": 157.0,
@@ -80,7 +80,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
                       "x": 111.0,
                       "y": -120.0,
                       "width": 157.0,
@@ -103,7 +103,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
                       "x": 414.0,
                       "y": 61.0,
                       "width": 157.0,
@@ -120,7 +120,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
                       "x": 247.0,
                       "y": 60.0,
                       "width": 157.0,
@@ -143,7 +143,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
                       "x": 446.0,
                       "y": -120.0,
                       "width": 157.0,
@@ -160,7 +160,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
                       "x": 278.0,
                       "y": -120.0,
                       "width": 157.0,
@@ -179,7 +179,7 @@
               "children": [
                 {
                   "type": "trailpad",
-                  "image": "\\general\\arcadestick\\ThemeAssets\\padheat.png",
+                  "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\padheat.png",
                   "x": 0.0,
                   "y": 0.0,
                   "width": 30.0,
@@ -195,7 +195,7 @@
                       "children": [
                         {
                           "type": "image",
-                          "image": "\\general\\arcadestick\\ThemeAssets\\Arcade-Stick_Joystick.png",
+                          "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Joystick.png",
                           "x": 0.0,
                           "y": 0.0,
                           "width": 80.0,

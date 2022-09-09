@@ -1,5 +1,5 @@
 {
-  "name": "WASD",
+  "name": "Joystick",
   "width": 1122,
   "height": 443,
   "version": 1,
@@ -10,7 +10,7 @@
       "children": [
         {
           "type": "image",
-          "image": "\\general\\arcadestick\\ThemeAssets\\InputMethod\\Arcade-StickWASD_Xbox.png",
+          "image": "\\general\\arcadestick\\ThemeAssets\\InputMethod\\Arcade-Stick_NintendoSwitch.png",
           "x": 560.0,
           "y": 221.0,
           "width": 1047.0,
@@ -139,120 +139,6 @@
               "children": [
                 {
                   "type": "showhide",
-                  "input": "quad_left:s",
-                  "children": [
-                    {
-                      "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_WASD-Press.png",
-                      "x": -345.0,
-                      "y": 8.5,
-                      "width": 102.0,
-                      "height": 107.0,
-                      "center": true,
-                      "winform.smoothing": "Default",
-                      "winform.interpolation": "Low"
-                    }
-                  ]
-                },
-                {
-                  "type": "showhide",
-                  "input": "quad_left:e",
-                  "children": [
-                    {
-                      "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_WASD-Press.png",
-                      "x": -235.0,
-                      "y": 8.5,
-                      "width": 102.0,
-                      "height": 107.0,
-                      "center": true,
-                      "winform.smoothing": "Default",
-                      "winform.interpolation": "Low"
-                    }
-                  ]
-                },
-                {
-                  "type": "showhide",
-                  "input": "quad_left:w",
-                  "children": [
-                    {
-                      "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_WASD-Press.png",
-                      "x": -455.0,
-                      "y": 8.5,
-                      "width": 102.0,
-                      "height": 107.0,
-                      "center": true,
-                      "winform.smoothing": "Default",
-                      "winform.interpolation": "Low"
-                    }
-                  ]
-                },
-                {
-                  "type": "showhide",
-                  "input": "quad_left:n",
-                  "children": [
-                    {
-                      "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_WASD-Press.png",
-                      "x": -345.0,
-                      "y": -107.7,
-                      "width": 102.0,
-                      "height": 107.0,
-                      "center": true,
-                      "winform.smoothing": "Default",
-                      "winform.interpolation": "Low"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "x": 0.0,
-              "y": 0.0,
-              "children": [
-                {
-                  "type": "showhide",
-                  "input": "triggers:l:stage2 OR If(triggers:l:analog > 0, 1, 0)",
-                  "children": [
-                    {
-                      "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
-                      "x": 414.0,
-                      "y": 61.0,
-                      "width": 157.0,
-                      "height": 154.0,
-                      "center": true,
-                      "winform.smoothing": "Default",
-                      "winform.interpolation": "Low"
-                    }
-                  ]
-                },
-                {
-                  "type": "showhide",
-                  "input": "triggers:r:stage2 OR If(triggers:r:analog > 0, 1, 0)",
-                  "children": [
-                    {
-                      "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
-                      "x": 247.0,
-                      "y": 60.0,
-                      "width": 157.0,
-                      "height": 154.0,
-                      "center": true,
-                      "winform.smoothing": "Default",
-                      "winform.interpolation": "Low"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "x": 0.0,
-              "y": 0.0,
-              "children": [
-                {
-                  "type": "showhide",
                   "input": "bumpers:l",
                   "children": [
                     {
@@ -282,6 +168,43 @@
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "x": -345.0,
+              "y": -11.0,
+              "children": [
+                {
+                  "type": "trailpad",
+                  "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\padheat.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 30.0,
+                  "height": 30.0,
+                  "input": "stick_left:y",
+                  "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.3, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 115, 0)",
+                  "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.3, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 115, 0)",
+                  "length": 23,
+                  "children": [
+                    {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "children": [
+                        {
+                          "type": "image",
+                          "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Joystick.png",
+                          "x": 0.0,
+                          "y": 0.0,
+                          "width": 80.0,
+                          "height": 77.0,
+                          "center": true,
+                          "winform.smoothing": "Default",
+                          "winform.interpolation": "High"
+                        }
+                      ]
                     }
                   ]
                 }

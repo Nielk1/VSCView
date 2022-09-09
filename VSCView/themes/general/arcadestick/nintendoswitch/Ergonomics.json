@@ -1,7 +1,7 @@
 {
-  "name": "Joystick+D-Pad Prototype",
-  "width": 1122,
-  "height": 443,
+  "name": "Ergonomics",
+  "width": 1193,
+  "height": 654,
   "version": 1,
   "children": [
     {
@@ -10,11 +10,11 @@
       "children": [
         {
           "type": "image",
-          "image": "\\general\\arcade_stick\\ThemeAssets\\Arcade-Stick_Xbox.png",
-          "x": 560.0,
-          "y": 221.0,
-          "width": 1047.0,
-          "height": 395.0,
+          "image": "\\general\\arcadestick\\ThemeAssets\\InputMethod\\Arcade-StickErgonomic_NintendoSwitch.png",
+          "x": 595.0,
+          "y": 324.0,
+          "width": 1141.0,
+          "height": 617.0,
           "center": true,
           "winform.smoothing": "Default",
           "winform.interpolation": "High",
@@ -29,11 +29,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcade_stick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
-                      "x": -73.0,
-                      "y": 121.0,
-                      "width": 126.0,
-                      "height": 125.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": -28.0,
+                      "y": 10.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -46,11 +46,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcade_stick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
-                      "x": 80.0,
-                      "y": 59.0,
-                      "width": 126.0,
-                      "height": 125.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": 126.0,
+                      "y": -51.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -63,11 +63,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcade_stick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
-                      "x": -42.0,
-                      "y": -58.0,
-                      "width": 126.0,
-                      "height": 125.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": 4.0,
+                      "y": -167.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -80,11 +80,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcade_stick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
-                      "x": 112.0,
-                      "y": -122.0,
-                      "width": 126.0,
-                      "height": 125.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": 158.0,
+                      "y": -231.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -103,11 +103,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcade_stick\\ThemeAssets\\ArcadeStick_D-PAD_Down.png",
-                      "x": -346.0,
-                      "y": 74.0,
-                      "width": 117.0,
-                      "height": 182.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": -322.0,
+                      "y": -173.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -120,11 +120,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcade_stick\\ThemeAssets\\ArcadeStick_D-PAD_Right.png",
-                      "x": -262.0,
-                      "y": -8.0,
-                      "width": 186.0,
-                      "height": 116.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": -173.0,
+                      "y": -97.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -137,11 +137,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcade_stick\\ThemeAssets\\ArcadeStick_D-PAD_Left.png",
-                      "x": -428.0,
-                      "y": -8.0,
-                      "width": 186.0,
-                      "height": 116.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": -493.0,
+                      "y": -175.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -154,11 +154,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcade_stick\\ThemeAssets\\ArcadeStick_D-PAD_Up.png",
-                      "x": -346.0,
-                      "y": -91.0,
-                      "width": 117.0,
-                      "height": 188.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button-Ergonomic.png",
+                      "x": -98.4,
+                      "y": 215.0,
+                      "width": 189.0,
+                      "height": 186.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -177,11 +177,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcade_stick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
-                      "x": 415.0,
-                      "y": 58.0,
-                      "width": 126.0,
-                      "height": 125.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": 461.0,
+                      "y": -50.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -194,11 +194,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcade_stick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
-                      "x": 248.0,
-                      "y": 59.0,
-                      "width": 126.0,
-                      "height": 125.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": 294.0,
+                      "y": -51.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -217,11 +217,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcade_stick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
-                      "x": 446.0,
-                      "y": -121.0,
-                      "width": 126.0,
-                      "height": 125.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": 493.0,
+                      "y": -231.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -234,53 +234,16 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcade_stick\\ThemeAssets\\Arcade-Stick_Face_Button.png",
-                      "x": 280.0,
-                      "y": -122.0,
-                      "width": 126.0,
-                      "height": 125.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": 325.0,
+                      "y": -231.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
                     }
                   ]
-                }
-              ]
-            },
-            {
-              "type": "showhide",
-              "input": "stick_left:click",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "\\general\\arcade_stick\\ThemeAssets\\Arcade-Stick_Joystick.png",
-                  "x": -345.0,
-                  "y": -11.0,
-                  "width": 80.0,
-                  "height": 77.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "Low"
-                }
-              ]
-            },
-            {
-              "type": "slider",
-              "x": -345.0,
-              "y": -11.0,
-              "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.3, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 115, 0)",
-              "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.3, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 115, 0)",
-              "children": [
-                {
-                  "type": "image",
-                  "image": "\\general\\arcade_stick\\ThemeAssets\\Arcade-Stick_Joystick.png",
-                  "x": 0.0,
-                  "y": 0.0,
-                  "width": 80.0,
-                  "height": 77.0,
-                  "center": true,
-                  "winform.smoothing": "Default",
-                  "winform.interpolation": "High"
                 }
               ]
             }

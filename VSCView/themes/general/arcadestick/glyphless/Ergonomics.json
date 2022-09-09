@@ -1,7 +1,7 @@
 {
-  "name": "WASD",
-  "width": 1122,
-  "height": 443,
+  "name": "Ergonomics",
+  "width": 1193,
+  "height": 654,
   "version": 1,
   "children": [
     {
@@ -10,11 +10,11 @@
       "children": [
         {
           "type": "image",
-          "image": "\\general\\arcadestick\\ThemeAssets\\InputMethod\\Arcade-StickWASD_Xbox.png",
-          "x": 560.0,
-          "y": 221.0,
-          "width": 1047.0,
-          "height": 395.0,
+          "image": "\\general\\arcadestick\\ThemeAssets\\InputMethod\\Arcade-StickErgonomic_Glyphless.png",
+          "x": 595.0,
+          "y": 324.0,
+          "width": 1141.0,
+          "height": 617.0,
           "center": true,
           "winform.smoothing": "Default",
           "winform.interpolation": "High",
@@ -30,8 +30,8 @@
                     {
                       "type": "image",
                       "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
-                      "x": -75.0,
-                      "y": 121.0,
+                      "x": -28.0,
+                      "y": 10.0,
                       "width": 157.0,
                       "height": 154.0,
                       "center": true,
@@ -47,8 +47,8 @@
                     {
                       "type": "image",
                       "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
-                      "x": 79.0,
-                      "y": 60.0,
+                      "x": 126.0,
+                      "y": -51.0,
                       "width": 157.0,
                       "height": 154.0,
                       "center": true,
@@ -64,8 +64,8 @@
                     {
                       "type": "image",
                       "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
-                      "x": -43.0,
-                      "y": -56.0,
+                      "x": 4.0,
+                      "y": -167.0,
                       "width": 157.0,
                       "height": 154.0,
                       "center": true,
@@ -81,48 +81,8 @@
                     {
                       "type": "image",
                       "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
-                      "x": 111.0,
-                      "y": -120.0,
-                      "width": 157.0,
-                      "height": 154.0,
-                      "center": true,
-                      "winform.smoothing": "Default",
-                      "winform.interpolation": "Low"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "x": 0.0,
-              "y": 0.0,
-              "children": [
-                {
-                  "type": "showhide",
-                  "input": "triggers:l:stage2 OR If(triggers:l:analog > 0, 1, 0)",
-                  "children": [
-                    {
-                      "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
-                      "x": 414.0,
-                      "y": 61.0,
-                      "width": 157.0,
-                      "height": 154.0,
-                      "center": true,
-                      "winform.smoothing": "Default",
-                      "winform.interpolation": "Low"
-                    }
-                  ]
-                },
-                {
-                  "type": "showhide",
-                  "input": "triggers:r:stage2 OR If(triggers:r:analog > 0, 1, 0)",
-                  "children": [
-                    {
-                      "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
-                      "x": 247.0,
-                      "y": 60.0,
+                      "x": 158.0,
+                      "y": -231.0,
                       "width": 157.0,
                       "height": 154.0,
                       "center": true,
@@ -143,11 +103,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_WASD-Press.png",
-                      "x": -345.0,
-                      "y": 8.5,
-                      "width": 102.0,
-                      "height": 107.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": -322.0,
+                      "y": -173.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -160,11 +120,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_WASD-Press.png",
-                      "x": -235.0,
-                      "y": 8.5,
-                      "width": 102.0,
-                      "height": 107.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": -173.0,
+                      "y": -97.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -177,11 +137,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_WASD-Press.png",
-                      "x": -455.0,
-                      "y": 8.5,
-                      "width": 102.0,
-                      "height": 107.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
+                      "x": -493.0,
+                      "y": -175.0,
+                      "width": 157.0,
+                      "height": 154.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -194,11 +154,11 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_WASD-Press.png",
-                      "x": -345.0,
-                      "y": -107.7,
-                      "width": 102.0,
-                      "height": 107.0,
+                      "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button-Ergonomic.png",
+                      "x": -98.4,
+                      "y": 215.0,
+                      "width": 189.0,
+                      "height": 186.0,
                       "center": true,
                       "winform.smoothing": "Default",
                       "winform.interpolation": "Low"
@@ -218,8 +178,8 @@
                     {
                       "type": "image",
                       "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
-                      "x": 414.0,
-                      "y": 61.0,
+                      "x": 461.0,
+                      "y": -50.0,
                       "width": 157.0,
                       "height": 154.0,
                       "center": true,
@@ -235,8 +195,8 @@
                     {
                       "type": "image",
                       "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
-                      "x": 247.0,
-                      "y": 60.0,
+                      "x": 294.0,
+                      "y": -51.0,
                       "width": 157.0,
                       "height": 154.0,
                       "center": true,
@@ -258,8 +218,8 @@
                     {
                       "type": "image",
                       "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
-                      "x": 446.0,
-                      "y": -120.0,
+                      "x": 493.0,
+                      "y": -231.0,
                       "width": 157.0,
                       "height": 154.0,
                       "center": true,
@@ -275,8 +235,8 @@
                     {
                       "type": "image",
                       "image": "\\general\\arcadestick\\ThemeAssets\\ActivePresses\\Arcade-Stick_Face_Button.png",
-                      "x": 278.0,
-                      "y": -120.0,
+                      "x": 325.0,
+                      "y": -231.0,
                       "width": 157.0,
                       "height": 154.0,
                       "center": true,
