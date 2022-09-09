@@ -12,6 +12,11 @@ On-screen Controller Overlay for Steam Controller and various other controllers.
     - Color: White
 * ﻿Sony DualShock 4
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+    - Color: Glacier White
+    - Color: Gold
+    - Color: Jet Black
+    - Color: Magma Red
+    - Color: Midnight Blue
   * Devil May Cry 5 by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
   * PlayStation 20th Anniversary by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
 * ﻿General
