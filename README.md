@@ -16,6 +16,12 @@ On-screen Controller Overlay for Steam Controller and various other controllers.
   * PlayStation 20th Anniversary by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
 * ﻿General
   * Genshin Impact by Nielk1
+  * Arcade Stick by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+    - Directional Pad
+    - Ergonomics (HITBOX-style)
+    - Joystick+D-PAD Combo
+    - Joystick
+    - WASD
 * ﻿Nintendo Switch Pro Controller
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
 * ﻿Valve Steam Controller
