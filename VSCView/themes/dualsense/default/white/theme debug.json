@@ -469,7 +469,7 @@
               "input": "1",
               "inputX": "Math.Sin(UnixTimeMs() / 300.0) * 180",
               "inputY": "Math.Cos(UnixTimeMs() / 300.0) * 77",
-              "length": 76,
+              "length": 30,
               "children": [
                 {
                   "type": "showhide",
@@ -500,7 +500,7 @@
               "input": "1",
               "inputX": "Math.Min(Math.Max(Math.Sin(UnixTimeMs() / 300.0 + Math.PI) * 1.5, -1), 1) * 180.0",
               "inputY": "Math.Min(Math.Max(Math.Cos(UnixTimeMs() / 300.0 + Math.PI) * 1.5, -1), 1) * 77.0",
-              "length": 76,
+              "length": 30,
               "children": [
                 {
                   "type": "showhide",

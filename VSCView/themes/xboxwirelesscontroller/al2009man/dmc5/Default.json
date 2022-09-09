@@ -1,0 +1,438 @@
+{
+  "name": "Default",
+  "width": 1095,
+  "height": 685,
+  "version": 1,
+  "children": [
+    {
+      "x": 0.0,
+      "y": 0.0,
+      "children": [
+        {
+          "type": "image",
+          "image": "dmc5_xbxox_base.png",
+          "x": 547.0,
+          "y": 342.0,
+          "width": 1051.0,
+          "height": 647.0,
+          "center": true,
+          "winform.smoothing": "Default",
+          "winform.interpolation": "High",
+          "children": [
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "quad_right:s",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_a.png",
+                      "x": 294.0,
+                      "y": 79.0,
+                      "width": 100.0,
+                      "height": 96.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_right:e",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_b.png",
+                      "x": 379.0,
+                      "y": 8.0,
+                      "width": 98.0,
+                      "height": 96.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_right:w",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_x.png",
+                      "x": 219.0,
+                      "y": 17.0,
+                      "width": 99.0,
+                      "height": 96.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_right:n",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_y.png",
+                      "x": 306.0,
+                      "y": -55.0,
+                      "width": 99.0,
+                      "height": 96.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "quad_left:s",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_dpad_down.png",
+                      "x": -145.0,
+                      "y": 218.0,
+                      "width": 81.0,
+                      "height": 68.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_left:e",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_dpad_right.png",
+                      "x": -85.0,
+                      "y": 167.0,
+                      "width": 74.0,
+                      "height": 81.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_left:w",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_dpad_left.png",
+                      "x": -204.0,
+                      "y": 167.0,
+                      "width": 73.0,
+                      "height": 81.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_left:n",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_dpad_up.png",
+                      "x": -145.0,
+                      "y": 113.0,
+                      "width": 81.0,
+                      "height": 71.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "home",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_circle_bar.png",
+                      "x": 0.0,
+                      "y": -104.0,
+                      "width": 112.0,
+                      "height": 110.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "menu:r",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_menu.png",
+                      "x": 86.0,
+                      "y": 20.0,
+                      "width": 72.0,
+                      "height": 65.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "menu:l",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_view.png",
+                      "x": -84.0,
+                      "y": 21.0,
+                      "width": 71.0,
+                      "height": 65.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "triggers:l:stage2 OR If(triggers:l:analog > 0, 1, 0)",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_left_triggers.png",
+                      "x": -327.0,
+                      "y": -259.0,
+                      "width": 166.0,
+                      "height": 147.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "triggers:r:stage2 OR If(triggers:r:analog > 0, 1, 0)",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_right_triggers.png",
+                      "x": 330.0,
+                      "y": -258.0,
+                      "width": 165.0,
+                      "height": 147.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "bumpers:l",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_left_bumper.png",
+                      "x": -268.0,
+                      "y": -181.0,
+                      "width": 312.0,
+                      "height": 134.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "bumpers:r",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_right_bumper.png",
+                      "x": 275.0,
+                      "y": -180.0,
+                      "width": 312.0,
+                      "height": 134.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "stick_left:click",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "dmc5_xbox_circle_bar.png",
+                  "x": -296.0,
+                  "y": 19.0,
+                  "width": 221.0,
+                  "height": 200.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
+                }
+              ]
+            },
+            {
+              "type": "slider",
+              "x": -303.0,
+              "y": 43.0,
+              "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.3, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+              "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.3, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "dmc5_xbox_left_joystick.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 129.0,
+                  "height": 117.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "slider",
+              "x": -303.0,
+              "y": 43.0,
+              "inputX": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.0, Math.Sin(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+              "inputY": "If(Math.Sqrt(stick_left:x * stick_left:x + stick_left:y * stick_left:y) > 0.0, Math.Cos(Math.Round(Math.ATan2(stick_left:x, stick_left:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "(Math.Abs(stick_left:x) > 0.3) or (Math.Abs(stick_left:y) > 0.3)",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_analog_stick_active.png", //Active Analog Input
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 155.0,
+                      "height": 141.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "stick_right:click",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "dmc5_xbox_circle_bar.png",
+                  "x": 149.0,
+                  "y": 164.0,
+                  "width": 244.0,
+                  "height": 204.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "High"
+                }
+              ]
+            },
+            {
+              "type": "slider",
+              "x": 154.0,
+              "y": 195.0,
+              "inputX": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.3, Math.Sin(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+              "inputY": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.3, Math.Cos(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "dmc5_xbox_right_joystick.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 128.0,
+                  "height": 116.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "slider",
+              "x": 154.0,
+              "y": 195.0,
+              "inputX": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.0, Math.Sin(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+              "inputY": "If(Math.Sqrt(stick_right:x * stick_right:x + stick_right:y * stick_right:y) > 0.0, Math.Cos(Math.Round(Math.ATan2(stick_right:x, stick_right:y)*8/2/Math.PI)*2*Math.PI/8) * 34, 0)",
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "(Math.Abs(stick_right:x) > 0.3) or (Math.Abs(stick_right:y) > 0.3)",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "dmc5_xbox_analog_stick_active.png", //Active Analog Input
+                      "x": 0.0,
+                      "y": 0.0,
+                      "width": 155.0,
+                      "height": 141.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "High"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
