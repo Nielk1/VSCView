@@ -57,6 +57,7 @@ On-screen Controller Overlay for Steam Controller and various other controllers.
     - Xbox Series X|S Controller
       * Color: Carbon Black
       * Color: Shock Blue
+      * Color: Deep Pink
       * Color: Pulse Red
       * Color: Electric Volt
       * Color: Robot White
