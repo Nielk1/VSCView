@@ -19,7 +19,7 @@
           "children": [
             {
               "type": "image",
-              "image": "DualSense_L2.png",
+              "image": "\\dualsense\\default\\ThemeAssets\\DualSense_L2.png",
               "x": 0.0,
               "y": 0.0,
               "width": 149.0,
@@ -34,7 +34,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_L2-Active.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_L2-Active.png",
                   "x": 0.0,
                   "y": -3.0,
                   "width": 150.0,
@@ -58,7 +58,7 @@
           "children": [
             {
               "type": "image",
-              "image": "DualSense_R2.png",
+              "image": "\\dualsense\\default\\ThemeAssets\\DualSense_R2.png",
               "x": 0.0,
               "y": 0.0,
               "width": 150.0,
@@ -73,7 +73,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_R2-Active.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_R2-Active.png",
                   "x": 0.0,
                   "y": -2.0,
                   "width": 150.0,
@@ -109,7 +109,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Cross.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_Cross.png",
                   "x": 350.0,
                   "y": 84.0,
                   "width": 83.0,
@@ -126,7 +126,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Circle.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_Circle.png",
                   "x": 434.0,
                   "y": 14.0,
                   "width": 82.0,
@@ -143,7 +143,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Square.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_Square.png",
                   "x": 270.0,
                   "y": 17.0,
                   "width": 82.0,
@@ -160,7 +160,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Triangle.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_Triangle.png",
                   "x": 354.0,
                   "y": -53.0,
                   "width": 83.0,
@@ -183,7 +183,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_D-PAD_Down.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_D-PAD_Down.png",
                   "x": -352.0,
                   "y": 60.0,
                   "width": 69.0,
@@ -200,7 +200,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_D-PAD_Right.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_D-PAD_Right.png",
                   "x": -298.0,
                   "y": 16.0,
                   "width": 85.0,
@@ -217,7 +217,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_D-PAD_Left.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_D-PAD_Left.png",
                   "x": -406.0,
                   "y": 16.0,
                   "width": 85.0,
@@ -234,7 +234,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_D-PAD_Up.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_D-PAD_Up.png",
                   "x": -352.0,
                   "y": -28.0,
                   "width": 69.0,
@@ -257,7 +257,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Home_Button.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_Home_Button.png",
                   "x": 2.0,
                   "y": 124.0,
                   "width": 72.0,
@@ -274,7 +274,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Mute_Button.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_Mute_Button.png",
                   "x": 3.0,
                   "y": 168.0,
                   "width": 56.0,
@@ -291,7 +291,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Option_Button.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_Option_Button.png",
                   "x": 267.0,
                   "y": -90.0,
                   "width": 41.0,
@@ -308,7 +308,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_Create_Button.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_Create_Button.png",
                   "x": -267.0,
                   "y": -90.0,
                   "width": 39.0,
@@ -331,7 +331,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_L1-Active.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_L1-Active.png",
                   "x": -351.0,
                   "y": -194.0,
                   "width": 164.0,
@@ -348,7 +348,7 @@
               "children": [
                 {
                   "type": "image",
-                  "image": "DualSense_R1-Active.png",
+                  "image": "\\dualsense\\default\\ThemeAssets\\DualSense_R1-Active.png",
                   "x": 351.0,
                   "y": -195.0,
                   "width": 164.0,
@@ -367,7 +367,7 @@
           "children": [
             {
               "type": "image",
-              "image": "DualSense_AnalogStick_Click.png",
+              "image": "\\dualsense\\default\\ThemeAssets\\DualSense_AnalogStick_Click.png",
               "x": -177.0,
               "y": 145.0,
               "width": 146.0,
@@ -388,7 +388,7 @@
           "children": [
             {
               "type": "image",
-              "image": "DualSense_LeftAnalogStick.png",
+              "image": "\\dualsense\\default\\ThemeAssets\\DualSense_LeftAnalogStick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 129.0,
@@ -405,7 +405,7 @@
           "children": [
             {
               "type": "image",
-              "image": "DualSense_AnalogStick_Click.png",
+              "image": "\\dualsense\\default\\ThemeAssets\\DualSense_AnalogStick_Click.png",
               "x": 180.0,
               "y": 145.0,
               "width": 146.0,
@@ -426,7 +426,7 @@
           "children": [
             {
               "type": "image",
-              "image": "DualSense_RightAnalogStick.png",
+              "image": "\\dualsense\\default\\ThemeAssets\\DualSense_RightAnalogStick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 130.0,
@@ -443,7 +443,7 @@
           "children": [
             {
               "type": "image",
-              "image": "DualSense_Touchpad-Click.png",
+              "image": "\\dualsense\\default\\ThemeAssets\\DualSense_Touchpad-Click.png",
               "x": 0.0,
               "y": -71.0,
               "width": 459.0,
@@ -461,7 +461,7 @@
           "children": [
             {
               "type": "trailpad",
-              "image": "padheat.png",
+              "image": "\\dualsense\\default\\ThemeAssets\\padheat.png",
               "x": 0.0,
               "y": 0.0,
               "width": 30.0,
@@ -477,7 +477,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "DualSense_Touchpad_Touch.png",
+                      "image": "\\dualsense\\default\\ThemeAssets\\DualSense_Touchpad_Touch.png",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 50.0,
@@ -492,7 +492,7 @@
             },
             {
               "type": "trailpad",
-              "image": "padheat.png",
+              "image": "\\dualsense\\default\\ThemeAssets\\padheat.png",
               "x": 0.0,
               "y": 0.0,
               "width": 30.0,
@@ -508,7 +508,7 @@
                   "children": [
                     {
                       "type": "image",
-                      "image": "DualSense_Touchpad_Touch.png",
+                      "image": "\\dualsense\\default\\ThemeAssets\\DualSense_Touchpad_Touch.png",
                       "x": 0.0,
                       "y": 0.0,
                       "width": 50.0,
@@ -529,16 +529,16 @@
           "children": [
             {
               "type": "basic3d1",
-              "image": "DualSense_Gyro-Accel.png",
+              "image": "\\dualsense\\default\\ThemeAssets\\DualSense_Gyro-Accel.png",
               "x": 0.0,
               "y": 362.0,
               "width": 260.0,
               "height": 174.0,
               "mode": "accel",
-              "shadowl": "gyro_left.png",
-              "shadowr": "gyro_right.png",
-              "shadowu": "gyro_up.png",
-              "shadowd": "gyro_down.png"
+              "shadowl": "\\dualsense\\default\\ThemeAssets\\gyro_left.png",
+              "shadowr": "\\dualsense\\default\\ThemeAssets\\gyro_right.png",
+              "shadowu": "\\dualsense\\default\\ThemeAssets\\gyro_up.png",
+              "shadowd": "\\dualsense\\default\\ThemeAssets\\gyro_down.png"
             }
           ]
         }
