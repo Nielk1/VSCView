@@ -29,6 +29,8 @@ On-screen Controller Overlay for Steam Controller and various other controllers.
     - WASD
 * ﻿Nintendo Switch Pro Controller
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+* ﻿Nintendo Switch Joy-Con
+  * Default by (AL2009man)](https://github.com/AL2009man)
 * ﻿Valve Steam Controller
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
     - Color: Black
