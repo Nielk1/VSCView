@@ -19,7 +19,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\dualshock4\\default\\DS4_L2.png",
+              "image": "\\dualshock4\\default\\V1\\DS4_L2.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,
@@ -58,7 +58,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\dualshock4\\default\\DS4_R2.png",
+              "image": "\\dualshock4\\default\\V1\\DS4_R2.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,
@@ -370,7 +370,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\dualshock4\\default\\DS4_LeftAnalogStick.png",
+              "image": "\\dualshock4\\default\\V1\\DS4_LeftAnalogStick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,
@@ -407,7 +407,7 @@
           "children": [
             {
               "type": "image",
-              "image": "\\dualshock4\\default\\DS4_RightAnalogStick.png",
+              "image": "\\dualshock4\\default\\V1\\DS4_RightAnalogStick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,

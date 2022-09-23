@@ -370,7 +370,7 @@
           "children": [
             {
               "type": "image",
-              "image": "DS4_V2_LeftAnalogStick.png",
+              "image": "DS4_LeftAnalogStick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,
@@ -407,7 +407,7 @@
           "children": [
             {
               "type": "image",
-              "image": "DS4_V2_RightAnalogStick.png",
+              "image": "DS4_RightAnalogStick.png",
               "x": 0.0,
               "y": 0.0,
               "width": 123.0,
