@@ -25,7 +25,7 @@ On-screen Controller Overlay for Steam Controller and various other controllers.
     - Directional Pad
     - Ergonomics (HITBOX-style)
     - Joystick+D-PAD Combo
-    - Joystick
+    - Joystick (Joystick Output only)
     - WASD
 * ﻿Nintendo Switch Pro Controller
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
@@ -52,6 +52,9 @@ On-screen Controller Overlay for Steam Controller and various other controllers.
   * White Cerberus by [8BitCerberus](https://github.com/8BitCerberus/vscview-themes)
 * ﻿Valve Steam Controller Chell
   * Default by Nielk1
+* ﻿Valve Steam Deck
+  * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
+    - Color: Black
 * ﻿Microsoft Xbox 360 Controller
   * Default by [Al. Lopez (AL2009man)](https://github.com/AL2009man)
     - Color: Black 
