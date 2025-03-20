@@ -1,0 +1,283 @@
+{
+  "name": "All - Horizontal",
+  "width": 701,
+  "height": 625,
+  "version": 1,
+  "children": [
+    {
+      "x": 0.0,
+      "y": 0.0,
+      "children": [
+        {
+          "type": "image",
+          "image": "NSwitchJoyCon_Right-Horizontal.png",
+          "x": 339.0,
+          "y": 143.0,
+          "width": 644.0,
+          "height": 226.0,
+          "center": true,
+          "winform.smoothing": "Default",
+          "winform.interpolation": "High",
+          "children": [
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "quad_right:s",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\NSwitchJoycon_FaceD-PAD_Button.png",
+                      "x": 97.0,
+                      "y": 3.0,
+                      "width": 50.0,
+                      "height": 50.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_right:e",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\NSwitchJoycon_FaceD-PAD_Button.png",
+                      "x": 144.5,
+                      "y": 52.0,
+                      "width": 50.0,
+                      "height": 50.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_right:w",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\NSwitchJoycon_FaceD-PAD_Button.png",
+                      "x": 144.5,
+                      "y": -46.0,
+                      "width": 50.0,
+                      "height": 50.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "quad_right:n",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\NSwitchJoycon_FaceD-PAD_Button.png",
+                      "x": 190.0,
+                      "y": 3.0,
+                      "width": 50.0,
+                      "height": 50.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "home",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\NSwitchJoycon_HomeButton.png",
+                      "x": -145.0,
+                      "y": -32.0,
+                      "width": 42.0,
+                      "height": 42.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "menu:r",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\NSwitchJoycon_MinusButton_Vertical.png",
+                      "x": 239.0,
+                      "y": -60.0,
+                      "width": 38.0,
+                      "height": 37.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "bumpers:r",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\NSwitchJoycon_R_Bumper-Horizontal.png",
+                      "x": 265.0,
+                      "y": 24.0,
+                      "width": 92.0,
+                      "height": 171.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "triggers:r:stage2 OR If(triggers:r:analog > 0, 1, 0)",
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\NSwitchJoycon_ZR-Horizontal.png",
+                      "x": 290.0,
+                      "y": 17.0,
+                      "width": 64.0,
+                      "height": 144.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "showhide",
+                  "input": "grip:l", // Right Joycon - SL Button
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\NSwitchJoycon_Small-L-R_Button_Horizontal.png",
+                      "x": -115.0,
+                      "y": -106.0,
+                      "width": 55.0,
+                      "height": 13.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                },
+                {
+                  "type": "showhide",
+                  "input": "grip:r", // Right Joycon - SR Button
+                  "children": [
+                    {
+                      "type": "image",
+                      "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\NSwitchJoycon_Small-L-R_Button_Horizontal.png",
+                      "x": 128.0,
+                      "y": -106.0,
+                      "width": 55.0,
+                      "height": 13.0,
+                      "center": true,
+                      "winform.smoothing": "Default",
+                      "winform.interpolation": "Low"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "showhide",
+              "input": "stick_right:click",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\NSwitchJoycon_AnalogStickClick.png",
+                  "x": -29.0,
+                  "y": 2.0,
+                  "width": 108.0,
+                  "height": 108.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "type": "slider",
+              "x": -29.0,
+              "y": 2.0,
+              "inputX": "stick_right:x * 18",
+              "inputY": "stick_right:y * 18",
+              "children": [
+                {
+                  "type": "image",
+                  "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\color\\NSwitchJoycon_LeftStick.png",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "width": 100.0,
+                  "height": 99.0,
+                  "center": true,
+                  "winform.smoothing": "Default",
+                  "winform.interpolation": "Low"
+                }
+              ]
+            },
+            {
+              "x": 0.0,
+              "y": 0.0,
+              "children": [
+                {
+                  "type": "basic3d1",
+                  "image": "\\nintendoswitchjoycon\\default\\ThemeAssets\\switchrightjoycon-horizontal_gyro-accel.png",
+                  "x": 0.0,
+                  "y": 319.0,
+                  "width": 297.0,
+                  "height": 108.0,
+                  "mode": "accel",
+                  "shadowl": "\\nintendoswitchjoycon\\default\\ThemeAssets\\rightjoycon_gyro_left.png",
+                  "shadowr": "\\nintendoswitchjoycon\\default\\ThemeAssets\\rightjoycon_gyro_right.png",
+                  "shadowu": "\\nintendoswitchjoycon\\default\\ThemeAssets\\rightjoycon_gyro_up.png",
+                  "shadowd": "\\nintendoswitchjoycon\\default\\ThemeAssets\\rightjoycon_gyro_down.png"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
