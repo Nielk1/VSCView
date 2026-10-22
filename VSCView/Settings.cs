@@ -15,6 +15,8 @@ namespace VSCView
         public int? Width { get; set; }
         public int? Height { get; set; }
         public bool AutoSelectOnlyController { get; set; }
+        public bool TransparentBackground { get; set; }
+        public bool AlwaysOnTop { get; set; }
 
 
 

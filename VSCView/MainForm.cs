@@ -101,6 +101,10 @@ namespace VSCView
                 catch { }
             }
             tsmiAutoSelectOnlyController.Checked = settings.AutoSelectOnlyController;
+            tsmiTransparentBackground.Checked = settings.TransparentBackground;
+            ApplyTransparency();
+            tsmiAlwaysOnTop.Checked = settings.AlwaysOnTop;
+            this.TopMost = settings.AlwaysOnTop;
 
             DeviceManager.ControllerAdded += DeviceManager_ControllerAdded;
             DeviceManager.ControllerRemoved += DeviceManager_ControllerRemoved;
@@ -673,7 +677,30 @@ namespace VSCView
                 this.BackColor = colorDialog1.Color;
                 settings.Background = ColorTranslator.ToHtml(this.BackColor);
                 SaveSettings();
+                ApplyTransparency();
             }
+        }
+
+        // If enabled, the background color becomes truly transparent (and click-through)
+        private void ApplyTransparency()
+        {
+            this.TransparencyKey = settings.TransparentBackground ? this.BackColor : Color.Empty;
+        }
+
+        private void tsmiAlwaysOnTop_Click(object sender, EventArgs e)
+        {
+            tsmiAlwaysOnTop.Checked = !tsmiAlwaysOnTop.Checked;
+            settings.AlwaysOnTop = tsmiAlwaysOnTop.Checked;
+            this.TopMost = settings.AlwaysOnTop;
+            SaveSettings();
+        }
+
+        private void tsmiTransparentBackground_Click(object sender, EventArgs e)
+        {
+            tsmiTransparentBackground.Checked = !tsmiTransparentBackground.Checked;
+            settings.TransparentBackground = tsmiTransparentBackground.Checked;
+            SaveSettings();
+            ApplyTransparency();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
